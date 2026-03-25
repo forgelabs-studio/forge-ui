@@ -3,11 +3,9 @@ const nextConfig = {
   outputFileTracingRoot: new URL('.', import.meta.url).pathname,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
-
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-
   async headers() {
     return [
       {
