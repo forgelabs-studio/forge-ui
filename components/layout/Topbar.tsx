@@ -42,7 +42,7 @@ export default function Topbar() {
 
       <nav className="page-tabs">
         {tabs.map(tab => {
-          const active = pathname.startsWith(tab.href)
+          const active = pathname?.startsWith(tab.href)
           return (
             <button
               key={tab.href}
