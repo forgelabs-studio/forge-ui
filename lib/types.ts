@@ -60,9 +60,4 @@ export interface BadgeProps {
 // This is intentional — full typing of all 40 components is a post-v0.1 task.
 export type ComponentProps = Record<string, string | number | boolean | string[] | boolean[] | undefined>
 
-export type PropDefaultsMap = {
-  button: ButtonProps
-  card: CardProps
-  badge: BadgeProps
-  [key: string]: ComponentProps
-}
+export type PropDefaultsMap = Record<string, ComponentProps>
