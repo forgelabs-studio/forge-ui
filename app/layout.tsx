@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Manrope:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&family=Sora:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <Script
           src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"

@@ -13,10 +13,10 @@ export default function CLIWindow() {
   const flags = buildCLIFlags(activeComponent, currentProps)
   const cliString = buildCLIString(activeComponent, currentProps)
   const meta = REGISTRY_BY_ID[activeComponent]
-  const displayName = meta?.displayName ?? `Prism${activeComponent.charAt(0).toUpperCase()}${activeComponent.slice(1)}`
+  const displayName = meta?.displayName ?? `Forge${activeComponent.charAt(0).toUpperCase()}${activeComponent.slice(1)}`
 
   function copyInit() {
-    navigator.clipboard.writeText('npx prism-ui@latest init').then(() => {
+    navigator.clipboard.writeText('npx @forgelabs-studio/ui@latest init').then(() => {
       setInitOk(true)
       setTimeout(() => setInitOk(false), 2000)
     })
@@ -42,7 +42,7 @@ export default function CLIWindow() {
         </div>
         <div className="cli-actions">
           <button className={`cli-btn${initOk ? ' ok' : ''}`} onClick={copyInit}>
-            {initOk ? '✓ Copied!' : '⬡ npx prism-ui init'}
+            {initOk ? '✓ Copied!' : '⬡ npx @forgelabs-studio/ui init'}
           </button>
           <button className={`cli-btn primary${cliOk ? ' ok' : ''}`} onClick={copyCLI}>
             {cliOk ? '✓ Copied!' : '⌘ Copy command'}
@@ -54,7 +54,7 @@ export default function CLIWindow() {
         <div className="cli-row">
           <span className="cli-prompt">$</span>
           <div className="cli-cmd">
-            <span className="t-base">npx prism-ui</span>
+            <span className="t-base">npx @forgelabs-studio/ui</span>
             {' '}
             <span className="t-sub">add</span>
             {' '}
@@ -85,10 +85,10 @@ export default function CLIWindow() {
         <div className="cli-out">
           <span className="cli-arrow">→</span>
           <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(240,237,232,.4)' }}>
-            writes {displayName}.tsx + {displayName}.css → components/prism/
+            writes {displayName}.tsx + {displayName}.css → components/forge/
           </span>
           <span style={{ marginLeft: 'auto', fontFamily: 'var(--mono)', fontSize: 10, color: 'rgba(240,237,232,.2)' }}>
-            import {'{ '}{displayName}{' }'} from &apos;@/components/prism/{displayName}&apos;
+            import {'{ '}{displayName}{' }'} from &apos;@/components/forge/{displayName}&apos;
           </span>
         </div>
       </div>

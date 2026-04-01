@@ -19,16 +19,16 @@ const DOCS: Record<DocId, React.ReactNode> = {
   overview: (<>
     <div className="d-eyebrow">Documentation</div>
     <h1 className="d-h1">Interfaces built to<br /><em>a standard you can feel.</em></h1>
-    <p className="d-lead">PRISM is a spectrum-aware, motion-first component library for React. Configure visually, install with one CLI command, own the generated files.</p>
+    <p className="d-lead">FORGE.ui is a spectrum-aware, motion-first component library for React. Configure visually, install with one CLI command, own the generated files.</p>
     <div className="d-cards">
       <div className="d-card"><div className="d-card-num">Configure</div><div className="d-card-title">Visual playground</div><div className="d-card-desc">Pick any of 40 components. Adjust every property. The preview updates live.</div></div>
       <div className="d-card"><div className="d-card-num">Install</div><div className="d-card-title">One CLI command</div><div className="d-card-desc">Your exact configuration baked in as flags. Copy it, run it, done.</div></div>
       <div className="d-card"><div className="d-card-num">Own it</div><div className="d-card-title">Your files, your code</div><div className="d-card-desc">Two files land in your project. Readable React + CSS. Edit anything.</div></div>
-      <div className="d-card"><div className="d-card-num">Update</div><div className="d-card-title">Preserved config</div><div className="d-card-desc"><code>npx prism-ui update</code> regenerates with your original flags intact.</div></div>
+      <div className="d-card"><div className="d-card-num">Update</div><div className="d-card-title">Preserved config</div><div className="d-card-desc"><code>npx forge-ui update</code> regenerates with your original flags intact.</div></div>
     </div>
     <hr className="d-divider" />
     <h2 className="d-h2">Why not an npm package?</h2>
-    <p className="d-p">Most component libraries ship as a black box. You import, it works, but you can&apos;t touch internals. When the API changes you&apos;re forced to upgrade. PRISM uses the shadcn model — the files live in your project and belong to you — but adds a CLI that pre-configures everything before copying, and a config file that tracks what&apos;s installed so updates work cleanly later.</p>
+    <p className="d-p">Most component libraries ship as a black box. You import, it works, but you can&apos;t touch internals. When the API changes you&apos;re forced to upgrade. FORGE.ui uses the shadcn model — the files live in your project and belong to you — but adds a CLI that pre-configures everything before copying, and a config file that tracks what&apos;s installed so updates work cleanly later.</p>
     <div className="callout callout-tip">
       <div className="callout-icon">✦</div>
       <div>The playground is the UI for the CLI. Every visual choice maps to a flag. What you see in the preview is what lands in your project.</div>
@@ -40,24 +40,24 @@ const DOCS: Record<DocId, React.ReactNode> = {
     <h1 className="d-h1">Quick start</h1>
     <p className="d-lead">Up and running in four commands.</p>
     <h2 className="d-h2">1. Init</h2>
-    <CB lang="bash"><span className="str">npx prism-ui@latest init</span></CB>
-    <p className="d-p">Creates <code>prism.config.json</code> and <code>components/prism/prism-tokens.css</code>.</p>
+    <CB lang="bash"><span className="str">npx forge-ui@latest init</span></CB>
+    <p className="d-p">Creates <code>forge.config.json</code> and <code>components/forge/forge-tokens.css</code>.</p>
     <h2 className="d-h2">2. Import the tokens</h2>
-    <CB lang="tsx — app/layout.tsx"><span className="kw">import</span> <span className="str">&apos;@/components/prism/prism-tokens.css&apos;</span></CB>
+    <CB lang="tsx — app/layout.tsx"><span className="kw">import</span> <span className="str">&apos;@/components/forge/forge-tokens.css&apos;</span></CB>
     <h2 className="d-h2">3. Add a component</h2>
     <p className="d-p">Configure in the playground and copy the generated command, or add with defaults:</p>
-    <CB lang="bash"><span className="str">npx prism-ui add button <span className="kw">--color</span>=#7F77DD <span className="kw">--variant</span>=glow</span></CB>
+    <CB lang="bash"><span className="str">npx forge-ui add button <span className="kw">--color</span>=#7F77DD <span className="kw">--variant</span>=glow</span></CB>
     <h2 className="d-h2">4. Use it</h2>
     <CB lang="tsx">
-      <span className="kw">import</span> <span className="punc">{'{ '}</span><span className="fn">PrismButton</span><span className="punc">{' }'}</span> <span className="kw">from</span> <span className="str">&apos;@/components/prism/PrismButton&apos;</span><br /><br />
+      <span className="kw">import</span> <span className="punc">{'{ '}</span><span className="fn">ForgeButton</span><span className="punc">{' }'}</span> <span className="kw">from</span> <span className="str">&apos;@/components/forge/ForgeButton&apos;</span><br /><br />
       <span className="kw">export default function</span> <span className="fn">Page</span>() {'{'}<br />
       {'  '}<span className="kw">return</span> (<br />
-      {'    '}<span className="tag">{'<PrismButton'}</span><br />
+      {'    '}<span className="tag">{'<ForgeButton'}</span><br />
       {'      '}<span className="attr">color</span>=<span className="str">&quot;#7F77DD&quot;</span><br />
       {'      '}<span className="attr">variant</span>=<span className="str">&quot;glow&quot;</span><br />
       {'    '}<span className="tag">{'>'}</span><br />
       {'      '}Start a project<br />
-      {'    '}<span className="tag">{'</PrismButton>'}</span><br />
+      {'    '}<span className="tag">{'</ForgeButton>'}</span><br />
       {'  '})<br />
       {'}'}
     </CB>
@@ -66,22 +66,22 @@ const DOCS: Record<DocId, React.ReactNode> = {
   tokens: (<>
     <div className="d-eyebrow">Design system</div>
     <h1 className="d-h1">Design tokens</h1>
-    <p className="d-lead">All tokens live in <code>prism-tokens.css</code>. Override any of them to retheme your entire installation.</p>
+    <p className="d-lead">All tokens live in <code>forge-tokens.css</code>. Override any of them to retheme your entire installation.</p>
     <h2 className="d-h2">Colour tokens</h2>
     <table className="d-table">
       <thead><tr><th>Token</th><th>Default</th><th>Use</th></tr></thead>
       <tbody>
         {[
-          ['--prism-bg','#09090b','Page background'],
-          ['--prism-bg2','#0f0f12','Panels, card surfaces'],
-          ['--prism-bg3','#141418','Card hover, input backgrounds'],
-          ['--prism-text','#f0ede8','Primary text'],
-          ['--prism-purple','#7F77DD','Default accent colour'],
-          ['--prism-red','#e24b4a','Danger, destructive actions'],
-          ['--prism-blue','#378ADD','Info, links'],
-          ['--prism-teal','#1D9E75','Success, positive states'],
-          ['--prism-amber','#EF9F27','Warning states'],
-          ['--prism-pink','#D4537E','Secondary accent'],
+          ['--forge-bg','#09090b','Page background'],
+          ['--forge-bg2','#0f0f12','Panels, card surfaces'],
+          ['--forge-bg3','#141418','Card hover, input backgrounds'],
+          ['--forge-text','#f0ede8','Primary text'],
+          ['--forge-purple','#7F77DD','Default accent colour'],
+          ['--forge-red','#e24b4a','Danger, destructive actions'],
+          ['--forge-blue','#378ADD','Info, links'],
+          ['--forge-teal','#1D9E75','Success, positive states'],
+          ['--forge-amber','#EF9F27','Warning states'],
+          ['--forge-pink','#D4537E','Secondary accent'],
         ].map(([tok,def,use])=>(
           <tr key={tok}>
             <td><code>{tok}</code></td>
@@ -94,9 +94,9 @@ const DOCS: Record<DocId, React.ReactNode> = {
     <h2 className="d-h2">Override example</h2>
     <CB lang="css — your globals.css">
       <span className="fn">:root</span> {'{'}<br />
-      {'  '}<span className="attr">--prism-purple</span>: <span className="num">#5B5BF0</span>;{'   '}<span className="cmt">{'/* your brand colour */'}</span><br />
-      {'  '}<span className="attr">--prism-bg</span>:{'     '}<span className="num">#06060a</span>;{'   '}<span className="cmt">{'/* slightly darker bg */'}</span><br />
-      {'  '}<span className="attr">--prism-font</span>:{'   '}<span className="str">&apos;Geist&apos;, sans-serif</span>;<br />
+      {'  '}<span className="attr">--forge-purple</span>: <span className="num">#5B5BF0</span>;{'   '}<span className="cmt">{'/* your brand colour */'}</span><br />
+      {'  '}<span className="attr">--forge-bg</span>:{'     '}<span className="num">#06060a</span>;{'   '}<span className="cmt">{'/* slightly darker bg */'}</span><br />
+      {'  '}<span className="attr">--forge-font</span>:{'   '}<span className="str">&apos;Geist&apos;, sans-serif</span>;<br />
       {'}'}
     </CB>
   </>),
@@ -108,19 +108,19 @@ const DOCS: Record<DocId, React.ReactNode> = {
     <h2 className="d-h2">How it works</h2>
     <p className="d-p">When the CLI generates a component, it calculates the RGB values from your <code>--color</code> flag and bakes them in as the default prop. At runtime, the component sets two CSS custom properties on itself:</p>
     <CB lang="generated at runtime">
-      <span className="attr">--prism-color</span>: <span className="num">#7F77DD</span>;<br />
-      <span className="attr">--prism-rgb</span>:{'   '}<span className="num">127, 119, 221</span>;
+      <span className="attr">--forge-color</span>: <span className="num">#7F77DD</span>;<br />
+      <span className="attr">--forge-rgb</span>:{'   '}<span className="num">127, 119, 221</span>;
     </CB>
     <p className="d-p">The CSS uses these to derive every state:</p>
-    <CB lang="PrismButton.css">
-      <span className="fn">.prism-btn--glow</span> {'{'}<br />
-      {'  '}background:{'   '}<span className="fn">rgba</span>(<span className="attr">var</span>(--prism-rgb), <span className="num">0.10</span>);<br />
-      {'  '}border-color: <span className="fn">rgba</span>(<span className="attr">var</span>(--prism-rgb), <span className="num">0.28</span>);<br />
-      {'  '}color:{'        '}<span className="fn">rgba</span>(<span className="attr">var</span>(--prism-rgb), <span className="num">0.90</span>);<br />
+    <CB lang="ForgeButton.css">
+      <span className="fn">.forge-btn--glow</span> {'{'}<br />
+      {'  '}background:{'   '}<span className="fn">rgba</span>(<span className="attr">var</span>(--forge-rgb), <span className="num">0.10</span>);<br />
+      {'  '}border-color: <span className="fn">rgba</span>(<span className="attr">var</span>(--forge-rgb), <span className="num">0.28</span>);<br />
+      {'  '}color:{'        '}<span className="fn">rgba</span>(<span className="attr">var</span>(--forge-rgb), <span className="num">0.90</span>);<br />
       {'}'}<br />
-      <span className="fn">.prism-btn--glow:hover</span> {'{'}<br />
-      {'  '}border-color: <span className="fn">rgba</span>(<span className="attr">var</span>(--prism-rgb), <span className="num">0.55</span>);<br />
-      {'  '}box-shadow: <span className="num">0 0 22px</span> <span className="fn">rgba</span>(<span className="attr">var</span>(--prism-rgb), <span className="num">0.25</span>);<br />
+      <span className="fn">.forge-btn--glow:hover</span> {'{'}<br />
+      {'  '}border-color: <span className="fn">rgba</span>(<span className="attr">var</span>(--forge-rgb), <span className="num">0.55</span>);<br />
+      {'  '}box-shadow: <span className="num">0 0 22px</span> <span className="fn">rgba</span>(<span className="attr">var</span>(--forge-rgb), <span className="num">0.25</span>);<br />
       {'}'}
     </CB>
     <div className="callout callout-tip">
@@ -131,10 +131,10 @@ const DOCS: Record<DocId, React.ReactNode> = {
 
   'doc-button': (<>
     <div className="d-eyebrow">Component</div>
-    <h1 className="d-h1">PrismButton</h1>
+    <h1 className="d-h1">ForgeButton</h1>
     <p className="d-lead">Spectrum-aware button. 6 variants, ripple animation, lift/scale/glow hover, loading state, optional icon.</p>
     <h2 className="d-h2">Install</h2>
-    <CB lang="bash"><span className="str">npx prism-ui add button <span className="kw">--color</span>=#7F77DD <span className="kw">--variant</span>=glow <span className="kw">--hover</span>=lift</span></CB>
+    <CB lang="bash"><span className="str">npx forge-ui add button <span className="kw">--color</span>=#7F77DD <span className="kw">--variant</span>=glow <span className="kw">--hover</span>=lift</span></CB>
     <h2 className="d-h2">Props</h2>
     <table className="d-table">
       <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -167,10 +167,10 @@ const DOCS: Record<DocId, React.ReactNode> = {
 
   'doc-card': (<>
     <div className="d-eyebrow">Component</div>
-    <h1 className="d-h1">PrismCard</h1>
+    <h1 className="d-h1">ForgeCard</h1>
     <p className="d-lead">Card with a bottom-up colour glow on hover. Each card gets its own colour — assign different colours to distribute the spectrum across your UI.</p>
     <h2 className="d-h2">Install</h2>
-    <CB lang="bash"><span className="str">npx prism-ui add card <span className="kw">--color</span>=#7F77DD</span></CB>
+    <CB lang="bash"><span className="str">npx forge-ui add card <span className="kw">--color</span>=#7F77DD</span></CB>
     <h2 className="d-h2">Props</h2>
     <table className="d-table">
       <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -195,10 +195,10 @@ const DOCS: Record<DocId, React.ReactNode> = {
 
   'doc-input': (<>
     <div className="d-eyebrow">Component</div>
-    <h1 className="d-h1">PrismInput</h1>
+    <h1 className="d-h1">ForgeInput</h1>
     <p className="d-lead">Input with focus glow derived from the colour token and four validation states with automatic hint colouring.</p>
     <h2 className="d-h2">Install</h2>
-    <CB lang="bash"><span className="str">npx prism-ui add input <span className="kw">--color</span>=#7F77DD <span className="kw">--state</span>=default</span></CB>
+    <CB lang="bash"><span className="str">npx forge-ui add input <span className="kw">--color</span>=#7F77DD <span className="kw">--state</span>=default</span></CB>
     <h2 className="d-h2">Props</h2>
     <table className="d-table">
       <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -223,10 +223,10 @@ const DOCS: Record<DocId, React.ReactNode> = {
 
   'doc-badge': (<>
     <div className="d-eyebrow">Component</div>
-    <h1 className="d-h1">PrismBadge</h1>
+    <h1 className="d-h1">ForgeBadge</h1>
     <p className="d-lead">Status badge with optional animated pulse dot. Three shape variants.</p>
     <h2 className="d-h2">Install</h2>
-    <CB lang="bash"><span className="str">npx prism-ui add badge <span className="kw">--color</span>=#1D9E75 <span className="kw">--variant</span>=pill</span></CB>
+    <CB lang="bash"><span className="str">npx forge-ui add badge <span className="kw">--color</span>=#1D9E75 <span className="kw">--variant</span>=pill</span></CB>
     <h2 className="d-h2">Props</h2>
     <table className="d-table">
       <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -255,11 +255,11 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <thead><tr><th>Component</th><th>Description</th><th>Install</th></tr></thead>
       <tbody>
         {[
-          ['PrismFadeUp','Text reveal with per-line stagger','npx prism-ui add fadeup'],
-          ['PrismTicker','Infinite horizontal scroll ticker','npx prism-ui add ticker'],
-          ['PrismMorphBlob','CSS border-radius morphing blob','npx prism-ui add morphblob'],
-          ['PrismCountUp','requestAnimationFrame counter','npx prism-ui add countup'],
-          ['PrismSpinner','5 loading spinner variants','npx prism-ui add spinner'],
+          ['ForgeFadeUp','Text reveal with per-line stagger','npx forge-ui add fadeup'],
+          ['ForgeTicker','Infinite horizontal scroll ticker','npx forge-ui add ticker'],
+          ['ForgeMorphBlob','CSS border-radius morphing blob','npx forge-ui add morphblob'],
+          ['ForgeCountUp','requestAnimationFrame counter','npx forge-ui add countup'],
+          ['ForgeSpinner','5 loading spinner variants','npx forge-ui add spinner'],
         ].map(([comp,desc,cmd])=>(
           <tr key={comp}>
             <td><code>{comp}</code></td>
@@ -294,11 +294,11 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <thead><tr><th>Component</th><th>Description</th><th>Install</th></tr></thead>
       <tbody>
         {[
-          ['PrismBarChart','Grouped bar chart','npx prism-ui add barchart'],
-          ['PrismLineChart','Line chart with optional fill','npx prism-ui add linechart'],
-          ['PrismDonut','Donut/pie chart','npx prism-ui add donut'],
-          ['PrismProgress','Linear progress bar','npx prism-ui add progress'],
-          ['PrismSparkline','Inline sparkline','npx prism-ui add sparkline'],
+          ['ForgeBarChart','Grouped bar chart','npx forge-ui add barchart'],
+          ['ForgeLineChart','Line chart with optional fill','npx forge-ui add linechart'],
+          ['ForgeDonut','Donut/pie chart','npx forge-ui add donut'],
+          ['ForgeProgress','Linear progress bar','npx forge-ui add progress'],
+          ['ForgeSparkline','Inline sparkline','npx forge-ui add sparkline'],
         ].map(([comp,desc,cmd])=>(
           <tr key={comp}><td><code>{comp}</code></td><td style={{fontSize:12,color:'var(--muted)'}}>{desc}</td><td><code style={{color:'var(--hint)'}}>{cmd}</code></td></tr>
         ))}
@@ -315,11 +315,11 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <thead><tr><th>Component</th><th>Description</th></tr></thead>
       <tbody>
         {[
-          ['PrismModal','Dialog with optional footer and close button'],
-          ['PrismToast','4 semantic toast variants'],
-          ['PrismTooltip','Hover tooltip, dark/light theme'],
-          ['PrismDropdown','Toggleable dropdown menu'],
-          ['PrismDrawer','Slide-in side drawer with overlay'],
+          ['ForgeModal','Dialog with optional footer and close button'],
+          ['ForgeToast','4 semantic toast variants'],
+          ['ForgeTooltip','Hover tooltip, dark/light theme'],
+          ['ForgeDropdown','Toggleable dropdown menu'],
+          ['ForgeDrawer','Slide-in side drawer with overlay'],
         ].map(([comp,desc])=>(
           <tr key={comp}><td><code>{comp}</code></td><td style={{fontSize:12,color:'var(--muted)'}}>{desc}</td></tr>
         ))}
@@ -334,16 +334,16 @@ const DOCS: Record<DocId, React.ReactNode> = {
   'cli-commands': (<>
     <div className="d-eyebrow">CLI reference</div>
     <h1 className="d-h1">Commands</h1>
-    <p className="d-lead">The PRISM CLI is a dev dependency — it writes files and exits. Nothing runs at runtime.</p>
+    <p className="d-lead">The FORGE.ui CLI is a dev dependency — it writes files and exits. Nothing runs at runtime.</p>
     <table className="d-table">
       <thead><tr><th>Command</th><th>Description</th></tr></thead>
       <tbody>
         {[
-          ['npx prism-ui init','Create prism.config.json and prism-tokens.css'],
-          ['npx prism-ui add <component>','Add one or more components with optional flags'],
-          ['npx prism-ui update <component>','Regenerate component with original flags'],
-          ['npx prism-ui list','List all installed components'],
-          ['npx prism-ui remove <component>','Remove a component and its CSS file'],
+          ['npx forge-ui init','Create forge.config.json and forge-tokens.css'],
+          ['npx forge-ui add <component>','Add one or more components with optional flags'],
+          ['npx forge-ui update <component>','Regenerate component with original flags'],
+          ['npx forge-ui list','List all installed components'],
+          ['npx forge-ui remove <component>','Remove a component and its CSS file'],
         ].map(([cmd,desc])=>(
           <tr key={cmd}><td><code>{cmd}</code></td><td style={{fontSize:12,color:'var(--muted)'}}>{desc}</td></tr>
         ))}
@@ -361,7 +361,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <tbody>
         {[
           ['--color','hex string','Primary colour. Derives all states.'],
-          ['--output','path','Output directory (default: components/prism)'],
+          ['--output','path','Output directory (default: components/forge)'],
           ['--overwrite','boolean','Overwrite existing files'],
         ].map(([flag,type,desc])=>(
           <tr key={flag}><td><code>{flag}</code></td><td><span className="dt">{type}</span></td><td style={{fontSize:12,color:'var(--muted)'}}>{desc}</td></tr>
@@ -376,22 +376,22 @@ const DOCS: Record<DocId, React.ReactNode> = {
 
   'cli-config': (<>
     <div className="d-eyebrow">CLI reference</div>
-    <h1 className="d-h1">prism.config.json</h1>
-    <p className="d-lead">Created by <code>npx prism-ui init</code>. Tracks installed components so <code>update</code> knows which flags to use.</p>
-    <CB lang="json — prism.config.json">
+    <h1 className="d-h1">forge.config.json</h1>
+    <p className="d-lead">Created by <code>npx forge-ui init</code>. Tracks installed components so <code>update</code> knows which flags to use.</p>
+    <CB lang="json — forge.config.json">
       {'{'}<br />
       {'  '}<span className="attr">&quot;version&quot;</span>: <span className="str">&quot;0.1.0&quot;</span>,<br />
-      {'  '}<span className="attr">&quot;output&quot;</span>: <span className="str">&quot;components/prism&quot;</span>,<br />
+      {'  '}<span className="attr">&quot;output&quot;</span>: <span className="str">&quot;components/forge&quot;</span>,<br />
       {'  '}<span className="attr">&quot;components&quot;</span>: {'{'}<br />
       {'    '}<span className="attr">&quot;button&quot;</span>: {'{'} <span className="attr">&quot;color&quot;</span>: <span className="str">&quot;#7F77DD&quot;</span>, <span className="attr">&quot;variant&quot;</span>: <span className="str">&quot;glow&quot;</span> {'}'}<br />
       {'    '}<span className="attr">&quot;card&quot;</span>: {'{'} <span className="attr">&quot;color&quot;</span>: <span className="str">&quot;#1D9E75&quot;</span> {'}'}<br />
       {'  '}{'}'},<br />
       {'}'}
     </CB>
-    <p className="d-p">When you run <code>npx prism-ui update button</code>, the CLI reads the stored flags and regenerates the component file exactly as it was configured — preserving your colour and variant choices across library updates.</p>
+    <p className="d-p">When you run <code>npx forge-ui update button</code>, the CLI reads the stored flags and regenerates the component file exactly as it was configured — preserving your colour and variant choices across library updates.</p>
     <div className="callout callout-info">
       <div className="callout-icon">i</div>
-      <div>Commit <code>prism.config.json</code> to version control. Other developers on your team can run <code>npx prism-ui update --all</code> to regenerate all components to the same specification.</div>
+      <div>Commit <code>forge.config.json</code> to version control. Other developers on your team can run <code>npx forge-ui update --all</code> to regenerate all components to the same specification.</div>
     </div>
   </>),
 }
@@ -415,7 +415,7 @@ const NAV = [
   { section: 'CLI reference', items: [
     { id: 'cli-commands' as DocId, label: 'Commands' },
     { id: 'cli-flags' as DocId, label: 'Flags' },
-    { id: 'cli-config' as DocId, label: 'prism.config.json' },
+    { id: 'cli-config' as DocId, label: 'forge.config.json' },
   ]},
 ]
 

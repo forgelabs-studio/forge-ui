@@ -1,18 +1,24 @@
 'use client'
 import { create } from 'zustand'
 import { PROP_DEFAULTS } from '@/lib/prop-defaults'
+import type { ComponentProps } from '@/lib/types'
 
 export type CanvasMode = 'c-grid' | 'c-dots' | 'c-dark'
+export type RadiusScale = 'sharp' | 'default' | 'rounded'
 
 interface PlaygroundStore {
   activeComponent: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  props: Record<string, Record<string, any>>
+  props: Record<string, ComponentProps>
   canvasMode: CanvasMode
+  globalFont: string
+  globalTextColor: string
+  globalRadius: RadiusScale
   setActiveComponent: (id: string) => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setProp: (componentId: string, key: string, value: any) => void
+  setProp: (componentId: string, key: string, value: ComponentProps[string]) => void
   setCanvasMode: (mode: CanvasMode) => void
+  setGlobalFont: (font: string) => void
+  setGlobalTextColor: (color: string) => void
+  setGlobalRadius: (r: RadiusScale) => void
   resetComponent: (componentId: string) => void
 }
 
@@ -20,6 +26,9 @@ export const usePlaygroundStore = create<PlaygroundStore>((set) => ({
   activeComponent: 'button',
   props: structuredClone(PROP_DEFAULTS),
   canvasMode: 'c-grid',
+  globalFont: 'Inter',
+  globalTextColor: '#f0ede8',
+  globalRadius: 'default',
 
   setActiveComponent: (id) => set({ activeComponent: id }),
 
@@ -32,6 +41,9 @@ export const usePlaygroundStore = create<PlaygroundStore>((set) => ({
     })),
 
   setCanvasMode: (mode) => set({ canvasMode: mode }),
+  setGlobalFont: (font) => set({ globalFont: font }),
+  setGlobalTextColor: (color) => set({ globalTextColor: color }),
+  setGlobalRadius: (r) => set({ globalRadius: r }),
 
   resetComponent: (componentId) =>
     set((state) => ({

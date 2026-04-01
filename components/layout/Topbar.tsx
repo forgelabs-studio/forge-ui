@@ -12,7 +12,7 @@ export default function Topbar() {
   const [cliOk, setCliOk] = useState(false)
 
   function copyInit() {
-    navigator.clipboard.writeText('npx prism-ui@latest init').then(() => {
+    navigator.clipboard.writeText('npx @forgelabs-studio/ui@latest init').then(() => {
       setInitOk(true)
       setTimeout(() => setInitOk(false), 2000)
     })
@@ -36,8 +36,7 @@ export default function Topbar() {
     <header className="topbar">
       <div className="logo">
         <div className="gem" />
-        <span className="logo-name">PRISM</span>
-        <span className="logo-tag">/ ui</span>
+        <span className="logo-name">FORGE</span><span className="logo-tag">.ui</span>
       </div>
 
       <nav className="page-tabs">
