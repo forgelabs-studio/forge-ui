@@ -1,26 +1,82 @@
 'use client'
 import { hexRgb, lighten } from './_utils'
+import { useGlobals } from './_useGlobals'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function AvatarRenderer({ props: p }: { props: any }) {
-  const col = p.color||'#7F77DD'; const rgb = hexRgb(col)
-  const szMap: Record<string,number> = {xs:20,sm:32,md:48,lg:64,xl:88}
-  const sc: Record<string,string> = {online:'#1D9E75',away:'#EF9F27',busy:'#e24b4a',offline:'rgba(240,237,232,.2)'}
-  const sizes = ['xl','lg','md','sm','xs'] as const
+  const { fontFamily } = useGlobals()
+  const col = p.color || '#7F77DD'
+  const rgb = hexRgb(col)
+  const szMap: Record<string, number> = {
+    xs: 20,
+    sm: 32,
+    md: 48,
+    lg: 64,
+    xl: 88,
+  }
+  const sc: Record<string, string> = {
+    online: '#1D9E75',
+    away: '#EF9F27',
+    busy: '#e24b4a',
+    offline: 'rgba(240,237,232,.2)',
+  }
+  const sizes = ['xl', 'lg', 'md', 'sm', 'xs'] as const
   // opacity: xl=1, lg=0.5, md=0.3, sm=0.2, xs=0.1
-  const opacityMap: Record<string,number> = {xl:1,lg:.5,md:.3,sm:.2,xs:.1}
+  const opacityMap: Record<string, number> = {
+    xl: 1,
+    lg: 0.5,
+    md: 0.3,
+    sm: 0.2,
+    xs: 0.1,
+  }
   return (
-    <div style={{display:'flex',alignItems:'center',gap:10}}>
-      {sizes.map((sz)=>{
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      {sizes.map((sz) => {
         const sn = szMap[sz]
-        const isMain = sz===p.size
-        const br = p.shape==='circle'?'50%':p.shape==='squircle'?`${sn*.28}px`:'8px'
+        const isMain = sz === p.size
+        const br =
+          p.shape === 'circle'
+            ? '50%'
+            : p.shape === 'squircle'
+              ? `${sn * 0.28}px`
+              : '8px'
         const op = isMain ? 1 : opacityMap[sz]
         return (
-          <div key={sz} style={{position:'relative',opacity:op}}>
-            <div style={{width:sn,height:sn,borderRadius:br,background:`rgba(${rgb},.2)`,border:p.showRing?`2px solid rgba(${rgb},.5)`:'1px solid rgba(255,255,255,.08)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:Math.max(sn*.28,8),fontWeight:500,color:lighten(col),fontFamily:'Inter',letterSpacing:'-.02em'}}>
+          <div key={sz} style={{ position: 'relative', opacity: op }}>
+            <div
+              style={{
+                width: sn,
+                height: sn,
+                borderRadius: br,
+                background: `rgba(${rgb},.2)`,
+                border: p.showRing
+                  ? `2px solid rgba(${rgb},.5)`
+                  : '1px solid rgba(255,255,255,.08)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: Math.max(sn * 0.28, 8),
+                fontWeight: 500,
+                color: lighten(col),
+                fontFamily,
+                letterSpacing: '-.02em',
+              }}
+            >
               {p.initials}
             </div>
-            {p.showStatus&&isMain&&<div style={{position:'absolute',bottom:1,right:1,width:Math.max(7,sn*.14),height:Math.max(7,sn*.14),borderRadius:'50%',background:sc[p.status]||sc.online,border:'2px solid #09090b'}}/>}
+            {p.showStatus && isMain && (
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 1,
+                  right: 1,
+                  width: Math.max(7, sn * 0.14),
+                  height: Math.max(7, sn * 0.14),
+                  borderRadius: '50%',
+                  background: sc[p.status] || sc.online,
+                  border: '2px solid #09090b',
+                }}
+              />
+            )}
           </div>
         )
       })}
