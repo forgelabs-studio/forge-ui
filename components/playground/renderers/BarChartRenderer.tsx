@@ -1,9 +1,11 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import { hexRgb } from './_utils'
+import { useGlobals } from './_useGlobals'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BarChartRenderer({ props: p }: { props: any }) {
+  const { fontFamily, textColor } = useGlobals()
   const col = p.color||'#7F77DD'; const rgb = hexRgb(col)
   const col2 = p.color2||'#378ADD'; const rgb2 = hexRgb(col2)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -22,6 +24,7 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Chart = (window as any).Chart
     if (!Chart) return
+    const ff = fontFamily
     if (chartRef.current) { chartRef.current.destroy(); chartRef.current = null }
     chartRef.current = new Chart(canvasRef.current, {
       type: 'bar',
@@ -32,9 +35,17 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
           {label:'2025',data:vals2,backgroundColor:`rgba(${rgb2},.35)`,borderColor:`rgba(${rgb2},.6)`,borderWidth:1,borderRadius:p.radius??4},
         ],
       },
-      options: { responsive:true, animation:{duration:p.animated?800:0},
-        plugins:{legend:{display:p.showLegend,labels:{color:'rgba(240,237,232,.4)',font:{size:10,family:'Inter'}}},tooltip:{backgroundColor:'#1a1a1f',borderColor:'rgba(255,255,255,.08)',borderWidth:1,titleColor:'#f0ede8',bodyColor:'rgba(240,237,232,.5)',padding:8,cornerRadius:6}},
-        scales:{x:{grid:{display:p.showGrid,color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(240,237,232,.3)',font:{size:10,family:'Inter'}}},y:{grid:{display:p.showGrid,color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(240,237,232,.3)',font:{size:10,family:'Inter'}},border:{display:false}}},
+      options: {
+        responsive: true,
+        animation: { duration: p.animated ? 800 : 0 },
+        plugins: {
+          legend: { display: p.showLegend, labels: { color: 'rgba(240,237,232,.4)', font: { size: 10, family: ff } } },
+          tooltip: { backgroundColor: '#1a1a1f', borderColor: 'rgba(255,255,255,.08)', borderWidth: 1, titleColor: '#f0ede8', bodyColor: 'rgba(240,237,232,.5)', padding: 8, cornerRadius: 6 },
+        },
+        scales: {
+          x: { grid: { display: p.showGrid, color: 'rgba(255,255,255,.05)' }, ticks: { color: 'rgba(240,237,232,.3)', font: { size: 10, family: ff } } },
+          y: { grid: { display: p.showGrid, color: 'rgba(255,255,255,.05)' }, ticks: { color: 'rgba(240,237,232,.3)', font: { size: 10, family: ff } }, border: { display: false } },
+        },
       },
     })
     return () => { if (chartRef.current) { chartRef.current.destroy(); chartRef.current = null } }
@@ -42,7 +53,7 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
 
   return (
     <div style={{background:'#111113',border:'1px solid rgba(255,255,255,.07)',borderRadius:10,padding:18,width:300}}>
-      <div style={{fontSize:12,color:'rgba(240,237,232,.55)',marginBottom:14,fontFamily:'Inter'}}>{p.title}</div>
+      <div style={{fontSize:12,color:textColor,marginBottom:14,fontFamily}}>{p.title}</div>
       <canvas ref={canvasRef} height={150}/>
     </div>
   )
