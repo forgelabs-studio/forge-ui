@@ -25,6 +25,26 @@ forge-ui/
         └── flags.ts          # Flag parser
 ```
 
+## Components
+
+**Primitives:** Button, Card, Input, Badge, Toggle, Select, Checkbox, Radio, Slider, Textarea, Avatar, StatCard, TagInput, DatePicker
+
+**Motion:** Spinner, FadeUp, Ticker, MorphBlob, CountUp
+
+**Charts:** BarChart, LineChart, Donut, Progress, Sparkline  
+*Note: Chart.js is required as a peer dependency. Add it to your layout via CDN:*
+```html
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+```
+
+**Navigation:** Command, Navbar, Breadcrumb, Pagination, SideNav, Tabs
+
+**Overlay:** Modal, Toast, Tooltip, Dropdown, Drawer
+
+**Feedback:** Skeleton, Alert, Stepper, Accordion
+
+**Data:** Table
+
 ## Running locally
 ```bash
 npm install

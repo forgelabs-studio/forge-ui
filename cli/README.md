@@ -54,6 +54,26 @@ You own these files. Edit them freely.
 | `--animation` | Click animation (ripple, scale, bounce, none) |
 | `--shadow` | Shadow style (glow, soft, hard, none) |
 
+## Components
+
+**Primitives:** Button, Card, Input, Badge, Toggle, Select, Checkbox, Radio, Slider, Textarea, Avatar, StatCard, TagInput, DatePicker
+
+**Motion:** Spinner, FadeUp, Ticker, MorphBlob, CountUp
+
+**Charts:** BarChart, LineChart, Donut, Progress, Sparkline  
+*Note: Chart.js is required as a peer dependency. Add it to your layout via CDN:*
+```html
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+```
+
+**Navigation:** Command, Navbar, Breadcrumb, Pagination, SideNav, Tabs
+
+**Overlay:** Modal, Toast, Tooltip, Dropdown, Drawer
+
+**Feedback:** Skeleton, Alert, Stepper, Accordion
+
+**Data:** Table
+
 ## Design tokens
 
 Override any token in your globals to retheme everything:
