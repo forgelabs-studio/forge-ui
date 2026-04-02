@@ -1,6 +1,6 @@
 {
   "name": "@forgelabs-studio/ui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Spectrum-aware, motion-first React component library. Configure visually, own the generated files.",
   "license": "MIT",
   "type": "module",
