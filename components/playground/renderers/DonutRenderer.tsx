@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 
 ChartJS.register(...registerables);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function DonutRenderer({ props: p }: { props: any }) {
+  const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,13 +88,39 @@ export default function DonutRenderer({ props: p }: { props: any }) {
           fontSize: 12,
           color: "rgba(240,237,232,.55)",
           marginBottom: 12,
-          fontFamily: "Inter",
+          fontFamily,
         }}
       >
         {p.title}
       </div>
       <div style={{ position: "relative" }}>
         <canvas ref={canvasRef} height={170} />
+        {p.showCenter && (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+              textAlign: "center",
+              pointerEvents: "none",
+            }}
+          >
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: 300,
+                color: textColor,
+                letterSpacing: "-.02em",
+              }}
+            >
+              {p.centerText}
+            </div>
+            <div style={{ fontSize: 9, color: "rgba(240,237,232,.35)" }}>
+              visitors
+            </div>
+          </div>
+        )}
       </div>
       {p.showLabels && (
         <div
@@ -107,7 +135,7 @@ export default function DonutRenderer({ props: p }: { props: any }) {
                 gap: 4,
                 fontSize: 10,
                 color: "rgba(240,237,232,.45)",
-                fontFamily: "Inter",
+                fontFamily,
               }}
             >
               <span

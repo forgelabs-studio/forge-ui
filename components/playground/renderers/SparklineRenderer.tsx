@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { hexRgb } from "./_utils";
+import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 
 ChartJS.register(...registerables);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SparklineRenderer({ props: p }: { props: any }) {
+  const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -94,19 +96,15 @@ export default function SparklineRenderer({ props: p }: { props: any }) {
           style={{
             fontSize: 22,
             fontWeight: 300,
-            color: "#f0ede8",
-            fontFamily: "Inter",
+            color: textColor,
+            fontFamily,
             letterSpacing: "-.03em",
           }}
         >
           £24,100
         </span>
         <span
-          style={{
-            fontSize: 11,
-            color: "rgba(29,158,117,.8)",
-            fontFamily: "Inter",
-          }}
+          style={{ fontSize: 11, color: "rgba(29,158,117,.8)", fontFamily }}
         >
           +18.2%
         </span>

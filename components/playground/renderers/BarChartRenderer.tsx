@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { hexRgb } from "./_utils";
+import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 
 ChartJS.register(...registerables);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BarChartRenderer({ props: p }: { props: any }) {
+  const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const col2 = p.color2 || "#378ADD";
@@ -67,7 +69,7 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
             display: p.showLegend,
             labels: {
               color: "rgba(240,237,232,.4)",
-              font: { size: 10, family: "Inter" },
+              font: { size: 10, family: fontFamily },
             },
           },
           tooltip: {
@@ -85,14 +87,14 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
             grid: { display: p.showGrid, color: "rgba(255,255,255,.05)" },
             ticks: {
               color: "rgba(240,237,232,.3)",
-              font: { size: 10, family: "Inter" },
+              font: { size: 10, family: fontFamily },
             },
           },
           y: {
             grid: { display: p.showGrid, color: "rgba(255,255,255,.05)" },
             ticks: {
               color: "rgba(240,237,232,.3)",
-              font: { size: 10, family: "Inter" },
+              font: { size: 10, family: fontFamily },
             },
             border: { display: false },
           },
@@ -118,12 +120,7 @@ export default function BarChartRenderer({ props: p }: { props: any }) {
       }}
     >
       <div
-        style={{
-          fontSize: 12,
-          color: "rgba(240,237,232,.55)",
-          marginBottom: 14,
-          fontFamily: "Inter",
-        }}
+        style={{ fontSize: 12, color: textColor, marginBottom: 14, fontFamily }}
       >
         {p.title}
       </div>

@@ -1,7 +1,9 @@
 "use client";
 import { hexRgb } from "./_utils";
+import { useGlobals } from "./_useGlobals";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SpinnerRenderer({ props: p }: { props: any }) {
+  const { fontFamily } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const sz =
@@ -138,11 +140,7 @@ export default function SpinnerRenderer({ props: p }: { props: any }) {
       {renderVariant()}
       {p.showLabel && (
         <span
-          style={{
-            fontSize: 12,
-            color: "rgba(240,237,232,.4)",
-            fontFamily: "Inter",
-          }}
+          style={{ fontSize: 12, color: "rgba(240,237,232,.4)", fontFamily }}
         >
           {p.label}
         </span>
