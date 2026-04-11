@@ -14,7 +14,7 @@ import path from "path";
 var CONFIG_FILE = "forge.config.json";
 async function readConfig() {
   const configPath = path.join(process.cwd(), CONFIG_FILE);
-  if (!await fs.pathExists(configPath)) return null;
+  if (!(await fs.pathExists(configPath))) return null;
   return fs.readJson(configPath);
 }
 async function writeConfig(config) {
@@ -25,7 +25,7 @@ function createDefaultConfig() {
   return {
     version: "0.1.0",
     output: "components/forge",
-    components: {}
+    components: {},
   };
 }
 
@@ -34,8 +34,12 @@ async function runInit() {
   console.log(pc.bold("\n  forge-ui init\n"));
   const existing = await readConfig();
   if (existing) {
-    console.log(pc.yellow("  forge.config.json already exists \u2014 skipping."));
-    console.log(pc.dim("  Run npx forge-ui add <component> to add components.\n"));
+    console.log(
+      pc.yellow("  forge.config.json already exists \u2014 skipping."),
+    );
+    console.log(
+      pc.dim("  Run npx forge-ui add <component> to add components.\n"),
+    );
     return;
   }
   const config = createDefaultConfig();
@@ -75,8 +79,10 @@ async function runInit() {
   console.log(pc.green("  \u2713") + " forge.config.json");
   console.log(pc.green("  \u2713") + ` ${config.output}/forge-tokens.css`);
   console.log(pc.dim("\n  Next: import the tokens in your root layout"));
-  console.log(pc.cyan(`  import '@/components/forge/forge-tokens.css'
-`));
+  console.log(
+    pc.cyan(`  import '@/components/forge/forge-tokens.css'
+`),
+  );
 }
 
 // src/commands/add.ts
@@ -84,49 +90,301 @@ import pc3 from "picocolors";
 
 // src/registry.ts
 var REGISTRY = [
-  { id: "button", displayName: "ForgeButton", group: "Primitives", description: "Spectrum-aware button \u2014 6 variants, ripple, glow states", defaultColor: "#7F77DD" },
-  { id: "card", displayName: "ForgeCard", group: "Primitives", description: "Card with bottom-up colour glow on hover", defaultColor: "#7F77DD" },
-  { id: "input", displayName: "ForgeInput", group: "Primitives", description: "Input with focus glow and 4 validation states", defaultColor: "#7F77DD" },
-  { id: "badge", displayName: "ForgeBadge", group: "Primitives", description: "Status badge with optional pulse dot", defaultColor: "#1D9E75" },
-  { id: "toggle", displayName: "ForgeToggle", group: "Primitives", description: "Animated toggle switch with glow on active state", defaultColor: "#7F77DD" },
-  { id: "select", displayName: "ForgeSelect", group: "Primitives", description: "Select dropdown with colour-token focus", defaultColor: "#7F77DD" },
-  { id: "checkbox", displayName: "ForgeCheckbox", group: "Primitives", description: "Checkbox with animated check and glow", defaultColor: "#7F77DD" },
-  { id: "radio", displayName: "ForgeRadio", group: "Primitives", description: "Radio group with colour token", defaultColor: "#7F77DD" },
-  { id: "slider", displayName: "ForgeSlider", group: "Primitives", description: "Range slider with coloured fill track", defaultColor: "#7F77DD" },
-  { id: "textarea", displayName: "ForgeTextarea", group: "Primitives", description: "Textarea with focus glow and character count", defaultColor: "#7F77DD" },
-  { id: "avatar", displayName: "ForgeAvatar", group: "Primitives", description: "Avatar with initials, status dot, optional ring", defaultColor: "#7F77DD" },
-  { id: "statcard", displayName: "ForgeStatCard", group: "Primitives", description: "Metric card with value, delta, and colour bar", defaultColor: "#7F77DD" },
-  { id: "taginput", displayName: "ForgeTagInput", group: "Primitives", description: "Tag input \u2014 add and remove tags with keyboard", defaultColor: "#7F77DD" },
-  { id: "datepicker", displayName: "ForgeDatePicker", group: "Primitives", description: "Calendar date picker with month navigation", defaultColor: "#7F77DD" },
-  { id: "spinner", displayName: "ForgeSpinner", group: "Motion", description: "Loading indicator \u2014 5 variants, pure CSS", defaultColor: "#7F77DD" },
-  { id: "fadeup", displayName: "ForgeFadeUp", group: "Motion", description: "Scroll-triggered fade up with per-line stagger", defaultColor: "#7F77DD" },
-  { id: "ticker", displayName: "ForgeTicker", group: "Motion", description: "Infinite horizontal text ticker", defaultColor: "#7F77DD" },
-  { id: "morphblob", displayName: "ForgeMorphBlob", group: "Motion", description: "Organic CSS morphing blob", defaultColor: "#7F77DD" },
-  { id: "countup", displayName: "ForgeCountUp", group: "Motion", description: "Animated number counter", defaultColor: "#7F77DD" },
-  { id: "barchart", displayName: "ForgeBarChart", group: "Charts", description: "Bar chart \u2014 spectrum colours, animated", defaultColor: "#7F77DD", deps: ["chart.js"] },
-  { id: "linechart", displayName: "ForgeLineChart", group: "Charts", description: "Line chart with fill and tension", defaultColor: "#1D9E75", deps: ["chart.js"] },
-  { id: "donut", displayName: "ForgeDonut", group: "Charts", description: "Donut chart with centre display", defaultColor: "#7F77DD", deps: ["chart.js"] },
-  { id: "progress", displayName: "ForgeProgress", group: "Charts", description: "Progress bar with glow and striped option", defaultColor: "#7F77DD" },
-  { id: "sparkline", displayName: "ForgeSparkline", group: "Charts", description: "Compact inline sparkline", defaultColor: "#7F77DD", deps: ["chart.js"] },
-  { id: "cmdpalette", displayName: "ForgeCommand", group: "Navigation", description: "Command palette (\u2318K)", defaultColor: "#7F77DD" },
-  { id: "navbar", displayName: "ForgeNavbar", group: "Navigation", description: "Navigation bar \u2014 dark/light, CTA button", defaultColor: "#7F77DD" },
-  { id: "breadcrumb", displayName: "ForgeBreadcrumb", group: "Navigation", description: "Breadcrumb with custom separator", defaultColor: "#7F77DD" },
-  { id: "pagination", displayName: "ForgePagination", group: "Navigation", description: "Pagination with ellipsis and count", defaultColor: "#7F77DD" },
-  { id: "sidenav", displayName: "ForgeSideNav", group: "Navigation", description: "Collapsible side navigation", defaultColor: "#7F77DD" },
-  { id: "tabs", displayName: "ForgeTabs", group: "Navigation", description: "Tab bar \u2014 underline, pill, line variants", defaultColor: "#7F77DD" },
-  { id: "modal", displayName: "ForgeModal", group: "Overlay", description: "Modal dialog \u2014 overlay, ESC to close, actions", defaultColor: "#7F77DD" },
-  { id: "toast", displayName: "ForgeToast", group: "Overlay", description: "Toast notification \u2014 4 semantic variants", defaultColor: "#1D9E75" },
-  { id: "tooltip", displayName: "ForgeTooltip", group: "Overlay", description: "Tooltip \u2014 dark and light, 4 positions", defaultColor: "#7F77DD" },
-  { id: "dropdown", displayName: "ForgeDropdown", group: "Overlay", description: "Dropdown menu with icons and danger item", defaultColor: "#7F77DD" },
-  { id: "drawer", displayName: "ForgeDrawer", group: "Overlay", description: "Side drawer \u2014 left or right, with overlay", defaultColor: "#7F77DD" },
-  { id: "skeleton", displayName: "ForgeSkeleton", group: "Feedback", description: "Shimmer skeleton \u2014 card, text, profile, table", defaultColor: "#7F77DD" },
-  { id: "alert", displayName: "ForgeAlert", group: "Feedback", description: "Alert banner \u2014 4 semantic variants with action", defaultColor: "#1D9E75" },
-  { id: "stepper", displayName: "ForgeStepper", group: "Feedback", description: "Multi-step progress \u2014 horizontal and vertical", defaultColor: "#7F77DD" },
-  { id: "accordion", displayName: "ForgeAccordion", group: "Feedback", description: "Expandable accordion with smooth animation", defaultColor: "#7F77DD" },
-  { id: "table", displayName: "ForgeTable", group: "Data", description: "Data table \u2014 striped, hover, colour token", defaultColor: "#7F77DD" }
+  {
+    id: "button",
+    displayName: "ForgeButton",
+    group: "Primitives",
+    description: "Spectrum-aware button \u2014 6 variants, ripple, glow states",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "card",
+    displayName: "ForgeCard",
+    group: "Primitives",
+    description: "Card with bottom-up colour glow on hover",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "input",
+    displayName: "ForgeInput",
+    group: "Primitives",
+    description: "Input with focus glow and 4 validation states",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "badge",
+    displayName: "ForgeBadge",
+    group: "Primitives",
+    description: "Status badge with optional pulse dot",
+    defaultColor: "#1D9E75",
+  },
+  {
+    id: "toggle",
+    displayName: "ForgeToggle",
+    group: "Primitives",
+    description: "Animated toggle switch with glow on active state",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "select",
+    displayName: "ForgeSelect",
+    group: "Primitives",
+    description: "Select dropdown with colour-token focus",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "checkbox",
+    displayName: "ForgeCheckbox",
+    group: "Primitives",
+    description: "Checkbox with animated check and glow",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "radio",
+    displayName: "ForgeRadio",
+    group: "Primitives",
+    description: "Radio group with colour token",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "slider",
+    displayName: "ForgeSlider",
+    group: "Primitives",
+    description: "Range slider with coloured fill track",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "textarea",
+    displayName: "ForgeTextarea",
+    group: "Primitives",
+    description: "Textarea with focus glow and character count",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "avatar",
+    displayName: "ForgeAvatar",
+    group: "Primitives",
+    description: "Avatar with initials, status dot, optional ring",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "statcard",
+    displayName: "ForgeStatCard",
+    group: "Primitives",
+    description: "Metric card with value, delta, and colour bar",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "taginput",
+    displayName: "ForgeTagInput",
+    group: "Primitives",
+    description: "Tag input \u2014 add and remove tags with keyboard",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "datepicker",
+    displayName: "ForgeDatePicker",
+    group: "Primitives",
+    description: "Calendar date picker with month navigation",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "spinner",
+    displayName: "ForgeSpinner",
+    group: "Motion",
+    description: "Loading indicator \u2014 5 variants, pure CSS",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "fadeup",
+    displayName: "ForgeFadeUp",
+    group: "Motion",
+    description: "Scroll-triggered fade up with per-line stagger",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "ticker",
+    displayName: "ForgeTicker",
+    group: "Motion",
+    description: "Infinite horizontal text ticker",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "morphblob",
+    displayName: "ForgeMorphBlob",
+    group: "Motion",
+    description: "Organic CSS morphing blob",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "countup",
+    displayName: "ForgeCountUp",
+    group: "Motion",
+    description: "Animated number counter",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "barchart",
+    displayName: "ForgeBarChart",
+    group: "Charts",
+    description: "Bar chart \u2014 spectrum colours, animated",
+    defaultColor: "#7F77DD",
+    deps: ["chart.js"],
+  },
+  {
+    id: "linechart",
+    displayName: "ForgeLineChart",
+    group: "Charts",
+    description: "Line chart with fill and tension",
+    defaultColor: "#1D9E75",
+    deps: ["chart.js"],
+  },
+  {
+    id: "donut",
+    displayName: "ForgeDonut",
+    group: "Charts",
+    description: "Donut chart with centre display",
+    defaultColor: "#7F77DD",
+    deps: ["chart.js"],
+  },
+  {
+    id: "progress",
+    displayName: "ForgeProgress",
+    group: "Charts",
+    description: "Progress bar with glow and striped option",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "sparkline",
+    displayName: "ForgeSparkline",
+    group: "Charts",
+    description: "Compact inline sparkline",
+    defaultColor: "#7F77DD",
+    deps: ["chart.js"],
+  },
+  {
+    id: "cmdpalette",
+    displayName: "ForgeCommand",
+    group: "Navigation",
+    description: "Command palette (\u2318K)",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "navbar",
+    displayName: "ForgeNavbar",
+    group: "Navigation",
+    description: "Navigation bar \u2014 dark/light, CTA button",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "breadcrumb",
+    displayName: "ForgeBreadcrumb",
+    group: "Navigation",
+    description: "Breadcrumb with custom separator",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "pagination",
+    displayName: "ForgePagination",
+    group: "Navigation",
+    description: "Pagination with ellipsis and count",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "sidenav",
+    displayName: "ForgeSideNav",
+    group: "Navigation",
+    description: "Collapsible side navigation",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "tabs",
+    displayName: "ForgeTabs",
+    group: "Navigation",
+    description: "Tab bar \u2014 underline, pill, line variants",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "modal",
+    displayName: "ForgeModal",
+    group: "Overlay",
+    description: "Modal dialog \u2014 overlay, ESC to close, actions",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "toast",
+    displayName: "ForgeToast",
+    group: "Overlay",
+    description: "Toast notification \u2014 4 semantic variants",
+    defaultColor: "#1D9E75",
+  },
+  {
+    id: "tooltip",
+    displayName: "ForgeTooltip",
+    group: "Overlay",
+    description: "Tooltip \u2014 dark and light, 4 positions",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "dropdown",
+    displayName: "ForgeDropdown",
+    group: "Overlay",
+    description: "Dropdown menu with icons and danger item",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "drawer",
+    displayName: "ForgeDrawer",
+    group: "Overlay",
+    description: "Side drawer \u2014 left or right, with overlay",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "skeleton",
+    displayName: "ForgeSkeleton",
+    group: "Feedback",
+    description: "Shimmer skeleton \u2014 card, text, profile, table",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "alert",
+    displayName: "ForgeAlert",
+    group: "Feedback",
+    description: "Alert banner \u2014 4 semantic variants with action",
+    defaultColor: "#1D9E75",
+  },
+  {
+    id: "stepper",
+    displayName: "ForgeStepper",
+    group: "Feedback",
+    description: "Multi-step progress \u2014 horizontal and vertical",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "accordion",
+    displayName: "ForgeAccordion",
+    group: "Feedback",
+    description: "Expandable accordion with smooth animation",
+    defaultColor: "#7F77DD",
+  },
+  {
+    id: "table",
+    displayName: "ForgeTable",
+    group: "Data",
+    description: "Data table \u2014 striped, hover, colour token",
+    defaultColor: "#7F77DD",
+  },
 ];
 var REGISTRY_BY_ID = Object.fromEntries(REGISTRY.map((c) => [c.id, c]));
-var GROUPS = ["Primitives", "Motion", "Charts", "Navigation", "Overlay", "Feedback", "Data"];
+var GROUPS = [
+  "Primitives",
+  "Motion",
+  "Charts",
+  "Navigation",
+  "Overlay",
+  "Feedback",
+  "Data",
+];
 
 // src/flags.ts
 var FLAG_TO_PROP = {
@@ -144,7 +402,7 @@ var FLAG_TO_PROP = {
   "--height": "height",
   "--shape": "shape",
   "--side": "side",
-  "--padding": "padding"
+  "--padding": "padding",
 };
 function parseFlags(rawFlags) {
   const props = {};
@@ -313,7 +571,9 @@ ${shadow === "glow" ? `.forge-btn:hover { box-shadow: 0 0 20px rgba(${rgb}, 0.25
 ${shadow === "soft" ? `.forge-btn:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.35); }` : ""}
 
 /* Click animation: ${clickAnim} */
-${clickAnim === "ripple" ? `
+${
+  clickAnim === "ripple"
+    ? `
 @keyframes forge-ripple {
   to { transform: scale(20); opacity: 0; }
 }
@@ -325,7 +585,9 @@ ${clickAnim === "ripple" ? `
   background: rgba(255,255,255,0.25);
   animation: forge-ripple 0.5s ease-out forwards;
   pointer-events: none;
-}` : ""}
+}`
+    : ""
+}
 `;
   return { tsx, css };
 }
@@ -340,17 +602,17 @@ function generateBadge(props) {
   const radiusMap = {
     pill: "999px",
     tag: "4px",
-    square: "0px"
+    square: "0px",
   };
   const paddingMap = {
     sm: "2px 8px",
     md: "4px 12px",
-    lg: "6px 16px"
+    lg: "6px 16px",
   };
   const fontSizeMap = {
     sm: "10px",
     md: "12px",
-    lg: "13px"
+    lg: "13px",
   };
   const tsx = `// ForgeBadge \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -452,12 +714,12 @@ function generateSpinner(props) {
     sm: "16px",
     md: "24px",
     lg: "36px",
-    xl: "48px"
+    xl: "48px",
   };
   const speedMap = {
     slow: "1.4s",
     normal: "0.8s",
-    fast: "0.4s"
+    fast: "0.4s",
   };
   const tsx = `// ForgeSpinner \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -796,25 +1058,25 @@ function generateAvatar(props) {
     sm: "32px",
     md: "40px",
     lg: "48px",
-    xl: "64px"
+    xl: "64px",
   };
   const fontSizeMap = {
     xs: "9px",
     sm: "11px",
     md: "13px",
     lg: "16px",
-    xl: "20px"
+    xl: "20px",
   };
   const shapeMap = {
     circle: "50%",
     squircle: "30%",
-    square: "6px"
+    square: "6px",
   };
   const statusColorMap = {
     online: "#1D9E75",
     away: "#EF9F27",
     busy: "#e24b4a",
-    offline: "#555"
+    offline: "#555",
   };
   const tsx = `// ForgeAvatar \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -935,12 +1197,12 @@ function generateInput(props) {
   const paddingMap = {
     sm: "6px 10px",
     md: "9px 14px",
-    lg: "12px 16px"
+    lg: "12px 16px",
   };
   const fontSizeMap = {
     sm: "12px",
     md: "13px",
-    lg: "14px"
+    lg: "14px",
   };
   const tsx = `// ForgeInput \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -1103,7 +1365,7 @@ function generateToggle(props) {
   const trackMap = {
     sm: { w: "28px", h: "16px", thumb: "10px" },
     md: { w: "36px", h: "20px", thumb: "14px" },
-    lg: { w: "44px", h: "24px", thumb: "18px" }
+    lg: { w: "44px", h: "24px", thumb: "18px" },
   };
   const t = trackMap[size] ?? trackMap.md;
   const tsx = `// ForgeToggle \u2014 generated by forge-ui CLI
@@ -1797,12 +2059,12 @@ function generateSelect(props) {
   const paddingMap = {
     sm: "6px 10px",
     md: "9px 14px",
-    lg: "12px 16px"
+    lg: "12px 16px",
   };
   const fontSizeMap = {
     sm: "12px",
     md: "13px",
-    lg: "14px"
+    lg: "14px",
   };
   const tsx = `// ForgeSelect \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -3584,11 +3846,16 @@ function generateTicker(props) {
   const separator = props.separator ?? "\u2014";
   const gap = props.gap ?? 48;
   const pauseOnHover = props.pauseOnHover ?? true;
-  const items = props.items ?? ["Item one", "Item two", "Item three", "Item four"];
+  const items = props.items ?? [
+    "Item one",
+    "Item two",
+    "Item three",
+    "Item four",
+  ];
   const durationMap = {
     slow: "40s",
     normal: "24s",
-    fast: "14s"
+    fast: "14s",
   };
   const tsx = `// ForgeTicker \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -3699,7 +3966,7 @@ function generateMorphBlob(props) {
   const durationMap = {
     slow: "8s",
     normal: "5s",
-    fast: "3s"
+    fast: "3s",
   };
   const tsx = `// ForgeMorphBlob \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -3790,7 +4057,7 @@ function generateCountUp(props) {
     sm: "24px",
     md: "32px",
     lg: "48px",
-    xl: "64px"
+    xl: "64px",
   };
   const tsx = `// ForgeCountUp \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -3937,79 +4204,54 @@ async function generateComponent(componentId, displayName, props, config) {
   let tsx;
   let css;
   if (componentId === "button") {
-    ;
     ({ tsx, css } = generateButton(props));
   } else if (componentId === "badge") {
-    ;
     ({ tsx, css } = generateBadge(props));
   } else if (componentId === "spinner") {
-    ;
     ({ tsx, css } = generateSpinner(props));
   } else if (componentId === "progress") {
-    ;
     ({ tsx, css } = generateProgress(props));
   } else if (componentId === "avatar") {
-    ;
     ({ tsx, css } = generateAvatar(props));
   } else if (componentId === "input") {
-    ;
     ({ tsx, css } = generateInput(props));
   } else if (componentId === "toggle") {
-    ;
     ({ tsx, css } = generateToggle(props));
   } else if (componentId === "checkbox") {
-    ;
     ({ tsx, css } = generateCheckbox(props));
   } else if (componentId === "radio") {
-    ;
     ({ tsx, css } = generateRadio(props));
   } else if (componentId === "textarea") {
-    ;
     ({ tsx, css } = generateTextarea(props));
   } else if (componentId === "card") {
-    ;
     ({ tsx, css } = generateCard(props));
   } else if (componentId === "select") {
-    ;
     ({ tsx, css } = generateSelect(props));
   } else if (componentId === "slider") {
-    ;
     ({ tsx, css } = generateSlider(props));
   } else if (componentId === "statcard") {
-    ;
     ({ tsx, css } = generateStatCard(props));
   } else if (componentId === "taginput") {
-    ;
     ({ tsx, css } = generateTagInput(props));
   } else if (componentId === "tabs") {
-    ;
     ({ tsx, css } = generateTabs(props));
   } else if (componentId === "breadcrumb") {
-    ;
     ({ tsx, css } = generateBreadcrumb(props));
   } else if (componentId === "pagination") {
-    ;
     ({ tsx, css } = generatePagination(props));
   } else if (componentId === "navbar") {
-    ;
     ({ tsx, css } = generateNavbar(props));
   } else if (componentId === "datepicker") {
-    ;
     ({ tsx, css } = generateDatePicker(props));
   } else if (componentId === "fadeup") {
-    ;
     ({ tsx, css } = generateFadeUp(props));
   } else if (componentId === "ticker") {
-    ;
     ({ tsx, css } = generateTicker(props));
   } else if (componentId === "morphblob") {
-    ;
     ({ tsx, css } = generateMorphBlob(props));
   } else if (componentId === "countup") {
-    ;
     ({ tsx, css } = generateCountUp(props));
   } else {
-    ;
     ({ tsx, css } = generatePlaceholder(componentId, displayName));
   }
   const tsxPath = path3.join(outputDir, `${displayName}.tsx`);
@@ -4022,13 +4264,17 @@ async function generateComponent(componentId, displayName, props, config) {
 
 // src/commands/add.ts
 async function runAdd(componentId, rawFlags) {
-  console.log(pc3.bold(`
+  console.log(
+    pc3.bold(`
   forge-ui add ${componentId}
-`));
+`),
+  );
   const meta = REGISTRY_BY_ID[componentId];
   if (!meta) {
     console.log(pc3.red(`  Unknown component: "${componentId}"`));
-    console.log(pc3.dim("  Run npx forge-ui list to see available components.\n"));
+    console.log(
+      pc3.dim("  Run npx forge-ui list to see available components.\n"),
+    );
     process.exit(1);
   }
   let config = await readConfig();
@@ -4042,13 +4288,19 @@ async function runAdd(componentId, rawFlags) {
   config.components[componentId] = props;
   await writeConfig(config);
   if (meta.deps?.length) {
-    console.log(pc3.yellow(`
-  Peer deps required: ${meta.deps.join(", ")}`));
+    console.log(
+      pc3.yellow(`
+  Peer deps required: ${meta.deps.join(", ")}`),
+    );
   }
-  console.log(pc3.dim(`
-  Import with:`));
-  console.log(pc3.cyan(`  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
-`));
+  console.log(
+    pc3.dim(`
+  Import with:`),
+  );
+  console.log(
+    pc3.cyan(`  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
+`),
+  );
 }
 
 // src/commands/list.ts
@@ -4061,8 +4313,12 @@ async function runList() {
     const components = REGISTRY.filter((c) => c.group === group);
     console.log(pc4.dim(`  ${group}`));
     for (const c of components) {
-      const tick = installed.has(c.id) ? pc4.green("\u2713") : pc4.dim("\u25CB");
-      console.log(`  ${tick} ${pc4.white(c.displayName.padEnd(22))} ${pc4.dim(c.description)}`);
+      const tick = installed.has(c.id)
+        ? pc4.green("\u2713")
+        : pc4.dim("\u25CB");
+      console.log(
+        `  ${tick} ${pc4.white(c.displayName.padEnd(22))} ${pc4.dim(c.description)}`,
+      );
     }
     console.log();
   }
@@ -4071,12 +4327,16 @@ async function runList() {
 // src/commands/update.ts
 import pc5 from "picocolors";
 async function runUpdate(componentId) {
-  console.log(pc5.bold(`
+  console.log(
+    pc5.bold(`
   forge-ui update ${componentId}
-`));
+`),
+  );
   const config = await readConfig();
   if (!config) {
-    console.log(pc5.red("  No forge.config.json found. Run npx forge-ui init first.\n"));
+    console.log(
+      pc5.red("  No forge.config.json found. Run npx forge-ui init first.\n"),
+    );
     process.exit(1);
   }
   const savedProps = config.components[componentId];
@@ -4087,8 +4347,10 @@ async function runUpdate(componentId) {
   }
   const meta = REGISTRY_BY_ID[componentId];
   if (!meta) {
-    console.log(pc5.red(`  Unknown component: "${componentId}"
-`));
+    console.log(
+      pc5.red(`  Unknown component: "${componentId}"
+`),
+    );
     process.exit(1);
   }
   await generateComponent(componentId, meta.displayName, savedProps, config);
@@ -4101,9 +4363,11 @@ import fs4 from "fs-extra";
 import path4 from "path";
 import pc6 from "picocolors";
 async function runRemove(componentId) {
-  console.log(pc6.bold(`
+  console.log(
+    pc6.bold(`
   forge-ui remove ${componentId}
-`));
+`),
+  );
   const config = await readConfig();
   if (!config) {
     console.log(pc6.red("  No forge.config.json found.\n"));
@@ -4111,8 +4375,10 @@ async function runRemove(componentId) {
   }
   const meta = REGISTRY_BY_ID[componentId];
   if (!meta) {
-    console.log(pc6.red(`  Unknown component: "${componentId}"
-`));
+    console.log(
+      pc6.red(`  Unknown component: "${componentId}"
+`),
+    );
     process.exit(1);
   }
   const outputDir = path4.join(process.cwd(), config.output);
@@ -4133,13 +4399,32 @@ async function runRemove(componentId) {
 
 // src/index.ts
 var program = new Command();
-program.name("forge-ui").description("FORGE.ui \u2014 spectrum-aware React component library").version("0.1.0");
-program.command("init").description("Create forge.config.json and forge-tokens.css").action(() => runInit());
-program.command("add <component>").description("Add a component with optional flags").allowUnknownOption(true).action((component, _opts, cmd) => {
-  const rawFlags = cmd.args.slice(1);
-  runAdd(component, rawFlags);
-});
-program.command("list").description("List all available and installed components").action(() => runList());
-program.command("update <component>").description("Regenerate a component using its saved configuration").action((component) => runUpdate(component));
-program.command("remove <component>").description("Remove a component and its files").action((component) => runRemove(component));
+program
+  .name("forge-ui")
+  .description("FORGE.ui \u2014 spectrum-aware React component library")
+  .version("0.1.0");
+program
+  .command("init")
+  .description("Create forge.config.json and forge-tokens.css")
+  .action(() => runInit());
+program
+  .command("add <component>")
+  .description("Add a component with optional flags")
+  .allowUnknownOption(true)
+  .action((component, _opts, cmd) => {
+    const rawFlags = cmd.args.slice(1);
+    runAdd(component, rawFlags);
+  });
+program
+  .command("list")
+  .description("List all available and installed components")
+  .action(() => runList());
+program
+  .command("update <component>")
+  .description("Regenerate a component using its saved configuration")
+  .action((component) => runUpdate(component));
+program
+  .command("remove <component>")
+  .description("Remove a component and its files")
+  .action((component) => runRemove(component));
 program.parse();
