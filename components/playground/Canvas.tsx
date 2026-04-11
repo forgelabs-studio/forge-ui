@@ -1,33 +1,44 @@
-'use client'
-import { usePlaygroundStore, CanvasMode } from '@/store/playground'
-import { REGISTRY_BY_ID } from '@/lib/registry'
-import dynamic from 'next/dynamic'
-import CLIWindow from './CLIWindow'
+"use client";
+import { usePlaygroundStore, CanvasMode } from "@/store/playground";
+import { REGISTRY_BY_ID } from "@/lib/registry";
+import dynamic from "next/dynamic";
+import CLIWindow from "./CLIWindow";
 
 // Dynamically import the renderer dispatcher to avoid SSR issues with canvas/chart
-const RendererDispatch = dynamic(() => import('./RendererDispatch'), { ssr: false })
+const RendererDispatch = dynamic(() => import("./RendererDispatch"), {
+  ssr: false,
+});
 
 const MODES: { key: CanvasMode; label: string }[] = [
-  { key: 'c-grid', label: 'Grid' },
-  { key: 'c-dots', label: 'Dots' },
-  { key: 'c-dark', label: 'Dark' },
-]
+  { key: "c-grid", label: "Grid" },
+  { key: "c-dots", label: "Dots" },
+  { key: "c-dark", label: "Dark" },
+];
 
 export default function Canvas() {
-  const { activeComponent, canvasMode, setCanvasMode } = usePlaygroundStore()
-  const meta = REGISTRY_BY_ID[activeComponent]
+  const { activeComponent, canvasMode, setCanvasMode } = usePlaygroundStore();
+  const meta = REGISTRY_BY_ID[activeComponent];
 
   return (
     <div className="centre">
       {/* Preview bar */}
       <div className="prev-bar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 9, color: 'var(--hint)', letterSpacing: '.1em', textTransform: 'uppercase' }}>Preview</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span
+            style={{
+              fontSize: 9,
+              color: "var(--hint)",
+              letterSpacing: ".1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Preview
+          </span>
           <div className="pmodes">
-            {MODES.map(m => (
+            {MODES.map((m) => (
               <button
                 key={m.key}
-                className={`pm${canvasMode === m.key ? ' active' : ''}`}
+                className={`pm${canvasMode === m.key ? " active" : ""}`}
                 onClick={() => setCanvasMode(m.key)}
               >
                 {m.label}
@@ -35,13 +46,13 @@ export default function Canvas() {
             ))}
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-          <span style={{ fontSize: 12, color: 'var(--muted)' }}>
-            {meta?.displayName.replace('Prism', '') ?? activeComponent}
+        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+          <span style={{ fontSize: 12, color: "var(--muted)" }}>
+            {meta?.displayName.replace("FORGE", "") ?? activeComponent}
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
             <div className="ch-dot" />
-            <span style={{ fontSize: 10, color: 'var(--hint)' }}>Live</span>
+            <span style={{ fontSize: 10, color: "var(--hint)" }}>Live</span>
           </div>
         </div>
       </div>
@@ -61,5 +72,5 @@ export default function Canvas() {
       {/* CLI Window pinned to bottom */}
       <CLIWindow />
     </div>
-  )
+  );
 }
