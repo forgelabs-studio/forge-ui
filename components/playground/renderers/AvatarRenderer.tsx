@@ -1,8 +1,8 @@
 'use client'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function AvatarRenderer({ props: p }: { props: any }) {
+import type { AvatarProps } from '@/lib/types'
+export default function AvatarRenderer({ props: p }: { props: AvatarProps }) {
   const { fontFamily } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)

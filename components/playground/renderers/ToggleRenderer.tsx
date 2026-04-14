@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import { hexRgb } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ToggleRenderer({ props: p }: { props: any }) {
+import type { ToggleProps } from '@/lib/types'
+export default function ToggleRenderer({ props: p }: { props: ToggleProps }) {
   const { fontFamily } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)

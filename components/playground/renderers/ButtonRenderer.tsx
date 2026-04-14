@@ -75,9 +75,9 @@ export default function ButtonRenderer({
 
   // Apply globalTextColor override for variants where it makes sense.
   // solid and spectrum manage their own text colour for contrast/brand reasons.
-  const effectiveTextColor = ['solid', 'spectrum'].includes(p.variant)
+  const effectiveTextColor = ["solid", "spectrum"].includes(p.variant)
     ? v.c
-    : globalTextColor || v.c
+    : globalTextColor || v.c;
 
   // Use size preset values if size prop changed, fallback to individual values
   const preset = SIZE_PRESETS[p.size] ?? SIZE_PRESETS.md;

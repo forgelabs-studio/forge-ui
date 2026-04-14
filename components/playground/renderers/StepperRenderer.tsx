@@ -2,16 +2,16 @@
 import { useState } from 'react'
 import { hexRgb, lighten, contrast } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function StepperRenderer({ props: p }: { props: any }) {
+import type { StepperProps } from '@/lib/types'
+export default function StepperRenderer({ props: p }: { props: StepperProps }) {
   const { fontFamily, textColor } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)
 
   // Support plus/minus arrays or legacy step1/step2/step3/step4
   const steps: string[] = Array.isArray(p.steps)
-    ? p.steps
-    : [p.step1, p.step2, p.step3, p.step4].filter(Boolean)
+  ? p.steps
+  : [p.step1, p.step2, p.step3, p.step4].filter((s): s is string => Boolean(s));
   const descs: string[] = Array.isArray(p.descs)
     ? p.descs
     : [

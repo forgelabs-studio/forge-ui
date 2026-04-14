@@ -3,11 +3,11 @@ import { useEffect, useRef } from "react";
 import { hexRgb } from "./_utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
+import type { SparklineProps } from "@/lib/types";
 
 ChartJS.register(...registerables);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function SparklineRenderer({ props: p }: { props: any }) {
+export default function SparklineRenderer({ props: p }: { props: SparklineProps }) {
   const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);

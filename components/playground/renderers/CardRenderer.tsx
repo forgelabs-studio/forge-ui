@@ -2,9 +2,8 @@
 import { useState } from 'react'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function CardRenderer({ props: p }: { props: any }) {
+import type { CardProps } from '@/lib/types'
+export default function CardRenderer({ props: p }: { props: CardProps }) {
   const { fontFamily, textColor, resolveRadius } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)
@@ -15,7 +14,7 @@ export default function CardRenderer({ props: p }: { props: any }) {
       style={{
         background: hovered ? '#161618' : '#111113',
         border: `1px solid ${hovered ? `rgba(${rgb},.22)` : 'rgba(255,255,255,.07)'}`,
-        borderRadius: resolveRadius(p.radius),
+        borderRadius: resolveRadius(p.radius ?? 4),
         padding: p.padding,
         width: p.width ?? 280,
         cursor: 'pointer',

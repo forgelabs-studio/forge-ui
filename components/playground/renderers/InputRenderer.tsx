@@ -1,8 +1,8 @@
 'use client'
 import { hexRgb } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function InputRenderer({ props: p }: { props: any }) {
+import type { InputProps } from '@/lib/types'
+export default function InputRenderer({ props: p }: { props: InputProps }) {
   const { fontFamily, textColor, resolveRadius } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)
@@ -35,7 +35,7 @@ export default function InputRenderer({ props: p }: { props: any }) {
     disabled: 'rgba(240,237,232,.15)',
   }
   const ht: Record<string, string> = {
-    default: p.hint,
+    default: p.hint ?? 'Enter a value',
     error: 'Please enter a valid email.',
     success: 'Looks good!',
     disabled: 'This field is locked.',
@@ -63,7 +63,7 @@ export default function InputRenderer({ props: p }: { props: any }) {
           width: '100%',
           background: '#111113',
           border: `1px solid ${ss.b}`,
-          borderRadius: resolveRadius(p.radius),
+          borderRadius: resolveRadius(p.radius ?? 4),
           padding: `${sz[0]}px 12px`,
           fontSize: sz[1],
           color: textColor,

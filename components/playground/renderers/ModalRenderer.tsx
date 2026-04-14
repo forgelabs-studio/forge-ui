@@ -1,8 +1,8 @@
 'use client'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ModalRenderer({ props: p }: { props: any }) {
+import type { ModalProps } from '@/lib/types'
+export default function ModalRenderer({ props: p }: { props: ModalProps }) {
   const { fontFamily, textColor, resolveRadius } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)
@@ -12,7 +12,7 @@ export default function ModalRenderer({ props: p }: { props: any }) {
         width: 340,
         background: '#0f0f12',
         border: '1px solid rgba(255,255,255,.08)',
-        borderRadius: resolveRadius(p.radius),
+        borderRadius: resolveRadius(p.radius ?? 4),
         overflow: 'hidden',
         boxShadow: '0 24px 80px rgba(0,0,0,.5)',
       }}

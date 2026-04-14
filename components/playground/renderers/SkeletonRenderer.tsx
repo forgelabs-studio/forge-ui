@@ -1,6 +1,6 @@
 'use client'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function SkeletonRenderer({ props: p }: { props: any }) {
+import type { SkeletonProps } from '@/lib/types'
+export default function SkeletonRenderer({ props: p }: { props: SkeletonProps }) {
   const shine = `linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%)`
   const sk = (w:string|number,h:number,r=p.radius??8) => ({
     width:w, height:h, borderRadius:r,
@@ -16,11 +16,24 @@ export default function SkeletonRenderer({ props: p }: { props: any }) {
       <div style={{display:'flex',gap:8,marginTop:3}}><div style={sk(60,22)}/><div style={sk(80,22)}/></div>
     </div>
   )
-  if(p.variant==='text') return (
-    <div style={{width:280,display:'flex',flexDirection:'column',gap:10}}>
-      {Array.from({length:p.lines??3}).map((_,i)=><div key={i} style={sk(i===p.lines-1?'65%':'100%',13)}/>)}
+  if (p.variant === "text") {
+
+    const lines = p.lines ?? 3;
+    return (
+      <div
+      style={{
+        width: 280,
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
+      }}
+      >
+      {Array.from({ length: p.lines ?? 3 }).map((_, i) => (
+        <div key={i} style={sk(i === lines - 1 ? "65%" : "100%", 13)} />
+      ))}
     </div>
-  )
+  );
+}
   if(p.variant==='profile') return (
     <div style={{display:'flex',alignItems:'center',gap:14,width:280}}>
       <div style={sk(56,56)}/>
