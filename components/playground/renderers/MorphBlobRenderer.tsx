@@ -1,7 +1,7 @@
 'use client'
 import { hexRgb } from './_utils'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function MorphBlobRenderer({ props: p }: { props: any }) {
+import type { MorphBlobProps } from '@/lib/types'
+export default function MorphBlobRenderer({ props: p }: { props: MorphBlobProps }) {
   const col = p.color||'#7F77DD'; const rgb = hexRgb(col)
   const dur = ({slow:'6s',normal:'4s',fast:'2s'} as Record<string,string>)[p.speed]??'4s'
   const bg = p.gradient?`linear-gradient(135deg,${col},${p.color2||'#D4537E'})`:`rgba(${rgb},.6)`

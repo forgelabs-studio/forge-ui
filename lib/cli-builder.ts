@@ -113,7 +113,10 @@ export function buildCLIString(
   const parts = [`npx @forgelabs-studio/ui add ${componentId}`];
   for (const { key, value } of flags) {
     if (value === null) parts.push(key);
-    else parts.push(`${key}=${value}`);
+    else {
+      const safe = value.toString().replace(/'/g, "'\\''");
+      parts.push(`${key}='${safe}'`);
+    }
   }
   return parts.join(" ");
 }

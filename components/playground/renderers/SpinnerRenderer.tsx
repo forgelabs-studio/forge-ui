@@ -1,8 +1,8 @@
 "use client";
 import { hexRgb } from "./_utils";
 import { useGlobals } from "./_useGlobals";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function SpinnerRenderer({ props: p }: { props: any }) {
+import type { SpinnerProps } from "@/lib/types";
+export default function SpinnerRenderer({ props: p }: { props: SpinnerProps }) {
   const { fontFamily } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);

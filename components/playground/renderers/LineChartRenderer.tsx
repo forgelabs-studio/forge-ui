@@ -3,11 +3,11 @@ import { useEffect, useRef } from "react";
 import { hexRgb } from "./_utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
+import type { LineChartProps } from "@/lib/types";
 
 ChartJS.register(...registerables);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function LineChartRenderer({ props: p }: { props: any }) {
+export default function LineChartRenderer({ props: p }: { props: LineChartProps }) {
   const { fontFamily } = useGlobals();
   const col = p.color || "#1D9E75";
   const rgb = hexRgb(col);

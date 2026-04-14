@@ -1,8 +1,8 @@
 'use client'
 import { hexRgb } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function InputRenderer({ props: p }: { props: any }) {
+import type { InputProps } from '@/lib/types'
+export default function InputRenderer({ props: p }: { props: InputProps }) {
   const { fontFamily, textColor, resolveRadius } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)

@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function TagInputRenderer({ props: p }: { props: any }) {
+import type { TagInputProps } from '@/lib/types'
+export default function TagInputRenderer({ props: p }: { props: TagInputProps }) {
   const { fontFamily, textColor } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)

@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function StatCardRenderer({ props: p }: { props: any }) {
+import type { StatCardProps } from '@/lib/types'
+export default function StatCardRenderer({ props: p }: { props: StatCardProps }) {
   const { textColor } = useGlobals()
   const col = p.color || '#7F77DD'
   const rgb = hexRgb(col)

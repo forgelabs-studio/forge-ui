@@ -1,8 +1,8 @@
 'use client'
 import { hexRgb, lighten } from './_utils'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function AlertRenderer({ props: p }: { props: any }) {
+import type { AlertProps } from '@/lib/types'
+export default function AlertRenderer({ props: p }: { props: AlertProps }) {
   const { fontFamily, textColor } = useGlobals()
   const col = p.color || '#1D9E75'
   const rgb = hexRgb(col)

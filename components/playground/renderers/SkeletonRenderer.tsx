@@ -1,6 +1,6 @@
 'use client'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function SkeletonRenderer({ props: p }: { props: any }) {
+import type { SkeletonProps } from '@/lib/types'
+export default function SkeletonRenderer({ props: p }: { props: SkeletonProps }) {
   const shine = `linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%)`
   const sk = (w:string|number,h:number,r=p.radius??8) => ({
     width:w, height:h, borderRadius:r,

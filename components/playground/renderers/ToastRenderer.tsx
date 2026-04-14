@@ -1,7 +1,7 @@
 'use client'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ToastRenderer({ props: p }: { props: any }) {
+import type { ToastProps } from '@/lib/types'
+export default function ToastRenderer({ props: p }: { props: ToastProps }) {
   const { fontFamily, textColor } = useGlobals()
   const VM: Record<
     string,

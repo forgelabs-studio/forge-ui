@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
 import { useGlobals } from './_useGlobals'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DropdownRenderer({ props: p }: { props: any }) {
+import type { DropdownProps } from '@/lib/types'
+export default function DropdownRenderer({ props: p }: { props: DropdownProps }) {
   const { fontFamily, textColor } = useGlobals()
   const [open, setOpen] = useState(true)
   const items: string[] = Array.isArray(p.items)
