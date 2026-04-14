@@ -11,8 +11,8 @@ export default function TabsRenderer({ props: p }: { props: TabsProps }) {
 
   // Support both old tab1/tab2/tab3/tab4 props and new tabs array
   const tabs: string[] = Array.isArray(p.tabs)
-    ? p.tabs
-    : [p.tab1, p.tab2, p.tab3, p.tab4].filter(Boolean)
+  ? p.tabs
+  : [p.tab1, p.tab2, p.tab3, p.tab4].filter((s): s is string => Boolean(s));
 
   const isPill = p.variant === 'pill',
     isLine = p.variant === 'line'
