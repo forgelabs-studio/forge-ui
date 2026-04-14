@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { hexRgb } from "./_utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
@@ -7,7 +7,11 @@ import type { LineChartProps } from "@/lib/types";
 
 ChartJS.register(...registerables);
 
-export default function LineChartRenderer({ props: p }: { props: LineChartProps }) {
+export default function LineChartRenderer({
+  props: p,
+}: {
+  props: LineChartProps;
+}) {
   const { fontFamily } = useGlobals();
   const col = p.color || "#1D9E75";
   const rgb = hexRgb(col);
@@ -17,17 +21,35 @@ export default function LineChartRenderer({ props: p }: { props: LineChartProps 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const chartRef = useRef<any>(null);
 
-  const rawData: string[] = Array.isArray(p.data) ? p.data : [];
+  const rawData = useMemo(
+    () => (Array.isArray(p.data) ? p.data : []),
+    [p.data],
+  );
   const hasData = rawData.length > 0;
-  const labels = hasData
-    ? rawData.map((s: string) => s.split(",")[0] || "")
-    : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-  const vals1 = hasData
-    ? rawData.map((s: string) => Number(s.split(",")[1]) || 0)
-    : [2.1, 3.4, 2.8, 4.2, 3.9, 5.8, 5.2, 7.1];
-  const vals2 = hasData
-    ? rawData.map((s: string) => Number(s.split(",")[2]) || 0)
-    : [0.8, 1.2, 1, 1.8, 2.1, 2.8, 2.4, 3.6];
+
+  const labels = useMemo(
+    () =>
+      hasData
+        ? rawData.map((s: string) => s.split(",")[0] || "")
+        : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+    [rawData, hasData],
+  );
+
+  const vals1 = useMemo(
+    () =>
+      hasData
+        ? rawData.map((s: string) => Number(s.split(",")[1]) || 0)
+        : [2.1, 3.4, 2.8, 4.2, 3.9, 5.8, 5.2, 7.1],
+    [rawData, hasData],
+  );
+
+  const vals2 = useMemo(
+    () =>
+      hasData
+        ? rawData.map((s: string) => Number(s.split(",")[2]) || 0)
+        : [0.8, 1.2, 1, 1.8, 2.1, 2.8, 2.4, 3.6],
+    [rawData, hasData],
+  );
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -110,13 +132,19 @@ export default function LineChartRenderer({ props: p }: { props: LineChartProps 
   }, [
     col,
     col2,
+    rgb,
+    rgb2,
+    fontFamily,
+    labels,
+    vals1,
+    vals2,
     p.tension,
     p.fill,
     p.animated,
     p.showGrid,
     p.showDots,
-    p.data,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
+  ]);
+
   return (
     <div
       style={{
