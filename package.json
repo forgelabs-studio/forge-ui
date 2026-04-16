@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "typecheck": "tsc --noEmit",
     "audit": "npm audit --audit-level=high",
     "start": "next start",
     "lint": "next lint"
