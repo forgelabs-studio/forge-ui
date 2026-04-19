@@ -29,7 +29,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
   useEffect(() => {
     if (!canvasRef.current) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Chart = (window as any).Chart ?? ChartJS;
+    const Chart = ChartJS;
 
     if (chartRef.current) {
       chartRef.current.destroy();
