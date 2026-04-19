@@ -7,7 +7,11 @@ import type { BarChartProps } from "@/lib/types";
 
 ChartJS.register(...registerables);
 
-export default function BarChartRenderer({ props: p }: { props: BarChartProps }) {
+export default function BarChartRenderer({
+  props: p,
+}: {
+  props: BarChartProps;
+}) {
   const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
@@ -33,7 +37,7 @@ export default function BarChartRenderer({ props: p }: { props: BarChartProps })
   useEffect(() => {
     if (!canvasRef.current) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Chart = (window as any).Chart ?? ChartJS;
+    const Chart = ChartJS;
     if (chartRef.current) {
       chartRef.current.destroy();
       chartRef.current = null;

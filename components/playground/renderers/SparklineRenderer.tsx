@@ -7,7 +7,11 @@ import type { SparklineProps } from "@/lib/types";
 
 ChartJS.register(...registerables);
 
-export default function SparklineRenderer({ props: p }: { props: SparklineProps }) {
+export default function SparklineRenderer({
+  props: p,
+}: {
+  props: SparklineProps;
+}) {
   const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
@@ -25,7 +29,7 @@ export default function SparklineRenderer({ props: p }: { props: SparklineProps 
   useEffect(() => {
     if (!canvasRef.current) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Chart = (window as any).Chart ?? ChartJS;
+    const Chart = ChartJS;
 
     if (chartRef.current) {
       chartRef.current.destroy();
