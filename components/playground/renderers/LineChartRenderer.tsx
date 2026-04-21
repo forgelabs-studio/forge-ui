@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useMemo } from "react";
-import { hexRgb } from "./_utils";
+import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 import type { LineChartProps } from "@/lib/types";

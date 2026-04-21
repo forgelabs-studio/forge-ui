@@ -1,5 +1,5 @@
 "use client";
-import { hexRgb } from "./_utils";
+import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { InputProps } from "@/lib/types";
 export default function InputRenderer({ props: p }: { props: InputProps }) {

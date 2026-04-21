@@ -45,11 +45,11 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
             backgroundColor: colors.map((c) => `${c}cc`),
             borderColor: colors,
             borderWidth: 1,
-            cutout: `${100 - p.thickness}%`,
           },
         ],
       },
       options: {
+        cutout: `${100 - p.thickness}%`,
         responsive: true,
         animation: { duration: p.animated ? 1000 : 0 },
         plugins: {

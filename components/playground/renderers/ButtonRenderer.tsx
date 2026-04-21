@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { hexRgb, lighten, contrast } from "./_utils";
+import { hexRgb, lighten, contrast } from "@/lib/utils";
 import { usePlaygroundStore } from "@/store/playground";
 import type { ButtonProps, RadiusScale } from "@/lib/types";
 
