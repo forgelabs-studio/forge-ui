@@ -2,6 +2,8 @@
 // cli/src/registry.ts is a deliberate copy of the REGISTRY array.
 // Keep in sync manually until monorepo migration.
 
+export type ComponentId = (typeof REGISTRY)[number]["id"];
+
 export type ComponentGroup =
   | "Primitives"
   | "Motion"

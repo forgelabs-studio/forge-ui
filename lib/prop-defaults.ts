@@ -1,4 +1,4 @@
-import type { PropDefaultsMap } from './types'
+import type { PropDefaultsMap } from "./types";
 
 export const PROP_DEFAULTS: PropDefaultsMap = {
   button: {

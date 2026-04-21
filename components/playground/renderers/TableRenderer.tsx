@@ -1,58 +1,58 @@
-'use client'
-import { useState } from 'react'
-import { hexRgb } from './_utils'
-import { useGlobals } from './_useGlobals'
-import type { TableProps } from '@/lib/types'
+"use client";
+import { useState } from "react";
+import { hexRgb } from "@/lib/utils";
+import { useGlobals } from "./_useGlobals";
+import type { TableProps } from "@/lib/types";
 export default function TableRenderer({ props: p }: { props: TableProps }) {
-  const { fontFamily, textColor } = useGlobals()
-  const col = p.color || '#7F77DD'
-  const rgb = hexRgb(col)
-  const [hovered, setHovered] = useState(-1)
+  const { fontFamily, textColor } = useGlobals();
+  const col = p.color || "#7F77DD";
+  const rgb = hexRgb(col);
+  const [hovered, setHovered] = useState(-1);
   const rows = [
-    ['Regula app', 'Mobile app', 'In progress', '#7F77DD'],
-    ['FORGE.labs site', 'Website', 'Live', '#1D9E75'],
-    ['Law Tech dash', 'Dashboard', 'Review', '#EF9F27'],
-    ['Component lib', 'Open source', 'Planning', '#378ADD'],
-    ['Client NDA', 'SaaS app', 'Scoping', '#D4537E'],
-  ]
+    ["Regula app", "Mobile app", "In progress", "#7F77DD"],
+    ["FORGE.labs site", "Website", "Live", "#1D9E75"],
+    ["Law Tech dash", "Dashboard", "Review", "#EF9F27"],
+    ["Component lib", "Open source", "Planning", "#378ADD"],
+    ["Client NDA", "SaaS app", "Scoping", "#D4537E"],
+  ];
   const sc: Record<string, string> = {
-    Live: '#1D9E75',
-    'In progress': '#EF9F27',
-    Review: '#378ADD',
-    Planning: 'rgba(240,237,232,.3)',
-    Scoping: '#D4537E',
-  }
+    Live: "#1D9E75",
+    "In progress": "#EF9F27",
+    Review: "#378ADD",
+    Planning: "rgba(240,237,232,.3)",
+    Scoping: "#D4537E",
+  };
 
   // Support plus/minus columns or default
   const cols: string[] =
     Array.isArray(p.columns) && p.columns.length > 0
       ? p.columns
-      : ['Project', 'Type', 'Status']
+      : ["Project", "Type", "Status"];
 
   // Map column names to row data indices
   const colIdx = cols.map((c) => {
-    const l = c.toLowerCase()
-    if (l.includes('project') || l.includes('name')) return 0
-    if (l.includes('type') || l.includes('category')) return 1
-    if (l.includes('status') || l.includes('state')) return 2
-    return 0
-  })
+    const l = c.toLowerCase();
+    if (l.includes("project") || l.includes("name")) return 0;
+    if (l.includes("type") || l.includes("category")) return 1;
+    if (l.includes("status") || l.includes("state")) return 2;
+    return 0;
+  });
 
   return (
     <div
       style={{
         width: 360,
-        background: '#0f0f12',
-        border: '1px solid rgba(255,255,255,.07)',
+        background: "#0f0f12",
+        border: "1px solid rgba(255,255,255,.07)",
         borderRadius: 10,
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       {p.caption && (
         <div
           style={{
-            padding: '13px 16px',
-            borderBottom: '1px solid rgba(255,255,255,.06)',
+            padding: "13px 16px",
+            borderBottom: "1px solid rgba(255,255,255,.06)",
           }}
         >
           <span style={{ fontSize: 13, color: textColor, fontFamily }}>
@@ -60,21 +60,21 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
           </span>
         </div>
       )}
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
-          <tr style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
+          <tr style={{ borderBottom: "1px solid rgba(255,255,255,.06)" }}>
             {cols.map((c) => (
               <th
                 key={c}
                 style={{
-                  textAlign: 'left',
-                  padding: '10px 14px',
+                  textAlign: "left",
+                  padding: "10px 14px",
                   fontSize: 10,
-                  color: 'rgba(240,237,232,.3)',
+                  color: "rgba(240,237,232,.3)",
                   fontFamily,
                   fontWeight: 500,
-                  letterSpacing: '.06em',
-                  textTransform: 'uppercase',
+                  letterSpacing: ".06em",
+                  textTransform: "uppercase",
                 }}
               >
                 {c}
@@ -84,11 +84,11 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
         </thead>
         <tbody>
           {rows.map((r, i) => {
-            const isHov = p.showHover && hovered === i
+            const isHov = p.showHover && hovered === i;
             const base =
               p.showStripes && i % 2 === 0
-                ? 'rgba(255,255,255,.015)'
-                : 'transparent'
+                ? "rgba(255,255,255,.015)"
+                : "transparent";
             return (
               <tr
                 key={i}
@@ -97,14 +97,14 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                 style={{
                   borderBottom:
                     i < rows.length - 1
-                      ? '1px solid rgba(255,255,255,.04)'
-                      : 'none',
+                      ? "1px solid rgba(255,255,255,.04)"
+                      : "none",
                   background: isHov ? `rgba(${rgb},.05)` : base,
-                  transition: 'background .12s',
+                  transition: "background .12s",
                 }}
               >
                 {cols.map((_, ci) => {
-                  const dataIdx = colIdx[ci]
+                  const dataIdx = colIdx[ci];
                   if (ci === 0)
                     return (
                       <td
@@ -118,8 +118,8 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                       >
                         <div
                           style={{
-                            display: 'flex',
-                            alignItems: 'center',
+                            display: "flex",
+                            alignItems: "center",
                             gap: 8,
                           }}
                         >
@@ -135,7 +135,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                           {r[dataIdx]}
                         </div>
                       </td>
-                    )
+                    );
                   if (dataIdx === 2)
                     return (
                       <td
@@ -145,33 +145,33 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                         <span
                           style={{
                             fontSize: 10,
-                            color: sc[r[2]] || 'rgba(240,237,232,.4)',
+                            color: sc[r[2]] || "rgba(240,237,232,.4)",
                             fontFamily,
                           }}
                         >
                           {r[2]}
                         </span>
                       </td>
-                    )
+                    );
                   return (
                     <td
                       key={ci}
                       style={{
                         padding: `${p.compact ? 8 : 12}px 14px`,
                         fontSize: 12,
-                        color: 'rgba(240,237,232,.45)',
+                        color: "rgba(240,237,232,.45)",
                         fontFamily,
                       }}
                     >
                       {r[dataIdx]}
                     </td>
-                  )
+                  );
                 })}
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
     </div>
-  )
+  );
 }

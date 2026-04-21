@@ -1,5 +1,5 @@
 "use client";
-import { hexRgb } from "./_utils";
+import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { SpinnerProps } from "@/lib/types";
 export default function SpinnerRenderer({ props: p }: { props: SpinnerProps }) {
