@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Topbar from "@/components/layout/Topbar";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "FORGE.ui — Component Playground",
@@ -8,11 +9,12 @@ export const metadata: Metadata = {
     "Spectrum-aware, motion-first React component library. Configure visually, install with one CLI command, own the generated files.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  await headers();
   return (
     <html lang="en">
       <head>

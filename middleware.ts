@@ -4,9 +4,20 @@ export function middleware(request: NextRequest) {
   const nonce = Buffer.from(
     crypto.getRandomValues(new Uint8Array(16)),
   ).toString("base64");
+
+  const isDev = process.env.NODE_ENV === "development";
+
+  const scriptSrc = [
+    "'self'",
+    `'nonce-${nonce}'`,
+    isDev ? "'unsafe-eval'" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}'`,
+    `script-src ${scriptSrc}`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: blob: https:",
@@ -14,13 +25,17 @@ export function middleware(request: NextRequest) {
     "frame-ancestors 'none'",
   ].join("; ");
 
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+
   const response = NextResponse.next({
     request: {
-      headers: new Headers(request.headers),
+      headers: requestHeaders,
     },
   });
 
   response.headers.set("x-nonce", nonce);
   response.headers.set("Content-Security-Policy", csp);
+
   return response;
 }
