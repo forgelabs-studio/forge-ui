@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Topbar from "@/components/layout/Topbar";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "FORGE.ui — Component Playground",
@@ -8,11 +10,12 @@ export const metadata: Metadata = {
     "Spectrum-aware, motion-first React component library. Configure visually, install with one CLI command, own the generated files.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = (await headers()).get("x-nonce") ?? "";
   return (
     <html lang="en">
       <head>
@@ -28,6 +31,11 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Script
+          nonce={nonce}
+          src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"
+          strategy="beforeInteractive"
+        />
         <div className="app">
           <Topbar />
           {children}
