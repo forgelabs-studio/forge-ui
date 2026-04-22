@@ -14,9 +14,12 @@ export function middleware(request: NextRequest) {
     "frame-ancestors 'none'",
   ].join("; ");
 
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+
   const response = NextResponse.next({
     request: {
-      headers: new Headers(request.headers),
+      headers: requestHeaders,
     },
   });
 
