@@ -13,6 +13,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  await headers();
   return (
     <html lang="en">
       <head>

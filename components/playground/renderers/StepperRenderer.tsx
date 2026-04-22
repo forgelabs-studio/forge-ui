@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { hexRgb, lighten, contrast } from "@/lib/utils";
-
 import { useGlobals } from "./_useGlobals";
 import type { StepperProps } from "@/lib/types";
 export default function StepperRenderer({ props: p }: { props: StepperProps }) {
