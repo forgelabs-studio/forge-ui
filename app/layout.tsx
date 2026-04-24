@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Topbar from "@/components/layout/Topbar";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "FORGE.ui — Component Playground",
@@ -31,6 +32,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
+        <Analytics />
         <Script
           nonce={nonce}
           src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"

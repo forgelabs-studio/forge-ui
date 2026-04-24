@@ -4,6 +4,7 @@ import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 import type { SparklineProps } from "@/lib/types";
+import { useId } from "react";
 
 ChartJS.register(...registerables);
 
@@ -13,6 +14,8 @@ export default function SparklineRenderer({
   props: SparklineProps;
 }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -26,6 +29,13 @@ export default function SparklineRenderer({
       ? rawData.map((s: string) => Number(s.split(",")[1] ?? s) || 0)
       : [4, 7, 5, 9, 6, 11, 8, 13, 10, 15, 12, 16];
 
+  // Accessibility ids
+  const figId = `${uid}-spark-figure`;
+  const captionId = `${uid}-spark-caption`;
+  const tableId = `${uid}-spark-data`;
+  const canvasId = `${uid}-spark-canvas`;
+  const liveId = `${uid}-spark-live`;
+
   useEffect(() => {
     if (!canvasRef.current) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,6 +45,7 @@ export default function SparklineRenderer({
       chartRef.current.destroy();
       chartRef.current = null;
     }
+
     chartRef.current = new Chart(canvasRef.current, {
       type: p.variant || "line",
       data: {
@@ -71,6 +82,7 @@ export default function SparklineRenderer({
         scales: { x: { display: false }, y: { display: false } },
       },
     });
+
     return () => {
       if (chartRef.current) {
         chartRef.current.destroy();
@@ -78,8 +90,13 @@ export default function SparklineRenderer({
       }
     };
   }, [col, p.fill, p.showDot, p.animated, p.variant, p.data]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const summary = `Sparkline showing ${data.length} points. Latest value ${data[data.length - 1] ?? 0}.`;
+
   return (
-    <div
+    <figure
+      id={figId}
+      aria-labelledby={captionId}
       style={{
         background: "#111113",
         border: "1px solid rgba(255,255,255,.07)",
@@ -88,34 +105,82 @@ export default function SparklineRenderer({
         width: 260,
       }}
     >
-      <div
+      <figcaption
+        id={captionId}
         style={{
           display: "flex",
           alignItems: "baseline",
           justifyContent: "space-between",
           marginBottom: 12,
+          fontFamily,
         }}
       >
-        <span
-          style={{
-            fontSize: 22,
-            fontWeight: 300,
-            color: textColor,
-            fontFamily,
-            letterSpacing: "-.03em",
-          }}
-        >
+        <span style={{ fontSize: 22, fontWeight: 300, color: textColor }}>
           £24,100
         </span>
-        <span
-          style={{ fontSize: 11, color: "rgba(29,158,117,.8)", fontFamily }}
-        >
+        <span style={{ fontSize: 11, color: "rgba(29,158,117,.8)" }}>
           +18.2%
         </span>
+      </figcaption>
+
+      <div
+        id={liveId}
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          margin: -1,
+          border: 0,
+          padding: 0,
+          overflow: "hidden",
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {summary}
       </div>
+
       <div style={{ height, position: "relative" }}>
-        <canvas ref={canvasRef} height={150} />
+        <canvas
+          id={canvasId}
+          ref={canvasRef}
+          role="img"
+          aria-labelledby={captionId}
+          aria-describedby={tableId}
+          height={150}
+        />
       </div>
-    </div>
+
+      {/* Hidden data table for screen readers */}
+      <table
+        id={tableId}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+        aria-hidden={false}
+      >
+        <caption>Sparkline data</caption>
+        <thead>
+          <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((v, i) => (
+            <tr key={i}>
+              <td>{String(i)}</td>
+              <td>{String(v)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
   );
 }

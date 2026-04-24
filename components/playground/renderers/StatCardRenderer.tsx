@@ -1,23 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { hexRgb, lighten } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { StatCardProps } from "@/lib/types";
+
 export default function StatCardRenderer({
   props: p,
 }: {
   props: StatCardProps;
 }) {
   const { textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const [hovered, setHovered] = useState(false);
   const dir = p.deltaDir === "up";
+
+  const cardId = `${uid}-statcard`;
+  const valueId = `${uid}-statcard-value`;
+  const deltaId = `${uid}-statcard-delta`;
+  const barId = `${uid}-statcard-bar`;
+
   return (
     <div style={{ width: 300 }}>
       <div
+        id={cardId}
+        role="group"
+        aria-label={`${p.title} statistic`}
+        aria-describedby={`${valueId} ${p.showDelta ? deltaId : ""}`}
+        tabIndex={0}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
+        onKeyDown={(e) => {
+          // non-functional: allow Enter/Space to toggle the hover visual for keyboard users
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setHovered((h) => !h);
+          }
+        }}
         style={{
           background: "#111113",
           border: `1px solid ${hovered ? `rgba(${rgb},.22)` : "rgba(255,255,255,.07)"}`,
@@ -28,7 +51,12 @@ export default function StatCardRenderer({
           transition: "all .25s",
           cursor: "pointer",
           marginBottom: 8,
+          outline: "none",
         }}
+        onFocusCapture={(e) =>
+          (e.currentTarget.style.boxShadow = `0 0 0 6px rgba(${rgb},.06)`)
+        }
+        onBlurCapture={(e) => (e.currentTarget.style.boxShadow = "none")}
       >
         <div
           style={{
@@ -42,10 +70,16 @@ export default function StatCardRenderer({
             gap: 6,
           }}
         >
-          {p.showIcon && <span style={{ color: lighten(col) }}>{p.icon}</span>}
-          {p.title}
+          {p.showIcon && (
+            <span aria-hidden="true" style={{ color: lighten(col) }}>
+              {p.icon}
+            </span>
+          )}
+          <span>{p.title}</span>
         </div>
+
         <div
+          id={valueId}
           style={{
             fontSize: 28,
             fontWeight: 300,
@@ -56,8 +90,11 @@ export default function StatCardRenderer({
         >
           {p.value}
         </div>
+
         {p.showDelta && (
           <div
+            id={deltaId}
+            aria-live="polite"
             style={{
               fontSize: 12,
               color: dir ? "rgba(29,158,117,.8)" : "rgba(226,75,74,.7)",
@@ -66,8 +103,11 @@ export default function StatCardRenderer({
             {p.delta} vs last month
           </div>
         )}
+
         {p.showBar && (
           <div
+            id={barId}
+            aria-hidden="true"
             style={{
               marginTop: 14,
               height: 3,
@@ -87,6 +127,7 @@ export default function StatCardRenderer({
           </div>
         )}
       </div>
+
       <div
         style={{
           display: "grid",
@@ -94,6 +135,7 @@ export default function StatCardRenderer({
           gap: 8,
           opacity: 0.4,
         }}
+        aria-hidden="true"
       >
         {[
           ["Visitors", "24.1k"],
