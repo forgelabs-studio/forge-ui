@@ -1,13 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { TableProps } from "@/lib/types";
+
 export default function TableRenderer({ props: p }: { props: TableProps }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const [hovered, setHovered] = useState(-1);
+
   const rows = [
     ["Regula app", "Mobile app", "In progress", "#7F77DD"],
     ["FORGE.labs site", "Website", "Live", "#1D9E75"],
@@ -15,6 +19,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
     ["Component lib", "Open source", "Planning", "#378ADD"],
     ["Client NDA", "SaaS app", "Scoping", "#D4537E"],
   ];
+
   const sc: Record<string, string> = {
     Live: "#1D9E75",
     "In progress": "#EF9F27",
@@ -23,7 +28,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
     Scoping: "#D4537E",
   };
 
-  // Support plus/minus columns or default
+  // Columns fallback
   const cols: string[] =
     Array.isArray(p.columns) && p.columns.length > 0
       ? p.columns
@@ -37,6 +42,8 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
     if (l.includes("status") || l.includes("state")) return 2;
     return 0;
   });
+
+  const captionId = `${uid}-table-caption`;
 
   return (
     <div
@@ -52,7 +59,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
         <div
           style={{
             padding: "13px 16px",
-            borderBottom: "1px solid rgba(255,255,255,.06)",
+            borderBottom: "1px solid rgba(255,255,232,.06)",
           }}
         >
           <span style={{ fontSize: 13, color: textColor, fontFamily }}>
@@ -60,12 +67,23 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
           </span>
         </div>
       )}
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+
+      <table
+        style={{ width: "100%", borderCollapse: "collapse" }}
+        aria-describedby={p.caption ? captionId : undefined}
+      >
+        {p.caption && (
+          <caption id={captionId} style={{ position: "absolute", left: -9999 }}>
+            {p.caption}
+          </caption>
+        )}
+
         <thead>
           <tr style={{ borderBottom: "1px solid rgba(255,255,255,.06)" }}>
             {cols.map((c) => (
               <th
                 key={c}
+                scope="col"
                 style={{
                   textAlign: "left",
                   padding: "10px 14px",
@@ -82,6 +100,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
             ))}
           </tr>
         </thead>
+
         <tbody>
           {rows.map((r, i) => {
             const isHov = p.showHover && hovered === i;
@@ -89,11 +108,19 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
               p.showStripes && i % 2 === 0
                 ? "rgba(255,255,255,.015)"
                 : "transparent";
+
+            // Accessible row summary for screen readers
+            const rowLabel = `${r[0]}, ${r[1]}, status ${r[2]}`;
+
             return (
               <tr
                 key={i}
                 onMouseEnter={() => p.showHover && setHovered(i)}
                 onMouseLeave={() => setHovered(-1)}
+                onFocus={() => p.showHover && setHovered(i)}
+                onBlur={() => p.showHover && setHovered(-1)}
+                tabIndex={0}
+                aria-label={rowLabel}
                 style={{
                   borderBottom:
                     i < rows.length - 1
@@ -101,10 +128,25 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                       : "none",
                   background: isHov ? `rgba(${rgb},.05)` : base,
                   transition: "background .12s",
+                  outline: "none",
                 }}
+                onKeyDown={(e) => {
+                  // keep non-functional: allow Enter/Space to mimic click hover for keyboard users
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setHovered((h) => (h === i ? -1 : i));
+                  }
+                }}
+                onFocusCapture={(e) =>
+                  (e.currentTarget.style.boxShadow = `0 0 0 4px rgba(${rgb},.06)`)
+                }
+                onBlurCapture={(e) =>
+                  (e.currentTarget.style.boxShadow = "none")
+                }
               >
                 {cols.map((_, ci) => {
                   const dataIdx = colIdx[ci];
+
                   if (ci === 0)
                     return (
                       <td
@@ -124,6 +166,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                           }}
                         >
                           <div
+                            aria-hidden="true"
                             style={{
                               width: 8,
                               height: 8,
@@ -136,6 +179,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                         </div>
                       </td>
                     );
+
                   if (dataIdx === 2)
                     return (
                       <td
@@ -153,6 +197,7 @@ export default function TableRenderer({ props: p }: { props: TableProps }) {
                         </span>
                       </td>
                     );
+
                   return (
                     <td
                       key={ci}

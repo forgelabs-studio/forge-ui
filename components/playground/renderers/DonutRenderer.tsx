@@ -3,11 +3,14 @@ import { useEffect, useRef } from "react";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 import type { DonutProps } from "@/lib/types";
+import { useId } from "react";
 
 ChartJS.register(...registerables);
 
 export default function DonutRenderer({ props: p }: { props: DonutProps }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,6 +21,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
   const defaultColors = [col, "#378ADD", "#EF9F27", "#D4537E"];
   const defaultLabels = ["Direct", "Organic", "Referral", "Social"];
   const defaultVals = [40, 25, 22, 13];
+
   const labels = hasData
     ? rawData.map((s: string) => s.split(",")[0] || "")
     : defaultLabels;
@@ -25,6 +29,13 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
     ? rawData.map((s: string) => Number(s.split(",")[1]) || 0)
     : defaultVals;
   const colors = labels.map((_, i) => defaultColors[i % defaultColors.length]);
+
+  // Accessibility ids
+  const figId = `${uid}-donut-figure`;
+  const captionId = `${uid}-donut-caption`;
+  const tableId = `${uid}-donut-data`;
+  const canvasId = `${uid}-donut-canvas`;
+  const liveId = `${uid}-donut-live`;
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -35,6 +46,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
       chartRef.current.destroy();
       chartRef.current = null;
     }
+
     chartRef.current = new Chart(canvasRef.current, {
       type: "doughnut",
       data: {
@@ -66,6 +78,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
         },
       },
     });
+
     return () => {
       if (chartRef.current) {
         chartRef.current.destroy();
@@ -73,8 +86,15 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
       }
     };
   }, [col, p.thickness, p.animated, p.data]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const summary = `${p.title || "Donut chart"} with ${labels.length} segments. Values ${labels
+    .map((lab, i) => `${lab}: ${data[i]}%`)
+    .join("; ")}`;
+
   return (
-    <div
+    <figure
+      id={figId}
+      aria-labelledby={captionId}
       style={{
         background: "#111113",
         border: "1px solid rgba(255,255,255,.07)",
@@ -83,7 +103,8 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
         width: 230,
       }}
     >
-      <div
+      <figcaption
+        id={captionId}
         style={{
           fontSize: 12,
           color: "rgba(240,237,232,.55)",
@@ -92,11 +113,39 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
         }}
       >
         {p.title}
+      </figcaption>
+
+      <div
+        id={liveId}
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          margin: -1,
+          border: 0,
+          padding: 0,
+          overflow: "hidden",
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {summary}
       </div>
+
       <div style={{ position: "relative" }}>
-        <canvas ref={canvasRef} height={170} />
+        <canvas
+          id={canvasId}
+          ref={canvasRef}
+          role="img"
+          aria-labelledby={captionId}
+          aria-describedby={tableId}
+          height={170}
+        />
         {p.showCenter && (
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               top: "50%",
@@ -122,6 +171,35 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
           </div>
         )}
       </div>
+
+      <table
+        id={tableId}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+        aria-hidden={false}
+      >
+        <caption>{p.title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Segment</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((lab, i) => (
+            <tr key={lab}>
+              <td>{lab}</td>
+              <td>{String(data[i])}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       {p.showLabels && (
         <div
           style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}
@@ -139,6 +217,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
               }}
             >
               <span
+                aria-hidden="true"
                 style={{
                   width: 7,
                   height: 7,
@@ -152,6 +231,6 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
           ))}
         </div>
       )}
-    </div>
+    </figure>
   );
 }

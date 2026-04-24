@@ -4,6 +4,7 @@ import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 import type { LineChartProps } from "@/lib/types";
+import { useId } from "react";
 
 ChartJS.register(...registerables);
 
@@ -13,6 +14,8 @@ export default function LineChartRenderer({
   props: LineChartProps;
 }) {
   const { fontFamily } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#1D9E75";
   const rgb = hexRgb(col);
   const col2 = p.color2 || "#EF9F27";
@@ -50,6 +53,13 @@ export default function LineChartRenderer({
         : [0.8, 1.2, 1, 1.8, 2.1, 2.8, 2.4, 3.6],
     [rawData, hasData],
   );
+
+  // Accessibility ids
+  const figId = `${uid}-line-figure`;
+  const captionId = `${uid}-line-caption`;
+  const tableId = `${uid}-line-data`;
+  const canvasId = `${uid}-line-canvas`;
+  const liveId = `${uid}-line-live`;
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -145,8 +155,14 @@ export default function LineChartRenderer({
     p.showDots,
   ]);
 
+  const summary = `${p.title || "Line chart"} with ${labels.length} points. Latest values ${labels
+    .map((lab, i) => `${lab}: ${vals1[i]} and ${vals2[i]}`)
+    .join("; ")}`;
+
   return (
-    <div
+    <figure
+      id={figId}
+      aria-labelledby={captionId}
       style={{
         background: "#111113",
         border: "1px solid rgba(255,255,255,.07)",
@@ -155,7 +171,8 @@ export default function LineChartRenderer({
         width: 300,
       }}
     >
-      <div
+      <figcaption
+        id={captionId}
         style={{
           fontSize: 12,
           color: "rgba(240,237,232,.55)",
@@ -164,8 +181,65 @@ export default function LineChartRenderer({
         }}
       >
         {p.title}
+      </figcaption>
+
+      <div
+        id={liveId}
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          margin: -1,
+          border: 0,
+          padding: 0,
+          overflow: "hidden",
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {summary}
       </div>
-      <canvas ref={canvasRef} height={150} />
-    </div>
+
+      <canvas
+        id={canvasId}
+        ref={canvasRef}
+        role="img"
+        aria-labelledby={captionId}
+        aria-describedby={tableId}
+        height={150}
+      />
+
+      <table
+        id={tableId}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+        aria-hidden={false}
+      >
+        <caption>{p.title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Label</th>
+            <th scope="col">Series 1</th>
+            <th scope="col">Series 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((lab, i) => (
+            <tr key={lab}>
+              <td>{lab}</td>
+              <td>{String(vals1[i])}</td>
+              <td>{String(vals2[i])}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
   );
 }

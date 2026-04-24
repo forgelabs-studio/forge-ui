@@ -1,15 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { hexRgb, lighten } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { SliderProps } from "@/lib/types";
+
 export default function SliderRenderer({ props: p }: { props: SliderProps }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const [val, setVal] = useState(p.value ?? 8000);
+  const [focused, setFocused] = useState(false);
+
   const fmt = (v: number) => `${p.unit || ""}${Number(v).toLocaleString()}`;
   const pct = ((val - p.min) / (p.max - p.min)) * 100;
+
+  const showLabel = (p as Partial<{ showLabel: boolean }>).showLabel ?? true;
+  const labelId = `${uid}-label`;
+  const liveId = `${uid}-live`;
+  const minId = `${uid}-min`;
+  const maxId = `${uid}-max`;
+  const trackId = `${uid}-track`;
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", gap: 8, width: 280 }}
@@ -22,10 +35,15 @@ export default function SliderRenderer({ props: p }: { props: SliderProps }) {
             alignItems: "baseline",
           }}
         >
-          <span style={{ fontSize: 11, color: textColor, fontFamily }}>
+          <span
+            id={labelId}
+            style={{ fontSize: 11, color: textColor, fontFamily }}
+          >
             {p.label}
           </span>
           <span
+            aria-live="polite"
+            id={liveId}
             style={{
               fontSize: 15,
               fontWeight: 400,
@@ -38,13 +56,18 @@ export default function SliderRenderer({ props: p }: { props: SliderProps }) {
           </span>
         </div>
       )}
+
       <div style={{ position: "relative", padding: "8px 0" }}>
         <div
+          id={trackId}
+          aria-hidden="true"
           style={{
             height: 4,
             borderRadius: 100,
             background: "rgba(255,255,255,.08)",
             overflow: "hidden",
+            boxShadow: focused ? `0 0 0 4px rgba(${rgb},.08)` : "none",
+            transition: "box-shadow .12s",
           }}
         >
           <div
@@ -57,13 +80,24 @@ export default function SliderRenderer({ props: p }: { props: SliderProps }) {
             }}
           />
         </div>
+
+        {/* Native range input kept for full AT/keyboard support.
+            It's visually hidden but remains focusable; we add focus handlers
+            to show a focus ring on the track so keyboard users see focus. */}
         <input
+          aria-label={!showLabel ? p.label : undefined}
+          aria-labelledby={showLabel ? labelId : undefined}
+          aria-valuemin={p.min}
+          aria-valuemax={p.max}
+          aria-valuenow={val}
+          aria-valuetext={fmt(val)}
+          aria-describedby={`${minId} ${maxId}`}
+          role="slider"
           type="range"
           min={p.min}
           max={p.max}
           step={p.step || 1}
           value={val}
-          aria-label="Volume"
           style={{
             WebkitAppearance: "none",
             position: "absolute",
@@ -73,14 +107,26 @@ export default function SliderRenderer({ props: p }: { props: SliderProps }) {
             opacity: 0,
             cursor: "pointer",
           }}
-          onChange={(e) => setVal(+e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          onChange={(e) => {
+            const v = +e.target.value;
+            setVal(v);
+          }}
         />
       </div>
+
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <span style={{ fontSize: 10, color: "var(--hint)", fontFamily }}>
+        <span
+          id={minId}
+          style={{ fontSize: 10, color: "var(--hint)", fontFamily }}
+        >
           {fmt(p.min)}
         </span>
-        <span style={{ fontSize: 10, color: "var(--hint)", fontFamily }}>
+        <span
+          id={maxId}
+          style={{ fontSize: 10, color: "var(--hint)", fontFamily }}
+        >
           {fmt(p.max)}
         </span>
       </div>

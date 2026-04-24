@@ -89,6 +89,7 @@ export interface AlertProps {
 }
 
 export interface AvatarProps {
+  name: string;
   color: string;
   size: "xs" | "sm" | "md" | "lg" | "xl";
   shape: "circle" | "squircle" | "square";
@@ -110,6 +111,7 @@ export interface BarChartProps {
 }
 
 export interface BreadcrumbProps {
+  label: string;
   color: string;
   items: string;
   showHome: boolean;
@@ -181,6 +183,7 @@ export interface DropdownProps {
 }
 
 export interface FadeUpProps {
+  ariaLabel: string;
   color: string;
   text?: string;
   duration?: number;
@@ -224,6 +227,8 @@ export interface ModalProps {
 }
 
 export interface MorphBlobProps {
+  ariaDescription: string;
+  ariaLabel: string;
   color: string;
   speed: Speed;
   gradient: boolean;
@@ -234,6 +239,7 @@ export interface MorphBlobProps {
 }
 
 export interface NavbarProps {
+  label: string;
   color: string;
   variant: "dark" | "light";
   links?: string[] | string;
@@ -244,6 +250,7 @@ export interface NavbarProps {
 }
 
 export interface PaginationProps {
+  label: string;
   color: string;
   total?: number;
   perPage?: number;
@@ -264,6 +271,7 @@ export interface ProgressProps {
 }
 
 export interface RadioProps {
+  label: undefined;
   color: string;
   size: SizePreset;
   selected?: number;
@@ -292,6 +300,7 @@ export interface SideNavProps {
 }
 
 export interface SkeletonProps {
+  label: string;
   radius?: number;
   animated: boolean;
   variant: "card" | "text" | "profile" | "table";
@@ -342,6 +351,7 @@ export interface StatCardProps {
 }
 
 export interface StepperProps {
+  label: string;
   color: string;
   steps?: string[];
   step1?: string;
@@ -375,6 +385,8 @@ export interface TabsProps {
 }
 
 export interface TagInputProps {
+  hint: import("react").JSX.Element;
+  label: string;
   color: string;
   tags?: string[] | string;
   placeholder?: string;
@@ -383,6 +395,7 @@ export interface TagInputProps {
 }
 
 export interface TextareaProps {
+  state: string;
   color: string;
   showLabel: boolean;
   showCount: boolean;
@@ -396,6 +409,8 @@ export interface TextareaProps {
 }
 
 export interface TickerProps {
+  ariaLabel: string;
+  label: string;
   color: string;
   speed: Speed;
   items?: string[] | string;
