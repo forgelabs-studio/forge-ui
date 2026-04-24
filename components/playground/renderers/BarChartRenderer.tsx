@@ -4,6 +4,7 @@ import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import { Chart as ChartJS, registerables } from "chart.js";
 import type { BarChartProps } from "@/lib/types";
+import { useId } from "react";
 
 ChartJS.register(...registerables);
 
@@ -13,6 +14,8 @@ export default function BarChartRenderer({
   props: BarChartProps;
 }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const col2 = p.color2 || "#378ADD";
@@ -33,6 +36,13 @@ export default function BarChartRenderer({
   const vals2 = hasData
     ? rawData.map((s: string) => Number(s.split(",")[2]) || 0)
     : [12, 18, 14, 22, 17, 26, 21, 30];
+
+  // IDs for accessibility
+  const figId = `${uid}-chart-figure`;
+  const captionId = `${uid}-chart-caption`;
+  const tableId = `${uid}-chart-data`;
+  const canvasId = `${uid}-chart-canvas`;
+  const liveId = `${uid}-chart-live`;
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -95,7 +105,7 @@ export default function BarChartRenderer({
             },
           },
           y: {
-            grid: { display: p.showGrid, color: "rgba(255,255,255,.05)" },
+            grid: { display: p.showGrid, color: "rgba(255,255,232,.05)" },
             ticks: {
               color: "rgba(240,237,232,.3)",
               font: { size: 10, family: fontFamily },
@@ -113,8 +123,15 @@ export default function BarChartRenderer({
     };
   }, [col, col2, p.radius, p.animated, p.showLegend, p.showGrid, p.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Build a short textual summary for screen readers
+  const summary = `${p.title || "Bar chart"} showing ${labels.length} points. Latest values: ${labels
+    .map((lab, i) => `${lab}: ${vals1[i]} (2024), ${vals2[i]} (2025)`)
+    .join("; ")}`;
+
   return (
-    <div
+    <figure
+      id={figId}
+      aria-labelledby={captionId}
       style={{
         background: "#111113",
         border: "1px solid rgba(255,255,255,.07)",
@@ -123,12 +140,73 @@ export default function BarChartRenderer({
         width: 300,
       }}
     >
-      <div
+      <figcaption
+        id={captionId}
         style={{ fontSize: 12, color: textColor, marginBottom: 14, fontFamily }}
       >
         {p.title}
+      </figcaption>
+
+      {/* Offscreen live summary for screen readers */}
+      <div
+        id={liveId}
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          margin: -1,
+          border: 0,
+          padding: 0,
+          overflow: "hidden",
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {summary}
       </div>
-      <canvas ref={canvasRef} height={150} />
-    </div>
+
+      {/* Canvas with accessible references */}
+      <canvas
+        id={canvasId}
+        ref={canvasRef}
+        role="img"
+        aria-labelledby={captionId}
+        aria-describedby={tableId}
+        height={150}
+      />
+
+      {/* Hidden data table for screen readers (keeps parity with visual chart) */}
+      <table
+        id={tableId}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+        aria-hidden={false}
+      >
+        <caption>{p.title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Label</th>
+            <th scope="col">2024</th>
+            <th scope="col">2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((lab, i) => (
+            <tr key={lab}>
+              <td>{lab}</td>
+              <td>{String(vals1[i])}</td>
+              <td>{String(vals2[i])}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
   );
 }

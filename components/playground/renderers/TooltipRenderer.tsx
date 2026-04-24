@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { hexRgb, lighten } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { TooltipProps } from "@/lib/types";
+
 export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
   const { fontFamily, textColor } = useGlobals();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const [visible, setVisible] = useState(false);
   const isLight = p.variant === "light";
+  const uid = useId();
+  const triggerId = `${uid}-tooltip-trigger`;
+  const tipId = `${uid}-tooltip`;
+
   return (
     <div
       style={{
@@ -20,8 +25,18 @@ export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
     >
       <div style={{ position: "relative", display: "inline-block" }}>
         <button
+          id={triggerId}
+          aria-describedby={visible ? tipId : undefined}
+          aria-expanded={visible}
           onMouseEnter={() => setVisible(true)}
           onMouseLeave={() => setVisible(false)}
+          onFocus={() => setVisible(true)}
+          onBlur={() => setVisible(false)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setVisible(false);
+            }
+          }}
           style={{
             padding: "9px 18px",
             borderRadius: 8,
@@ -36,7 +51,11 @@ export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
         >
           {p.text}
         </button>
+
         <div
+          id={tipId}
+          role="tooltip"
+          aria-hidden={!visible}
           style={{
             position: "absolute",
             bottom: "calc(100% + 10px)",
@@ -49,7 +68,7 @@ export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
             fontSize: 11,
             color: isLight ? "#1a1a1f" : textColor,
             whiteSpace: "nowrap",
-            pointerEvents: "none",
+            pointerEvents: visible ? "auto" : "none",
             fontFamily,
             opacity: visible ? 1 : 0,
             transition: "opacity .15s,transform .15s",
@@ -58,6 +77,7 @@ export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
         >
           {p.tip}
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               top: "100%",
@@ -71,6 +91,7 @@ export default function TooltipRenderer({ props: p }: { props: TooltipProps }) {
           />
         </div>
       </div>
+
       <div style={{ display: "flex", gap: 10, opacity: 0.35 }}>
         {["Top", "Bottom", "Left"].map((pos) => (
           <div

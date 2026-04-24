@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { hexRgb, lighten, contrast } from "@/lib/utils";
 import { usePlaygroundStore } from "@/store/playground";
 import type { ButtonProps, RadiusScale } from "@/lib/types";
+import { useId } from "react";
 
 const ICONS: Record<string, string> = {
   none: "",
@@ -42,13 +43,12 @@ export default function ButtonRenderer({
     globalRadius?: RadiusScale;
   };
 }) {
+  const uid = useId();
   const { globalFont, globalRadius, globalTextColor } = usePlaygroundStore();
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  // If p.icon is already a raw character (not a key like 'arrow'), use it directly.
-  // If it's a key name, look it up in the ICONS map. If it's 'none' or empty, use ''.
   const icon =
     p.icon === "none" || !p.icon
       ? ""
@@ -73,13 +73,10 @@ export default function ButtonRenderer({
   };
   const v = V[p.variant] ?? V.glow;
 
-  // Apply globalTextColor override for variants where it makes sense.
-  // solid and spectrum manage their own text colour for contrast/brand reasons.
   const effectiveTextColor = ["solid", "spectrum"].includes(p.variant)
     ? v.c
     : globalTextColor || v.c;
 
-  // Use size preset values if size prop changed, fallback to individual values
   const preset = SIZE_PRESETS[p.size] ?? SIZE_PRESETS.md;
   const paddingY = p.paddingY ?? preset.paddingY;
   const paddingX = p.paddingX ?? preset.paddingX;
@@ -94,17 +91,17 @@ export default function ButtonRenderer({
         : baseRadius;
 
   const isSpectrum = p.variant === "spectrum";
-  const specWrap: React.CSSProperties = isSpectrum
+
+  const specWrapStyle: React.CSSProperties = isSpectrum
     ? {
-        position: "relative",
+        display: "inline-block",
         borderRadius: effectiveRadius + 1,
+        padding: "1.5px",
         background:
           "conic-gradient(from var(--ang),#e24b4a,#EF9F27,#f5e642,#1D9E75,#378ADD,#7F77DD,#D4537E,#e24b4a)",
-        padding: "1.5px",
         animation: p.disabled
           ? "spin 3s linear infinite paused"
           : "spin 3s linear infinite",
-        display: "inline-block",
         opacity: p.disabled ? 0.4 : 1,
       }
     : { display: "inline-block", opacity: p.disabled ? 0.4 : 1 };
@@ -143,8 +140,7 @@ export default function ButtonRenderer({
     none: "none",
   };
 
-  function handleMouseEnter(e: React.MouseEvent<HTMLButtonElement>) {
-    const btn = e.currentTarget;
+  function applyHoverStyles(btn: HTMLButtonElement) {
     if (p.hoverEffect !== "none")
       btn.style.boxShadow = shadowMap[p.shadow] ?? "none";
     btn.style.transform = hoverMap[p.hoverEffect] ?? "none";
@@ -157,52 +153,81 @@ export default function ButtonRenderer({
       btn.style.color = "#f0ede8";
     }
   }
-  function handleMouseLeave(e: React.MouseEvent<HTMLButtonElement>) {
-    const btn = e.currentTarget;
+
+  function clearHoverStyles(btn: HTMLButtonElement) {
     btn.style.boxShadow = "none";
     btn.style.transform = "none";
     btn.style.background = v.bg;
     btn.style.borderColor = v.b;
     btn.style.color = effectiveTextColor;
   }
-  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+
+  function handleMouseEnter(e: React.MouseEvent<HTMLButtonElement>) {
+    const btn = e.currentTarget;
+    applyHoverStyles(btn);
+  }
+  function handleMouseLeave(e: React.MouseEvent<HTMLButtonElement>) {
+    const btn = e.currentTarget;
+    clearHoverStyles(btn);
+  }
+
+  function triggerClickAnim(
+    btn: HTMLButtonElement,
+    clientX?: number,
+    clientY?: number,
+  ) {
     if (p.clickAnim === "ripple") {
-      const btn = e.currentTarget;
       const r = document.createElement("span");
       r.style.cssText = `position:absolute;border-radius:50%;width:10px;height:10px;transform:scale(0);background:rgba(255,255,255,.25);pointer-events:none;animation:ripple-out .5s ease-out forwards;`;
       const rect = btn.getBoundingClientRect();
-      r.style.left = e.clientX - rect.left - 5 + "px";
-      r.style.top = e.clientY - rect.top - 5 + "px";
+      const left =
+        typeof clientX === "number"
+          ? clientX - rect.left - 5
+          : rect.width / 2 - 5;
+      const top =
+        typeof clientY === "number"
+          ? clientY - rect.top - 5
+          : rect.height / 2 - 5;
+      r.style.left = `${left}px`;
+      r.style.top = `${top}px`;
       btn.appendChild(r);
       setTimeout(() => r.remove(), 600);
     }
-    if (p.clickAnim === "scale" && btnRef.current) {
-      btnRef.current.style.transform = "scale(.95)";
-      setTimeout(() => {
-        if (btnRef.current) btnRef.current.style.transform = "none";
-      }, 120);
+    if (p.clickAnim === "scale") {
+      btn.style.transform = "scale(.95)";
+      setTimeout(() => (btn.style.transform = "none"), 120);
     }
-    if (p.clickAnim === "bounce" && btnRef.current) {
-      const btn = btnRef.current;
+    if (p.clickAnim === "bounce") {
       btn.style.transform = "scale(.92)";
-      setTimeout(() => {
-        btn.style.transform = "scale(1.07)";
-      }, 100);
-      setTimeout(() => {
-        btn.style.transform = "scale(.97)";
-      }, 200);
-      setTimeout(() => {
-        btn.style.transform = "scale(1.02)";
-      }, 300);
-      setTimeout(() => {
-        btn.style.transform = "none";
-      }, 400);
+      setTimeout(() => (btn.style.transform = "scale(1.07)"), 100);
+      setTimeout(() => (btn.style.transform = "scale(.97)"), 200);
+      setTimeout(() => (btn.style.transform = "scale(1.02)"), 300);
+      setTimeout(() => (btn.style.transform = "none"), 400);
+    }
+  }
+
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (p.disabled) return;
+    const btn = e.currentTarget;
+    triggerClickAnim(btn, e.clientX, e.clientY);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (p.disabled) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const btn = e.currentTarget as HTMLButtonElement;
+      triggerClickAnim(btn);
+      btn.click();
     }
   }
 
   const ghostVariants = ["ghost", "outline", "soft"]
     .filter((k) => k !== p.variant)
     .slice(0, 2);
+
+  const ariaLabel = p.text ? p.text : txt;
+  const describedById = `${uid}-btn-desc`;
 
   return (
     <div
@@ -213,30 +238,47 @@ export default function ButtonRenderer({
         gap: 14,
       }}
     >
-      <div style={specWrap}>
+      {/* FIXED: removed aria-hidden entirely */}
+      <div style={specWrapStyle}>
         <button
           ref={btnRef}
-          style={btnStyle}
+          type="button"
+          id={`${uid}-btn`}
+          aria-label={ariaLabel}
+          aria-describedby={describedById}
+          aria-disabled={p.disabled}
           disabled={p.disabled}
+          style={btnStyle}
           onMouseEnter={p.disabled ? undefined : handleMouseEnter}
           onMouseLeave={p.disabled ? undefined : handleMouseLeave}
           onClick={p.disabled ? undefined : handleClick}
+          onKeyDown={handleKeyDown}
+          onFocus={(e) =>
+            (e.currentTarget.style.boxShadow = `0 0 0 6px rgba(${rgb},.06)`)
+          }
+          onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
         >
           {icon && (p.iconPos ?? p.iconSide ?? "left") === "left" && (
-            <span style={{ fontSize: textSize + 2 }}>{icon}</span>
+            <span aria-hidden="true" style={{ fontSize: textSize + 2 }}>
+              {icon}
+            </span>
           )}
-          <span>{txt}</span>
+          <span id={describedById}>{txt}</span>
           {icon && (p.iconPos ?? p.iconSide ?? "left") === "right" && (
-            <span style={{ fontSize: textSize + 2 }}>{icon}</span>
+            <span aria-hidden="true" style={{ fontSize: textSize + 2 }}>
+              {icon}
+            </span>
           )}
         </button>
       </div>
-      <div style={{ display: "flex", gap: 8, opacity: 0.2 }}>
+
+      <div style={{ display: "flex", gap: 8, opacity: 0.2 }} aria-hidden="true">
         {ghostVariants.map((k) => {
           const vv = V[k];
           return (
             <button
               key={k}
+              type="button"
               style={{
                 padding: "6px 14px",
                 borderRadius: effectiveRadius,

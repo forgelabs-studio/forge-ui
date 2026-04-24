@@ -1,9 +1,13 @@
 "use client";
+import { useId } from "react";
 import { hexRgb, lighten } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { NavbarProps } from "@/lib/types";
+
 export default function NavbarRenderer({ props: p }: { props: NavbarProps }) {
   const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const isDark = p.variant === "dark";
@@ -14,9 +18,15 @@ export default function NavbarRenderer({ props: p }: { props: NavbarProps }) {
     : (p.links || "Work,About,Services,Contact")
         .split(",")
         .map((s: string) => s.trim());
+
+  const navLabel =
+    p.label ?? (p.showLogo ? `${p.brand} navigation` : "Main navigation");
+
   return (
     <div style={{ width: "100%", maxWidth: 420 }}>
       <nav
+        aria-label={navLabel}
+        id={`${uid}-nav`}
         style={{
           display: "grid",
           gridTemplateColumns: "1fr auto 1fr",
@@ -44,40 +54,68 @@ export default function NavbarRenderer({ props: p }: { props: NavbarProps }) {
             </div>
           )}
         </div>
-        {/* Center: links */}
-        <div style={{ display: "flex", gap: 2 }}>
-          {links.map((l: string, i: number) => (
-            <a
-              key={i}
-              style={{
-                padding: "6px 11px",
-                borderRadius: 6,
-                fontSize: 12,
-                color: i === 0 ? textColor : tc,
-                fontFamily,
-                textDecoration: "none",
-                cursor: "pointer",
-                transition: "all .15s",
-                background:
-                  i === 0
-                    ? isDark
-                      ? "rgba(255,255,255,.06)"
-                      : "rgba(0,0,0,.05)"
-                    : "transparent",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = textColor)}
-              onMouseOut={(e) =>
-                (e.currentTarget.style.color = i === 0 ? textColor : tc)
-              }
-            >
-              {l}
-            </a>
-          ))}
+
+        {/* Center: links — now using pure semantic HTML */}
+        <div>
+          <ul
+            aria-label="Primary"
+            style={{
+              display: "flex",
+              gap: 2,
+              margin: 0,
+              padding: 0,
+              listStyle: "none",
+            }}
+          >
+            {links.map((l: string, i: number) => {
+              const isActive = i === 0;
+              return (
+                <li key={i}>
+                  <a
+                    href="#"
+                    aria-current={isActive ? "page" : undefined}
+                    style={{
+                      display: "inline-block",
+                      padding: "6px 11px",
+                      borderRadius: 6,
+                      fontSize: 12,
+                      color: isActive ? textColor : tc,
+                      fontFamily,
+                      textDecoration: "none",
+                      cursor: "pointer",
+                      transition: "all .15s",
+                      background: isActive
+                        ? isDark
+                          ? "rgba(255,255,255,.06)"
+                          : "rgba(0,0,0,.05)"
+                        : "transparent",
+                      outline: "none",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = textColor)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = isActive ? textColor : tc)
+                    }
+                    onFocus={(e) =>
+                      (e.currentTarget.style.boxShadow = `0 0 0 4px rgba(${rgb},.08)`)
+                    }
+                    onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
+                  >
+                    {l}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
+
         {/* Right: CTA */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {p.showCta && (
             <button
+              type="button"
+              aria-label={p.ctaText ?? "Call to action"}
               style={{
                 padding: "7px 14px",
                 borderRadius: 7,
@@ -87,7 +125,12 @@ export default function NavbarRenderer({ props: p }: { props: NavbarProps }) {
                 fontFamily,
                 fontSize: 12,
                 cursor: "pointer",
+                outline: "none",
               }}
+              onFocus={(e) =>
+                (e.currentTarget.style.boxShadow = `0 0 0 4px rgba(${rgb},.08)`)
+              }
+              onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
             >
               {p.ctaText}
             </button>

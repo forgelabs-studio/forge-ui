@@ -1,20 +1,30 @@
 "use client";
+import { useId } from "react";
 import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { ProgressProps } from "@/lib/types";
+
 export default function ProgressRenderer({
   props: p,
 }: {
   props: ProgressProps;
 }) {
   const { fontFamily } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
+
+  const labelId = `${uid}-progress-label`;
+  const valueId = `${uid}-progress-value`;
+  const barId = `${uid}-progressbar`;
+
   const secondary = [
     ["Tasks", 78, "#7F77DD"],
     ["Storage", 45, "#378ADD"],
     ["Speed", 92, "#1D9E75"],
   ];
+
   return (
     <div
       style={{ width: 280, display: "flex", flexDirection: "column", gap: 16 }}
@@ -29,6 +39,7 @@ export default function ProgressRenderer({
             }}
           >
             <span
+              id={labelId}
               style={{
                 fontSize: 11,
                 color: "rgba(240,237,232,.5)",
@@ -39,18 +50,30 @@ export default function ProgressRenderer({
             </span>
             {p.showValue && (
               <span
+                id={valueId}
                 style={{
                   fontSize: 11,
                   color: "rgba(240,237,232,.4)",
                   fontFamily,
                 }}
+                aria-live="polite"
               >
                 {p.value}%
               </span>
             )}
           </div>
         )}
+
+        {/* Semantic progressbar with ARIA attributes */}
         <div
+          role="progressbar"
+          id={barId}
+          aria-labelledby={p.showLabel ? labelId : undefined}
+          aria-describedby={p.showValue ? valueId : undefined}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={p.value}
+          aria-valuetext={`${p.value}% complete`}
           style={{
             height: p.height,
             background: "#1a1a1d",
@@ -72,7 +95,9 @@ export default function ProgressRenderer({
           />
         </div>
       </div>
-      <div style={{ opacity: 0.4 }}>
+
+      {/* Secondary progress examples are decorative */}
+      <div aria-hidden="true" style={{ opacity: 0.4 }}>
         {secondary.map(([l, v, c]) => (
           <div key={String(l)} style={{ marginBottom: 9 }}>
             <div

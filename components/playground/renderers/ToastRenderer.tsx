@@ -1,68 +1,85 @@
-'use client'
-import { useGlobals } from './_useGlobals'
-import type { ToastProps } from '@/lib/types'
+"use client";
+import { useId } from "react";
+import { hexRgb } from "@/lib/utils";
+import { useGlobals } from "./_useGlobals";
+import type { ToastProps } from "@/lib/types";
+
 export default function ToastRenderer({ props: p }: { props: ToastProps }) {
-  const { fontFamily, textColor } = useGlobals()
+  const { fontFamily, textColor } = useGlobals();
+  const uid = useId();
+
   const VM: Record<
     string,
     { bg: string; bc: string; ic: string; icon: string; ib: string }
   > = {
     success: {
-      bg: 'rgba(29,158,117,.07)',
-      bc: 'rgba(29,158,117,.22)',
-      ic: '#1D9E75',
-      icon: '✓',
-      ib: 'rgba(29,158,117,.15)',
+      bg: "rgba(29,158,117,.07)",
+      bc: "rgba(29,158,117,.22)",
+      ic: "#1D9E75",
+      icon: "✓",
+      ib: "rgba(29,158,117,.15)",
     },
     error: {
-      bg: 'rgba(226,75,74,.07)',
-      bc: 'rgba(226,75,74,.22)',
-      ic: '#e24b4a',
-      icon: '✕',
-      ib: 'rgba(226,75,74,.15)',
+      bg: "rgba(226,75,74,.07)",
+      bc: "rgba(226,75,74,.22)",
+      ic: "#e24b4a",
+      icon: "✕",
+      ib: "rgba(226,75,74,.15)",
     },
     warning: {
-      bg: 'rgba(239,159,39,.07)',
-      bc: 'rgba(239,159,39,.22)',
-      ic: '#EF9F27',
-      icon: '!',
-      ib: 'rgba(239,159,39,.15)',
+      bg: "rgba(239,159,39,.07)",
+      bc: "rgba(239,159,39,.22)",
+      ic: "#EF9F27",
+      icon: "!",
+      ib: "rgba(239,159,39,.15)",
     },
     info: {
-      bg: 'rgba(55,138,221,.07)',
-      bc: 'rgba(55,138,221,.22)',
-      ic: '#378ADD',
-      icon: 'i',
-      ib: 'rgba(55,138,221,.15)',
+      bg: "rgba(55,138,221,.07)",
+      bc: "rgba(55,138,221,.22)",
+      ic: "#378ADD",
+      icon: "i",
+      ib: "rgba(55,138,221,.15)",
     },
-  }
-  const v = VM[p.variant] ?? VM.success
+  };
+
+  const v = VM[p.variant] ?? VM.success;
+
+  // Use assertive for error to ensure urgent announcements; polite otherwise.
+  const liveMode = p.variant === "error" ? "assertive" : "polite";
+  const toastId = `${uid}-toast`;
+  const closeId = `${uid}-toast-close`;
+
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', gap: 9, width: 320 }}
+      style={{ display: "flex", flexDirection: "column", gap: 9, width: 320 }}
     >
       <div
+        id={toastId}
+        role="status"
+        aria-live={liveMode}
+        aria-atomic="true"
         style={{
-          display: 'flex',
-          alignItems: 'flex-start',
+          display: "flex",
+          alignItems: "flex-start",
           gap: 12,
-          padding: '13px 15px',
+          padding: "13px 15px",
           borderRadius: 10,
           border: `1px solid ${v.bc}`,
           background: v.bg,
-          animation: 'slide-up .3s ease',
+          animation: "slide-up .3s ease",
         }}
       >
         {p.showIcon && (
           <div
+            aria-hidden="true"
             style={{
               width: 22,
               height: 22,
-              borderRadius: '50%',
+              borderRadius: "50%",
               background: v.ib,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               fontSize: 11,
               color: v.ic,
               flexShrink: 0,
@@ -72,6 +89,7 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
             {v.icon}
           </div>
         )}
+
         <div style={{ flex: 1 }}>
           <div
             style={{
@@ -87,7 +105,7 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
           <div
             style={{
               fontSize: 11,
-              color: 'rgba(240,237,232,.5)',
+              color: "rgba(240,237,232,.5)",
               fontFamily,
               lineHeight: 1.5,
             }}
@@ -95,24 +113,43 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
             {p.message}
           </div>
         </div>
+
         {p.showClose && (
-          <span
+          <button
+            id={closeId}
+            type="button"
+            aria-label="Dismiss notification"
+            // intentionally no onClick to preserve original behavior;
+            // keep focusable and keyboard accessible
             style={{
-              color: 'rgba(240,237,232,.3)',
+              color: "rgba(240,237,232,.3)",
               fontSize: 12,
-              cursor: 'pointer',
+              cursor: "pointer",
               flexShrink: 0,
+              background: "transparent",
+              border: "none",
+              padding: 6,
+              borderRadius: 6,
+              outline: "none",
             }}
+            onFocus={(e) =>
+              (e.currentTarget.style.boxShadow = `0 0 0 4px rgba(${hexRgb(
+                v.ic,
+              )},.06)`)
+            }
+            onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
           >
             ✕
-          </span>
+          </button>
         )}
       </div>
+
       <div
+        aria-hidden="true"
         style={{
           opacity: 0.35,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
           gap: 7,
         }}
       >
@@ -123,24 +160,25 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
             <div
               key={k}
               style={{
-                display: 'flex',
-                alignItems: 'center',
+                display: "flex",
+                alignItems: "center",
                 gap: 10,
-                padding: '10px 13px',
+                padding: "10px 13px",
                 borderRadius: 8,
                 border: `1px solid ${vv.bc}`,
                 background: vv.bg,
               }}
             >
               <div
+                aria-hidden="true"
                 style={{
                   width: 18,
                   height: 18,
-                  borderRadius: '50%',
+                  borderRadius: "50%",
                   background: vv.ib,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   fontSize: 10,
                   color: vv.ic,
                   flexShrink: 0,
@@ -151,7 +189,7 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
               <span
                 style={{
                   fontSize: 11,
-                  color: 'rgba(240,237,232,.6)',
+                  color: "rgba(240,237,232,.6)",
                   fontFamily,
                 }}
               >
@@ -161,5 +199,5 @@ export default function ToastRenderer({ props: p }: { props: ToastProps }) {
           ))}
       </div>
     </div>
-  )
+  );
 }

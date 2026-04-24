@@ -1,11 +1,16 @@
 "use client";
+import { useId } from "react";
 import { hexRgb, lighten } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { BadgeProps } from "@/lib/types";
+
 export default function BadgeRenderer({ props: p }: { props: BadgeProps }) {
   const { fontFamily } = useGlobals();
+  const uid = useId();
+
   const col = p.color || "#1D9E75";
   const rgb = hexRgb(col);
+
   // [paddingY, paddingX, fontSize]
   const sz = (
     { sm: [6, 12, 10], md: [8, 16, 12], lg: [11, 20, 14] } as Record<
@@ -13,19 +18,26 @@ export default function BadgeRenderer({ props: p }: { props: BadgeProps }) {
       number[]
     >
   )[p.size] ?? [8, 16, 12];
+
   const dotSz =
     ({ sm: 6, md: 7, lg: 9 } as Record<string, number>)[p.size] ?? 7;
   const br =
     p.variant === "pill" ? "100px" : p.variant === "tag" ? "4px" : "8px";
+
   const txt = p.uppercase
     ? (p.text || "").toUpperCase()
     : p.text || "Open for work";
+
   const others: [string, string][] = [
     ["#1D9E75", "Online"],
     ["#EF9F27", "Away"],
     ["#e24b4a", "Busy"],
     ["#f0ede8", "Offline"],
   ];
+
+  // Accessible label for the badge; prefer explicit text, fallback to computed text
+  const badgeLabel = p.text ? p.text : txt;
+
   return (
     <div
       style={{
@@ -35,7 +47,11 @@ export default function BadgeRenderer({ props: p }: { props: BadgeProps }) {
         gap: 18,
       }}
     >
-      <div
+      {/* Non-interactive badge with accessible name */}
+      <span
+        role="status"
+        aria-label={badgeLabel}
+        id={`${uid}-badge`}
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -49,8 +65,10 @@ export default function BadgeRenderer({ props: p }: { props: BadgeProps }) {
           fontFamily,
         }}
       >
+        {/* Decorative dot hidden from AT */}
         {p.showDot && (
           <span
+            aria-hidden="true"
             style={{
               width: dotSz,
               height: dotSz,
@@ -64,9 +82,13 @@ export default function BadgeRenderer({ props: p }: { props: BadgeProps }) {
             }}
           />
         )}
-        {txt}
-      </div>
+
+        <span>{txt}</span>
+      </span>
+
+      {/* Example variants are decorative and hidden from AT */}
       <div
+        aria-hidden="true"
         style={{
           display: "flex",
           flexWrap: "wrap",

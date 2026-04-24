@@ -1,9 +1,15 @@
 "use client";
+import { useId } from "react";
 import { hexRgb } from "@/lib/utils";
 import { useGlobals } from "./_useGlobals";
 import type { InputProps } from "@/lib/types";
+
 export default function InputRenderer({ props: p }: { props: InputProps }) {
   const { fontFamily, textColor, resolveRadius } = useGlobals();
+  const uid = useId();
+  const inputId = `${uid}-input`;
+  const hintId = `${uid}-hint`;
+
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const sz = (
@@ -40,18 +46,21 @@ export default function InputRenderer({ props: p }: { props: InputProps }) {
     success: "Looks good!",
     disabled: "This field is locked.",
   };
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", gap: 6, width: 280 }}
     >
       {p.showLabel && (
         <label
+          htmlFor={inputId}
           style={{ fontSize: 11, color: "rgba(240,237,232,.45)", fontFamily }}
         >
           {p.label}
         </label>
       )}
       <input
+        id={inputId}
         placeholder={p.placeholder}
         type={p.type}
         disabled={p.state === "disabled"}
@@ -59,6 +68,9 @@ export default function InputRenderer({ props: p }: { props: InputProps }) {
         data-1p-ignore
         data-lpignore="true"
         data-form-type="other"
+        aria-describedby={p.showHint ? hintId : undefined}
+        aria-invalid={p.state === "error"}
+        aria-label={!p.showLabel ? p.label : undefined}
         style={{
           width: "100%",
           background: "#111113",
@@ -83,6 +95,9 @@ export default function InputRenderer({ props: p }: { props: InputProps }) {
       />
       {p.showHint && (
         <span
+          id={hintId}
+          aria-live={p.state === "error" ? "assertive" : "polite"}
+          aria-atomic="true"
           style={{ fontSize: 11, color: hc[p.state] ?? hc.default, fontFamily }}
         >
           {ht[p.state] ?? ht.default}
