@@ -1,6 +1,7 @@
 import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["@forgelabs-studio/shared"],
   outputFileTracingRoot: new URL(".", import.meta.url).pathname,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,

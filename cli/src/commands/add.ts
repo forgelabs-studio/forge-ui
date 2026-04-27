@@ -1,6 +1,6 @@
 import pc from "picocolors";
 import { readConfig, writeConfig, createDefaultConfig } from "../config.js";
-import { REGISTRY_BY_ID } from "../registry.js";
+import { REGISTRY_BY_ID } from "@forgelabs-studio/shared";
 import { parseFlags } from "../flags.js";
 import { generateComponent } from "../generate.js";
 

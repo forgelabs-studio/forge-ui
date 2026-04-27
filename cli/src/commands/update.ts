@@ -1,6 +1,6 @@
 import pc from "picocolors";
 import { readConfig, writeConfig } from "../config.js";
-import { REGISTRY_BY_ID } from "../registry.js";
+import { REGISTRY_BY_ID } from "@forgelabs-studio/shared";
 import { generateComponent } from "../generate.js";
 
 export async function runUpdate(componentId: string): Promise<void> {
