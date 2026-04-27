@@ -21,8 +21,7 @@ export default function BarChartRenderer({
   const col2 = p.color2 || "#378ADD";
   const rgb2 = hexRgb(col2);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chartRef = useRef<any>(null);
+  const chartRef = useRef<ChartJS | null>(null);
 
   // Parse data: array of "label,v1,v2" strings or use defaults
   const rawData: string[] = Array.isArray(p.data) ? p.data : [];

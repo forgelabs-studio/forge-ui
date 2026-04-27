@@ -13,8 +13,7 @@ export default function DonutRenderer({ props: p }: { props: DonutProps }) {
 
   const col = p.color || "#7F77DD";
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chartRef = useRef<any>(null);
+  const chartRef = useRef<ChartJS | null>(null);
 
   const rawData: string[] = Array.isArray(p.data) ? p.data : [];
   const hasData = rawData.length > 0;
