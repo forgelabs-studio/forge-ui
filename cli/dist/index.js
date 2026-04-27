@@ -14,7 +14,7 @@ import path from "path";
 var CONFIG_FILE = "forge.config.json";
 async function readConfig() {
   const configPath = path.join(process.cwd(), CONFIG_FILE);
-  if (!(await fs.pathExists(configPath))) return null;
+  if (!await fs.pathExists(configPath)) return null;
   return fs.readJson(configPath);
 }
 async function writeConfig(config) {
@@ -25,7 +25,7 @@ function createDefaultConfig() {
   return {
     version: "0.1.0",
     output: "components/forge",
-    components: {},
+    components: {}
   };
 }
 
@@ -34,12 +34,8 @@ async function runInit() {
   console.log(pc.bold("\n  forge-ui init\n"));
   const existing = await readConfig();
   if (existing) {
-    console.log(
-      pc.yellow("  forge.config.json already exists \u2014 skipping."),
-    );
-    console.log(
-      pc.dim("  Run npx forge-ui add <component> to add components.\n"),
-    );
+    console.log(pc.yellow("  forge.config.json already exists \u2014 skipping."));
+    console.log(pc.dim("  Run npx forge-ui add <component> to add components.\n"));
     return;
   }
   const config = createDefaultConfig();
@@ -79,10 +75,8 @@ async function runInit() {
   console.log(pc.green("  \u2713") + " forge.config.json");
   console.log(pc.green("  \u2713") + ` ${config.output}/forge-tokens.css`);
   console.log(pc.dim("\n  Next: import the tokens in your root layout"));
-  console.log(
-    pc.cyan(`  import '@/components/forge/forge-tokens.css'
-`),
-  );
+  console.log(pc.cyan(`  import '@/components/forge/forge-tokens.css'
+`));
 }
 
 // src/commands/add.ts
@@ -95,133 +89,133 @@ var REGISTRY = [
     displayName: "ForgeButton",
     group: "Primitives",
     description: "Spectrum-aware button \u2014 6 variants, ripple, glow states",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "card",
     displayName: "ForgeCard",
     group: "Primitives",
     description: "Card with bottom-up colour glow on hover",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "input",
     displayName: "ForgeInput",
     group: "Primitives",
     description: "Input with focus glow and 4 validation states",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "badge",
     displayName: "ForgeBadge",
     group: "Primitives",
     description: "Status badge with optional pulse dot",
-    defaultColor: "#1D9E75",
+    defaultColor: "#1D9E75"
   },
   {
     id: "toggle",
     displayName: "ForgeToggle",
     group: "Primitives",
     description: "Animated toggle switch with glow on active state",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "select",
     displayName: "ForgeSelect",
     group: "Primitives",
     description: "Select dropdown with colour-token focus",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "checkbox",
     displayName: "ForgeCheckbox",
     group: "Primitives",
     description: "Checkbox with animated check and glow",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "radio",
     displayName: "ForgeRadio",
     group: "Primitives",
     description: "Radio group with colour token",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "slider",
     displayName: "ForgeSlider",
     group: "Primitives",
     description: "Range slider with coloured fill track",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "textarea",
     displayName: "ForgeTextarea",
     group: "Primitives",
     description: "Textarea with focus glow and character count",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "avatar",
     displayName: "ForgeAvatar",
     group: "Primitives",
     description: "Avatar with initials, status dot, optional ring",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "statcard",
     displayName: "ForgeStatCard",
     group: "Primitives",
     description: "Metric card with value, delta, and colour bar",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "taginput",
     displayName: "ForgeTagInput",
     group: "Primitives",
     description: "Tag input \u2014 add and remove tags with keyboard",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "datepicker",
     displayName: "ForgeDatePicker",
     group: "Primitives",
     description: "Calendar date picker with month navigation",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "spinner",
     displayName: "ForgeSpinner",
     group: "Motion",
     description: "Loading indicator \u2014 5 variants, pure CSS",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "fadeup",
     displayName: "ForgeFadeUp",
     group: "Motion",
     description: "Scroll-triggered fade up with per-line stagger",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "ticker",
     displayName: "ForgeTicker",
     group: "Motion",
     description: "Infinite horizontal text ticker",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "morphblob",
     displayName: "ForgeMorphBlob",
     group: "Motion",
     description: "Organic CSS morphing blob",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "countup",
     displayName: "ForgeCountUp",
     group: "Motion",
     description: "Animated number counter",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "barchart",
@@ -229,7 +223,7 @@ var REGISTRY = [
     group: "Charts",
     description: "Bar chart \u2014 spectrum colours, animated",
     defaultColor: "#7F77DD",
-    deps: ["chart.js"],
+    deps: ["chart.js"]
   },
   {
     id: "linechart",
@@ -237,7 +231,7 @@ var REGISTRY = [
     group: "Charts",
     description: "Line chart with fill and tension",
     defaultColor: "#1D9E75",
-    deps: ["chart.js"],
+    deps: ["chart.js"]
   },
   {
     id: "donut",
@@ -245,14 +239,14 @@ var REGISTRY = [
     group: "Charts",
     description: "Donut chart with centre display",
     defaultColor: "#7F77DD",
-    deps: ["chart.js"],
+    deps: ["chart.js"]
   },
   {
     id: "progress",
     displayName: "ForgeProgress",
     group: "Charts",
     description: "Progress bar with glow and striped option",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "sparkline",
@@ -260,122 +254,124 @@ var REGISTRY = [
     group: "Charts",
     description: "Compact inline sparkline",
     defaultColor: "#7F77DD",
-    deps: ["chart.js"],
+    deps: ["chart.js"]
   },
   {
     id: "cmdpalette",
     displayName: "ForgeCommand",
     group: "Navigation",
     description: "Command palette (\u2318K)",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "navbar",
     displayName: "ForgeNavbar",
     group: "Navigation",
     description: "Navigation bar \u2014 dark/light, CTA button",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "breadcrumb",
     displayName: "ForgeBreadcrumb",
     group: "Navigation",
     description: "Breadcrumb with custom separator",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "pagination",
     displayName: "ForgePagination",
     group: "Navigation",
     description: "Pagination with ellipsis and count",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "sidenav",
     displayName: "ForgeSideNav",
     group: "Navigation",
     description: "Collapsible side navigation",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "tabs",
     displayName: "ForgeTabs",
     group: "Navigation",
     description: "Tab bar \u2014 underline, pill, line variants",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "modal",
     displayName: "ForgeModal",
     group: "Overlay",
     description: "Modal dialog \u2014 overlay, ESC to close, actions",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "toast",
     displayName: "ForgeToast",
     group: "Overlay",
     description: "Toast notification \u2014 4 semantic variants",
-    defaultColor: "#1D9E75",
+    defaultColor: "#1D9E75"
   },
   {
     id: "tooltip",
     displayName: "ForgeTooltip",
     group: "Overlay",
     description: "Tooltip \u2014 dark and light, 4 positions",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "dropdown",
     displayName: "ForgeDropdown",
     group: "Overlay",
     description: "Dropdown menu with icons and danger item",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "drawer",
     displayName: "ForgeDrawer",
     group: "Overlay",
     description: "Side drawer \u2014 left or right, with overlay",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "skeleton",
     displayName: "ForgeSkeleton",
     group: "Feedback",
     description: "Shimmer skeleton \u2014 card, text, profile, table",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "alert",
     displayName: "ForgeAlert",
     group: "Feedback",
     description: "Alert banner \u2014 4 semantic variants with action",
-    defaultColor: "#1D9E75",
+    defaultColor: "#1D9E75"
   },
   {
     id: "stepper",
     displayName: "ForgeStepper",
     group: "Feedback",
     description: "Multi-step progress \u2014 horizontal and vertical",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "accordion",
     displayName: "ForgeAccordion",
     group: "Feedback",
     description: "Expandable accordion with smooth animation",
-    defaultColor: "#7F77DD",
+    defaultColor: "#7F77DD"
   },
   {
     id: "table",
     displayName: "ForgeTable",
     group: "Data",
     description: "Data table \u2014 striped, hover, colour token",
-    defaultColor: "#7F77DD",
-  },
+    defaultColor: "#7F77DD"
+  }
 ];
-var REGISTRY_BY_ID = Object.fromEntries(REGISTRY.map((c) => [c.id, c]));
+var REGISTRY_BY_ID = Object.fromEntries(
+  REGISTRY.map((c) => [c.id, c])
+);
 var GROUPS = [
   "Primitives",
   "Motion",
@@ -383,7 +379,7 @@ var GROUPS = [
   "Navigation",
   "Overlay",
   "Feedback",
-  "Data",
+  "Data"
 ];
 
 // src/flags.ts
@@ -402,7 +398,7 @@ var FLAG_TO_PROP = {
   "--height": "height",
   "--shape": "shape",
   "--side": "side",
-  "--padding": "padding",
+  "--padding": "padding"
 };
 function parseFlags(rawFlags) {
   const props = {};
@@ -424,6 +420,8 @@ function parseFlags(rawFlags) {
 import fs3 from "fs-extra";
 import path3 from "path";
 import pc2 from "picocolors";
+
+// src/generators/utils.ts
 function hexToRgb(hex) {
   const clean = hex.replace("#", "");
   const r = parseInt(clean.slice(0, 2), 16);
@@ -431,6 +429,8 @@ function hexToRgb(hex) {
   const b = parseInt(clean.slice(4, 6), 16);
   return `${r}, ${g}, ${b}`;
 }
+
+// src/generators/button.ts
 function generateButton(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
@@ -571,9 +571,7 @@ ${shadow === "glow" ? `.forge-btn:hover { box-shadow: 0 0 20px rgba(${rgb}, 0.25
 ${shadow === "soft" ? `.forge-btn:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.35); }` : ""}
 
 /* Click animation: ${clickAnim} */
-${
-  clickAnim === "ripple"
-    ? `
+${clickAnim === "ripple" ? `
 @keyframes forge-ripple {
   to { transform: scale(20); opacity: 0; }
 }
@@ -585,12 +583,12 @@ ${
   background: rgba(255,255,255,0.25);
   animation: forge-ripple 0.5s ease-out forwards;
   pointer-events: none;
-}`
-    : ""
-}
+}` : ""}
 `;
   return { tsx, css };
 }
+
+// src/generators/badge.ts
 function generateBadge(props) {
   const color = props.color ?? "#1D9E75";
   const rgb = hexToRgb(color);
@@ -602,17 +600,17 @@ function generateBadge(props) {
   const radiusMap = {
     pill: "999px",
     tag: "4px",
-    square: "0px",
+    square: "0px"
   };
   const paddingMap = {
     sm: "2px 8px",
     md: "4px 12px",
-    lg: "6px 16px",
+    lg: "6px 16px"
   };
   const fontSizeMap = {
     sm: "10px",
     md: "12px",
-    lg: "13px",
+    lg: "13px"
   };
   const tsx = `// ForgeBadge \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -702,348 +700,290 @@ export function ForgeBadge({
 `;
   return { tsx, css };
 }
-function generateSpinner(props) {
+
+// src/generators/accordion.ts
+function generateAccordion(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
-  const variant = props.variant ?? "ring";
-  const size = props.size ?? "md";
-  const speed = props.speed ?? "normal";
-  const showLabel = props.showLabel ?? false;
-  const label = props.label ?? "Loading\u2026";
-  const sizeMap = {
-    sm: "16px",
-    md: "24px",
-    lg: "36px",
-    xl: "48px",
-  };
-  const speedMap = {
-    slow: "1.4s",
-    normal: "0.8s",
-    fast: "0.4s",
-  };
-  const tsx = `// ForgeSpinner \u2014 generated by forge-ui CLI
+  const radius = props.radius ?? 8;
+  const items = props.items ?? ["Question one", "Question two"];
+  const bodies = props.bodies ?? ["Answer one.", "Answer two."];
+  const tsx = `// ForgeAccordion \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update spinner
+// Re-generate with: npx @forgelabs-studio/ui update accordion
 
-import './ForgeSpinner.css'
+import { useState } from 'react'
+import './ForgeAccordion.css'
 
-interface ForgeSpinnerProps {
+interface ForgeAccordionProps {
+  items?: string[]
+  bodies?: string[]
   color?: string
-  variant?: 'ring' | 'dots' | 'bars' | 'orbit' | 'pulse'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  speed?: 'slow' | 'normal' | 'fast'
-  showLabel?: boolean
-  label?: string
+  radius?: number
+  allowMultiple?: boolean
 }
 
-export function ForgeSpinner({
+export function ForgeAccordion({
+  items = ${JSON.stringify(items)},
+  bodies = ${JSON.stringify(bodies)},
   color = '${color}',
-  variant = '${variant}',
-  size = '${size}',
-  speed = '${speed}',
-  showLabel = ${showLabel},
-  label = '${label}',
-}: ForgeSpinnerProps) {
+  radius = ${radius},
+  allowMultiple = false,
+}: ForgeAccordionProps) {
+  const [open, setOpen] = useState<number[]>([])
+
+  function toggle(i: number) {
+    if (allowMultiple) {
+      setOpen(o => o.includes(i) ? o.filter(x => x !== i) : [...o, i])
+    } else {
+      setOpen(o => o.includes(i) ? [] : [i])
+    }
+  }
+
   return (
     <div
-      className="forge-spinner-wrap"
-      style={{ '--forge-spinner-color': color, '--forge-spinner-rgb': '${rgb}' } as React.CSSProperties}
+      className="forge-accordion"
+      style={{ '--forge-accordion-color': color, '--forge-accordion-rgb': '${rgb}' } as React.CSSProperties}
     >
-      <div className={\`forge-spinner forge-spinner--\${variant} forge-spinner--\${size} forge-spinner--\${speed}\`}>
-        {variant === 'dots' && (
-          <>
-            <div className="forge-spinner__dot" />
-            <div className="forge-spinner__dot" />
-            <div className="forge-spinner__dot" />
-          </>
-        )}
-        {variant === 'bars' && (
-          <>
-            <div className="forge-spinner__bar" />
-            <div className="forge-spinner__bar" />
-            <div className="forge-spinner__bar" />
-            <div className="forge-spinner__bar" />
-          </>
-        )}
-      </div>
-      {showLabel && <span className="forge-spinner__label">{label}</span>}
+      {items.map((item, i) => {
+        const isOpen = open.includes(i)
+        return (
+          <div key={i} className={\`forge-accordion__item\${isOpen ? ' forge-accordion__item--open' : ''}\`} style={{ borderRadius: radius }}>
+            <button
+              className="forge-accordion__trigger"
+              onClick={() => toggle(i)}
+              aria-expanded={isOpen}
+            >
+              <span>{item}</span>
+              <span className={\`forge-accordion__arrow\${isOpen ? ' forge-accordion__arrow--open' : ''}\`}>\u25BE</span>
+            </button>
+            {isOpen && (
+              <div className="forge-accordion__body">
+                {bodies[i] ?? ''}
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
 `;
-  const css = `/* ForgeSpinner.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-spinner-wrap {
-  display: inline-flex;
+  const css = `/* ForgeAccordion.css \u2014 generated by forge-ui CLI */
+.forge-accordion {
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.forge-spinner {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Sizes */
-.forge-spinner--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
-.forge-spinner--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
-.forge-spinner--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
-.forge-spinner--xl { width: ${sizeMap.xl}; height: ${sizeMap.xl}; }
-
-/* Ring variant */
-@keyframes forge-spin { to { transform: rotate(360deg); } }
-.forge-spinner--ring {
-  border-radius: 50%;
-  border: 2px solid rgba(var(--forge-spinner-rgb), 0.15);
-  border-top-color: var(--forge-spinner-color);
-}
-.forge-spinner--ring.forge-spinner--slow   { animation: forge-spin ${speedMap.slow} linear infinite; }
-.forge-spinner--ring.forge-spinner--normal { animation: forge-spin ${speedMap.normal} linear infinite; }
-.forge-spinner--ring.forge-spinner--fast   { animation: forge-spin ${speedMap.fast} linear infinite; }
-
-/* Pulse variant */
-@keyframes forge-pulse-spin {
-  0%   { transform: scale(1);    opacity: 1; }
-  50%  { transform: scale(0.6);  opacity: 0.4; }
-  100% { transform: scale(1);    opacity: 1; }
-}
-.forge-spinner--pulse {
-  border-radius: 50%;
-  background: var(--forge-spinner-color);
-}
-.forge-spinner--pulse.forge-spinner--slow   { animation: forge-pulse-spin ${speedMap.slow} ease-in-out infinite; }
-.forge-spinner--pulse.forge-spinner--normal { animation: forge-pulse-spin ${speedMap.normal} ease-in-out infinite; }
-.forge-spinner--pulse.forge-spinner--fast   { animation: forge-pulse-spin ${speedMap.fast} ease-in-out infinite; }
-
-/* Dots variant */
-@keyframes forge-dot-bounce {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40%           { transform: scale(1);   opacity: 1; }
-}
-.forge-spinner--dots {
   gap: 4px;
-}
-.forge-spinner__dot {
-  width: 30%;
-  height: 30%;
-  border-radius: 50%;
-  background: var(--forge-spinner-color);
-}
-.forge-spinner--slow   .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0s; }
-.forge-spinner--slow   .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0.16s; }
-.forge-spinner--slow   .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0.32s; }
-.forge-spinner--normal .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0s; }
-.forge-spinner--normal .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0.16s; }
-.forge-spinner--normal .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0.32s; }
-.forge-spinner--fast   .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0s; }
-.forge-spinner--fast   .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0.16s; }
-.forge-spinner--fast   .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0.32s; }
-
-/* Bars variant */
-@keyframes forge-bar-stretch {
-  0%, 40%, 100% { transform: scaleY(0.4); }
-  20%           { transform: scaleY(1); }
-}
-.forge-spinner--bars {
-  gap: 3px;
-  align-items: center;
-}
-.forge-spinner__bar {
-  width: 15%;
-  height: 60%;
-  background: var(--forge-spinner-color);
-  border-radius: 2px;
-}
-.forge-spinner--slow   .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0s; }
-.forge-spinner--slow   .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.1s; }
-.forge-spinner--slow   .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.2s; }
-.forge-spinner--slow   .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.3s; }
-.forge-spinner--normal .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0s; }
-.forge-spinner--normal .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.1s; }
-.forge-spinner--normal .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.2s; }
-.forge-spinner--normal .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.3s; }
-.forge-spinner--fast   .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0s; }
-.forge-spinner--fast   .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.1s; }
-.forge-spinner--fast   .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.2s; }
-.forge-spinner--fast   .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.3s; }
-
-/* Orbit variant */
-@keyframes forge-orbit {
-  to { transform: rotate(360deg); }
-}
-.forge-spinner--orbit {
-  border-radius: 50%;
-  border: 2px solid rgba(var(--forge-spinner-rgb), 0.1);
-  position: relative;
-}
-.forge-spinner--orbit::before {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: var(--forge-spinner-color);
-  border-right-color: rgba(var(--forge-spinner-rgb), 0.4);
-}
-.forge-spinner--orbit.forge-spinner--slow::before   { animation: forge-orbit ${speedMap.slow} linear infinite; }
-.forge-spinner--orbit.forge-spinner--normal::before { animation: forge-orbit ${speedMap.normal} linear infinite; }
-.forge-spinner--orbit.forge-spinner--fast::before   { animation: forge-orbit ${speedMap.fast} linear infinite; }
-
-/* Label */
-.forge-spinner__label {
   font-family: Inter, sans-serif;
-  font-size: 12px;
-  color: rgba(240, 237, 232, 0.38);
-  letter-spacing: -0.01em;
+  width: 100%;
 }
 
-/* Respect reduced motion */
+.forge-accordion__item {
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.forge-accordion__item--open {
+  border-color: rgba(var(--forge-accordion-rgb), 0.2);
+}
+
+.forge-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.7);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s ease;
+}
+
+.forge-accordion__trigger:hover { color: #f0ede8; }
+.forge-accordion__item--open .forge-accordion__trigger { color: #f0ede8; }
+
+.forge-accordion__arrow {
+  font-size: 12px;
+  color: rgba(240,237,232,0.25);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.forge-accordion__arrow--open {
+  transform: rotate(180deg);
+  color: var(--forge-accordion-color);
+}
+
+.forge-accordion__body {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.45);
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .forge-spinner,
-  .forge-spinner::before,
-  .forge-spinner__dot,
-  .forge-spinner__bar { animation: none !important; }
+  .forge-accordion__item,
+  .forge-accordion__trigger,
+  .forge-accordion__arrow { transition: none; }
 }
 `;
   return { tsx, css };
 }
-function generateProgress(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const value = props.value ?? 72;
-  const height = props.height ?? 6;
-  const radius = props.radius ?? 4;
-  const showLabel = props.showLabel ?? true;
-  const showValue = props.showValue ?? true;
-  const striped = props.striped ?? false;
-  const label = props.label ?? "Completion";
-  const tsx = `// ForgeProgress \u2014 generated by forge-ui CLI
+
+// src/generators/alert.ts
+function generateAlert(props) {
+  const variant = props.variant ?? "success";
+  const showIcon = props.showIcon ?? true;
+  const showClose = props.showClose ?? true;
+  const showAction = props.showAction ?? false;
+  const actionText = props.actionText ?? "View";
+  const title = props.title ?? "Alert";
+  const message = props.message ?? "";
+  const tsx = `// ForgeAlert \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update progress
+// Re-generate with: npx @forgelabs-studio/ui update alert
 
-import './ForgeProgress.css'
+import { useState } from 'react'
+import './ForgeAlert.css'
 
-interface ForgeProgressProps {
-  value?: number
-  label?: string
-  color?: string
-  height?: number
-  radius?: number
-  showLabel?: boolean
-  showValue?: boolean
-  striped?: boolean
+type AlertVariant = 'success' | 'error' | 'warning' | 'info'
+
+interface ForgeAlertProps {
+  title?: string
+  message?: string
+  variant?: AlertVariant
+  showIcon?: boolean
+  showClose?: boolean
+  showAction?: boolean
+  actionText?: string
+  onAction?: () => void
+  onClose?: () => void
 }
 
-export function ForgeProgress({
-  value = ${value},
-  label = '${label}',
-  color = '${color}',
-  height = ${height},
-  radius = ${radius},
-  showLabel = ${showLabel},
-  showValue = ${showValue},
-  striped = ${striped},
-}: ForgeProgressProps) {
-  const clamped = Math.min(100, Math.max(0, value))
+const ICONS: Record<AlertVariant, string> = {
+  success: '\u2713', error: '\u2715', warning: '\u26A0', info: 'i',
+}
+
+export function ForgeAlert({
+  title = '${title}',
+  message = '${message}',
+  variant = '${variant}',
+  showIcon = ${showIcon},
+  showClose = ${showClose},
+  showAction = ${showAction},
+  actionText = '${actionText}',
+  onAction,
+  onClose,
+}: ForgeAlertProps) {
+  const [visible, setVisible] = useState(true)
+  if (!visible) return null
+
   return (
-    <div className="forge-progress-wrap" style={{ '--forge-progress-color': color, '--forge-progress-rgb': '${rgb}' } as React.CSSProperties}>
-      {(showLabel || showValue) && (
-        <div className="forge-progress-header">
-          {showLabel && <span className="forge-progress-label">{label}</span>}
-          {showValue && <span className="forge-progress-value">{clamped}%</span>}
-        </div>
-      )}
-      <div
-        className="forge-progress-track"
-        style={{ height, borderRadius: radius }}
-        role="progressbar"
-        aria-valuenow={clamped}
-        aria-valuemin={0}
-        aria-valuemax={100}
-      >
-        <div
-          className={\`forge-progress-fill\${striped ? ' forge-progress-fill--striped' : ''}\`}
-          style={{ width: \`\${clamped}%\`, borderRadius: radius }}
-        />
+    <div className={\`forge-alert forge-alert--\${variant}\`} role="alert">
+      {showIcon && <span className="forge-alert__icon">{ICONS[variant]}</span>}
+      <div className="forge-alert__content">
+        <div className="forge-alert__title">{title}</div>
+        {message && <div className="forge-alert__message">{message}</div>}
+        {showAction && (
+          <button className="forge-alert__action" onClick={onAction}>{actionText}</button>
+        )}
       </div>
+      {showClose && (
+        <button className="forge-alert__close" onClick={() => { setVisible(false); onClose?.() }} aria-label="Dismiss">\u2715</button>
+      )}
     </div>
   )
 }
 `;
-  const css = `/* ForgeProgress.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-progress-wrap {
+  const css = `/* ForgeAlert.css \u2014 generated by forge-ui CLI */
+.forge-alert {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid;
   font-family: Inter, sans-serif;
-}
-
-.forge-progress-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.forge-progress-label {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.38);
-  letter-spacing: -0.01em;
-}
-
-.forge-progress-value {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(var(--forge-progress-rgb), 0.9);
-  letter-spacing: -0.01em;
-}
-
-.forge-progress-track {
   width: 100%;
-  background: rgba(var(--forge-progress-rgb), 0.10);
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.forge-progress-fill {
-  height: 100%;
-  background: var(--forge-progress-color);
-  box-shadow: 0 0 8px rgba(var(--forge-progress-rgb), 0.4);
-  transition: width 0.4s ease;
+.forge-alert--success { background: rgba(29,158,117,0.08);  border-color: rgba(29,158,117,0.2);  }
+.forge-alert--error   { background: rgba(226,75,74,0.08);   border-color: rgba(226,75,74,0.2);   }
+.forge-alert--warning { background: rgba(239,159,39,0.08);  border-color: rgba(239,159,39,0.2);  }
+.forge-alert--info    { background: rgba(55,138,221,0.08);  border-color: rgba(55,138,221,0.2);  }
+
+.forge-alert__icon {
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.forge-alert--success .forge-alert__icon { color: #1D9E75; }
+.forge-alert--error   .forge-alert__icon { color: #e24b4a; }
+.forge-alert--warning .forge-alert__icon { color: #EF9F27; }
+.forge-alert--info    .forge-alert__icon { color: #378ADD; }
+
+.forge-alert__content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+.forge-alert__title {
+  font-size: 13px;
+  font-weight: 400;
+  color: #f0ede8;
+  letter-spacing: -0.01em;
 }
 
-/* Striped variant */
-@keyframes forge-progress-stripes {
-  from { background-position: 20px 0; }
-  to   { background-position: 0 0; }
-}
-.forge-progress-fill--striped {
-  background-image: linear-gradient(
-    45deg,
-    rgba(255,255,255,0.1) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255,255,255,0.1) 50%,
-    rgba(255,255,255,0.1) 75%,
-    transparent 75%,
-    transparent
-  );
-  background-size: 20px 20px;
-  animation: forge-progress-stripes 0.8s linear infinite;
+.forge-alert__message {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.5);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .forge-progress-fill { transition: none; }
-  .forge-progress-fill--striped { animation: none; }
+.forge-alert__action {
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
+.forge-alert--success .forge-alert__action { color: #1D9E75; }
+.forge-alert--error   .forge-alert__action { color: #e24b4a; }
+.forge-alert--warning .forge-alert__action { color: #EF9F27; }
+.forge-alert--info    .forge-alert__action { color: #378ADD; }
+
+.forge-alert__close {
+  background: none;
+  border: none;
+  color: rgba(240,237,232,0.3);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+.forge-alert__close:hover { color: #f0ede8; }
 `;
   return { tsx, css };
 }
+
+// src/generators/avatar.ts
 function generateAvatar(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
@@ -1058,25 +998,25 @@ function generateAvatar(props) {
     sm: "32px",
     md: "40px",
     lg: "48px",
-    xl: "64px",
+    xl: "64px"
   };
   const fontSizeMap = {
     xs: "9px",
     sm: "11px",
     md: "13px",
     lg: "16px",
-    xl: "20px",
+    xl: "20px"
   };
   const shapeMap = {
     circle: "50%",
     squircle: "30%",
-    square: "6px",
+    square: "6px"
   };
   const statusColorMap = {
     online: "#1D9E75",
     away: "#EF9F27",
     busy: "#e24b4a",
-    offline: "#555",
+    offline: "#555"
   };
   const tsx = `// ForgeAvatar \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -1183,702 +1123,240 @@ export function ForgeAvatar({
 `;
   return { tsx, css };
 }
-function generateInput(props) {
+
+// src/generators/barchart.ts
+function generateBarChart(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
-  const size = props.size ?? "md";
-  const radius = props.radius ?? 8;
-  const showLabel = props.showLabel ?? true;
-  const showHint = props.showHint ?? true;
-  const label = props.label ?? "Email address";
-  const placeholder = props.placeholder ?? "hello@example.com";
-  const hint = props.hint ?? "";
-  const type = props.type ?? "text";
-  const paddingMap = {
-    sm: "6px 10px",
-    md: "9px 14px",
-    lg: "12px 16px",
-  };
-  const fontSizeMap = {
-    sm: "12px",
-    md: "13px",
-    lg: "14px",
-  };
-  const tsx = `// ForgeInput \u2014 generated by forge-ui CLI
+  const color2 = props.color2 ?? "#378ADD";
+  const radius = props.radius ?? 4;
+  const showGrid = props.showGrid ?? true;
+  const showLegend = props.showLegend ?? true;
+  const animated = props.animated ?? true;
+  const title = props.title ?? "Chart";
+  const tsx = `// ForgeBarChart \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update input
+// Re-generate with: npx @forgelabs-studio/ui update barchart
+// Requires Chart.js \u2014 add to your layout:
+// <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
 
-import { useState } from 'react'
-import './ForgeInput.css'
+import { useEffect, useRef } from 'react'
+import './ForgeBarChart.css'
 
-interface ForgeInputProps {
-  label?: string
-  placeholder?: string
-  hint?: string
-  type?: 'text' | 'email' | 'password' | 'number' | 'search'
+interface ForgeBarChartProps {
+  title?: string
+  labels?: string[]
+  series?: { label: string; data: number[]; color?: string }[]
   color?: string
-  size?: 'sm' | 'md' | 'lg'
+  color2?: string
   radius?: number
-  showLabel?: boolean
-  showHint?: boolean
-  state?: 'default' | 'error' | 'success' | 'disabled'
-  value?: string
-  onChange?: (value: string) => void
+  showGrid?: boolean
+  showLegend?: boolean
+  animated?: boolean
+  height?: number
 }
 
-export function ForgeInput({
-  label = '${label}',
-  placeholder = '${placeholder}',
-  hint = '${hint}',
-  type = '${type}',
-  color = '${color}',
-  size = '${size}',
-  radius = ${radius},
-  showLabel = ${showLabel},
-  showHint = ${showHint},
-  state = 'default',
-  value,
-  onChange,
-}: ForgeInputProps) {
-  const [internal, setInternal] = useState('')
-  const controlled = value !== undefined
-  const current = controlled ? value : internal
+const DEFAULT_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+const DEFAULT_DATA = [42, 68, 55, 81, 63, 90]
 
-  const stateColorMap: Record<string, string> = {
-    default: color,
-    error: '#e24b4a',
-    success: '#1D9E75',
-    disabled: '#555',
-  }
-  const activeColor = stateColorMap[state] ?? color
+export function ForgeBarChart({
+  title = '${title}',
+  labels = DEFAULT_LABELS,
+  series,
+  color = '${color}',
+  color2 = '${color2}',
+  radius = ${radius},
+  showGrid = ${showGrid},
+  showLegend = ${showLegend},
+  animated = ${animated},
+  height = 260,
+}: ForgeBarChartProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const chartRef = useRef<unknown>(null)
+
+  const resolvedSeries = series ?? [
+    { label: 'Series 1', data: DEFAULT_DATA, color },
+    { label: 'Series 2', data: DEFAULT_DATA.map(v => Math.round(v * 0.7)), color: color2 },
+  ]
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Chart = (window as any).Chart
+    if (!Chart || !canvasRef.current) return
+    if (chartRef.current) (chartRef.current as any).destroy()
+
+    chartRef.current = new Chart(canvasRef.current, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: resolvedSeries.map(s => ({
+          label: s.label,
+          data: s.data,
+          backgroundColor: s.color ?? color,
+          borderRadius: radius,
+          borderSkipped: false,
+        })),
+      },
+      options: {
+        responsive: true,
+        animation: animated,
+        plugins: {
+          legend: { display: showLegend, labels: { color: 'rgba(240,237,232,0.4)', font: { family: 'Inter', size: 11 }, boxWidth: 10 } },
+          title: { display: !!title, text: title, color: 'rgba(240,237,232,0.6)', font: { family: 'Inter', size: 13, weight: '400' } },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: 'rgba(240,237,232,0.3)', font: { family: 'Inter', size: 11 } }, border: { display: false } },
+          y: { grid: { display: showGrid, color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(240,237,232,0.3)', font: { family: 'Inter', size: 11 } }, border: { display: false } },
+        },
+      },
+    })
+
+    return () => { if (chartRef.current) (chartRef.current as any).destroy() }
+  }, [labels, color, color2, radius, showGrid, showLegend, animated, title])
 
   return (
     <div
-      className={\`forge-input-wrap forge-input-wrap--\${state}\`}
-      style={{ '--forge-input-color': activeColor, '--forge-input-rgb': '${rgb}' } as React.CSSProperties}
+      className="forge-chart-wrap"
+      style={{ '--forge-chart-color': color, '--forge-chart-rgb': '${rgb}' } as React.CSSProperties}
     >
-      {showLabel && label && (
-        <label className="forge-input-label">{label}</label>
-      )}
-      <input
-        className={\`forge-input forge-input--\${size}\`}
-        type={type}
-        placeholder={placeholder}
-        value={current}
-        disabled={state === 'disabled'}
-        style={{ borderRadius: radius }}
-        onChange={e => {
-          if (!controlled) setInternal(e.target.value)
-          onChange?.(e.target.value)
-        }}
-      />
-      {showHint && hint && (
-        <span className="forge-input-hint">{hint}</span>
-      )}
+      <canvas ref={canvasRef} height={height} />
     </div>
   )
 }
 `;
-  const css = `/* ForgeInput.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-input-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-family: Inter, sans-serif;
+  const css = `/* ForgeBarChart.css \u2014 generated by forge-ui CLI */
+.forge-chart-wrap {
   width: 100%;
-}
-
-.forge-input-label {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
-}
-
-.forge-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #f0ede8;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px;
   box-sizing: border-box;
 }
-
-.forge-input--sm { padding: ${paddingMap.sm}; font-size: ${fontSizeMap.sm}; }
-.forge-input--md { padding: ${paddingMap.md}; font-size: ${fontSizeMap.md}; }
-.forge-input--lg { padding: ${paddingMap.lg}; font-size: ${fontSizeMap.lg}; }
-
-.forge-input::placeholder {
-  color: rgba(240, 237, 232, 0.2);
-}
-
-.forge-input:focus {
-  border-color: rgba(var(--forge-input-rgb), 0.5);
-  box-shadow: 0 0 0 3px rgba(var(--forge-input-rgb), 0.12);
-}
-
-/* States */
-.forge-input-wrap--error .forge-input {
-  border-color: rgba(226, 75, 74, 0.4);
-}
-.forge-input-wrap--error .forge-input:focus {
-  border-color: #e24b4a;
-  box-shadow: 0 0 0 3px rgba(226, 75, 74, 0.12);
-}
-.forge-input-wrap--success .forge-input {
-  border-color: rgba(29, 158, 117, 0.4);
-}
-.forge-input-wrap--success .forge-input:focus {
-  border-color: #1D9E75;
-  box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.12);
-}
-.forge-input-wrap--disabled .forge-input {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.forge-input-hint {
-  font-size: 11px;
-  color: rgba(240, 237, 232, 0.3);
-  letter-spacing: -0.01em;
-}
-.forge-input-wrap--error .forge-input-hint   { color: #e24b4a; }
-.forge-input-wrap--success .forge-input-hint { color: #1D9E75; }
 `;
   return { tsx, css };
 }
-function generateToggle(props) {
+
+// src/generators/breadcrumb.ts
+function generateBreadcrumb(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
-  const size = props.size ?? "md";
-  const checked = props.checked ?? false;
-  const showLabel = props.showLabel ?? true;
-  const label = props.label ?? "Toggle";
-  const labelPos = props.labelPos ?? "right";
-  const trackMap = {
-    sm: { w: "28px", h: "16px", thumb: "10px" },
-    md: { w: "36px", h: "20px", thumb: "14px" },
-    lg: { w: "44px", h: "24px", thumb: "18px" },
-  };
-  const t = trackMap[size] ?? trackMap.md;
-  const tsx = `// ForgeToggle \u2014 generated by forge-ui CLI
+  const separator = props.separator ?? "/";
+  const showHome = props.showHome ?? true;
+  const tsx = `// ForgeBreadcrumb \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update toggle
+// Re-generate with: npx @forgelabs-studio/ui update breadcrumb
 
-import { useState } from 'react'
-import './ForgeToggle.css'
+import './ForgeBreadcrumb.css'
 
-interface ForgeToggleProps {
-  label?: string
+interface ForgeBreadcrumbProps {
+  items: { label: string; href?: string }[]
   color?: string
-  size?: 'sm' | 'md' | 'lg'
-  checked?: boolean
-  showLabel?: boolean
-  labelPos?: 'left' | 'right'
-  onChange?: (checked: boolean) => void
+  separator?: string
+  showHome?: boolean
 }
 
-export function ForgeToggle({
-  label = '${label}',
+export function ForgeBreadcrumb({
+  items = [{ label: 'Home', href: '/' }, { label: 'Components' }, { label: 'Button' }],
   color = '${color}',
-  size = '${size}',
-  checked,
-  showLabel = ${showLabel},
-  labelPos = '${labelPos}',
-  onChange,
-}: ForgeToggleProps) {
-  const [internal, setInternal] = useState(${checked})
-  const controlled = checked !== undefined
-  const active = controlled ? checked : internal
-
-  function handleClick() {
-    if (!controlled) setInternal(v => !v)
-    onChange?.(!active)
-  }
+  separator = '${separator}',
+  showHome = ${showHome},
+}: ForgeBreadcrumbProps) {
+  const all = showHome && items[0]?.label !== 'Home'
+    ? [{ label: 'Home', href: '/' }, ...items]
+    : items
 
   return (
-    <div
-      className={\`forge-toggle-wrap forge-toggle-wrap--\${labelPos}\`}
-      style={{ '--forge-toggle-color': color, '--forge-toggle-rgb': '${rgb}' } as React.CSSProperties}
-      onClick={handleClick}
+    <nav
+      className="forge-breadcrumb"
+      aria-label="Breadcrumb"
+      style={{ '--forge-breadcrumb-color': color, '--forge-breadcrumb-rgb': '${rgb}' } as React.CSSProperties}
     >
-      {showLabel && labelPos === 'left' && (
-        <span className="forge-toggle-label">{label}</span>
-      )}
-      <div className={\`forge-toggle forge-toggle--\${size}\${active ? ' forge-toggle--on' : ''}\`}>
-        <div className="forge-toggle__thumb" />
-      </div>
-      {showLabel && labelPos === 'right' && (
-        <span className="forge-toggle-label">{label}</span>
-      )}
-    </div>
+      <ol className="forge-breadcrumb__list">
+        {all.map((item, i) => {
+          const isLast = i === all.length - 1
+          return (
+            <li key={i} className="forge-breadcrumb__item">
+              {i > 0 && (
+                <span className="forge-breadcrumb__sep" aria-hidden="true">
+                  {separator}
+                </span>
+              )}
+              {item.href && !isLast ? (
+                <a href={item.href} className="forge-breadcrumb__link">
+                  {item.label}
+                </a>
+              ) : (
+                <span className={\`forge-breadcrumb__current\${isLast ? ' forge-breadcrumb__current--active' : ''}\`}>
+                  {item.label}
+                </span>
+              )}
+            </li>
+          )
+        })}
+      </ol>
+    </nav>
   )
 }
 `;
-  const css = `/* ForgeToggle.css \u2014 generated by forge-ui CLI */
+  const css = `/* ForgeBreadcrumb.css \u2014 generated by forge-ui CLI */
 /* Edit freely \u2014 you own this file. */
 
-.forge-toggle-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
+.forge-breadcrumb {
   font-family: Inter, sans-serif;
 }
 
-.forge-toggle-label {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
-}
-
-.forge-toggle {
-  position: relative;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  flex-shrink: 0;
-}
-
-.forge-toggle--sm { width: ${t.w}; height: ${t.h}; }
-.forge-toggle--md { width: ${trackMap.md.w}; height: ${trackMap.md.h}; }
-.forge-toggle--lg { width: ${trackMap.lg.w}; height: ${trackMap.lg.h}; }
-
-.forge-toggle__thumb {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 2px;
-  border-radius: 50%;
-  background: rgba(240, 237, 232, 0.4);
-  transition: left 0.2s ease, background 0.2s ease, width 0.1s ease;
-}
-
-.forge-toggle--sm .forge-toggle__thumb { width: ${trackMap.sm.thumb}; height: ${trackMap.sm.thumb}; }
-.forge-toggle--md .forge-toggle__thumb { width: ${trackMap.md.thumb}; height: ${trackMap.md.thumb}; }
-.forge-toggle--lg .forge-toggle__thumb { width: ${trackMap.lg.thumb}; height: ${trackMap.lg.thumb}; }
-
-/* On state */
-.forge-toggle--on {
-  background: rgba(var(--forge-toggle-rgb), 0.25);
-  border-color: rgba(var(--forge-toggle-rgb), 0.5);
-  box-shadow: 0 0 12px rgba(var(--forge-toggle-rgb), 0.2);
-}
-.forge-toggle--sm.forge-toggle--on .forge-toggle__thumb {
-  left: calc(${t.w} - ${trackMap.sm.thumb} - 2px);
-  background: var(--forge-toggle-color);
-}
-.forge-toggle--md.forge-toggle--on .forge-toggle__thumb {
-  left: calc(${trackMap.md.w} - ${trackMap.md.thumb} - 2px);
-  background: var(--forge-toggle-color);
-}
-.forge-toggle--lg.forge-toggle--on .forge-toggle__thumb {
-  left: calc(${trackMap.lg.w} - ${trackMap.lg.thumb} - 2px);
-  background: var(--forge-toggle-color);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-toggle, .forge-toggle__thumb { transition: none; }
-}
-`;
-  return { tsx, css };
-}
-function generateCheckbox(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const size = props.size ?? "md";
-  const variant = props.variant ?? "square";
-  const items = props.items ?? ["I agree to the terms"];
-  const sizeMap = { sm: "14px", md: "16px", lg: "20px" };
-  const fontMap = { sm: "12px", md: "13px", lg: "14px" };
-  const radiusMap = { square: "3px", round: "50%", squircle: "30%" };
-  const tsx = `// ForgeCheckbox \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update checkbox
-
-import { useState } from 'react'
-import './ForgeCheckbox.css'
-
-interface ForgeCheckboxProps {
-  items?: string[]
-  color?: string
-  size?: 'sm' | 'md' | 'lg'
-  variant?: 'square' | 'round' | 'squircle'
-  onChange?: (checked: boolean[]) => void
-}
-
-export function ForgeCheckbox({
-  items = ${JSON.stringify(items)},
-  color = '${color}',
-  size = '${size}',
-  variant = '${variant}',
-  onChange,
-}: ForgeCheckboxProps) {
-  const [checked, setChecked] = useState<boolean[]>(items.map(() => false))
-
-  function toggle(i: number) {
-    const next = [...checked]
-    next[i] = !next[i]
-    setChecked(next)
-    onChange?.(next)
-  }
-
-  return (
-    <div
-      className="forge-checkbox-group"
-      style={{ '--forge-checkbox-color': color, '--forge-checkbox-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      {items.map((item, i) => (
-        <label key={i} className={\`forge-checkbox-item forge-checkbox-item--\${size}\`} onClick={() => toggle(i)}>
-          <div className={\`forge-checkbox forge-checkbox--\${variant} forge-checkbox--\${size}\${checked[i] ? ' forge-checkbox--checked' : ''}\`}>
-            {checked[i] && <span className="forge-checkbox__check">\u2713</span>}
-          </div>
-          <span className="forge-checkbox-label">{item}</span>
-        </label>
-      ))}
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeCheckbox.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-family: Inter, sans-serif;
-}
-
-.forge-checkbox-item {
+.forge-breadcrumb__list {
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
+  flex-wrap: wrap;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.forge-checkbox {
+.forge-breadcrumb__item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.04);
-  transition: all 0.15s ease;
+  gap: 0;
 }
 
-.forge-checkbox--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
-.forge-checkbox--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
-.forge-checkbox--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
-
-.forge-checkbox--square   { border-radius: ${radiusMap.square}; }
-.forge-checkbox--round    { border-radius: ${radiusMap.round}; }
-.forge-checkbox--squircle { border-radius: ${radiusMap.squircle}; }
-
-.forge-checkbox--checked {
-  background: rgba(var(--forge-checkbox-rgb), 0.2);
-  border-color: rgba(var(--forge-checkbox-rgb), 0.6);
-  box-shadow: 0 0 8px rgba(var(--forge-checkbox-rgb), 0.2);
-}
-
-.forge-checkbox__check {
-  font-size: 70%;
-  color: var(--forge-checkbox-color);
-  line-height: 1;
-}
-
-.forge-checkbox-label {
-  font-size: ${fontMap[size] ?? fontMap.md};
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
-}
-
-.forge-checkbox-item:hover .forge-checkbox {
-  border-color: rgba(var(--forge-checkbox-rgb), 0.35);
-}
-`;
-  return { tsx, css };
-}
-function generateRadio(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const size = props.size ?? "md";
-  const layout = props.layout ?? "vertical";
-  const options = props.options ?? ["Option 1", "Option 2"];
-  const sizeMap = { sm: "14px", md: "16px", lg: "20px" };
-  const fontMap = { sm: "12px", md: "13px", lg: "14px" };
-  const tsx = `// ForgeRadio \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update radio
-
-import { useState } from 'react'
-import './ForgeRadio.css'
-
-interface ForgeRadioProps {
-  options?: string[]
-  color?: string
-  size?: 'sm' | 'md' | 'lg'
-  layout?: 'vertical' | 'horizontal'
-  selected?: number
-  onChange?: (index: number, value: string) => void
-}
-
-export function ForgeRadio({
-  options = ${JSON.stringify(options)},
-  color = '${color}',
-  size = '${size}',
-  layout = '${layout}',
-  selected,
-  onChange,
-}: ForgeRadioProps) {
-  const [internal, setInternal] = useState(0)
-  const controlled = selected !== undefined
-  const active = controlled ? selected : internal
-
-  function handleSelect(i: number) {
-    if (!controlled) setInternal(i)
-    onChange?.(i, options[i])
-  }
-
-  return (
-    <div
-      className={\`forge-radio-group forge-radio-group--\${layout}\`}
-      style={{ '--forge-radio-color': color, '--forge-radio-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      {options.map((opt, i) => (
-        <label key={i} className={\`forge-radio-item forge-radio-item--\${size}\`} onClick={() => handleSelect(i)}>
-          <div className={\`forge-radio forge-radio--\${size}\${active === i ? ' forge-radio--checked' : ''}\`}>
-            {active === i && <div className="forge-radio__dot" />}
-          </div>
-          <span className="forge-radio-label">{opt}</span>
-        </label>
-      ))}
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeRadio.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-radio-group {
-  display: flex;
-  font-family: Inter, sans-serif;
-}
-.forge-radio-group--vertical   { flex-direction: column; gap: 8px; }
-.forge-radio-group--horizontal { flex-direction: row; flex-wrap: wrap; gap: 16px; }
-
-.forge-radio-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.forge-radio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.04);
-  transition: all 0.15s ease;
-}
-
-.forge-radio--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
-.forge-radio--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
-.forge-radio--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
-
-.forge-radio--checked {
-  border-color: rgba(var(--forge-radio-rgb), 0.6);
-  background: rgba(var(--forge-radio-rgb), 0.1);
-  box-shadow: 0 0 8px rgba(var(--forge-radio-rgb), 0.2);
-}
-
-.forge-radio__dot {
-  width: 40%;
-  height: 40%;
-  border-radius: 50%;
-  background: var(--forge-radio-color);
-}
-
-.forge-radio-label {
-  font-size: ${fontMap[size] ?? fontMap.md};
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
-}
-
-.forge-radio-item:hover .forge-radio {
-  border-color: rgba(var(--forge-radio-rgb), 0.35);
-}
-`;
-  return { tsx, css };
-}
-function generateTextarea(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const radius = props.radius ?? 8;
-  const rows = props.rows ?? 4;
-  const showLabel = props.showLabel ?? true;
-  const showHint = props.showHint ?? true;
-  const showCount = props.showCount ?? true;
-  const maxLength = props.maxLength ?? 500;
-  const label = props.label ?? "Message";
-  const placeholder = props.placeholder ?? "Write something\u2026";
-  const hint = props.hint ?? "";
-  const tsx = `// ForgeTextarea \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update textarea
-
-import { useState } from 'react'
-import './ForgeTextarea.css'
-
-interface ForgeTextareaProps {
-  label?: string
-  placeholder?: string
-  hint?: string
-  color?: string
-  radius?: number
-  rows?: number
-  maxLength?: number
-  showLabel?: boolean
-  showHint?: boolean
-  showCount?: boolean
-  value?: string
-  onChange?: (value: string) => void
-}
-
-export function ForgeTextarea({
-  label = '${label}',
-  placeholder = '${placeholder}',
-  hint = '${hint}',
-  color = '${color}',
-  radius = ${radius},
-  rows = ${rows},
-  maxLength = ${maxLength},
-  showLabel = ${showLabel},
-  showHint = ${showHint},
-  showCount = ${showCount},
-  value,
-  onChange,
-}: ForgeTextareaProps) {
-  const [internal, setInternal] = useState('')
-  const controlled = value !== undefined
-  const current = controlled ? value : internal
-
-  return (
-    <div
-      className="forge-textarea-wrap"
-      style={{ '--forge-textarea-color': color, '--forge-textarea-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      {showLabel && label && (
-        <label className="forge-textarea-label">{label}</label>
-      )}
-      <textarea
-        className="forge-textarea"
-        placeholder={placeholder}
-        value={current}
-        rows={rows}
-        maxLength={maxLength}
-        style={{ borderRadius: radius }}
-        onChange={e => {
-          if (!controlled) setInternal(e.target.value)
-          onChange?.(e.target.value)
-        }}
-      />
-      <div className="forge-textarea-footer">
-        {showHint && hint && <span className="forge-textarea-hint">{hint}</span>}
-        {showCount && (
-          <span className="forge-textarea-count">{current.length} / {maxLength}</span>
-        )}
-      </div>
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeTextarea.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-textarea-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-family: Inter, sans-serif;
-  width: 100%;
-}
-
-.forge-textarea-label {
+.forge-breadcrumb__sep {
   font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
+  color: rgba(240, 237, 232, 0.2);
+  margin: 0 6px;
+  user-select: none;
 }
 
-.forge-textarea {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #f0ede8;
-  font-family: Inter, sans-serif;
+.forge-breadcrumb__link {
   font-size: 13px;
   font-weight: 400;
+  color: rgba(240, 237, 232, 0.38);
+  text-decoration: none;
   letter-spacing: -0.01em;
-  outline: none;
-  resize: vertical;
-  padding: 10px 14px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  box-sizing: border-box;
-  line-height: 1.5;
+  transition: color 0.15s ease;
 }
 
-.forge-textarea::placeholder {
-  color: rgba(240, 237, 232, 0.2);
+.forge-breadcrumb__link:hover {
+  color: var(--forge-breadcrumb-color);
 }
 
-.forge-textarea:focus {
-  border-color: rgba(var(--forge-textarea-rgb), 0.5);
-  box-shadow: 0 0 0 3px rgba(var(--forge-textarea-rgb), 0.12);
-}
-
-.forge-textarea-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.forge-textarea-hint {
-  font-size: 11px;
-  color: rgba(240, 237, 232, 0.3);
+.forge-breadcrumb__current {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.38);
   letter-spacing: -0.01em;
 }
 
-.forge-textarea-count {
-  font-size: 11px;
-  color: rgba(240, 237, 232, 0.2);
-  letter-spacing: -0.01em;
-  margin-left: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-textarea { transition: none; }
+.forge-breadcrumb__current--active {
+  color: rgba(240, 237, 232, 0.7);
 }
 `;
   return { tsx, css };
 }
+
+// src/generators/card.ts
 function generateCard(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
@@ -2047,1364 +1525,530 @@ export function ForgeCard({
 `;
   return { tsx, css };
 }
-function generateSelect(props) {
+
+// src/generators/checkbox.ts
+function generateCheckbox(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
   const size = props.size ?? "md";
-  const radius = props.radius ?? 8;
-  const showLabel = props.showLabel ?? true;
-  const label = props.label ?? "Select";
-  const placeholder = props.placeholder ?? "Choose\u2026";
-  const options = props.options ?? ["Option 1", "Option 2", "Option 3"];
-  const paddingMap = {
-    sm: "6px 10px",
-    md: "9px 14px",
-    lg: "12px 16px",
+  const variant = props.variant ?? "square";
+  const items = props.items ?? ["I agree to the terms"];
+  const sizeMap = {
+    sm: "14px",
+    md: "16px",
+    lg: "20px"
   };
-  const fontSizeMap = {
+  const fontMap = {
     sm: "12px",
     md: "13px",
-    lg: "14px",
+    lg: "14px"
   };
-  const tsx = `// ForgeSelect \u2014 generated by forge-ui CLI
+  const radiusMap = {
+    square: "3px",
+    round: "50%",
+    squircle: "30%"
+  };
+  const tsx = `// ForgeCheckbox \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update select
+// Re-generate with: npx @forgelabs-studio/ui update checkbox
 
 import { useState } from 'react'
-import './ForgeSelect.css'
+import './ForgeCheckbox.css'
 
-interface ForgeSelectProps {
-  label?: string
-  placeholder?: string
-  options?: string[]
+interface ForgeCheckboxProps {
+  items?: string[]
   color?: string
   size?: 'sm' | 'md' | 'lg'
-  radius?: number
-  showLabel?: boolean
-  value?: string
-  onChange?: (value: string) => void
+  variant?: 'square' | 'round' | 'squircle'
+  onChange?: (checked: boolean[]) => void
 }
 
-export function ForgeSelect({
-  label = '${label}',
-  placeholder = '${placeholder}',
-  options = ${JSON.stringify(options)},
+export function ForgeCheckbox({
+  items = ${JSON.stringify(items)},
   color = '${color}',
   size = '${size}',
-  radius = ${radius},
-  showLabel = ${showLabel},
-  value,
-  onChange,
-}: ForgeSelectProps) {
-  const [internal, setInternal] = useState('')
-  const controlled = value !== undefined
-  const current = controlled ? value : internal
-
-  return (
-    <div
-      className="forge-select-wrap"
-      style={{ '--forge-select-color': color, '--forge-select-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      {showLabel && label && (
-        <label className="forge-select-label">{label}</label>
-      )}
-      <div className="forge-select-inner">
-        <select
-          className={\`forge-select forge-select--\${size}\`}
-          value={current}
-          style={{ borderRadius: radius }}
-          onChange={e => {
-            if (!controlled) setInternal(e.target.value)
-            onChange?.(e.target.value)
-          }}
-        >
-          <option value="" disabled>{placeholder}</option>
-          {options.map(opt => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
-        <span className="forge-select-arrow">\u25BE</span>
-      </div>
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeSelect.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-select-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-family: Inter, sans-serif;
-  width: 100%;
-}
-
-.forge-select-label {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.6);
-  letter-spacing: -0.01em;
-}
-
-.forge-select-inner {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.forge-select {
-  width: 100%;
-  appearance: none;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #f0ede8;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  padding-right: 32px;
-  box-sizing: border-box;
-}
-
-.forge-select--sm { padding: ${paddingMap.sm}; font-size: ${fontSizeMap.sm}; }
-.forge-select--md { padding: ${paddingMap.md}; font-size: ${fontSizeMap.md}; }
-.forge-select--lg { padding: ${paddingMap.lg}; font-size: ${fontSizeMap.lg}; }
-
-.forge-select:focus {
-  border-color: rgba(var(--forge-select-rgb), 0.5);
-  box-shadow: 0 0 0 3px rgba(var(--forge-select-rgb), 0.12);
-}
-
-.forge-select option {
-  background: #0f0f12;
-  color: #f0ede8;
-}
-
-.forge-select-arrow {
-  position: absolute;
-  right: 10px;
-  font-size: 11px;
-  color: rgba(240, 237, 232, 0.3);
-  pointer-events: none;
-}
-`;
-  return { tsx, css };
-}
-function generateSlider(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const min = props.min ?? 0;
-  const max = props.max ?? 100;
-  const step = props.step ?? 1;
-  const defaultValue = props.value ?? 50;
-  const showValue = props.showValue ?? true;
-  const label = props.label ?? "Value";
-  const unit = props.unit ?? "";
-  const tsx = `// ForgeSlider \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update slider
-
-import { useState } from 'react'
-import './ForgeSlider.css'
-
-interface ForgeSliderProps {
-  label?: string
-  min?: number
-  max?: number
-  step?: number
-  value?: number
-  color?: string
-  showValue?: boolean
-  unit?: string
-  onChange?: (value: number) => void
-}
-
-export function ForgeSlider({
-  label = '${label}',
-  min = ${min},
-  max = ${max},
-  step = ${step},
-  value,
-  color = '${color}',
-  showValue = ${showValue},
-  unit = '${unit}',
-  onChange,
-}: ForgeSliderProps) {
-  const [internal, setInternal] = useState(${defaultValue})
-  const controlled = value !== undefined
-  const current = controlled ? value : internal
-  const pct = ((current - min) / (max - min)) * 100
-
-  return (
-    <div
-      className="forge-slider-wrap"
-      style={{ '--forge-slider-color': color, '--forge-slider-rgb': '${rgb}', '--forge-slider-pct': \`\${pct}%\` } as React.CSSProperties}
-    >
-      <div className="forge-slider-header">
-        <span className="forge-slider-label">{label}</span>
-        {showValue && (
-          <span className="forge-slider-value">{unit}{current}</span>
-        )}
-      </div>
-      <input
-        type="range"
-        className="forge-slider"
-        min={min}
-        max={max}
-        step={step}
-        value={current}
-        onChange={e => {
-          const v = Number(e.target.value)
-          if (!controlled) setInternal(v)
-          onChange?.(v)
-        }}
-      />
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeSlider.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-slider-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-family: Inter, sans-serif;
-  width: 100%;
-}
-
-.forge-slider-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.forge-slider-label {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.38);
-  letter-spacing: -0.01em;
-}
-
-.forge-slider-value {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(var(--forge-slider-rgb), 0.9);
-  letter-spacing: -0.01em;
-}
-
-.forge-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-  /* Fill track up to thumb using a gradient */
-  background: linear-gradient(
-    to right,
-    var(--forge-slider-color) 0%,
-    var(--forge-slider-color) var(--forge-slider-pct),
-    rgba(255, 255, 255, 0.08) var(--forge-slider-pct),
-    rgba(255, 255, 255, 0.08) 100%
-  );
-}
-
-.forge-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--forge-slider-color);
-  box-shadow: 0 0 8px rgba(var(--forge-slider-rgb), 0.4);
-  border: 2px solid #09090b;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.forge-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--forge-slider-color);
-  box-shadow: 0 0 8px rgba(var(--forge-slider-rgb), 0.4);
-  border: 2px solid #09090b;
-  transition: transform 0.15s ease;
-}
-
-.forge-slider:hover::-webkit-slider-thumb {
-  transform: scale(1.2);
-  box-shadow: 0 0 14px rgba(var(--forge-slider-rgb), 0.5);
-}
-
-.forge-slider:hover::-moz-range-thumb {
-  transform: scale(1.2);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-slider::-webkit-slider-thumb,
-  .forge-slider::-moz-range-thumb { transition: none; }
-}
-`;
-  return { tsx, css };
-}
-function generateStatCard(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const showIcon = props.showIcon ?? true;
-  const showDelta = props.showDelta ?? true;
-  const showBar = props.showBar ?? true;
-  const barValue = props.barValue ?? 72;
-  const title = props.title ?? "Metric";
-  const value = props.value ?? "0";
-  const delta = props.delta ?? "+0%";
-  const deltaDir = props.deltaDir ?? "up";
-  const icon = props.icon ?? "\u2191";
-  const tsx = `// ForgeStatCard \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update statcard
-
-import './ForgeStatCard.css'
-
-interface ForgeStatCardProps {
-  title?: string
-  value?: string | number
-  delta?: string
-  deltaDir?: 'up' | 'down'
-  icon?: string
-  color?: string
-  showIcon?: boolean
-  showDelta?: boolean
-  showBar?: boolean
-  barValue?: number
-}
-
-export function ForgeStatCard({
-  title = '${title}',
-  value = '${value}',
-  delta = '${delta}',
-  deltaDir = '${deltaDir}',
-  icon = '${icon}',
-  color = '${color}',
-  showIcon = ${showIcon},
-  showDelta = ${showDelta},
-  showBar = ${showBar},
-  barValue = ${barValue},
-}: ForgeStatCardProps) {
-  const clamped = Math.min(100, Math.max(0, barValue))
-  return (
-    <div
-      className="forge-statcard"
-      style={{ '--forge-statcard-color': color, '--forge-statcard-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      <div className="forge-statcard__header">
-        <span className="forge-statcard__title">{title}</span>
-        {showIcon && <span className="forge-statcard__icon">{icon}</span>}
-      </div>
-      <div className="forge-statcard__value">{value}</div>
-      {showDelta && (
-        <div className={\`forge-statcard__delta forge-statcard__delta--\${deltaDir}\`}>
-          {deltaDir === 'up' ? '\u2191' : '\u2193'} {delta}
-        </div>
-      )}
-      {showBar && (
-        <div className="forge-statcard__track">
-          <div className="forge-statcard__fill" style={{ width: \`\${clamped}%\` }} />
-        </div>
-      )}
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeStatCard.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-statcard {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-  background: #0f0f12;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  font-family: Inter, sans-serif;
-  min-width: 180px;
-}
-
-.forge-statcard__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.forge-statcard__title {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.38);
-  letter-spacing: -0.01em;
-}
-
-.forge-statcard__icon {
-  font-size: 14px;
-  color: rgba(var(--forge-statcard-rgb), 0.6);
-}
-
-.forge-statcard__value {
-  font-size: 24px;
-  font-weight: 300;
-  color: #f0ede8;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.forge-statcard__delta {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-.forge-statcard__delta--up   { color: #1D9E75; }
-.forge-statcard__delta--down { color: #e24b4a; }
-
-.forge-statcard__track {
-  height: 3px;
-  background: rgba(var(--forge-statcard-rgb), 0.1);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-.forge-statcard__fill {
-  height: 100%;
-  background: var(--forge-statcard-color);
-  border-radius: 2px;
-  box-shadow: 0 0 6px rgba(var(--forge-statcard-rgb), 0.4);
-  transition: width 0.4s ease;
-}
-`;
-  return { tsx, css };
-}
-function generateTagInput(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const variant = props.variant ?? "soft";
-  const removable = props.removable ?? true;
-  const placeholder = props.placeholder ?? "Add tag\u2026";
-  const initialTags = props.tags ?? [];
-  const tsx = `// ForgeTagInput \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update taginput
-
-import { useState, KeyboardEvent } from 'react'
-import './ForgeTagInput.css'
-
-interface ForgeTagInputProps {
-  tags?: string[]
-  placeholder?: string
-  color?: string
-  variant?: 'soft' | 'pill' | 'outline'
-  removable?: boolean
-  onChange?: (tags: string[]) => void
-}
-
-export function ForgeTagInput({
-  tags: initialTags = ${JSON.stringify(initialTags)},
-  placeholder = '${placeholder}',
-  color = '${color}',
   variant = '${variant}',
-  removable = ${removable},
   onChange,
-}: ForgeTagInputProps) {
-  const [tags, setTags] = useState<string[]>(initialTags)
-  const [input, setInput] = useState('')
+}: ForgeCheckboxProps) {
+  const [checked, setChecked] = useState<boolean[]>(items.map(() => false))
 
-  function addTag() {
-    const val = input.trim()
-    if (val && !tags.includes(val)) {
-      const next = [...tags, val]
-      setTags(next)
-      onChange?.(next)
-    }
-    setInput('')
-  }
-
-  function removeTag(i: number) {
-    const next = tags.filter((_, j) => j !== i)
-    setTags(next)
+  function toggle(i: number) {
+    const next = [...checked]
+    next[i] = !next[i]
+    setChecked(next)
     onChange?.(next)
   }
 
-  function handleKey(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault()
-      addTag()
-    }
-    if (e.key === 'Backspace' && !input && tags.length) {
-      removeTag(tags.length - 1)
-    }
-  }
-
   return (
     <div
-      className="forge-taginput"
-      style={{ '--forge-tag-color': color, '--forge-tag-rgb': '${rgb}' } as React.CSSProperties}
+      className="forge-checkbox-group"
+      style={{ '--forge-checkbox-color': color, '--forge-checkbox-rgb': '${rgb}' } as React.CSSProperties}
     >
-      {tags.map((tag, i) => (
-        <span key={i} className={\`forge-tag forge-tag--\${variant}\`}>
-          {tag}
-          {removable && (
-            <button
-              type="button"
-              className="forge-tag__remove"
-              onClick={() => removeTag(i)}
-              aria-label={\`Remove \${tag}\`}
-            >
-              \u2715
-            </button>
-          )}
-        </span>
+      {items.map((item, i) => (
+        <label key={i} className={\`forge-checkbox-item forge-checkbox-item--\${size}\`} onClick={() => toggle(i)}>
+          <div className={\`forge-checkbox forge-checkbox--\${variant} forge-checkbox--\${size}\${checked[i] ? ' forge-checkbox--checked' : ''}\`}>
+            {checked[i] && <span className="forge-checkbox__check">\u2713</span>}
+          </div>
+          <span className="forge-checkbox-label">{item}</span>
+        </label>
       ))}
-      <input
-        className="forge-taginput__input"
-        value={input}
-        placeholder={tags.length === 0 ? placeholder : ''}
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={handleKey}
-        onBlur={addTag}
-      />
     </div>
   )
 }
 `;
-  const css = `/* ForgeTagInput.css \u2014 generated by forge-ui CLI */
+  const css = `/* ForgeCheckbox.css \u2014 generated by forge-ui CLI */
 /* Edit freely \u2014 you own this file. */
 
-.forge-taginput {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  font-family: Inter, sans-serif;
-  min-height: 42px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.forge-taginput:focus-within {
-  border-color: rgba(var(--forge-tag-rgb), 0.4);
-  box-shadow: 0 0 0 3px rgba(var(--forge-tag-rgb), 0.1);
-}
-
-/* Tag variants */
-.forge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-.forge-tag--soft {
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: rgba(var(--forge-tag-rgb), 0.12);
-  color: rgba(var(--forge-tag-rgb), 0.9);
-  border: 1px solid transparent;
-}
-
-.forge-tag--pill {
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: rgba(var(--forge-tag-rgb), 0.12);
-  color: rgba(var(--forge-tag-rgb), 0.9);
-  border: 1px solid transparent;
-}
-
-.forge-tag--outline {
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: transparent;
-  color: rgba(var(--forge-tag-rgb), 0.9);
-  border: 1px solid rgba(var(--forge-tag-rgb), 0.3);
-}
-
-.forge-tag__remove {
-  background: none;
-  border: none;
-  color: rgba(var(--forge-tag-rgb), 0.5);
-  cursor: pointer;
-  font-size: 9px;
-  padding: 0;
-  line-height: 1;
-  transition: color 0.15s ease;
-}
-
-.forge-tag__remove:hover {
-  color: rgba(var(--forge-tag-rgb), 0.9);
-}
-
-/* Input */
-.forge-taginput__input {
-  flex: 1;
-  min-width: 80px;
-  background: none;
-  border: none;
-  outline: none;
-  color: #f0ede8;
-  font-family: Inter, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  padding: 0;
-}
-
-.forge-taginput__input::placeholder {
-  color: rgba(240, 237, 232, 0.2);
-}
-`;
-  return { tsx, css };
-}
-function generateTabs(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const variant = props.variant ?? "underline";
-  const tabs = props.tabs ?? ["Overview", "Features", "Pricing"];
-  const tsx = `// ForgeTabs \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update tabs
-
-import { useState } from 'react'
-import './ForgeTabs.css'
-
-interface ForgeTabsProps {
-  tabs?: string[]
-  color?: string
-  variant?: 'underline' | 'pill' | 'line'
-  defaultTab?: number
-  onChange?: (index: number, label: string) => void
-  children?: React.ReactNode
-}
-
-export function ForgeTabs({
-  tabs = ${JSON.stringify(tabs)},
-  color = '${color}',
-  variant = '${variant}',
-  defaultTab = 0,
-  onChange,
-  children,
-}: ForgeTabsProps) {
-  const [active, setActive] = useState(defaultTab)
-
-  function handleSelect(i: number) {
-    setActive(i)
-    onChange?.(i, tabs[i])
-  }
-
-  return (
-    <div
-      className="forge-tabs-wrap"
-      style={{ '--forge-tabs-color': color, '--forge-tabs-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      <div className={\`forge-tabs forge-tabs--\${variant}\`} role="tablist">
-        {tabs.map((tab, i) => (
-          <button
-            key={i}
-            role="tab"
-            aria-selected={active === i}
-            className={\`forge-tab\${active === i ? ' forge-tab--active' : ''}\`}
-            onClick={() => handleSelect(i)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-      {children && (
-        <div className="forge-tabs-panel" role="tabpanel">
-          {children}
-        </div>
-      )}
-    </div>
-  )
-}
-`;
-  const css = `/* ForgeTabs.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-tabs-wrap {
+.forge-checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   font-family: Inter, sans-serif;
 }
 
-.forge-tabs {
+.forge-checkbox-item {
   display: flex;
   align-items: center;
-}
-
-.forge-tab {
-  background: none;
-  border: none;
+  gap: 8px;
   cursor: pointer;
-  font-family: Inter, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: rgba(240, 237, 232, 0.38);
-  transition: color 0.15s ease;
-  padding: 8px 14px;
-  white-space: nowrap;
-}
-
-.forge-tab:hover {
-  color: rgba(240, 237, 232, 0.7);
-}
-
-/* Underline variant */
-.forge-tabs--underline {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  gap: 0;
-}
-.forge-tabs--underline .forge-tab {
-  padding: 8px 16px;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-}
-.forge-tabs--underline .forge-tab--active {
-  color: var(--forge-tabs-color);
-  border-bottom-color: var(--forge-tabs-color);
-}
-
-/* Pill variant */
-.forge-tabs--pill {
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  padding: 3px;
-}
-.forge-tabs--pill .forge-tab {
-  border-radius: 6px;
-  padding: 6px 14px;
-}
-.forge-tabs--pill .forge-tab--active {
-  background: rgba(var(--forge-tabs-rgb), 0.15);
-  color: var(--forge-tabs-color);
-}
-
-/* Line variant */
-.forge-tabs--line {
-  gap: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.forge-tabs--line .forge-tab {
-  padding: 8px 16px;
-  position: relative;
-}
-.forge-tabs--line .forge-tab--active {
-  color: #f0ede8;
-}
-.forge-tabs--line .forge-tab--active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--forge-tabs-color);
-  box-shadow: 0 0 8px rgba(var(--forge-tabs-rgb), 0.5);
-}
-
-.forge-tabs-panel {
-  color: rgba(240, 237, 232, 0.6);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-tab { transition: none; }
-}
-`;
-  return { tsx, css };
-}
-function generateBreadcrumb(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const separator = props.separator ?? "/";
-  const showHome = props.showHome ?? true;
-  const tsx = `// ForgeBreadcrumb \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update breadcrumb
-
-import './ForgeBreadcrumb.css'
-
-interface ForgeBreadcrumbProps {
-  items: { label: string; href?: string }[]
-  color?: string
-  separator?: string
-  showHome?: boolean
-}
-
-export function ForgeBreadcrumb({
-  items = [{ label: 'Home', href: '/' }, { label: 'Components' }, { label: 'Button' }],
-  color = '${color}',
-  separator = '${separator}',
-  showHome = ${showHome},
-}: ForgeBreadcrumbProps) {
-  const all = showHome && items[0]?.label !== 'Home'
-    ? [{ label: 'Home', href: '/' }, ...items]
-    : items
-
-  return (
-    <nav
-      className="forge-breadcrumb"
-      aria-label="Breadcrumb"
-      style={{ '--forge-breadcrumb-color': color, '--forge-breadcrumb-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      <ol className="forge-breadcrumb__list">
-        {all.map((item, i) => {
-          const isLast = i === all.length - 1
-          return (
-            <li key={i} className="forge-breadcrumb__item">
-              {i > 0 && (
-                <span className="forge-breadcrumb__sep" aria-hidden="true">
-                  {separator}
-                </span>
-              )}
-              {item.href && !isLast ? (
-                <a href={item.href} className="forge-breadcrumb__link">
-                  {item.label}
-                </a>
-              ) : (
-                <span className={\`forge-breadcrumb__current\${isLast ? ' forge-breadcrumb__current--active' : ''}\`}>
-                  {item.label}
-                </span>
-              )}
-            </li>
-          )
-        })}
-      </ol>
-    </nav>
-  )
-}
-`;
-  const css = `/* ForgeBreadcrumb.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-breadcrumb {
-  font-family: Inter, sans-serif;
-}
-
-.forge-breadcrumb__list {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.forge-breadcrumb__item {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.forge-breadcrumb__sep {
-  font-size: 12px;
-  color: rgba(240, 237, 232, 0.2);
-  margin: 0 6px;
   user-select: none;
 }
 
-.forge-breadcrumb__link {
-  font-size: 13px;
+.forge-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.15s ease;
+}
+
+.forge-checkbox--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
+.forge-checkbox--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
+.forge-checkbox--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
+
+.forge-checkbox--square   { border-radius: ${radiusMap.square}; }
+.forge-checkbox--round    { border-radius: ${radiusMap.round}; }
+.forge-checkbox--squircle { border-radius: ${radiusMap.squircle}; }
+
+.forge-checkbox--checked {
+  background: rgba(var(--forge-checkbox-rgb), 0.2);
+  border-color: rgba(var(--forge-checkbox-rgb), 0.6);
+  box-shadow: 0 0 8px rgba(var(--forge-checkbox-rgb), 0.2);
+}
+
+.forge-checkbox__check {
+  font-size: 70%;
+  color: var(--forge-checkbox-color);
+  line-height: 1;
+}
+
+.forge-checkbox-label {
+  font-size: ${fontMap[size] ?? fontMap.md};
   font-weight: 400;
-  color: rgba(240, 237, 232, 0.38);
-  text-decoration: none;
-  letter-spacing: -0.01em;
-  transition: color 0.15s ease;
-}
-
-.forge-breadcrumb__link:hover {
-  color: var(--forge-breadcrumb-color);
-}
-
-.forge-breadcrumb__current {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.38);
+  color: rgba(240, 237, 232, 0.6);
   letter-spacing: -0.01em;
 }
 
-.forge-breadcrumb__current--active {
-  color: rgba(240, 237, 232, 0.7);
+.forge-checkbox-item:hover .forge-checkbox {
+  border-color: rgba(var(--forge-checkbox-rgb), 0.35);
 }
 `;
   return { tsx, css };
 }
-function generatePagination(props) {
+
+// src/generators/cmdpalette.ts
+function generateCommandPalette(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
-  const total = props.total ?? 48;
-  const perPage = props.perPage ?? 10;
-  const showCount = props.showCount ?? true;
-  const showArrows = props.showArrows ?? true;
-  const tsx = `// ForgePagination \u2014 generated by forge-ui CLI
+  const placeholder = props.placeholder ?? "Search\u2026";
+  const showCategories = props.showCategories ?? true;
+  const showShortcuts = props.showShortcuts ?? true;
+  const items = props.items ?? [
+    "Components:Button",
+    "Components:Card",
+    "Actions:Copy command"
+  ];
+  const tsx = `// ForgeCommand \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update pagination
+// Re-generate with: npx @forgelabs-studio/ui update cmdpalette
 
-import { useState } from 'react'
-import './ForgePagination.css'
+import { useState, useEffect } from 'react'
+import './ForgeCommand.css'
 
-interface ForgePaginationProps {
-  total?: number
-  perPage?: number
-  color?: string
-  showCount?: boolean
-  showArrows?: boolean
-  page?: number
-  onPageChange?: (page: number) => void
+interface CommandItem {
+  category: string
+  label: string
 }
 
-export function ForgePagination({
-  total = ${total},
-  perPage = ${perPage},
+interface ForgeCommandProps {
+  items?: string[]
+  placeholder?: string
+  color?: string
+  showCategories?: boolean
+  showShortcuts?: boolean
+  onSelect?: (item: CommandItem) => void
+  // Set trigger to true to use \u2318K keyboard shortcut
+  triggerOnKey?: boolean
+}
+
+export function ForgeCommand({
+  items = ${JSON.stringify(items)},
+  placeholder = '${placeholder}',
   color = '${color}',
-  showCount = ${showCount},
-  showArrows = ${showArrows},
-  page,
-  onPageChange,
-}: ForgePaginationProps) {
-  const [internal, setInternal] = useState(1)
-  const controlled = page !== undefined
-  const current = controlled ? page : internal
-  const totalPages = Math.ceil(total / perPage)
+  showCategories = ${showCategories},
+  showShortcuts = ${showShortcuts},
+  onSelect,
+  triggerOnKey = false,
+}: ForgeCommandProps) {
+  const [open, setOpen] = useState(!triggerOnKey)
+  const [query, setQuery] = useState('')
 
-  function go(p: number) {
-    if (p < 1 || p > totalPages) return
-    if (!controlled) setInternal(p)
-    onPageChange?.(p)
-  }
+  // Parse items from "Category:Label" format
+  const parsed: CommandItem[] = items.map(item => {
+    const [category, ...rest] = item.split(':')
+    return { category, label: rest.join(':') || category }
+  })
 
-  // Build page number list with ellipsis
-  function getPages(): (number | '...')[] {
-    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1)
-    if (current <= 4) return [1, 2, 3, 4, 5, '...', totalPages]
-    if (current >= totalPages - 3) return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
-    return [1, '...', current - 1, current, current + 1, '...', totalPages]
-  }
+  // Filter by query
+  const filtered = query
+    ? parsed.filter(i => i.label.toLowerCase().includes(query.toLowerCase()))
+    : parsed
 
-  const start = (current - 1) * perPage + 1
-  const end = Math.min(current * perPage, total)
+  // Group by category
+  const grouped = filtered.reduce<Record<string, CommandItem[]>>((acc, item) => {
+    if (!acc[item.category]) acc[item.category] = []
+    acc[item.category].push(item)
+    return acc
+  }, {})
+
+  useEffect(() => {
+    if (!triggerOnKey) return
+    function handleKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setOpen(o => !o)
+      }
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [triggerOnKey])
+
+  if (!open) return null
 
   return (
     <div
-      className="forge-pagination"
-      style={{ '--forge-pagination-color': color, '--forge-pagination-rgb': '${rgb}' } as React.CSSProperties}
+      className="forge-cmd-overlay"
+      onClick={e => { if (e.target === e.currentTarget) setOpen(false) }}
+      style={{ '--forge-cmd-color': color, '--forge-cmd-rgb': '${rgb}' } as React.CSSProperties}
     >
-      {showCount && (
-        <span className="forge-pagination__count">
-          {start}\u2013{end} of {total}
-        </span>
-      )}
-      <div className="forge-pagination__pages">
-        {showArrows && (
-          <button
-            className="forge-pagination__btn forge-pagination__arrow"
-            onClick={() => go(current - 1)}
-            disabled={current === 1}
-            aria-label="Previous page"
-          >
-            \u2190
-          </button>
-        )}
-        {getPages().map((p, i) =>
-          p === '...' ? (
-            <span key={\`ellipsis-\${i}\`} className="forge-pagination__ellipsis">\u2026</span>
-          ) : (
-            <button
-              key={p}
-              className={\`forge-pagination__btn\${current === p ? ' forge-pagination__btn--active' : ''}\`}
-              onClick={() => go(p as number)}
-              aria-current={current === p ? 'page' : undefined}
-            >
-              {p}
-            </button>
-          )
-        )}
-        {showArrows && (
-          <button
-            className="forge-pagination__btn forge-pagination__arrow"
-            onClick={() => go(current + 1)}
-            disabled={current === totalPages}
-            aria-label="Next page"
-          >
-            \u2192
-          </button>
-        )}
+      <div className="forge-cmd">
+        <div className="forge-cmd__search">
+          <span className="forge-cmd__search-icon">\u2315</span>
+          <input
+            className="forge-cmd__input"
+            placeholder={placeholder}
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            autoFocus
+          />
+          {showShortcuts && <span className="forge-cmd__esc">esc</span>}
+        </div>
+        <div className="forge-cmd__results">
+          {Object.entries(grouped).map(([category, catItems]) => (
+            <div key={category}>
+              {showCategories && (
+                <div className="forge-cmd__category">{category}</div>
+              )}
+              {catItems.map((item, i) => (
+                <button
+                  key={i}
+                  className="forge-cmd__item"
+                  onClick={() => { onSelect?.(item); setOpen(false) }}
+                >
+                  <span className="forge-cmd__item-label">{item.label}</span>
+                  {showShortcuts && <span className="forge-cmd__item-hint">\u21B5</span>}
+                </button>
+              ))}
+            </div>
+          ))}
+          {filtered.length === 0 && (
+            <div className="forge-cmd__empty">No results for "{query}"</div>
+          )}
+        </div>
       </div>
     </div>
   )
 }
 `;
-  const css = `/* ForgePagination.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-pagination {
+  const css = `/* ForgeCommand.css \u2014 generated by forge-ui CLI */
+.forge-cmd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
   display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: Inter, sans-serif;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  z-index: 100;
+  backdrop-filter: blur(4px);
 }
 
-.forge-pagination__count {
+.forge-cmd {
+  width: 100%;
+  max-width: 520px;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  font-family: Inter, sans-serif;
+  margin: 0 16px;
+}
+
+.forge-cmd__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.forge-cmd__search-icon {
+  font-size: 15px;
+  color: rgba(240,237,232,0.25);
+  flex-shrink: 0;
+}
+
+.forge-cmd__input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #f0ede8;
+  letter-spacing: -0.01em;
+}
+
+.forge-cmd__input::placeholder { color: rgba(240,237,232,0.2); }
+
+.forge-cmd__esc {
+  font-size: 10px;
+  color: rgba(240,237,232,0.2);
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  padding: 2px 5px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.forge-cmd__results {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.forge-cmd__category {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 10px 4px;
+}
+
+.forge-cmd__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  text-align: left;
+}
+
+.forge-cmd__item:hover {
+  background: rgba(var(--forge-cmd-rgb), 0.08);
+}
+
+.forge-cmd__item-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.7);
+  letter-spacing: -0.01em;
+}
+
+.forge-cmd__item:hover .forge-cmd__item-label { color: #f0ede8; }
+
+.forge-cmd__item-hint {
+  font-size: 11px;
+  color: rgba(240,237,232,0.15);
+}
+
+.forge-cmd__empty {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(240,237,232,0.2);
+  letter-spacing: -0.01em;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/countup.ts
+function generateCountUp(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const to = props.to ?? 48200;
+  const from = props.from ?? 0;
+  const duration = props.duration ?? 2e3;
+  const prefix = props.prefix ?? "";
+  const suffix = props.suffix ?? "";
+  const size = props.size ?? "xl";
+  const showLabel = props.showLabel ?? true;
+  const label = props.label ?? "Total";
+  const fontSizeMap = {
+    sm: "24px",
+    md: "32px",
+    lg: "48px",
+    xl: "64px"
+  };
+  const tsx = `// ForgeCountUp \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update countup
+// Uses requestAnimationFrame \u2014 no animation library required.
+
+import { useEffect, useRef, useState } from 'react'
+import './ForgeCountUp.css'
+
+interface ForgeCountUpProps {
+  from?: number
+  to?: number
+  duration?: number
+  prefix?: string
+  suffix?: string
+  color?: string
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  showLabel?: boolean
+  label?: string
+}
+
+export function ForgeCountUp({
+  from = ${from},
+  to = ${to},
+  duration = ${duration},
+  prefix = '${prefix}',
+  suffix = '${suffix}',
+  color = '${color}',
+  size = '${size}',
+  showLabel = ${showLabel},
+  label = '${label}',
+}: ForgeCountUpProps) {
+  const [value, setValue] = useState(from)
+  const ref = useRef<HTMLDivElement>(null)
+  const started = useRef(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const startTime = performance.now()
+          const range = to - from
+
+          function tick(now: number) {
+            const elapsed = now - startTime
+            const progress = Math.min(elapsed / duration, 1)
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3)
+            setValue(Math.round(from + range * eased))
+            if (progress < 1) requestAnimationFrame(tick)
+          }
+
+          requestAnimationFrame(tick)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [from, to, duration])
+
+  // Format number with commas
+  const formatted = value.toLocaleString()
+
+  return (
+    <div
+      ref={ref}
+      className={\`forge-countup forge-countup--\${size}\`}
+      style={{ '--forge-countup-color': color, '--forge-countup-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-countup__number">
+        {prefix}<span className="forge-countup__value">{formatted}</span>{suffix}
+      </div>
+      {showLabel && <div className="forge-countup__label">{label}</div>}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeCountUp.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-countup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: Inter, sans-serif;
+}
+
+.forge-countup__number {
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: #f0ede8;
+  line-height: 1;
+}
+
+.forge-countup--sm .forge-countup__number { font-size: ${fontSizeMap.sm}; }
+.forge-countup--md .forge-countup__number { font-size: ${fontSizeMap.md}; }
+.forge-countup--lg .forge-countup__number { font-size: ${fontSizeMap.lg}; }
+.forge-countup--xl .forge-countup__number { font-size: ${fontSizeMap.xl}; }
+
+.forge-countup__value {
+  color: var(--forge-countup-color);
+}
+
+.forge-countup__label {
   font-size: 12px;
   font-weight: 400;
   color: rgba(240, 237, 232, 0.3);
   letter-spacing: -0.01em;
-  margin-right: 4px;
-}
-
-.forge-pagination__pages {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.forge-pagination__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 30px;
-  height: 30px;
-  padding: 0 6px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: rgba(240, 237, 232, 0.4);
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.forge-pagination__btn:hover:not(:disabled) {
-  background: rgba(var(--forge-pagination-rgb), 0.08);
-  color: var(--forge-pagination-color);
-  border-color: rgba(var(--forge-pagination-rgb), 0.2);
-}
-
-.forge-pagination__btn--active {
-  background: rgba(var(--forge-pagination-rgb), 0.15);
-  color: var(--forge-pagination-color);
-  border-color: rgba(var(--forge-pagination-rgb), 0.3);
-}
-
-.forge-pagination__btn:disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
-}
-
-.forge-pagination__arrow {
-  font-size: 14px;
-}
-
-.forge-pagination__ellipsis {
-  font-size: 12px;
-  color: rgba(240, 237, 232, 0.2);
-  padding: 0 4px;
-  user-select: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .forge-pagination__btn { transition: none; }
+  .forge-countup__value {
+    transition: none;
+  }
 }
 `;
   return { tsx, css };
 }
-function generateNavbar(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const brand = props.brand ?? "FORGE";
-  const variant = props.variant ?? "dark";
-  const showCta = props.showCta ?? true;
-  const ctaText = props.ctaText ?? "Get started";
-  const showLogo = props.showLogo ?? true;
-  const links = props.links ?? ["Work", "About", "Contact"];
-  const tsx = `// ForgeNavbar \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update navbar
-// Note: links use <a> tags \u2014 swap for Next.js <Link> if needed.
 
-import { useState } from 'react'
-import './ForgeNavbar.css'
-
-interface ForgeNavbarProps {
-  brand?: string
-  links?: { label: string; href: string }[] | string[]
-  color?: string
-  variant?: 'dark' | 'light'
-  showLogo?: boolean
-  showCta?: boolean
-  ctaText?: string
-  onCtaClick?: () => void
-}
-
-export function ForgeNavbar({
-  brand = '${brand}',
-  links = ${JSON.stringify(links)},
-  color = '${color}',
-  variant = '${variant}',
-  showLogo = ${showLogo},
-  showCta = ${showCta},
-  ctaText = '${ctaText}',
-  onCtaClick,
-}: ForgeNavbarProps) {
-  const [open, setOpen] = useState(false)
-
-  // Normalise links \u2014 accept both strings and { label, href } objects
-  const normalisedLinks = links.map(l =>
-    typeof l === 'string' ? { label: l, href: \`#\${l.toLowerCase()}\` } : l
-  )
-
-  return (
-    <header
-      className={\`forge-navbar forge-navbar--\${variant}\`}
-      style={{ '--forge-navbar-color': color, '--forge-navbar-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      <div className="forge-navbar__inner">
-        {/* Logo / brand */}
-        <a href="/" className="forge-navbar__brand">
-          {showLogo && <span className="forge-navbar__gem" />}
-          <span className="forge-navbar__brand-name">{brand}</span>
-        </a>
-
-        {/* Desktop nav */}
-        <nav className="forge-navbar__links" aria-label="Main navigation">
-          {normalisedLinks.map(link => (
-            <a key={link.label} href={link.href} className="forge-navbar__link">
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* CTA + mobile toggle */}
-        <div className="forge-navbar__right">
-          {showCta && (
-            <button className="forge-navbar__cta" onClick={onCtaClick}>
-              {ctaText}
-            </button>
-          )}
-          <button
-            className="forge-navbar__toggle"
-            onClick={() => setOpen(o => !o)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            {open ? '\u2715' : '\u2630'}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <nav className="forge-navbar__mobile" aria-label="Mobile navigation">
-          {normalisedLinks.map(link => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="forge-navbar__mobile-link"
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          {showCta && (
-            <button className="forge-navbar__cta forge-navbar__cta--mobile" onClick={onCtaClick}>
-              {ctaText}
-            </button>
-          )}
-        </nav>
-      )}
-    </header>
-  )
-}
-`;
-  const css = `/* ForgeNavbar.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-navbar {
-  width: 100%;
-  font-family: Inter, sans-serif;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  position: relative;
-}
-
-.forge-navbar--dark  { background: #09090b; }
-.forge-navbar--light { background: #ffffff; }
-
-.forge-navbar__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-  padding: 0 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Brand */
-.forge-navbar__brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-
-.forge-navbar__gem {
-  width: 18px;
-  height: 18px;
-  background: conic-gradient(from 0deg, #e24b4a, #EF9F27, #1D9E75, #378ADD, #7F77DD, #D4537E, #e24b4a);
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.forge-navbar__brand-name {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: #f0ede8;
-}
-
-.forge-navbar--light .forge-navbar__brand-name {
-  color: #09090b;
-}
-
-/* Desktop links */
-.forge-navbar__links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.forge-navbar__link {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.45);
-  text-decoration: none;
-  letter-spacing: -0.01em;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: color 0.15s ease, background 0.15s ease;
-}
-
-.forge-navbar__link:hover {
-  color: #f0ede8;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.forge-navbar--light .forge-navbar__link {
-  color: rgba(9, 9, 11, 0.5);
-}
-
-.forge-navbar--light .forge-navbar__link:hover {
-  color: #09090b;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-/* Right side */
-.forge-navbar__right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* CTA button */
-.forge-navbar__cta {
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  padding: 7px 16px;
-  border-radius: 6px;
-  border: 1px solid rgba(var(--forge-navbar-rgb), 0.3);
-  background: rgba(var(--forge-navbar-rgb), 0.1);
-  color: rgba(var(--forge-navbar-rgb), 0.9);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.forge-navbar__cta:hover {
-  background: rgba(var(--forge-navbar-rgb), 0.18);
-  border-color: rgba(var(--forge-navbar-rgb), 0.5);
-}
-
-/* Mobile toggle */
-.forge-navbar__toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: rgba(240, 237, 232, 0.5);
-  font-size: 16px;
-  cursor: pointer;
-  padding: 4px;
-}
-
-/* Mobile menu */
-.forge-navbar__mobile {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 16px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  gap: 2px;
-}
-
-.forge-navbar__mobile-link {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(240, 237, 232, 0.5);
-  text-decoration: none;
-  padding: 10px 8px;
-  letter-spacing: -0.01em;
-  border-radius: 6px;
-  transition: color 0.15s ease;
-}
-
-.forge-navbar__mobile-link:hover {
-  color: #f0ede8;
-}
-
-.forge-navbar__cta--mobile {
-  margin-top: 8px;
-  width: 100%;
-  justify-content: center;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .forge-navbar__links { display: none; }
-  .forge-navbar__toggle { display: block; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-navbar__link,
-  .forge-navbar__cta { transition: none; }
-}
-`;
-  return { tsx, css };
-}
+// src/generators/datepicker.ts
 function generateDatePicker(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
@@ -3702,6 +2346,456 @@ export function ForgeDatePicker({
 `;
   return { tsx, css };
 }
+
+// src/generators/donut.ts
+function generateDonut(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const showLabels = props.showLabels ?? true;
+  const showCenter = props.showCenter ?? true;
+  const centerText = props.centerText ?? "\u2014";
+  const thickness = props.thickness ?? 28;
+  const animated = props.animated ?? true;
+  const title = props.title ?? "";
+  const tsx = `// ForgeDonut \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update donut
+// Requires Chart.js \u2014 add to your layout:
+// <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
+
+import { useEffect, useRef } from 'react'
+import './ForgeDonut.css'
+
+interface ForgeDonutProps {
+  title?: string
+  data?: { label: string; value: number }[]
+  color?: string
+  showLabels?: boolean
+  showCenter?: boolean
+  centerText?: string
+  thickness?: number
+  animated?: boolean
+  size?: number
+}
+
+const PALETTE = ['#7F77DD','#378ADD','#1D9E75','#EF9F27','#D4537E','#e24b4a']
+
+const DEFAULT_DATA = [
+  { label: 'Direct', value: 40 },
+  { label: 'Search', value: 30 },
+  { label: 'Social', value: 20 },
+  { label: 'Other', value: 10 },
+]
+
+export function ForgeDonut({
+  title = '${title}',
+  data = DEFAULT_DATA,
+  color = '${color}',
+  showLabels = ${showLabels},
+  showCenter = ${showCenter},
+  centerText = '${centerText}',
+  thickness = ${thickness},
+  animated = ${animated},
+  size = 240,
+}: ForgeDonutProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const chartRef = useRef<unknown>(null)
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Chart = (window as any).Chart
+    if (!Chart || !canvasRef.current) return
+    if (chartRef.current) (chartRef.current as any).destroy()
+
+    chartRef.current = new Chart(canvasRef.current, {
+      type: 'doughnut',
+      data: {
+        labels: data.map(d => d.label),
+        datasets: [{
+          data: data.map(d => d.value),
+          backgroundColor: data.map((_, i) => PALETTE[i % PALETTE.length]),
+          borderWidth: 0,
+          borderRadius: 4,
+          spacing: 2,
+        }],
+      },
+      options: {
+        responsive: false,
+        animation: animated,
+        cutout: \`\${100 - (thickness / (size / 2)) * 100}%\`,
+        plugins: {
+          legend: {
+            display: showLabels,
+            position: 'bottom',
+            labels: { color: 'rgba(240,237,232,0.4)', font: { family: 'Inter', size: 11 }, boxWidth: 8, padding: 16 }
+          },
+          title: { display: !!title, text: title, color: 'rgba(240,237,232,0.6)', font: { family: 'Inter', size: 13, weight: '400' } },
+        },
+      },
+    })
+
+    return () => { if (chartRef.current) (chartRef.current as any).destroy() }
+  }, [data, thickness, showLabels, animated, title, size])
+
+  return (
+    <div
+      className="forge-donut-wrap"
+      style={{ '--forge-donut-color': color, '--forge-donut-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-donut-canvas-wrap" style={{ width: size, height: size }}>
+        <canvas ref={canvasRef} width={size} height={size} />
+        {showCenter && (
+          <div className="forge-donut-center">
+            <span className="forge-donut-center__text">{centerText}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeDonut.css \u2014 generated by forge-ui CLI */
+.forge-donut-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.forge-donut-canvas-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forge-donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.forge-donut-center__text {
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #f0ede8;
+  letter-spacing: -0.04em;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/drawer.ts
+function generateDrawer(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const side = props.side ?? "right";
+  const width = props.width ?? 280;
+  const showOverlay = props.showOverlay ?? true;
+  const title = props.title ?? "Drawer";
+  const tsx = `// ForgeDrawer \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update drawer
+
+import { useEffect } from 'react'
+import './ForgeDrawer.css'
+
+interface ForgeDrawerProps {
+  open: boolean
+  onClose: () => void
+  title?: string
+  children?: React.ReactNode
+  color?: string
+  side?: 'left' | 'right'
+  width?: number
+  showOverlay?: boolean
+}
+
+export function ForgeDrawer({
+  open,
+  onClose,
+  title = '${title}',
+  children,
+  color = '${color}',
+  side = '${side}',
+  width = ${width},
+  showOverlay = ${showOverlay},
+}: ForgeDrawerProps) {
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    if (open) document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [open, onClose])
+
+  if (!open) return null
+
+  return (
+    <div
+      className="forge-drawer-root"
+      style={{ '--forge-drawer-color': color, '--forge-drawer-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {showOverlay && (
+        <div className="forge-drawer-overlay" onClick={onClose} />
+      )}
+      <div
+        className={\`forge-drawer forge-drawer--\${side}\`}
+        style={{ width }}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="forge-drawer__header">
+          <span className="forge-drawer__title">{title}</span>
+          <button className="forge-drawer__close" onClick={onClose} aria-label="Close">\u2715</button>
+        </div>
+        <div className="forge-drawer__body">{children}</div>
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeDrawer.css \u2014 generated by forge-ui CLI */
+.forge-drawer-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.forge-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+}
+
+.forge-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #0f0f12;
+  border-color: rgba(255,255,255,0.08);
+  border-style: solid;
+  border-width: 0;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+}
+
+.forge-drawer--right { right: 0; border-left-width: 1px; }
+.forge-drawer--left  { left: 0;  border-right-width: 1px; }
+
+.forge-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.forge-drawer__title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #f0ede8;
+  letter-spacing: -0.02em;
+}
+
+.forge-drawer__close {
+  background: none;
+  border: none;
+  color: rgba(240,237,232,0.3);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+.forge-drawer__close:hover { color: #f0ede8; }
+
+.forge-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.5);
+  line-height: 1.6;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/dropdown.ts
+function generateDropdown(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const radius = props.radius ?? 8;
+  const label = props.label ?? "Options";
+  const showDivider = props.showDivider ?? true;
+  const items = props.items ?? ["Edit", "Duplicate", "Delete"];
+  const dangerItems = props.dangerItems ?? items.map(() => false);
+  const tsx = `// ForgeDropdown \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update dropdown
+
+import { useState, useRef, useEffect } from 'react'
+import './ForgeDropdown.css'
+
+interface ForgeDropdownProps {
+  label?: string
+  items?: string[]
+  dangerItems?: boolean[]
+  color?: string
+  radius?: number
+  showDivider?: boolean
+  onSelect?: (item: string, index: number) => void
+}
+
+export function ForgeDropdown({
+  label = '${label}',
+  items = ${JSON.stringify(items)},
+  dangerItems = ${JSON.stringify(dangerItems)},
+  color = '${color}',
+  radius = ${radius},
+  showDivider = ${showDivider},
+  onSelect,
+}: ForgeDropdownProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className="forge-dropdown-wrap"
+      style={{ '--forge-dropdown-color': color, '--forge-dropdown-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <button
+        className="forge-dropdown-trigger"
+        style={{ borderRadius: radius }}
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+      >
+        {label}
+        <span className="forge-dropdown-trigger__arrow">{open ? '\u25B4' : '\u25BE'}</span>
+      </button>
+
+      {open && (
+        <div className="forge-dropdown-menu" style={{ borderRadius: radius }}>
+          {items.map((item, i) => {
+            const isDanger = dangerItems?.[i] ?? false
+            const isLast = i === items.length - 1
+            return (
+              <div key={i}>
+                {showDivider && isLast && items.length > 1 && (
+                  <div className="forge-dropdown-divider" />
+                )}
+                <button
+                  className={\`forge-dropdown-item\${isDanger ? ' forge-dropdown-item--danger' : ''}\`}
+                  onClick={() => { onSelect?.(item, i); setOpen(false) }}
+                >
+                  {item}
+                </button>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeDropdown.css \u2014 generated by forge-ui CLI */
+.forge-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+  font-family: Inter, sans-serif;
+}
+
+.forge-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(240,237,232,0.7);
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.forge-dropdown-trigger:hover {
+  border-color: rgba(var(--forge-dropdown-rgb), 0.3);
+  color: #f0ede8;
+}
+
+.forge-dropdown-trigger__arrow {
+  font-size: 10px;
+  color: rgba(240,237,232,0.3);
+}
+
+.forge-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 50;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.08);
+  min-width: 160px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.forge-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: 4px;
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.6);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.forge-dropdown-item:hover {
+  background: rgba(var(--forge-dropdown-rgb), 0.08);
+  color: #f0ede8;
+}
+.forge-dropdown-item--danger { color: rgba(226,75,74,0.7); }
+.forge-dropdown-item--danger:hover { background: rgba(226,75,74,0.08); color: #e24b4a; }
+
+.forge-dropdown-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 4px 0;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/fadeup.ts
 function generateFadeUp(props) {
   const color = props.color ?? "#7F77DD";
   const duration = props.duration ?? 600;
@@ -3839,6 +2933,2982 @@ export function ForgeFadeUp({
 `;
   return { tsx, css };
 }
+
+// src/generators/input.ts
+function generateInput(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const size = props.size ?? "md";
+  const radius = props.radius ?? 8;
+  const showLabel = props.showLabel ?? true;
+  const showHint = props.showHint ?? true;
+  const label = props.label ?? "Email address";
+  const placeholder = props.placeholder ?? "hello@example.com";
+  const hint = props.hint ?? "";
+  const type = props.type ?? "text";
+  const paddingMap = {
+    sm: "6px 10px",
+    md: "9px 14px",
+    lg: "12px 16px"
+  };
+  const fontSizeMap = {
+    sm: "12px",
+    md: "13px",
+    lg: "14px"
+  };
+  const tsx = `// ForgeInput \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update input
+
+import { useState } from 'react'
+import './ForgeInput.css'
+
+interface ForgeInputProps {
+  label?: string
+  placeholder?: string
+  hint?: string
+  type?: 'text' | 'email' | 'password' | 'number' | 'search'
+  color?: string
+  size?: 'sm' | 'md' | 'lg'
+  radius?: number
+  showLabel?: boolean
+  showHint?: boolean
+  state?: 'default' | 'error' | 'success' | 'disabled'
+  value?: string
+  onChange?: (value: string) => void
+}
+
+export function ForgeInput({
+  label = '${label}',
+  placeholder = '${placeholder}',
+  hint = '${hint}',
+  type = '${type}',
+  color = '${color}',
+  size = '${size}',
+  radius = ${radius},
+  showLabel = ${showLabel},
+  showHint = ${showHint},
+  state = 'default',
+  value,
+  onChange,
+}: ForgeInputProps) {
+  const [internal, setInternal] = useState('')
+  const controlled = value !== undefined
+  const current = controlled ? value : internal
+
+  const stateColorMap: Record<string, string> = {
+    default: color,
+    error: '#e24b4a',
+    success: '#1D9E75',
+    disabled: '#555',
+  }
+  const activeColor = stateColorMap[state] ?? color
+
+  return (
+    <div
+      className={\`forge-input-wrap forge-input-wrap--\${state}\`}
+      style={{ '--forge-input-color': activeColor, '--forge-input-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {showLabel && label && (
+        <label className="forge-input-label">{label}</label>
+      )}
+      <input
+        className={\`forge-input forge-input--\${size}\`}
+        type={type}
+        placeholder={placeholder}
+        value={current}
+        disabled={state === 'disabled'}
+        style={{ borderRadius: radius }}
+        onChange={e => {
+          if (!controlled) setInternal(e.target.value)
+          onChange?.(e.target.value)
+        }}
+      />
+      {showHint && hint && (
+        <span className="forge-input-hint">{hint}</span>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeInput.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: Inter, sans-serif;
+  width: 100%;
+}
+
+.forge-input-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.6);
+  letter-spacing: -0.01em;
+}
+
+.forge-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0ede8;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.forge-input--sm { padding: ${paddingMap.sm}; font-size: ${fontSizeMap.sm}; }
+.forge-input--md { padding: ${paddingMap.md}; font-size: ${fontSizeMap.md}; }
+.forge-input--lg { padding: ${paddingMap.lg}; font-size: ${fontSizeMap.lg}; }
+
+.forge-input::placeholder {
+  color: rgba(240, 237, 232, 0.2);
+}
+
+.forge-input:focus {
+  border-color: rgba(var(--forge-input-rgb), 0.5);
+  box-shadow: 0 0 0 3px rgba(var(--forge-input-rgb), 0.12);
+}
+
+/* States */
+.forge-input-wrap--error .forge-input {
+  border-color: rgba(226, 75, 74, 0.4);
+}
+.forge-input-wrap--error .forge-input:focus {
+  border-color: #e24b4a;
+  box-shadow: 0 0 0 3px rgba(226, 75, 74, 0.12);
+}
+.forge-input-wrap--success .forge-input {
+  border-color: rgba(29, 158, 117, 0.4);
+}
+.forge-input-wrap--success .forge-input:focus {
+  border-color: #1D9E75;
+  box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.12);
+}
+.forge-input-wrap--disabled .forge-input {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.forge-input-hint {
+  font-size: 11px;
+  color: rgba(240, 237, 232, 0.3);
+  letter-spacing: -0.01em;
+}
+.forge-input-wrap--error .forge-input-hint   { color: #e24b4a; }
+.forge-input-wrap--success .forge-input-hint { color: #1D9E75; }
+`;
+  return { tsx, css };
+}
+
+// src/generators/linechart.ts
+function generateLineChart(props) {
+  const color = props.color ?? "#1D9E75";
+  const rgb = hexToRgb(color);
+  const color2 = props.color2 ?? "#EF9F27";
+  const tension = props.tension ?? 0.4;
+  const fill = props.fill ?? true;
+  const showGrid = props.showGrid ?? true;
+  const showDots = props.showDots ?? true;
+  const animated = props.animated ?? true;
+  const title = props.title ?? "Chart";
+  const tsx = `// ForgeLineChart \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update linechart
+// Requires Chart.js \u2014 add to your layout:
+// <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
+
+import { useEffect, useRef } from 'react'
+import './ForgeLineChart.css'
+
+interface ForgeLineChartProps {
+  title?: string
+  labels?: string[]
+  series?: { label: string; data: number[]; color?: string }[]
+  color?: string
+  color2?: string
+  tension?: number
+  fill?: boolean
+  showGrid?: boolean
+  showDots?: boolean
+  animated?: boolean
+  height?: number
+}
+
+const DEFAULT_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+const DEFAULT_DATA = [30, 55, 45, 70, 60, 88]
+
+export function ForgeLineChart({
+  title = '${title}',
+  labels = DEFAULT_LABELS,
+  series,
+  color = '${color}',
+  color2 = '${color2}',
+  tension = ${tension},
+  fill = ${fill},
+  showGrid = ${showGrid},
+  showDots = ${showDots},
+  animated = ${animated},
+  height = 260,
+}: ForgeLineChartProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const chartRef = useRef<unknown>(null)
+
+  const resolvedSeries = series ?? [
+    { label: 'Series 1', data: DEFAULT_DATA, color },
+    { label: 'Series 2', data: DEFAULT_DATA.map(v => Math.round(v * 0.6)), color: color2 },
+  ]
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Chart = (window as any).Chart
+    if (!Chart || !canvasRef.current) return
+    if (chartRef.current) (chartRef.current as any).destroy()
+
+    chartRef.current = new Chart(canvasRef.current, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: resolvedSeries.map(s => ({
+          label: s.label,
+          data: s.data,
+          borderColor: s.color ?? color,
+          backgroundColor: fill ? \`\${s.color ?? color}22\` : 'transparent',
+          tension,
+          fill,
+          pointRadius: showDots ? 4 : 0,
+          pointBackgroundColor: s.color ?? color,
+          borderWidth: 2,
+        })),
+      },
+      options: {
+        responsive: true,
+        animation: animated,
+        plugins: {
+          legend: { display: true, labels: { color: 'rgba(240,237,232,0.4)', font: { family: 'Inter', size: 11 }, boxWidth: 10 } },
+          title: { display: !!title, text: title, color: 'rgba(240,237,232,0.6)', font: { family: 'Inter', size: 13, weight: '400' } },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: 'rgba(240,237,232,0.3)', font: { family: 'Inter', size: 11 } }, border: { display: false } },
+          y: { grid: { display: showGrid, color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(240,237,232,0.3)', font: { family: 'Inter', size: 11 } }, border: { display: false } },
+        },
+      },
+    })
+
+    return () => { if (chartRef.current) (chartRef.current as any).destroy() }
+  }, [labels, color, color2, tension, fill, showGrid, showDots, animated, title])
+
+  return (
+    <div
+      className="forge-linechart-wrap"
+      style={{ '--forge-chart-color': color, '--forge-chart-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <canvas ref={canvasRef} height={height} />
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeLineChart.css \u2014 generated by forge-ui CLI */
+.forge-linechart-wrap {
+  width: 100%;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/modal.ts
+function generateModal(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const radius = props.radius ?? 12;
+  const showClose = props.showClose ?? true;
+  const showFooter = props.showFooter ?? true;
+  const title = props.title ?? "Modal title";
+  const primaryBtn = props.primaryBtn ?? "Confirm";
+  const secondaryBtn = props.secondaryBtn ?? "Cancel";
+  const tsx = `// ForgeModal \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update modal
+
+import { useEffect } from 'react'
+import './ForgeModal.css'
+
+interface ForgeModalProps {
+  open: boolean
+  onClose: () => void
+  title?: string
+  children?: React.ReactNode
+  color?: string
+  radius?: number
+  showClose?: boolean
+  showFooter?: boolean
+  primaryBtn?: string
+  secondaryBtn?: string
+  onPrimary?: () => void
+  onSecondary?: () => void
+}
+
+export function ForgeModal({
+  open,
+  onClose,
+  title = '${title}',
+  children,
+  color = '${color}',
+  radius = ${radius},
+  showClose = ${showClose},
+  showFooter = ${showFooter},
+  primaryBtn = '${primaryBtn}',
+  secondaryBtn = '${secondaryBtn}',
+  onPrimary,
+  onSecondary,
+}: ForgeModalProps) {
+  // Close on Escape key
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    if (open) document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [open, onClose])
+
+  if (!open) return null
+
+  return (
+    <div
+      className="forge-modal-overlay"
+      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      style={{ '--forge-modal-color': color, '--forge-modal-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-modal" style={{ borderRadius: radius }} role="dialog" aria-modal="true">
+        <div className="forge-modal__header">
+          <h2 className="forge-modal__title">{title}</h2>
+          {showClose && (
+            <button className="forge-modal__close" onClick={onClose} aria-label="Close">\u2715</button>
+          )}
+        </div>
+        <div className="forge-modal__body">{children}</div>
+        {showFooter && (
+          <div className="forge-modal__footer">
+            <button className="forge-modal__btn forge-modal__btn--secondary" onClick={onSecondary ?? onClose}>
+              {secondaryBtn}
+            </button>
+            <button className="forge-modal__btn forge-modal__btn--primary" onClick={onPrimary ?? onClose}>
+              {primaryBtn}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeModal.css \u2014 generated by forge-ui CLI */
+.forge-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.forge-modal {
+  background: #0f0f12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 480px;
+  font-family: Inter, sans-serif;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.forge-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.forge-modal__title {
+  font-size: 15px;
+  font-weight: 400;
+  color: #f0ede8;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.forge-modal__close {
+  background: none;
+  border: none;
+  color: rgba(240, 237, 232, 0.3);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+.forge-modal__close:hover { color: #f0ede8; }
+
+.forge-modal__body {
+  padding: 16px 24px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.5);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.forge-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 24px 20px;
+}
+
+.forge-modal__btn {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.forge-modal__btn--secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(240, 237, 232, 0.4);
+}
+.forge-modal__btn--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f0ede8;
+}
+
+.forge-modal__btn--primary {
+  background: rgba(var(--forge-modal-rgb), 0.15);
+  border: 1px solid rgba(var(--forge-modal-rgb), 0.3);
+  color: rgba(var(--forge-modal-rgb), 0.9);
+}
+.forge-modal__btn--primary:hover {
+  background: rgba(var(--forge-modal-rgb), 0.22);
+  border-color: rgba(var(--forge-modal-rgb), 0.5);
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/navbar.ts
+function generateNavbar(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const brand = props.brand ?? "FORGE";
+  const variant = props.variant ?? "dark";
+  const showCta = props.showCta ?? true;
+  const ctaText = props.ctaText ?? "Get started";
+  const showLogo = props.showLogo ?? true;
+  const links = props.links ?? ["Work", "About", "Contact"];
+  const tsx = `// ForgeNavbar \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update navbar
+// Note: links use <a> tags \u2014 swap for Next.js <Link> if needed.
+
+import { useState } from 'react'
+import './ForgeNavbar.css'
+
+interface ForgeNavbarProps {
+  brand?: string
+  links?: { label: string; href: string }[] | string[]
+  color?: string
+  variant?: 'dark' | 'light'
+  showLogo?: boolean
+  showCta?: boolean
+  ctaText?: string
+  onCtaClick?: () => void
+}
+
+export function ForgeNavbar({
+  brand = '${brand}',
+  links = ${JSON.stringify(links)},
+  color = '${color}',
+  variant = '${variant}',
+  showLogo = ${showLogo},
+  showCta = ${showCta},
+  ctaText = '${ctaText}',
+  onCtaClick,
+}: ForgeNavbarProps) {
+  const [open, setOpen] = useState(false)
+
+  // Normalise links \u2014 accept both strings and { label, href } objects
+  const normalisedLinks = links.map(l =>
+    typeof l === 'string' ? { label: l, href: \`#\${l.toLowerCase()}\` } : l
+  )
+
+  return (
+    <header
+      className={\`forge-navbar forge-navbar--\${variant}\`}
+      style={{ '--forge-navbar-color': color, '--forge-navbar-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-navbar__inner">
+        {/* Logo / brand */}
+        <a href="/" className="forge-navbar__brand">
+          {showLogo && <span className="forge-navbar__gem" />}
+          <span className="forge-navbar__brand-name">{brand}</span>
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="forge-navbar__links" aria-label="Main navigation">
+          {normalisedLinks.map(link => (
+            <a key={link.label} href={link.href} className="forge-navbar__link">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA + mobile toggle */}
+        <div className="forge-navbar__right">
+          {showCta && (
+            <button className="forge-navbar__cta" onClick={onCtaClick}>
+              {ctaText}
+            </button>
+          )}
+          <button
+            className="forge-navbar__toggle"
+            onClick={() => setOpen(o => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            {open ? '\u2715' : '\u2630'}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <nav className="forge-navbar__mobile" aria-label="Mobile navigation">
+          {normalisedLinks.map(link => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="forge-navbar__mobile-link"
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          {showCta && (
+            <button className="forge-navbar__cta forge-navbar__cta--mobile" onClick={onCtaClick}>
+              {ctaText}
+            </button>
+          )}
+        </nav>
+      )}
+    </header>
+  )
+}
+`;
+  const css = `/* ForgeNavbar.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-navbar {
+  width: 100%;
+  font-family: Inter, sans-serif;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.forge-navbar--dark  { background: #09090b; }
+.forge-navbar--light { background: #ffffff; }
+
+.forge-navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Brand */
+.forge-navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.forge-navbar__gem {
+  width: 18px;
+  height: 18px;
+  background: conic-gradient(from 0deg, #e24b4a, #EF9F27, #1D9E75, #378ADD, #7F77DD, #D4537E, #e24b4a);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.forge-navbar__brand-name {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #f0ede8;
+}
+
+.forge-navbar--light .forge-navbar__brand-name {
+  color: #09090b;
+}
+
+/* Desktop links */
+.forge-navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.forge-navbar__link {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.45);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.forge-navbar__link:hover {
+  color: #f0ede8;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.forge-navbar--light .forge-navbar__link {
+  color: rgba(9, 9, 11, 0.5);
+}
+
+.forge-navbar--light .forge-navbar__link:hover {
+  color: #09090b;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Right side */
+.forge-navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* CTA button */
+.forge-navbar__cta {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--forge-navbar-rgb), 0.3);
+  background: rgba(var(--forge-navbar-rgb), 0.1);
+  color: rgba(var(--forge-navbar-rgb), 0.9);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.forge-navbar__cta:hover {
+  background: rgba(var(--forge-navbar-rgb), 0.18);
+  border-color: rgba(var(--forge-navbar-rgb), 0.5);
+}
+
+/* Mobile toggle */
+.forge-navbar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: rgba(240, 237, 232, 0.5);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Mobile menu */
+.forge-navbar__mobile {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 2px;
+}
+
+.forge-navbar__mobile-link {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.5);
+  text-decoration: none;
+  padding: 10px 8px;
+  letter-spacing: -0.01em;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.forge-navbar__mobile-link:hover {
+  color: #f0ede8;
+}
+
+.forge-navbar__cta--mobile {
+  margin-top: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .forge-navbar__links { display: none; }
+  .forge-navbar__toggle { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-navbar__link,
+  .forge-navbar__cta { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/morphblob.ts
+function generateMorphBlob(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const color2 = props.color2 ?? "#D4537E";
+  const size = props.size ?? 120;
+  const speed = props.speed ?? "normal";
+  const opacity = props.opacity ?? 0.8;
+  const blur = props.blur ?? 0;
+  const gradient = props.gradient ?? true;
+  const durationMap = {
+    slow: "8s",
+    normal: "5s",
+    fast: "3s"
+  };
+  const tsx = `// ForgeMorphBlob \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update morphblob
+// Pure CSS border-radius morphing \u2014 no SVG or canvas required.
+
+import './ForgeMorphBlob.css'
+
+interface ForgeMorphBlobProps {
+  color?: string
+  color2?: string
+  size?: number
+  speed?: 'slow' | 'normal' | 'fast'
+  opacity?: number
+  blur?: number
+  gradient?: boolean
+}
+
+export function ForgeMorphBlob({
+  color = '${color}',
+  color2 = '${color2}',
+  size = ${size},
+  speed = '${speed}',
+  opacity = ${opacity},
+  blur = ${blur},
+  gradient = ${gradient},
+}: ForgeMorphBlobProps) {
+  return (
+    <div
+      className={\`forge-blob forge-blob--\${speed}\`}
+      style={{
+        '--forge-blob-color': color,
+        '--forge-blob-color2': color2,
+        '--forge-blob-rgb': '${rgb}',
+        width: size,
+        height: size,
+        opacity,
+        filter: blur > 0 ? \`blur(\${blur}px)\` : undefined,
+        background: gradient
+          ? \`radial-gradient(circle at 30% 30%, \${color}, \${color2})\`
+          : color,
+      } as React.CSSProperties}
+    />
+  )
+}
+`;
+  const css = `/* ForgeMorphBlob.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+@keyframes forge-morph-slow {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+  75%  { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.forge-blob {
+  display: block;
+  flex-shrink: 0;
+}
+
+.forge-blob--slow   { animation: forge-morph-slow ${durationMap.slow} ease-in-out infinite; }
+.forge-blob--normal { animation: forge-morph-slow ${durationMap.normal} ease-in-out infinite; }
+.forge-blob--fast   { animation: forge-morph-slow ${durationMap.fast} ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-blob {
+    animation: none;
+    border-radius: 50%;
+  }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/pagination.ts
+function generatePagination(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const total = props.total ?? 48;
+  const perPage = props.perPage ?? 10;
+  const showCount = props.showCount ?? true;
+  const showArrows = props.showArrows ?? true;
+  const tsx = `// ForgePagination \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update pagination
+
+import { useState } from 'react'
+import './ForgePagination.css'
+
+interface ForgePaginationProps {
+  total?: number
+  perPage?: number
+  color?: string
+  showCount?: boolean
+  showArrows?: boolean
+  page?: number
+  onPageChange?: (page: number) => void
+}
+
+export function ForgePagination({
+  total = ${total},
+  perPage = ${perPage},
+  color = '${color}',
+  showCount = ${showCount},
+  showArrows = ${showArrows},
+  page,
+  onPageChange,
+}: ForgePaginationProps) {
+  const [internal, setInternal] = useState(1)
+  const controlled = page !== undefined
+  const current = controlled ? page : internal
+  const totalPages = Math.ceil(total / perPage)
+
+  function go(p: number) {
+    if (p < 1 || p > totalPages) return
+    if (!controlled) setInternal(p)
+    onPageChange?.(p)
+  }
+
+  // Build page number list with ellipsis
+  function getPages(): (number | '...')[] {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1)
+    if (current <= 4) return [1, 2, 3, 4, 5, '...', totalPages]
+    if (current >= totalPages - 3) return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
+    return [1, '...', current - 1, current, current + 1, '...', totalPages]
+  }
+
+  const start = (current - 1) * perPage + 1
+  const end = Math.min(current * perPage, total)
+
+  return (
+    <div
+      className="forge-pagination"
+      style={{ '--forge-pagination-color': color, '--forge-pagination-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {showCount && (
+        <span className="forge-pagination__count">
+          {start}\u2013{end} of {total}
+        </span>
+      )}
+      <div className="forge-pagination__pages">
+        {showArrows && (
+          <button
+            className="forge-pagination__btn forge-pagination__arrow"
+            onClick={() => go(current - 1)}
+            disabled={current === 1}
+            aria-label="Previous page"
+          >
+            \u2190
+          </button>
+        )}
+        {getPages().map((p, i) =>
+          p === '...' ? (
+            <span key={\`ellipsis-\${i}\`} className="forge-pagination__ellipsis">\u2026</span>
+          ) : (
+            <button
+              key={p}
+              className={\`forge-pagination__btn\${current === p ? ' forge-pagination__btn--active' : ''}\`}
+              onClick={() => go(p as number)}
+              aria-current={current === p ? 'page' : undefined}
+            >
+              {p}
+            </button>
+          )
+        )}
+        {showArrows && (
+          <button
+            className="forge-pagination__btn forge-pagination__arrow"
+            onClick={() => go(current + 1)}
+            disabled={current === totalPages}
+            aria-label="Next page"
+          >
+            \u2192
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgePagination.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: Inter, sans-serif;
+  flex-wrap: wrap;
+}
+
+.forge-pagination__count {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.3);
+  letter-spacing: -0.01em;
+  margin-right: 4px;
+}
+
+.forge-pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.forge-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(240, 237, 232, 0.4);
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.forge-pagination__btn:hover:not(:disabled) {
+  background: rgba(var(--forge-pagination-rgb), 0.08);
+  color: var(--forge-pagination-color);
+  border-color: rgba(var(--forge-pagination-rgb), 0.2);
+}
+
+.forge-pagination__btn--active {
+  background: rgba(var(--forge-pagination-rgb), 0.15);
+  color: var(--forge-pagination-color);
+  border-color: rgba(var(--forge-pagination-rgb), 0.3);
+}
+
+.forge-pagination__btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.forge-pagination__arrow {
+  font-size: 14px;
+}
+
+.forge-pagination__ellipsis {
+  font-size: 12px;
+  color: rgba(240, 237, 232, 0.2);
+  padding: 0 4px;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-pagination__btn { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/progress.ts
+function generateProgress(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const value = props.value ?? 72;
+  const height = props.height ?? 6;
+  const radius = props.radius ?? 4;
+  const showLabel = props.showLabel ?? true;
+  const showValue = props.showValue ?? true;
+  const striped = props.striped ?? false;
+  const label = props.label ?? "Completion";
+  const tsx = `// ForgeProgress \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update progress
+
+import './ForgeProgress.css'
+
+interface ForgeProgressProps {
+  value?: number
+  label?: string
+  color?: string
+  height?: number
+  radius?: number
+  showLabel?: boolean
+  showValue?: boolean
+  striped?: boolean
+}
+
+export function ForgeProgress({
+  value = ${value},
+  label = '${label}',
+  color = '${color}',
+  height = ${height},
+  radius = ${radius},
+  showLabel = ${showLabel},
+  showValue = ${showValue},
+  striped = ${striped},
+}: ForgeProgressProps) {
+  const clamped = Math.min(100, Math.max(0, value))
+  return (
+    <div className="forge-progress-wrap" style={{ '--forge-progress-color': color, '--forge-progress-rgb': '${rgb}' } as React.CSSProperties}>
+      {(showLabel || showValue) && (
+        <div className="forge-progress-header">
+          {showLabel && <span className="forge-progress-label">{label}</span>}
+          {showValue && <span className="forge-progress-value">{clamped}%</span>}
+        </div>
+      )}
+      <div
+        className="forge-progress-track"
+        style={{ height, borderRadius: radius }}
+        role="progressbar"
+        aria-valuenow={clamped}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
+        <div
+          className={\`forge-progress-fill\${striped ? ' forge-progress-fill--striped' : ''}\`}
+          style={{ width: \`\${clamped}%\`, borderRadius: radius }}
+        />
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeProgress.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  font-family: Inter, sans-serif;
+}
+
+.forge-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forge-progress-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.38);
+  letter-spacing: -0.01em;
+}
+
+.forge-progress-value {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(var(--forge-progress-rgb), 0.9);
+  letter-spacing: -0.01em;
+}
+
+.forge-progress-track {
+  width: 100%;
+  background: rgba(var(--forge-progress-rgb), 0.10);
+  overflow: hidden;
+}
+
+.forge-progress-fill {
+  height: 100%;
+  background: var(--forge-progress-color);
+  box-shadow: 0 0 8px rgba(var(--forge-progress-rgb), 0.4);
+  transition: width 0.4s ease;
+}
+
+/* Striped variant */
+@keyframes forge-progress-stripes {
+  from { background-position: 20px 0; }
+  to   { background-position: 0 0; }
+}
+.forge-progress-fill--striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255,255,255,0.1) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0.1) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  animation: forge-progress-stripes 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-progress-fill { transition: none; }
+  .forge-progress-fill--striped { animation: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/radio.ts
+function generateRadio(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const size = props.size ?? "md";
+  const layout = props.layout ?? "vertical";
+  const options = props.options ?? ["Option 1", "Option 2"];
+  const sizeMap = {
+    sm: "14px",
+    md: "16px",
+    lg: "20px"
+  };
+  const fontMap = {
+    sm: "12px",
+    md: "13px",
+    lg: "14px"
+  };
+  const tsx = `// ForgeRadio \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update radio
+
+import { useState } from 'react'
+import './ForgeRadio.css'
+
+interface ForgeRadioProps {
+  options?: string[]
+  color?: string
+  size?: 'sm' | 'md' | 'lg'
+  layout?: 'vertical' | 'horizontal'
+  selected?: number
+  onChange?: (index: number, value: string) => void
+}
+
+export function ForgeRadio({
+  options = ${JSON.stringify(options)},
+  color = '${color}',
+  size = '${size}',
+  layout = '${layout}',
+  selected,
+  onChange,
+}: ForgeRadioProps) {
+  const [internal, setInternal] = useState(0)
+  const controlled = selected !== undefined
+  const active = controlled ? selected : internal
+
+  function handleSelect(i: number) {
+    if (!controlled) setInternal(i)
+    onChange?.(i, options[i])
+  }
+
+  return (
+    <div
+      className={\`forge-radio-group forge-radio-group--\${layout}\`}
+      style={{ '--forge-radio-color': color, '--forge-radio-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {options.map((opt, i) => (
+        <label key={i} className={\`forge-radio-item forge-radio-item--\${size}\`} onClick={() => handleSelect(i)}>
+          <div className={\`forge-radio forge-radio--\${size}\${active === i ? ' forge-radio--checked' : ''}\`}>
+            {active === i && <div className="forge-radio__dot" />}
+          </div>
+          <span className="forge-radio-label">{opt}</span>
+        </label>
+      ))}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeRadio.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-radio-group {
+  display: flex;
+  font-family: Inter, sans-serif;
+}
+.forge-radio-group--vertical   { flex-direction: column; gap: 8px; }
+.forge-radio-group--horizontal { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+
+.forge-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.forge-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.15s ease;
+}
+
+.forge-radio--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
+.forge-radio--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
+.forge-radio--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
+
+.forge-radio--checked {
+  border-color: rgba(var(--forge-radio-rgb), 0.6);
+  background: rgba(var(--forge-radio-rgb), 0.1);
+  box-shadow: 0 0 8px rgba(var(--forge-radio-rgb), 0.2);
+}
+
+.forge-radio__dot {
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  background: var(--forge-radio-color);
+}
+
+.forge-radio-label {
+  font-size: ${fontMap[size] ?? fontMap.md};
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.6);
+  letter-spacing: -0.01em;
+}
+
+.forge-radio-item:hover .forge-radio {
+  border-color: rgba(var(--forge-radio-rgb), 0.35);
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/select.ts
+function generateSelect(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const size = props.size ?? "md";
+  const radius = props.radius ?? 8;
+  const showLabel = props.showLabel ?? true;
+  const label = props.label ?? "Select";
+  const placeholder = props.placeholder ?? "Choose\u2026";
+  const options = props.options ?? [
+    "Option 1",
+    "Option 2",
+    "Option 3"
+  ];
+  const paddingMap = {
+    sm: "6px 10px",
+    md: "9px 14px",
+    lg: "12px 16px"
+  };
+  const fontSizeMap = {
+    sm: "12px",
+    md: "13px",
+    lg: "14px"
+  };
+  const tsx = `// ForgeSelect \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update select
+
+import { useState } from 'react'
+import './ForgeSelect.css'
+
+interface ForgeSelectProps {
+  label?: string
+  placeholder?: string
+  options?: string[]
+  color?: string
+  size?: 'sm' | 'md' | 'lg'
+  radius?: number
+  showLabel?: boolean
+  value?: string
+  onChange?: (value: string) => void
+}
+
+export function ForgeSelect({
+  label = '${label}',
+  placeholder = '${placeholder}',
+  options = ${JSON.stringify(options)},
+  color = '${color}',
+  size = '${size}',
+  radius = ${radius},
+  showLabel = ${showLabel},
+  value,
+  onChange,
+}: ForgeSelectProps) {
+  const [internal, setInternal] = useState('')
+  const controlled = value !== undefined
+  const current = controlled ? value : internal
+
+  return (
+    <div
+      className="forge-select-wrap"
+      style={{ '--forge-select-color': color, '--forge-select-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {showLabel && label && (
+        <label className="forge-select-label">{label}</label>
+      )}
+      <div className="forge-select-inner">
+        <select
+          className={\`forge-select forge-select--\${size}\`}
+          value={current}
+          style={{ borderRadius: radius }}
+          onChange={e => {
+            if (!controlled) setInternal(e.target.value)
+            onChange?.(e.target.value)
+          }}
+        >
+          <option value="" disabled>{placeholder}</option>
+          {options.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+        <span className="forge-select-arrow">\u25BE</span>
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeSelect.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: Inter, sans-serif;
+  width: 100%;
+}
+
+.forge-select-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.6);
+  letter-spacing: -0.01em;
+}
+
+.forge-select-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.forge-select {
+  width: 100%;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0ede8;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  padding-right: 32px;
+  box-sizing: border-box;
+}
+
+.forge-select--sm { padding: ${paddingMap.sm}; font-size: ${fontSizeMap.sm}; }
+.forge-select--md { padding: ${paddingMap.md}; font-size: ${fontSizeMap.md}; }
+.forge-select--lg { padding: ${paddingMap.lg}; font-size: ${fontSizeMap.lg}; }
+
+.forge-select:focus {
+  border-color: rgba(var(--forge-select-rgb), 0.5);
+  box-shadow: 0 0 0 3px rgba(var(--forge-select-rgb), 0.12);
+}
+
+.forge-select option {
+  background: #0f0f12;
+  color: #f0ede8;
+}
+
+.forge-select-arrow {
+  position: absolute;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(240, 237, 232, 0.3);
+  pointer-events: none;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/sidenav.ts
+function generateSideNav(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const brand = props.brand ?? "FORGE";
+  const showIcons = props.showIcons ?? true;
+  const items = props.items ?? [
+    "\u25CE,Dashboard",
+    "\u229E,Components",
+    "\u2699,Settings"
+  ];
+  const initialActive = props.active ?? 0;
+  const tsx = `// ForgeSideNav \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update sidenav
+// Note: links use <a> tags \u2014 swap for Next.js <Link> if needed.
+
+import { useState } from 'react'
+import './ForgeSideNav.css'
+
+interface ForgeSideNavProps {
+  brand?: string
+  items?: string[]
+  color?: string
+  showIcons?: boolean
+  active?: number
+  onSelect?: (index: number, label: string) => void
+}
+
+export function ForgeSideNav({
+  brand = '${brand}',
+  items = ${JSON.stringify(items)},
+  color = '${color}',
+  showIcons = ${showIcons},
+  active,
+  onSelect,
+}: ForgeSideNavProps) {
+  const [internal, setInternal] = useState(${initialActive})
+  const controlled = active !== undefined
+  const current = controlled ? active : internal
+
+  // Items format: "icon,Label" or just "Label"
+  const parsed = items.map(item => {
+    const parts = item.split(',')
+    return parts.length >= 2
+      ? { icon: parts[0], label: parts.slice(1).join(',') }
+      : { icon: '', label: item }
+  })
+
+  function handleSelect(i: number) {
+    if (!controlled) setInternal(i)
+    onSelect?.(i, parsed[i].label)
+  }
+
+  return (
+    <aside
+      className="forge-sidenav"
+      style={{ '--forge-sidenav-color': color, '--forge-sidenav-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-sidenav__brand">{brand}</div>
+      <nav className="forge-sidenav__nav">
+        {parsed.map((item, i) => (
+          <button
+            key={i}
+            className={\`forge-sidenav__item\${current === i ? ' forge-sidenav__item--active' : ''}\`}
+            onClick={() => handleSelect(i)}
+          >
+            {showIcons && item.icon && (
+              <span className="forge-sidenav__icon">{item.icon}</span>
+            )}
+            <span className="forge-sidenav__label">{item.label}</span>
+          </button>
+        ))}
+      </nav>
+    </aside>
+  )
+}
+`;
+  const css = `/* ForgeSideNav.css \u2014 generated by forge-ui CLI */
+.forge-sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 100%;
+  background: #09090b;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 16px 8px;
+  font-family: Inter, sans-serif;
+  gap: 4px;
+}
+
+.forge-sidenav__brand {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f0ede8;
+  letter-spacing: -0.02em;
+  padding: 8px 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+}
+
+.forge-sidenav__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.forge-sidenav__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.38);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.forge-sidenav__item:hover {
+  background: rgba(255,255,255,0.04);
+  color: rgba(240,237,232,0.7);
+}
+
+.forge-sidenav__item--active {
+  background: rgba(var(--forge-sidenav-rgb), 0.1);
+  color: var(--forge-sidenav-color);
+}
+
+.forge-sidenav__icon {
+  font-size: 13px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.forge-sidenav__item--active .forge-sidenav__icon { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-sidenav__item { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/skeleton.ts
+function generateSkeleton(props) {
+  const radius = props.radius ?? 8;
+  const animated = props.animated ?? true;
+  const variant = props.variant ?? "card";
+  const lines = props.lines ?? 3;
+  const tsx = `// ForgeSkeleton \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update skeleton
+
+import './ForgeSkeleton.css'
+
+interface ForgeSkeletonProps {
+  variant?: 'card' | 'text' | 'profile' | 'table'
+  lines?: number
+  radius?: number
+  animated?: boolean
+}
+
+function Bone({ w = '100%', h = '16px', r = 6 }: { w?: string; h?: string; r?: number }) {
+  return <div className="forge-sk-bone" style={{ width: w, height: h, borderRadius: r }} />
+}
+
+export function ForgeSkeleton({
+  variant = '${variant}',
+  lines = ${lines},
+  radius = ${radius},
+  animated = ${animated},
+}: ForgeSkeletonProps) {
+  return (
+    <div className={\`forge-skeleton\${animated ? ' forge-skeleton--animated' : ''}\`}>
+      {variant === 'text' && (
+        <div className="forge-sk-text">
+          {Array.from({ length: lines }).map((_, i) => (
+            <Bone key={i} w={i === lines - 1 ? '65%' : '100%'} r={radius} />
+          ))}
+        </div>
+      )}
+
+      {variant === 'profile' && (
+        <div className="forge-sk-profile">
+          <Bone w="48px" h="48px" r={999} />
+          <div className="forge-sk-profile__lines">
+            <Bone w="140px" h="14px" r={radius} />
+            <Bone w="100px" h="12px" r={radius} />
+          </div>
+        </div>
+      )}
+
+      {variant === 'card' && (
+        <div className="forge-sk-card" style={{ borderRadius: radius }}>
+          <Bone w="40%" h="11px" r={4} />
+          <Bone w="85%" h="16px" r={radius} />
+          <Bone w="100%" h="13px" r={radius} />
+          <Bone w="70%" h="13px" r={radius} />
+        </div>
+      )}
+
+      {variant === 'table' && (
+        <div className="forge-sk-table">
+          <div className="forge-sk-table__row forge-sk-table__header">
+            {[40,25,20,15].map((w, i) => <Bone key={i} w={\`\${w}%\`} h="12px" r={4} />)}
+          </div>
+          {Array.from({ length: lines }).map((_, i) => (
+            <div key={i} className="forge-sk-table__row">
+              {[40,25,20,15].map((w, j) => <Bone key={j} w={\`\${w}%\`} h="13px" r={4} />)}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeSkeleton.css \u2014 generated by forge-ui CLI */
+@keyframes forge-shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+
+.forge-skeleton { font-family: Inter, sans-serif; }
+
+.forge-sk-bone {
+  background: rgba(255,255,255,0.06);
+}
+
+.forge-skeleton--animated .forge-sk-bone {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.09) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 400px 100%;
+  animation: forge-shimmer 1.4s ease-in-out infinite;
+}
+
+.forge-sk-text { display: flex; flex-direction: column; gap: 8px; }
+
+.forge-sk-profile { display: flex; align-items: center; gap: 12px; }
+.forge-sk-profile__lines { display: flex; flex-direction: column; gap: 6px; }
+
+.forge-sk-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: #0f0f12;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.forge-sk-table { display: flex; flex-direction: column; }
+.forge-sk-table__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.forge-sk-table__header { padding-bottom: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-sk-bone { animation: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/slider.ts
+function generateSlider(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const min = props.min ?? 0;
+  const max = props.max ?? 100;
+  const step = props.step ?? 1;
+  const defaultValue = props.value ?? 50;
+  const showValue = props.showValue ?? true;
+  const label = props.label ?? "Value";
+  const unit = props.unit ?? "";
+  const tsx = `// ForgeSlider \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update slider
+
+import { useState } from 'react'
+import './ForgeSlider.css'
+
+interface ForgeSliderProps {
+  label?: string
+  min?: number
+  max?: number
+  step?: number
+  value?: number
+  color?: string
+  showValue?: boolean
+  unit?: string
+  onChange?: (value: number) => void
+}
+
+export function ForgeSlider({
+  label = '${label}',
+  min = ${min},
+  max = ${max},
+  step = ${step},
+  value,
+  color = '${color}',
+  showValue = ${showValue},
+  unit = '${unit}',
+  onChange,
+}: ForgeSliderProps) {
+  const [internal, setInternal] = useState(${defaultValue})
+  const controlled = value !== undefined
+  const current = controlled ? value : internal
+  const pct = ((current - min) / (max - min)) * 100
+
+  return (
+    <div
+      className="forge-slider-wrap"
+      style={{ '--forge-slider-color': color, '--forge-slider-rgb': '${rgb}', '--forge-slider-pct': \`\${pct}%\` } as React.CSSProperties}
+    >
+      <div className="forge-slider-header">
+        <span className="forge-slider-label">{label}</span>
+        {showValue && (
+          <span className="forge-slider-value">{unit}{current}</span>
+        )}
+      </div>
+      <input
+        type="range"
+        className="forge-slider"
+        min={min}
+        max={max}
+        step={step}
+        value={current}
+        onChange={e => {
+          const v = Number(e.target.value)
+          if (!controlled) setInternal(v)
+          onChange?.(v)
+        }}
+      />
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeSlider.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: Inter, sans-serif;
+  width: 100%;
+}
+
+.forge-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forge-slider-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.38);
+  letter-spacing: -0.01em;
+}
+
+.forge-slider-value {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(var(--forge-slider-rgb), 0.9);
+  letter-spacing: -0.01em;
+}
+
+.forge-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  /* Fill track up to thumb using a gradient */
+  background: linear-gradient(
+    to right,
+    var(--forge-slider-color) 0%,
+    var(--forge-slider-color) var(--forge-slider-pct),
+    rgba(255, 255, 255, 0.08) var(--forge-slider-pct),
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+.forge-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--forge-slider-color);
+  box-shadow: 0 0 8px rgba(var(--forge-slider-rgb), 0.4);
+  border: 2px solid #09090b;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.forge-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--forge-slider-color);
+  box-shadow: 0 0 8px rgba(var(--forge-slider-rgb), 0.4);
+  border: 2px solid #09090b;
+  transition: transform 0.15s ease;
+}
+
+.forge-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  box-shadow: 0 0 14px rgba(var(--forge-slider-rgb), 0.5);
+}
+
+.forge-slider:hover::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-slider::-webkit-slider-thumb,
+  .forge-slider::-moz-range-thumb { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/sparkline.ts
+function generateSparkline(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const fill = props.fill ?? true;
+  const variant = props.variant ?? "line";
+  const showDot = props.showDot ?? true;
+  const height = props.height ?? 60;
+  const animated = props.animated ?? true;
+  const tsx = `// ForgeSparkline \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update sparkline
+// Requires Chart.js \u2014 add to your layout:
+// <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
+
+import { useEffect, useRef } from 'react'
+import './ForgeSparkline.css'
+
+interface ForgeSparklineProps {
+  data?: number[]
+  color?: string
+  fill?: boolean
+  variant?: 'line' | 'bar'
+  showDot?: boolean
+  height?: number
+  width?: number
+  animated?: boolean
+}
+
+const DEFAULT_DATA = [20, 35, 28, 50, 42, 65, 55, 72, 60, 88]
+
+export function ForgeSparkline({
+  data = DEFAULT_DATA,
+  color = '${color}',
+  fill = ${fill},
+  variant = '${variant}',
+  showDot = ${showDot},
+  height = ${height},
+  width = 160,
+  animated = ${animated},
+}: ForgeSparklineProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const chartRef = useRef<unknown>(null)
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Chart = (window as any).Chart
+    if (!Chart || !canvasRef.current) return
+    if (chartRef.current) (chartRef.current as any).destroy()
+
+    const isBar = variant === 'bar'
+
+    chartRef.current = new Chart(canvasRef.current, {
+      type: isBar ? 'bar' : 'line',
+      data: {
+        labels: data.map(() => ''),
+        datasets: [{
+          data,
+          borderColor: color,
+          backgroundColor: fill ? \`\${color}33\` : 'transparent',
+          borderWidth: isBar ? 0 : 1.5,
+          fill: !isBar && fill,
+          tension: 0.4,
+          pointRadius: showDot ? data.map((_, i) => (i === data.length - 1 ? 3 : 0)) : 0,
+          pointBackgroundColor: color,
+          borderRadius: isBar ? 2 : 0,
+        }],
+      },
+      options: {
+        responsive: false,
+        animation: animated,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          x: { display: false },
+          y: { display: false },
+        },
+      },
+    })
+
+    return () => { if (chartRef.current) (chartRef.current as any).destroy() }
+  }, [data, color, fill, variant, showDot, animated])
+
+  return (
+    <div
+      className="forge-sparkline"
+      style={{ '--forge-sparkline-color': color, '--forge-sparkline-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <canvas ref={canvasRef} width={width} height={height} />
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeSparkline.css \u2014 generated by forge-ui CLI */
+.forge-sparkline {
+  display: inline-flex;
+  align-items: center;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/spinner.ts
+function generateSpinner(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const variant = props.variant ?? "ring";
+  const size = props.size ?? "md";
+  const speed = props.speed ?? "normal";
+  const showLabel = props.showLabel ?? false;
+  const label = props.label ?? "Loading\u2026";
+  const sizeMap = {
+    sm: "16px",
+    md: "24px",
+    lg: "36px",
+    xl: "48px"
+  };
+  const speedMap = {
+    slow: "1.4s",
+    normal: "0.8s",
+    fast: "0.4s"
+  };
+  const tsx = `// ForgeSpinner \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update spinner
+
+import './ForgeSpinner.css'
+
+interface ForgeSpinnerProps {
+  color?: string
+  variant?: 'ring' | 'dots' | 'bars' | 'orbit' | 'pulse'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  speed?: 'slow' | 'normal' | 'fast'
+  showLabel?: boolean
+  label?: string
+}
+
+export function ForgeSpinner({
+  color = '${color}',
+  variant = '${variant}',
+  size = '${size}',
+  speed = '${speed}',
+  showLabel = ${showLabel},
+  label = '${label}',
+}: ForgeSpinnerProps) {
+  return (
+    <div
+      className="forge-spinner-wrap"
+      style={{ '--forge-spinner-color': color, '--forge-spinner-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className={\`forge-spinner forge-spinner--\${variant} forge-spinner--\${size} forge-spinner--\${speed}\`}>
+        {variant === 'dots' && (
+          <>
+            <div className="forge-spinner__dot" />
+            <div className="forge-spinner__dot" />
+            <div className="forge-spinner__dot" />
+          </>
+        )}
+        {variant === 'bars' && (
+          <>
+            <div className="forge-spinner__bar" />
+            <div className="forge-spinner__bar" />
+            <div className="forge-spinner__bar" />
+            <div className="forge-spinner__bar" />
+          </>
+        )}
+      </div>
+      {showLabel && <span className="forge-spinner__label">{label}</span>}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeSpinner.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-spinner-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.forge-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sizes */
+.forge-spinner--sm { width: ${sizeMap.sm}; height: ${sizeMap.sm}; }
+.forge-spinner--md { width: ${sizeMap.md}; height: ${sizeMap.md}; }
+.forge-spinner--lg { width: ${sizeMap.lg}; height: ${sizeMap.lg}; }
+.forge-spinner--xl { width: ${sizeMap.xl}; height: ${sizeMap.xl}; }
+
+/* Ring variant */
+@keyframes forge-spin { to { transform: rotate(360deg); } }
+.forge-spinner--ring {
+  border-radius: 50%;
+  border: 2px solid rgba(var(--forge-spinner-rgb), 0.15);
+  border-top-color: var(--forge-spinner-color);
+}
+.forge-spinner--ring.forge-spinner--slow   { animation: forge-spin ${speedMap.slow} linear infinite; }
+.forge-spinner--ring.forge-spinner--normal { animation: forge-spin ${speedMap.normal} linear infinite; }
+.forge-spinner--ring.forge-spinner--fast   { animation: forge-spin ${speedMap.fast} linear infinite; }
+
+/* Pulse variant */
+@keyframes forge-pulse-spin {
+  0%   { transform: scale(1);    opacity: 1; }
+  50%  { transform: scale(0.6);  opacity: 0.4; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.forge-spinner--pulse {
+  border-radius: 50%;
+  background: var(--forge-spinner-color);
+}
+.forge-spinner--pulse.forge-spinner--slow   { animation: forge-pulse-spin ${speedMap.slow} ease-in-out infinite; }
+.forge-spinner--pulse.forge-spinner--normal { animation: forge-pulse-spin ${speedMap.normal} ease-in-out infinite; }
+.forge-spinner--pulse.forge-spinner--fast   { animation: forge-pulse-spin ${speedMap.fast} ease-in-out infinite; }
+
+/* Dots variant */
+@keyframes forge-dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+.forge-spinner--dots {
+  gap: 4px;
+}
+.forge-spinner__dot {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: var(--forge-spinner-color);
+}
+.forge-spinner--slow   .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0s; }
+.forge-spinner--slow   .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0.16s; }
+.forge-spinner--slow   .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.slow} ease-in-out infinite 0.32s; }
+.forge-spinner--normal .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0s; }
+.forge-spinner--normal .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0.16s; }
+.forge-spinner--normal .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.normal} ease-in-out infinite 0.32s; }
+.forge-spinner--fast   .forge-spinner__dot:nth-child(1) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0s; }
+.forge-spinner--fast   .forge-spinner__dot:nth-child(2) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0.16s; }
+.forge-spinner--fast   .forge-spinner__dot:nth-child(3) { animation: forge-dot-bounce ${speedMap.fast} ease-in-out infinite 0.32s; }
+
+/* Bars variant */
+@keyframes forge-bar-stretch {
+  0%, 40%, 100% { transform: scaleY(0.4); }
+  20%           { transform: scaleY(1); }
+}
+.forge-spinner--bars {
+  gap: 3px;
+  align-items: center;
+}
+.forge-spinner__bar {
+  width: 15%;
+  height: 60%;
+  background: var(--forge-spinner-color);
+  border-radius: 2px;
+}
+.forge-spinner--slow   .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0s; }
+.forge-spinner--slow   .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.1s; }
+.forge-spinner--slow   .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.2s; }
+.forge-spinner--slow   .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.slow} ease-in-out infinite 0.3s; }
+.forge-spinner--normal .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0s; }
+.forge-spinner--normal .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.1s; }
+.forge-spinner--normal .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.2s; }
+.forge-spinner--normal .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.normal} ease-in-out infinite 0.3s; }
+.forge-spinner--fast   .forge-spinner__bar:nth-child(1) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0s; }
+.forge-spinner--fast   .forge-spinner__bar:nth-child(2) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.1s; }
+.forge-spinner--fast   .forge-spinner__bar:nth-child(3) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.2s; }
+.forge-spinner--fast   .forge-spinner__bar:nth-child(4) { animation: forge-bar-stretch ${speedMap.fast} ease-in-out infinite 0.3s; }
+
+/* Orbit variant */
+@keyframes forge-orbit {
+  to { transform: rotate(360deg); }
+}
+.forge-spinner--orbit {
+  border-radius: 50%;
+  border: 2px solid rgba(var(--forge-spinner-rgb), 0.1);
+  position: relative;
+}
+.forge-spinner--orbit::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--forge-spinner-color);
+  border-right-color: rgba(var(--forge-spinner-rgb), 0.4);
+}
+.forge-spinner--orbit.forge-spinner--slow::before   { animation: forge-orbit ${speedMap.slow} linear infinite; }
+.forge-spinner--orbit.forge-spinner--normal::before { animation: forge-orbit ${speedMap.normal} linear infinite; }
+.forge-spinner--orbit.forge-spinner--fast::before   { animation: forge-orbit ${speedMap.fast} linear infinite; }
+
+/* Label */
+.forge-spinner__label {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  color: rgba(240, 237, 232, 0.38);
+  letter-spacing: -0.01em;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .forge-spinner,
+  .forge-spinner::before,
+  .forge-spinner__dot,
+  .forge-spinner__bar { animation: none !important; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/statcard.ts
+function generateStatCard(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const showIcon = props.showIcon ?? true;
+  const showDelta = props.showDelta ?? true;
+  const showBar = props.showBar ?? true;
+  const barValue = props.barValue ?? 72;
+  const title = props.title ?? "Metric";
+  const value = props.value ?? "0";
+  const delta = props.delta ?? "+0%";
+  const deltaDir = props.deltaDir ?? "up";
+  const icon = props.icon ?? "\u2191";
+  const tsx = `// ForgeStatCard \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update statcard
+
+import './ForgeStatCard.css'
+
+interface ForgeStatCardProps {
+  title?: string
+  value?: string | number
+  delta?: string
+  deltaDir?: 'up' | 'down'
+  icon?: string
+  color?: string
+  showIcon?: boolean
+  showDelta?: boolean
+  showBar?: boolean
+  barValue?: number
+}
+
+export function ForgeStatCard({
+  title = '${title}',
+  value = '${value}',
+  delta = '${delta}',
+  deltaDir = '${deltaDir}',
+  icon = '${icon}',
+  color = '${color}',
+  showIcon = ${showIcon},
+  showDelta = ${showDelta},
+  showBar = ${showBar},
+  barValue = ${barValue},
+}: ForgeStatCardProps) {
+  const clamped = Math.min(100, Math.max(0, barValue))
+  return (
+    <div
+      className="forge-statcard"
+      style={{ '--forge-statcard-color': color, '--forge-statcard-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className="forge-statcard__header">
+        <span className="forge-statcard__title">{title}</span>
+        {showIcon && <span className="forge-statcard__icon">{icon}</span>}
+      </div>
+      <div className="forge-statcard__value">{value}</div>
+      {showDelta && (
+        <div className={\`forge-statcard__delta forge-statcard__delta--\${deltaDir}\`}>
+          {deltaDir === 'up' ? '\u2191' : '\u2193'} {delta}
+        </div>
+      )}
+      {showBar && (
+        <div className="forge-statcard__track">
+          <div className="forge-statcard__fill" style={{ width: \`\${clamped}%\` }} />
+        </div>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeStatCard.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-statcard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: #0f0f12;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  font-family: Inter, sans-serif;
+  min-width: 180px;
+}
+
+.forge-statcard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forge-statcard__title {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.38);
+  letter-spacing: -0.01em;
+}
+
+.forge-statcard__icon {
+  font-size: 14px;
+  color: rgba(var(--forge-statcard-rgb), 0.6);
+}
+
+.forge-statcard__value {
+  font-size: 24px;
+  font-weight: 300;
+  color: #f0ede8;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.forge-statcard__delta {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.forge-statcard__delta--up   { color: #1D9E75; }
+.forge-statcard__delta--down { color: #e24b4a; }
+
+.forge-statcard__track {
+  height: 3px;
+  background: rgba(var(--forge-statcard-rgb), 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.forge-statcard__fill {
+  height: 100%;
+  background: var(--forge-statcard-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(var(--forge-statcard-rgb), 0.4);
+  transition: width 0.4s ease;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/stepper.ts
+function generateStepper(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const variant = props.variant ?? "horizontal";
+  const showDesc = props.showDesc ?? true;
+  const steps = props.steps ?? ["Step 1", "Step 2", "Step 3"];
+  const descs = props.descs ?? [];
+  const initialCurrent = props.current ?? 0;
+  const tsx = `// ForgeStepper \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update stepper
+
+import { useState } from 'react'
+import './ForgeStepper.css'
+
+interface ForgeStepperProps {
+  steps?: string[]
+  descs?: string[]
+  color?: string
+  variant?: 'horizontal' | 'vertical'
+  showDesc?: boolean
+  current?: number
+  onChange?: (step: number) => void
+}
+
+export function ForgeStepper({
+  steps = ${JSON.stringify(steps)},
+  descs = ${JSON.stringify(descs)},
+  color = '${color}',
+  variant = '${variant}',
+  showDesc = ${showDesc},
+  current,
+  onChange,
+}: ForgeStepperProps) {
+  const [internal, setInternal] = useState(${initialCurrent})
+  const controlled = current !== undefined
+  const active = controlled ? current : internal
+
+  function handleClick(i: number) {
+    if (!controlled) setInternal(i)
+    onChange?.(i)
+  }
+
+  return (
+    <div
+      className={\`forge-stepper forge-stepper--\${variant}\`}
+      style={{ '--forge-stepper-color': color, '--forge-stepper-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {steps.map((step, i) => {
+        const done = i < active
+        const curr = i === active
+        return (
+          <div key={i} className={\`forge-step\${done ? ' forge-step--done' : ''}\${curr ? ' forge-step--current' : ''}\`}>
+            <div className="forge-step__indicator" onClick={() => handleClick(i)}>
+              <div className="forge-step__dot">
+                {done ? '\u2713' : i + 1}
+              </div>
+              {i < steps.length - 1 && <div className="forge-step__line" />}
+            </div>
+            <div className="forge-step__content">
+              <div className="forge-step__label">{step}</div>
+              {showDesc && descs[i] && (
+                <div className="forge-step__desc">{descs[i]}</div>
+              )}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeStepper.css \u2014 generated by forge-ui CLI */
+.forge-stepper {
+  display: flex;
+  font-family: Inter, sans-serif;
+}
+
+.forge-stepper--horizontal { flex-direction: row; align-items: flex-start; gap: 0; }
+.forge-stepper--vertical   { flex-direction: column; gap: 0; }
+
+.forge-step {
+  display: flex;
+  flex: 1;
+}
+
+.forge-stepper--horizontal .forge-step { flex-direction: column; align-items: center; }
+.forge-stepper--vertical   .forge-step { flex-direction: row; align-items: flex-start; gap: 12px; }
+
+.forge-step__indicator {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.forge-stepper--horizontal .forge-step__indicator { flex-direction: row; width: 100%; }
+.forge-stepper--vertical   .forge-step__indicator { flex-direction: column; align-items: center; }
+
+.forge-step__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 400;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: rgba(240,237,232,0.3);
+  transition: all 0.2s ease;
+}
+
+.forge-step--done .forge-step__dot {
+  background: rgba(var(--forge-stepper-rgb), 0.15);
+  border-color: rgba(var(--forge-stepper-rgb), 0.4);
+  color: var(--forge-stepper-color);
+}
+
+.forge-step--current .forge-step__dot {
+  background: rgba(var(--forge-stepper-rgb), 0.2);
+  border-color: rgba(var(--forge-stepper-rgb), 0.6);
+  color: var(--forge-stepper-color);
+  box-shadow: 0 0 12px rgba(var(--forge-stepper-rgb), 0.25);
+}
+
+.forge-step__line {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+}
+
+.forge-stepper--horizontal .forge-step__line { height: 1px; }
+.forge-stepper--vertical   .forge-step__line { width: 1px; height: 32px; margin: 4px 0; }
+
+.forge-step--done .forge-step__line {
+  background: rgba(var(--forge-stepper-rgb), 0.25);
+}
+
+.forge-step__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.forge-stepper--horizontal .forge-step__content {
+  align-items: center;
+  padding-top: 8px;
+}
+
+.forge-step__label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.3);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.forge-step--current .forge-step__label { color: #f0ede8; }
+.forge-step--done    .forge-step__label { color: rgba(240,237,232,0.5); }
+
+.forge-step__desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.25);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/table.ts
+function generateTable(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const showStripes = props.showStripes ?? true;
+  const showHover = props.showHover ?? true;
+  const compact = props.compact ?? false;
+  const caption = props.caption ?? "";
+  const columns = props.columns ?? ["Name", "Status", "Date"];
+  const tsx = `// ForgeTable \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update table
+
+import './ForgeTable.css'
+
+interface ForgeTableProps {
+  columns?: string[]
+  rows?: (string | number)[][]
+  caption?: string
+  color?: string
+  showStripes?: boolean
+  showHover?: boolean
+  compact?: boolean
+}
+
+// Default demo rows \u2014 replace with your data
+const DEFAULT_ROWS: (string | number)[][] = [
+  ${columns.map((_, i) => `[${columns.map((c) => `'${c} ${i + 1}'`).join(", ")}]`).slice(0, 3).join(",\n  ")},
+]
+
+export function ForgeTable({
+  columns = ${JSON.stringify(columns)},
+  rows = DEFAULT_ROWS,
+  caption = '${caption}',
+  color = '${color}',
+  showStripes = ${showStripes},
+  showHover = ${showHover},
+  compact = ${compact},
+}: ForgeTableProps) {
+  return (
+    <div
+      className="forge-table-wrap"
+      style={{ '--forge-table-color': color, '--forge-table-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <table className={\`forge-table\${showStripes ? ' forge-table--striped' : ''}\${showHover ? ' forge-table--hover' : ''}\${compact ? ' forge-table--compact' : ''}\`}>
+        {caption && <caption className="forge-table__caption">{caption}</caption>}
+        <thead>
+          <tr>
+            {columns.map(col => (
+              <th key={col} className="forge-table__th">{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} className="forge-table__row">
+              {row.map((cell, j) => (
+                <td key={j} className="forge-table__td">{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeTable.css \u2014 generated by forge-ui CLI */
+.forge-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+
+.forge-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Inter, sans-serif;
+}
+
+.forge-table__caption {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.25);
+  letter-spacing: -0.01em;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.forge-table__th {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(240,237,232,0.3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  white-space: nowrap;
+}
+
+.forge-table__td {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.6);
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.forge-table__row:last-child .forge-table__td { border-bottom: none; }
+
+/* Striped */
+.forge-table--striped .forge-table__row:nth-child(even) .forge-table__td {
+  background: rgba(255,255,255,0.02);
+}
+
+/* Hover */
+.forge-table--hover .forge-table__row:hover .forge-table__td {
+  background: rgba(var(--forge-table-rgb), 0.05);
+  color: rgba(240,237,232,0.8);
+}
+
+/* Compact */
+.forge-table--compact .forge-table__th { padding: 7px 12px; }
+.forge-table--compact .forge-table__td { padding: 8px 12px; }
+`;
+  return { tsx, css };
+}
+
+// src/generators/taginput.ts
+function generateTagInput(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const variant = props.variant ?? "soft";
+  const removable = props.removable ?? true;
+  const placeholder = props.placeholder ?? "Add tag\u2026";
+  const initialTags = props.tags ?? [];
+  const tsx = `// ForgeTagInput \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update taginput
+
+import { useState, KeyboardEvent } from 'react'
+import './ForgeTagInput.css'
+
+interface ForgeTagInputProps {
+  tags?: string[]
+  placeholder?: string
+  color?: string
+  variant?: 'soft' | 'pill' | 'outline'
+  removable?: boolean
+  onChange?: (tags: string[]) => void
+}
+
+export function ForgeTagInput({
+  tags: initialTags = ${JSON.stringify(initialTags)},
+  placeholder = '${placeholder}',
+  color = '${color}',
+  variant = '${variant}',
+  removable = ${removable},
+  onChange,
+}: ForgeTagInputProps) {
+  const [tags, setTags] = useState<string[]>(initialTags)
+  const [input, setInput] = useState('')
+
+  function addTag() {
+    const val = input.trim()
+    if (val && !tags.includes(val)) {
+      const next = [...tags, val]
+      setTags(next)
+      onChange?.(next)
+    }
+    setInput('')
+  }
+
+  function removeTag(i: number) {
+    const next = tags.filter((_, j) => j !== i)
+    setTags(next)
+    onChange?.(next)
+  }
+
+  function handleKey(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault()
+      addTag()
+    }
+    if (e.key === 'Backspace' && !input && tags.length) {
+      removeTag(tags.length - 1)
+    }
+  }
+
+  return (
+    <div
+      className="forge-taginput"
+      style={{ '--forge-tag-color': color, '--forge-tag-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {tags.map((tag, i) => (
+        <span key={i} className={\`forge-tag forge-tag--\${variant}\`}>
+          {tag}
+          {removable && (
+            <button
+              type="button"
+              className="forge-tag__remove"
+              onClick={() => removeTag(i)}
+              aria-label={\`Remove \${tag}\`}
+            >
+              \u2715
+            </button>
+          )}
+        </span>
+      ))}
+      <input
+        className="forge-taginput__input"
+        value={input}
+        placeholder={tags.length === 0 ? placeholder : ''}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={handleKey}
+        onBlur={addTag}
+      />
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeTagInput.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-taginput {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  min-height: 42px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.forge-taginput:focus-within {
+  border-color: rgba(var(--forge-tag-rgb), 0.4);
+  box-shadow: 0 0 0 3px rgba(var(--forge-tag-rgb), 0.1);
+}
+
+/* Tag variants */
+.forge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.forge-tag--soft {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(var(--forge-tag-rgb), 0.12);
+  color: rgba(var(--forge-tag-rgb), 0.9);
+  border: 1px solid transparent;
+}
+
+.forge-tag--pill {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(var(--forge-tag-rgb), 0.12);
+  color: rgba(var(--forge-tag-rgb), 0.9);
+  border: 1px solid transparent;
+}
+
+.forge-tag--outline {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: transparent;
+  color: rgba(var(--forge-tag-rgb), 0.9);
+  border: 1px solid rgba(var(--forge-tag-rgb), 0.3);
+}
+
+.forge-tag__remove {
+  background: none;
+  border: none;
+  color: rgba(var(--forge-tag-rgb), 0.5);
+  cursor: pointer;
+  font-size: 9px;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.forge-tag__remove:hover {
+  color: rgba(var(--forge-tag-rgb), 0.9);
+}
+
+/* Input */
+.forge-taginput__input {
+  flex: 1;
+  min-width: 80px;
+  background: none;
+  border: none;
+  outline: none;
+  color: #f0ede8;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding: 0;
+}
+
+.forge-taginput__input::placeholder {
+  color: rgba(240, 237, 232, 0.2);
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/textarea.ts
+function generateTextarea(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const radius = props.radius ?? 8;
+  const rows = props.rows ?? 4;
+  const showLabel = props.showLabel ?? true;
+  const showHint = props.showHint ?? true;
+  const showCount = props.showCount ?? true;
+  const maxLength = props.maxLength ?? 500;
+  const label = props.label ?? "Message";
+  const placeholder = props.placeholder ?? "Write something\u2026";
+  const hint = props.hint ?? "";
+  const tsx = `// ForgeTextarea \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update textarea
+
+import { useState } from 'react'
+import './ForgeTextarea.css'
+
+interface ForgeTextareaProps {
+  label?: string
+  placeholder?: string
+  hint?: string
+  color?: string
+  radius?: number
+  rows?: number
+  maxLength?: number
+  showLabel?: boolean
+  showHint?: boolean
+  showCount?: boolean
+  value?: string
+  onChange?: (value: string) => void
+}
+
+export function ForgeTextarea({
+  label = '${label}',
+  placeholder = '${placeholder}',
+  hint = '${hint}',
+  color = '${color}',
+  radius = ${radius},
+  rows = ${rows},
+  maxLength = ${maxLength},
+  showLabel = ${showLabel},
+  showHint = ${showHint},
+  showCount = ${showCount},
+  value,
+  onChange,
+}: ForgeTextareaProps) {
+  const [internal, setInternal] = useState('')
+  const controlled = value !== undefined
+  const current = controlled ? value : internal
+
+  return (
+    <div
+      className="forge-textarea-wrap"
+      style={{ '--forge-textarea-color': color, '--forge-textarea-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      {showLabel && label && (
+        <label className="forge-textarea-label">{label}</label>
+      )}
+      <textarea
+        className="forge-textarea"
+        placeholder={placeholder}
+        value={current}
+        rows={rows}
+        maxLength={maxLength}
+        style={{ borderRadius: radius }}
+        onChange={e => {
+          if (!controlled) setInternal(e.target.value)
+          onChange?.(e.target.value)
+        }}
+      />
+      <div className="forge-textarea-footer">
+        {showHint && hint && <span className="forge-textarea-hint">{hint}</span>}
+        {showCount && (
+          <span className="forge-textarea-count">{current.length} / {maxLength}</span>
+        )}
+      </div>
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeTextarea.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-textarea-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: Inter, sans-serif;
+  width: 100%;
+}
+
+.forge-textarea-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.6);
+  letter-spacing: -0.01em;
+}
+
+.forge-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0ede8;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  outline: none;
+  resize: vertical;
+  padding: 10px 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.forge-textarea::placeholder {
+  color: rgba(240, 237, 232, 0.2);
+}
+
+.forge-textarea:focus {
+  border-color: rgba(var(--forge-textarea-rgb), 0.5);
+  box-shadow: 0 0 0 3px rgba(var(--forge-textarea-rgb), 0.12);
+}
+
+.forge-textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forge-textarea-hint {
+  font-size: 11px;
+  color: rgba(240, 237, 232, 0.3);
+  letter-spacing: -0.01em;
+}
+
+.forge-textarea-count {
+  font-size: 11px;
+  color: rgba(240, 237, 232, 0.2);
+  letter-spacing: -0.01em;
+  margin-left: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-textarea { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generators/ticker.ts
 function generateTicker(props) {
   const color = props.color ?? "#7F77DD";
   const rgb = hexToRgb(color);
@@ -3850,12 +5920,12 @@ function generateTicker(props) {
     "Item one",
     "Item two",
     "Item three",
-    "Item four",
+    "Item four"
   ];
   const durationMap = {
     slow: "40s",
     normal: "24s",
-    fast: "14s",
+    fast: "14s"
   };
   const tsx = `// ForgeTicker \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
@@ -3954,235 +6024,567 @@ export function ForgeTicker({
 `;
   return { tsx, css };
 }
-function generateMorphBlob(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const color2 = props.color2 ?? "#D4537E";
-  const size = props.size ?? 120;
-  const speed = props.speed ?? "normal";
-  const opacity = props.opacity ?? 0.8;
-  const blur = props.blur ?? 0;
-  const gradient = props.gradient ?? true;
-  const durationMap = {
-    slow: "8s",
-    normal: "5s",
-    fast: "3s",
-  };
-  const tsx = `// ForgeMorphBlob \u2014 generated by forge-ui CLI
+
+// src/generators/toast.ts
+function generateToast(props) {
+  const variant = props.variant ?? "success";
+  const showIcon = props.showIcon ?? true;
+  const showClose = props.showClose ?? true;
+  const tsx = `// ForgeToast \u2014 generated by forge-ui CLI
 // Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update morphblob
-// Pure CSS border-radius morphing \u2014 no SVG or canvas required.
+// Re-generate with: npx @forgelabs-studio/ui update toast
 
-import './ForgeMorphBlob.css'
+import { useState } from 'react'
+import './ForgeToast.css'
 
-interface ForgeMorphBlobProps {
-  color?: string
-  color2?: string
-  size?: number
-  speed?: 'slow' | 'normal' | 'fast'
-  opacity?: number
-  blur?: number
-  gradient?: boolean
+type ToastVariant = 'success' | 'error' | 'warning' | 'info'
+
+interface ForgeToastProps {
+  title?: string
+  message?: string
+  variant?: ToastVariant
+  showIcon?: boolean
+  showClose?: boolean
+  onClose?: () => void
 }
 
-export function ForgeMorphBlob({
-  color = '${color}',
-  color2 = '${color2}',
-  size = ${size},
-  speed = '${speed}',
-  opacity = ${opacity},
-  blur = ${blur},
-  gradient = ${gradient},
-}: ForgeMorphBlobProps) {
-  return (
-    <div
-      className={\`forge-blob forge-blob--\${speed}\`}
-      style={{
-        '--forge-blob-color': color,
-        '--forge-blob-color2': color2,
-        '--forge-blob-rgb': '${rgb}',
-        width: size,
-        height: size,
-        opacity,
-        filter: blur > 0 ? \`blur(\${blur}px)\` : undefined,
-        background: gradient
-          ? \`radial-gradient(circle at 30% 30%, \${color}, \${color2})\`
-          : color,
-      } as React.CSSProperties}
-    />
-  )
-}
-`;
-  const css = `/* ForgeMorphBlob.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-@keyframes forge-morph-slow {
-  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50%  { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
-  75%  { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
-  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+const ICONS: Record<ToastVariant, string> = {
+  success: '\u2713',
+  error: '\u2715',
+  warning: '\u26A0',
+  info: 'i',
 }
 
-.forge-blob {
-  display: block;
-  flex-shrink: 0;
-}
+export function ForgeToast({
+  title = 'Notification',
+  message,
+  variant = '${variant}',
+  showIcon = ${showIcon},
+  showClose = ${showClose},
+  onClose,
+}: ForgeToastProps) {
+  const [visible, setVisible] = useState(true)
 
-.forge-blob--slow   { animation: forge-morph-slow ${durationMap.slow} ease-in-out infinite; }
-.forge-blob--normal { animation: forge-morph-slow ${durationMap.normal} ease-in-out infinite; }
-.forge-blob--fast   { animation: forge-morph-slow ${durationMap.fast} ease-in-out infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .forge-blob {
-    animation: none;
-    border-radius: 50%;
+  function handleClose() {
+    setVisible(false)
+    onClose?.()
   }
-}
-`;
-  return { tsx, css };
-}
-function generateCountUp(props) {
-  const color = props.color ?? "#7F77DD";
-  const rgb = hexToRgb(color);
-  const to = props.to ?? 48200;
-  const from = props.from ?? 0;
-  const duration = props.duration ?? 2e3;
-  const prefix = props.prefix ?? "";
-  const suffix = props.suffix ?? "";
-  const size = props.size ?? "xl";
-  const showLabel = props.showLabel ?? true;
-  const label = props.label ?? "Total";
-  const fontSizeMap = {
-    sm: "24px",
-    md: "32px",
-    lg: "48px",
-    xl: "64px",
-  };
-  const tsx = `// ForgeCountUp \u2014 generated by forge-ui CLI
-// Edit this file freely \u2014 you own it.
-// Re-generate with: npx @forgelabs-studio/ui update countup
-// Uses requestAnimationFrame \u2014 no animation library required.
 
-import { useEffect, useRef, useState } from 'react'
-import './ForgeCountUp.css'
-
-interface ForgeCountUpProps {
-  from?: number
-  to?: number
-  duration?: number
-  prefix?: string
-  suffix?: string
-  color?: string
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  showLabel?: boolean
-  label?: string
-}
-
-export function ForgeCountUp({
-  from = ${from},
-  to = ${to},
-  duration = ${duration},
-  prefix = '${prefix}',
-  suffix = '${suffix}',
-  color = '${color}',
-  size = '${size}',
-  showLabel = ${showLabel},
-  label = '${label}',
-}: ForgeCountUpProps) {
-  const [value, setValue] = useState(from)
-  const ref = useRef<HTMLDivElement>(null)
-  const started = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
-          const startTime = performance.now()
-          const range = to - from
-
-          function tick(now: number) {
-            const elapsed = now - startTime
-            const progress = Math.min(elapsed / duration, 1)
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3)
-            setValue(Math.round(from + range * eased))
-            if (progress < 1) requestAnimationFrame(tick)
-          }
-
-          requestAnimationFrame(tick)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [from, to, duration])
-
-  // Format number with commas
-  const formatted = value.toLocaleString()
+  if (!visible) return null
 
   return (
-    <div
-      ref={ref}
-      className={\`forge-countup forge-countup--\${size}\`}
-      style={{ '--forge-countup-color': color, '--forge-countup-rgb': '${rgb}' } as React.CSSProperties}
-    >
-      <div className="forge-countup__number">
-        {prefix}<span className="forge-countup__value">{formatted}</span>{suffix}
+    <div className={\`forge-toast forge-toast--\${variant}\`} role="alert">
+      {showIcon && (
+        <span className="forge-toast__icon">{ICONS[variant]}</span>
+      )}
+      <div className="forge-toast__content">
+        <div className="forge-toast__title">{title}</div>
+        {message && <div className="forge-toast__message">{message}</div>}
       </div>
-      {showLabel && <div className="forge-countup__label">{label}</div>}
+      {showClose && (
+        <button className="forge-toast__close" onClick={handleClose} aria-label="Dismiss">\u2715</button>
+      )}
     </div>
   )
 }
 `;
-  const css = `/* ForgeCountUp.css \u2014 generated by forge-ui CLI */
-/* Edit freely \u2014 you own this file. */
-
-.forge-countup {
+  const css = `/* ForgeToast.css \u2014 generated by forge-ui CLI */
+.forge-toast {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid;
   font-family: Inter, sans-serif;
+  max-width: 360px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.forge-countup__number {
-  font-weight: 300;
-  letter-spacing: -0.04em;
-  color: #f0ede8;
-  line-height: 1;
+.forge-toast--success { background: rgba(29,158,117,0.1);  border-color: rgba(29,158,117,0.25);  }
+.forge-toast--error   { background: rgba(226,75,74,0.1);   border-color: rgba(226,75,74,0.25);   }
+.forge-toast--warning { background: rgba(239,159,39,0.1);  border-color: rgba(239,159,39,0.25);  }
+.forge-toast--info    { background: rgba(55,138,221,0.1);  border-color: rgba(55,138,221,0.25);  }
+
+.forge-toast__icon {
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
+.forge-toast--success .forge-toast__icon { color: #1D9E75; }
+.forge-toast--error   .forge-toast__icon { color: #e24b4a; }
+.forge-toast--warning .forge-toast__icon { color: #EF9F27; }
+.forge-toast--info    .forge-toast__icon { color: #378ADD; }
 
-.forge-countup--sm .forge-countup__number { font-size: ${fontSizeMap.sm}; }
-.forge-countup--md .forge-countup__number { font-size: ${fontSizeMap.md}; }
-.forge-countup--lg .forge-countup__number { font-size: ${fontSizeMap.lg}; }
-.forge-countup--xl .forge-countup__number { font-size: ${fontSizeMap.xl}; }
+.forge-toast__content { flex: 1; }
 
-.forge-countup__value {
-  color: var(--forge-countup-color);
-}
-
-.forge-countup__label {
-  font-size: 12px;
+.forge-toast__title {
+  font-size: 13px;
   font-weight: 400;
-  color: rgba(240, 237, 232, 0.3);
+  color: #f0ede8;
   letter-spacing: -0.01em;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .forge-countup__value {
-    transition: none;
+.forge-toast__message {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.5);
+  letter-spacing: -0.01em;
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+.forge-toast__close {
+  background: none;
+  border: none;
+  color: rgba(240,237,232,0.3);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+.forge-toast__close:hover { color: #f0ede8; }
+`;
+  return { tsx, css };
+}
+
+// src/generators/toggle.ts
+function generateToggle(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const size = props.size ?? "md";
+  const checked = props.checked ?? false;
+  const showLabel = props.showLabel ?? true;
+  const label = props.label ?? "Toggle";
+  const labelPos = props.labelPos ?? "right";
+  const trackMap = {
+    sm: { w: "28px", h: "16px", thumb: "10px" },
+    md: { w: "36px", h: "20px", thumb: "14px" },
+    lg: { w: "44px", h: "24px", thumb: "18px" }
+  };
+  const t = trackMap[size] ?? trackMap.md;
+  const tsx = `// ForgeToggle \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update toggle
+
+import { useState } from 'react'
+import './ForgeToggle.css'
+
+interface ForgeToggleProps {
+  label?: string
+  color?: string
+  size?: 'sm' | 'md' | 'lg'
+  checked?: boolean
+  showLabel?: boolean
+  labelPos?: 'left' | 'right'
+  onChange?: (checked: boolean) => void
+}
+
+export function ForgeToggle({
+  label = '${label}',
+  color = '${color}',
+  size = '${size}',
+  checked,
+  showLabel = ${showLabel},
+  labelPos = '${labelPos}',
+  onChange,
+}: ForgeToggleProps) {
+  const [internal, setInternal] = useState(${checked})
+  const controlled = checked !== undefined
+  const active = controlled ? checked : internal
+
+  function handleClick() {
+    if (!controlled) setInternal(v => !v)
+    onChange?.(!active)
   }
+
+  return (
+    <div
+      className={\`forge-toggle-wrap forge-toggle-wrap--\${labelPos}\`}
+      style={{ '--forge-toggle-color': color, '--forge-toggle-rgb': '${rgb}' } as React.CSSProperties}
+      onClick={handleClick}
+    >
+      {showLabel && labelPos === 'left' && (
+        <span className="forge-toggle-label">{label}</span>
+      )}
+      <div className={\`forge-toggle forge-toggle--\${size}\${active ? ' forge-toggle--on' : ''}\`}>
+        <div className="forge-toggle__thumb" />
+      </div>
+      {showLabel && labelPos === 'right' && (
+        <span className="forge-toggle-label">{label}</span>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeToggle.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-toggle-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-family: Inter, sans-serif;
+}
+
+.forge-toggle-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(240, 237, 232, 0.6);
+  letter-spacing: -0.01em;
+}
+
+.forge-toggle {
+  position: relative;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.forge-toggle--sm { width: ${t.w}; height: ${t.h}; }
+.forge-toggle--md { width: ${trackMap.md.w}; height: ${trackMap.md.h}; }
+.forge-toggle--lg { width: ${trackMap.lg.w}; height: ${trackMap.lg.h}; }
+
+.forge-toggle__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2px;
+  border-radius: 50%;
+  background: rgba(240, 237, 232, 0.4);
+  transition: left 0.2s ease, background 0.2s ease, width 0.1s ease;
+}
+
+.forge-toggle--sm .forge-toggle__thumb { width: ${trackMap.sm.thumb}; height: ${trackMap.sm.thumb}; }
+.forge-toggle--md .forge-toggle__thumb { width: ${trackMap.md.thumb}; height: ${trackMap.md.thumb}; }
+.forge-toggle--lg .forge-toggle__thumb { width: ${trackMap.lg.thumb}; height: ${trackMap.lg.thumb}; }
+
+/* On state */
+.forge-toggle--on {
+  background: rgba(var(--forge-toggle-rgb), 0.25);
+  border-color: rgba(var(--forge-toggle-rgb), 0.5);
+  box-shadow: 0 0 12px rgba(var(--forge-toggle-rgb), 0.2);
+}
+.forge-toggle--sm.forge-toggle--on .forge-toggle__thumb {
+  left: calc(${t.w} - ${trackMap.sm.thumb} - 2px);
+  background: var(--forge-toggle-color);
+}
+.forge-toggle--md.forge-toggle--on .forge-toggle__thumb {
+  left: calc(${trackMap.md.w} - ${trackMap.md.thumb} - 2px);
+  background: var(--forge-toggle-color);
+}
+.forge-toggle--lg.forge-toggle--on .forge-toggle__thumb {
+  left: calc(${trackMap.lg.w} - ${trackMap.lg.thumb} - 2px);
+  background: var(--forge-toggle-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-toggle, .forge-toggle__thumb { transition: none; }
 }
 `;
   return { tsx, css };
 }
+
+// src/generators/tooltip.ts
+function generateTooltip(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const variant = props.variant ?? "dark";
+  const tsx = `// ForgeTooltip \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update tooltip
+
+import { useState } from 'react'
+import './ForgeTooltip.css'
+
+interface ForgeTooltipProps {
+  tip: string
+  children: React.ReactNode
+  color?: string
+  variant?: 'dark' | 'light'
+  position?: 'top' | 'bottom' | 'left' | 'right'
+}
+
+export function ForgeTooltip({
+  tip,
+  children,
+  color = '${color}',
+  variant = '${variant}',
+  position = 'top',
+}: ForgeTooltipProps) {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <span
+      className="forge-tooltip-wrap"
+      style={{ '--forge-tooltip-color': color, '--forge-tooltip-rgb': '${rgb}' } as React.CSSProperties}
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+      onFocus={() => setVisible(true)}
+      onBlur={() => setVisible(false)}
+    >
+      {children}
+      {visible && (
+        <span className={\`forge-tooltip forge-tooltip--\${variant} forge-tooltip--\${position}\`} role="tooltip">
+          {tip}
+        </span>
+      )}
+    </span>
+  )
+}
+`;
+  const css = `/* ForgeTooltip.css \u2014 generated by forge-ui CLI */
+.forge-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.forge-tooltip {
+  position: absolute;
+  z-index: 50;
+  white-space: nowrap;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding: 5px 10px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.forge-tooltip--dark {
+  background: #1a1a1f;
+  color: rgba(240,237,232,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.forge-tooltip--light {
+  background: #f0ede8;
+  color: #09090b;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.forge-tooltip--top    { bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
+.forge-tooltip--bottom { top: calc(100% + 6px);    left: 50%; transform: translateX(-50%); }
+.forge-tooltip--left   { right: calc(100% + 6px);  top: 50%;  transform: translateY(-50%); }
+.forge-tooltip--right  { left: calc(100% + 6px);   top: 50%;  transform: translateY(-50%); }
+`;
+  return { tsx, css };
+}
+
+// src/generators/tabs.ts
+function generateTabs(props) {
+  const color = props.color ?? "#7F77DD";
+  const rgb = hexToRgb(color);
+  const variant = props.variant ?? "underline";
+  const tabs = props.tabs ?? ["Overview", "Features", "Pricing"];
+  const tsx = `// ForgeTabs \u2014 generated by forge-ui CLI
+// Edit this file freely \u2014 you own it.
+// Re-generate with: npx @forgelabs-studio/ui update tabs
+
+import { useState } from 'react'
+import './ForgeTabs.css'
+
+interface ForgeTabsProps {
+  tabs?: string[]
+  color?: string
+  variant?: 'underline' | 'pill' | 'line'
+  defaultTab?: number
+  onChange?: (index: number, label: string) => void
+  children?: React.ReactNode
+}
+
+export function ForgeTabs({
+  tabs = ${JSON.stringify(tabs)},
+  color = '${color}',
+  variant = '${variant}',
+  defaultTab = 0,
+  onChange,
+  children,
+}: ForgeTabsProps) {
+  const [active, setActive] = useState(defaultTab)
+
+  function handleSelect(i: number) {
+    setActive(i)
+    onChange?.(i, tabs[i])
+  }
+
+  return (
+    <div
+      className="forge-tabs-wrap"
+      style={{ '--forge-tabs-color': color, '--forge-tabs-rgb': '${rgb}' } as React.CSSProperties}
+    >
+      <div className={\`forge-tabs forge-tabs--\${variant}\`} role="tablist">
+        {tabs.map((tab, i) => (
+          <button
+            key={i}
+            role="tab"
+            aria-selected={active === i}
+            className={\`forge-tab\${active === i ? ' forge-tab--active' : ''}\`}
+            onClick={() => handleSelect(i)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      {children && (
+        <div className="forge-tabs-panel" role="tabpanel">
+          {children}
+        </div>
+      )}
+    </div>
+  )
+}
+`;
+  const css = `/* ForgeTabs.css \u2014 generated by forge-ui CLI */
+/* Edit freely \u2014 you own this file. */
+
+.forge-tabs-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: Inter, sans-serif;
+}
+
+.forge-tabs {
+  display: flex;
+  align-items: center;
+}
+
+.forge-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: rgba(240, 237, 232, 0.38);
+  transition: color 0.15s ease;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+.forge-tab:hover {
+  color: rgba(240, 237, 232, 0.7);
+}
+
+/* Underline variant */
+.forge-tabs--underline {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 0;
+}
+.forge-tabs--underline .forge-tab {
+  padding: 8px 16px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.forge-tabs--underline .forge-tab--active {
+  color: var(--forge-tabs-color);
+  border-bottom-color: var(--forge-tabs-color);
+}
+
+/* Pill variant */
+.forge-tabs--pill {
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 3px;
+}
+.forge-tabs--pill .forge-tab {
+  border-radius: 6px;
+  padding: 6px 14px;
+}
+.forge-tabs--pill .forge-tab--active {
+  background: rgba(var(--forge-tabs-rgb), 0.15);
+  color: var(--forge-tabs-color);
+}
+
+/* Line variant */
+.forge-tabs--line {
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.forge-tabs--line .forge-tab {
+  padding: 8px 16px;
+  position: relative;
+}
+.forge-tabs--line .forge-tab--active {
+  color: #f0ede8;
+}
+.forge-tabs--line .forge-tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--forge-tabs-color);
+  box-shadow: 0 0 8px rgba(var(--forge-tabs-rgb), 0.5);
+}
+
+.forge-tabs-panel {
+  color: rgba(240, 237, 232, 0.6);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-tab { transition: none; }
+}
+`;
+  return { tsx, css };
+}
+
+// src/generate.ts
+var GENERATORS = {
+  accordion: generateAccordion,
+  alert: generateAlert,
+  avatar: generateAvatar,
+  badge: generateBadge,
+  barchart: generateBarChart,
+  breadcrumb: generateBreadcrumb,
+  button: generateButton,
+  card: generateCard,
+  checkbox: generateCheckbox,
+  cmdpalette: generateCommandPalette,
+  countup: generateCountUp,
+  datepicker: generateDatePicker,
+  donut: generateDonut,
+  drawer: generateDrawer,
+  dropdown: generateDropdown,
+  fadeup: generateFadeUp,
+  input: generateInput,
+  linechart: generateLineChart,
+  modal: generateModal,
+  morphblob: generateMorphBlob,
+  navbar: generateNavbar,
+  pagination: generatePagination,
+  progress: generateProgress,
+  radio: generateRadio,
+  select: generateSelect,
+  sidenav: generateSideNav,
+  skeleton: generateSkeleton,
+  slider: generateSlider,
+  sparkline: generateSparkline,
+  spinner: generateSpinner,
+  statcard: generateStatCard,
+  stepper: generateStepper,
+  table: generateTable,
+  tabs: generateTabs,
+  taginput: generateTagInput,
+  textarea: generateTextarea,
+  ticker: generateTicker,
+  toast: generateToast,
+  toggle: generateToggle,
+  tooltip: generateTooltip
+};
 function generatePlaceholder(componentId, displayName) {
   const tsx = `// ${displayName} \u2014 generated by forge-ui CLI v0.1.0
 // Full file generation for this component is coming in v0.2.0.
@@ -4203,54 +6605,9 @@ async function generateComponent(componentId, displayName, props, config) {
   await fs3.ensureDir(outputDir);
   let tsx;
   let css;
-  if (componentId === "button") {
-    ({ tsx, css } = generateButton(props));
-  } else if (componentId === "badge") {
-    ({ tsx, css } = generateBadge(props));
-  } else if (componentId === "spinner") {
-    ({ tsx, css } = generateSpinner(props));
-  } else if (componentId === "progress") {
-    ({ tsx, css } = generateProgress(props));
-  } else if (componentId === "avatar") {
-    ({ tsx, css } = generateAvatar(props));
-  } else if (componentId === "input") {
-    ({ tsx, css } = generateInput(props));
-  } else if (componentId === "toggle") {
-    ({ tsx, css } = generateToggle(props));
-  } else if (componentId === "checkbox") {
-    ({ tsx, css } = generateCheckbox(props));
-  } else if (componentId === "radio") {
-    ({ tsx, css } = generateRadio(props));
-  } else if (componentId === "textarea") {
-    ({ tsx, css } = generateTextarea(props));
-  } else if (componentId === "card") {
-    ({ tsx, css } = generateCard(props));
-  } else if (componentId === "select") {
-    ({ tsx, css } = generateSelect(props));
-  } else if (componentId === "slider") {
-    ({ tsx, css } = generateSlider(props));
-  } else if (componentId === "statcard") {
-    ({ tsx, css } = generateStatCard(props));
-  } else if (componentId === "taginput") {
-    ({ tsx, css } = generateTagInput(props));
-  } else if (componentId === "tabs") {
-    ({ tsx, css } = generateTabs(props));
-  } else if (componentId === "breadcrumb") {
-    ({ tsx, css } = generateBreadcrumb(props));
-  } else if (componentId === "pagination") {
-    ({ tsx, css } = generatePagination(props));
-  } else if (componentId === "navbar") {
-    ({ tsx, css } = generateNavbar(props));
-  } else if (componentId === "datepicker") {
-    ({ tsx, css } = generateDatePicker(props));
-  } else if (componentId === "fadeup") {
-    ({ tsx, css } = generateFadeUp(props));
-  } else if (componentId === "ticker") {
-    ({ tsx, css } = generateTicker(props));
-  } else if (componentId === "morphblob") {
-    ({ tsx, css } = generateMorphBlob(props));
-  } else if (componentId === "countup") {
-    ({ tsx, css } = generateCountUp(props));
+  const generator = GENERATORS[componentId.toLowerCase()];
+  if (generator) {
+    ({ tsx, css } = generator(props));
   } else {
     ({ tsx, css } = generatePlaceholder(componentId, displayName));
   }
@@ -4264,43 +6621,47 @@ async function generateComponent(componentId, displayName, props, config) {
 
 // src/commands/add.ts
 async function runAdd(componentId, rawFlags) {
-  console.log(
-    pc3.bold(`
+  console.log(pc3.bold(`
   forge-ui add ${componentId}
-`),
-  );
+`));
   const meta = REGISTRY_BY_ID[componentId];
   if (!meta) {
     console.log(pc3.red(`  Unknown component: "${componentId}"`));
     console.log(
-      pc3.dim("  Run npx forge-ui list to see available components.\n"),
+      pc3.dim("  Run npx forge-ui list to see available components.\n")
     );
     process.exit(1);
   }
-  let config = await readConfig();
-  if (!config) {
-    config = createDefaultConfig();
-    console.log(pc3.dim("  No forge.config.json found \u2014 creating one.\n"));
-  }
-  const flagProps = parseFlags(rawFlags);
-  const props = { color: meta.defaultColor, ...flagProps };
-  await generateComponent(componentId, meta.displayName, props, config);
-  config.components[componentId] = props;
-  await writeConfig(config);
-  if (meta.deps?.length) {
+  try {
+    let config = await readConfig();
+    if (!config) {
+      config = createDefaultConfig();
+      console.log(pc3.dim("  No forge.config.json found \u2014 creating one.\n"));
+    }
+    const flagProps = parseFlags(rawFlags);
+    const props = { color: meta.defaultColor, ...flagProps };
+    await generateComponent(componentId, meta.displayName, props, config);
+    config.components[componentId] = props;
+    await writeConfig(config);
+    if (meta.deps?.length) {
+      console.log(pc3.yellow(`
+  Peer deps required: ${meta.deps.join(", ")}`));
+    }
+    console.log(pc3.dim(`
+  Import with:`));
     console.log(
-      pc3.yellow(`
-  Peer deps required: ${meta.deps.join(", ")}`),
+      pc3.cyan(
+        `  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
+`
+      )
     );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(pc3.red(`
+  \u2716 Failed to add ${componentId}: ${message}
+`));
+    process.exit(1);
   }
-  console.log(
-    pc3.dim(`
-  Import with:`),
-  );
-  console.log(
-    pc3.cyan(`  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
-`),
-  );
 }
 
 // src/commands/list.ts
@@ -4313,12 +6674,8 @@ async function runList() {
     const components = REGISTRY.filter((c) => c.group === group);
     console.log(pc4.dim(`  ${group}`));
     for (const c of components) {
-      const tick = installed.has(c.id)
-        ? pc4.green("\u2713")
-        : pc4.dim("\u25CB");
-      console.log(
-        `  ${tick} ${pc4.white(c.displayName.padEnd(22))} ${pc4.dim(c.description)}`,
-      );
+      const tick = installed.has(c.id) ? pc4.green("\u2713") : pc4.dim("\u25CB");
+      console.log(`  ${tick} ${pc4.white(c.displayName.padEnd(22))} ${pc4.dim(c.description)}`);
     }
     console.log();
   }
@@ -4327,35 +6684,43 @@ async function runList() {
 // src/commands/update.ts
 import pc5 from "picocolors";
 async function runUpdate(componentId) {
-  console.log(
-    pc5.bold(`
+  console.log(pc5.bold(`
   forge-ui update ${componentId}
-`),
-  );
-  const config = await readConfig();
-  if (!config) {
-    console.log(
-      pc5.red("  No forge.config.json found. Run npx forge-ui init first.\n"),
+`));
+  try {
+    const config = await readConfig();
+    if (!config) {
+      console.log(
+        pc5.red("  No forge.config.json found. Run npx forge-ui init first.\n")
+      );
+      process.exit(1);
+    }
+    const savedProps = config.components[componentId];
+    if (!savedProps) {
+      console.log(pc5.red(`  "${componentId}" is not in forge.config.json.`));
+      console.log(
+        pc5.dim("  Run npx forge-ui add " + componentId + " first.\n")
+      );
+      process.exit(1);
+    }
+    const meta = REGISTRY_BY_ID[componentId];
+    if (!meta) {
+      console.log(pc5.red(`  Unknown component: "${componentId}"
+`));
+      process.exit(1);
+    }
+    await generateComponent(componentId, meta.displayName, savedProps, config);
+    await writeConfig(config);
+    console.log(pc5.dim("\n  Regenerated with original configuration.\n"));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(
+      pc5.red(`
+  \u2716 Failed to update ${componentId}: ${message}
+`)
     );
     process.exit(1);
   }
-  const savedProps = config.components[componentId];
-  if (!savedProps) {
-    console.log(pc5.red(`  "${componentId}" is not in forge.config.json.`));
-    console.log(pc5.dim("  Run npx forge-ui add " + componentId + " first.\n"));
-    process.exit(1);
-  }
-  const meta = REGISTRY_BY_ID[componentId];
-  if (!meta) {
-    console.log(
-      pc5.red(`  Unknown component: "${componentId}"
-`),
-    );
-    process.exit(1);
-  }
-  await generateComponent(componentId, meta.displayName, savedProps, config);
-  await writeConfig(config);
-  console.log(pc5.dim("\n  Regenerated with original configuration.\n"));
 }
 
 // src/commands/remove.ts
@@ -4363,68 +6728,55 @@ import fs4 from "fs-extra";
 import path4 from "path";
 import pc6 from "picocolors";
 async function runRemove(componentId) {
-  console.log(
-    pc6.bold(`
+  console.log(pc6.bold(`
   forge-ui remove ${componentId}
-`),
-  );
-  const config = await readConfig();
-  if (!config) {
-    console.log(pc6.red("  No forge.config.json found.\n"));
-    process.exit(1);
-  }
-  const meta = REGISTRY_BY_ID[componentId];
-  if (!meta) {
-    console.log(
-      pc6.red(`  Unknown component: "${componentId}"
-`),
+`));
+  try {
+    const config = await readConfig();
+    if (!config) {
+      console.log(pc6.red("  No forge.config.json found.\n"));
+      process.exit(1);
+    }
+    const meta = REGISTRY_BY_ID[componentId];
+    if (!meta) {
+      console.log(pc6.red(`  Unknown component: "${componentId}"
+`));
+      process.exit(1);
+    }
+    const outputDir = path4.join(process.cwd(), config.output);
+    const tsxPath = path4.join(outputDir, `${meta.displayName}.tsx`);
+    const cssPath = path4.join(outputDir, `${meta.displayName}.css`);
+    if (await fs4.pathExists(tsxPath)) {
+      await fs4.remove(tsxPath);
+      console.log(pc6.red("  \u2715") + ` ${meta.displayName}.tsx`);
+    }
+    if (await fs4.pathExists(cssPath)) {
+      await fs4.remove(cssPath);
+      console.log(pc6.red("  \u2715") + ` ${meta.displayName}.css`);
+    }
+    delete config.components[componentId];
+    await writeConfig(config);
+    console.log(pc6.dim("\n  Removed from forge.config.json.\n"));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(
+      pc6.red(`
+  \u2716 Failed to remove ${componentId}: ${message}
+`)
     );
     process.exit(1);
   }
-  const outputDir = path4.join(process.cwd(), config.output);
-  const tsxPath = path4.join(outputDir, `${meta.displayName}.tsx`);
-  const cssPath = path4.join(outputDir, `${meta.displayName}.css`);
-  if (await fs4.pathExists(tsxPath)) {
-    await fs4.remove(tsxPath);
-    console.log(pc6.red("  \u2715") + ` ${meta.displayName}.tsx`);
-  }
-  if (await fs4.pathExists(cssPath)) {
-    await fs4.remove(cssPath);
-    console.log(pc6.red("  \u2715") + ` ${meta.displayName}.css`);
-  }
-  delete config.components[componentId];
-  await writeConfig(config);
-  console.log(pc6.dim("\n  Removed from forge.config.json.\n"));
 }
 
 // src/index.ts
 var program = new Command();
-program
-  .name("forge-ui")
-  .description("FORGE.ui \u2014 spectrum-aware React component library")
-  .version("0.1.0");
-program
-  .command("init")
-  .description("Create forge.config.json and forge-tokens.css")
-  .action(() => runInit());
-program
-  .command("add <component>")
-  .description("Add a component with optional flags")
-  .allowUnknownOption(true)
-  .action((component, _opts, cmd) => {
-    const rawFlags = cmd.args.slice(1);
-    runAdd(component, rawFlags);
-  });
-program
-  .command("list")
-  .description("List all available and installed components")
-  .action(() => runList());
-program
-  .command("update <component>")
-  .description("Regenerate a component using its saved configuration")
-  .action((component) => runUpdate(component));
-program
-  .command("remove <component>")
-  .description("Remove a component and its files")
-  .action((component) => runRemove(component));
+program.name("forge-ui").description("FORGE.ui \u2014 spectrum-aware React component library").version("0.1.0");
+program.command("init").description("Create forge.config.json and forge-tokens.css").action(() => runInit());
+program.command("add <component>").description("Add a component with optional flags").allowUnknownOption(true).action((component, _opts, cmd) => {
+  const rawFlags = cmd.args.slice(1);
+  runAdd(component, rawFlags);
+});
+program.command("list").description("List all available and installed components").action(() => runList());
+program.command("update <component>").description("Regenerate a component using its saved configuration").action((component) => runUpdate(component));
+program.command("remove <component>").description("Remove a component and its files").action((component) => runRemove(component));
 program.parse();
