@@ -2,6 +2,10 @@
   "name": "FORGE",
   "version": "0.2.0",
   "private": true,
+  "workspaces": [
+    "cli",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,6 +16,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@forgelabs-studio/shared": "*",
     "@sentry/nextjs": "^10.50.0",
     "@vercel/analytics": "^2.0.1",
     "chart.js": "^4.5.1",

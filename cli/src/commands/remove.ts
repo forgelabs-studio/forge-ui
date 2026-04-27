@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import pc from "picocolors";
 import { readConfig, writeConfig } from "../config.js";
-import { REGISTRY_BY_ID } from "../registry.js";
+import { REGISTRY_BY_ID } from "@forgelabs-studio/shared";
 
 export async function runRemove(componentId: string): Promise<void> {
   console.log(pc.bold(`\n  forge-ui remove ${componentId}\n`));

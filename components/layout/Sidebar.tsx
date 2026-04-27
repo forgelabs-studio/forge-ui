@@ -67,7 +67,7 @@ function CompItem({
   active,
   onClick,
 }: {
-  icon: string;
+  icon: string | undefined;
   name: string;
   active: boolean;
   onClick: () => void;

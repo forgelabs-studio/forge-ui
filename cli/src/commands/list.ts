@@ -1,5 +1,5 @@
 import pc from 'picocolors'
-import { REGISTRY, GROUPS } from '../registry.js'
+import { REGISTRY, GROUPS } from '@forgelabs-studio/shared'
 import { readConfig } from '../config.js'
 
 export async function runList(): Promise<void> {

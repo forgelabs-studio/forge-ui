@@ -19,8 +19,7 @@ export default function SparklineRenderer({
   const col = p.color || "#7F77DD";
   const rgb = hexRgb(col);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chartRef = useRef<any>(null);
+  const chartRef = useRef<ChartJS | null>(null);
   const height = p.height || 60;
 
   const rawData: string[] = Array.isArray(p.data) ? p.data : [];

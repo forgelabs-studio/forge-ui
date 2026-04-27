@@ -21,8 +21,7 @@ export default function LineChartRenderer({
   const col2 = p.color2 || "#EF9F27";
   const rgb2 = hexRgb(col2);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chartRef = useRef<any>(null);
+  const chartRef = useRef<ChartJS | null>(null);
 
   const rawData = useMemo(
     () => (Array.isArray(p.data) ? p.data : []),
