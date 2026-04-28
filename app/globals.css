@@ -1299,3 +1299,101 @@ code {
   line-height: 1.75;
   margin-bottom: 14px;
 }
+
+/* ─── Mobile ─────────────────────────────────────────────── */
+
+/* max-width: 767px so this block only applies when Tailwind's md: (min-width:768px)
+   is NOT active. At exactly 768px the desktop layout is shown; if this query used
+   768px it would also fire there and break the desktop height chain via .app{height:auto}. */
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow: auto;
+  }
+
+  /* Let app grow to fit content (docs/how-it-works pages scroll freely) */
+  .app {
+    height: auto;
+    min-height: 100dvh;
+    grid-template-rows: 48px auto;
+  }
+
+  /* Playground panels: grow inside the flex-col panel wrapper in PlaygroundLayout.
+     height:100% would resolve to auto here (flex-algorithm height isn't a CSS value),
+     so flex:1 is used instead — it resolves against the container's definite main size. */
+  .sidebar,
+  .centre,
+  .props-col {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Hide the desktop grid — Tailwind's `hidden` can't override .playground{display:grid}
+     because globals.css comes after @tailwind utilities in the cascade. */
+  .playground {
+    display: none;
+  }
+
+  /* CLIWindow takes 150-200px on mobile and overflows its buttons — hide it.
+     The topbar's Copy command button covers the same use case on mobile. */
+  .cli-win {
+    display: none;
+  }
+
+  /* Docs / How-it-works pages */
+  .docs-wrap {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .docs-nav {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 8px 0;
+  }
+
+  .docs-body {
+    padding: 32px 20px;
+  }
+
+  .d-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .howto {
+    padding: 36px 20px;
+  }
+}
+
+/* Topbar: hide version + init button at ≤600px */
+@media (max-width: 600px) {
+  .ver {
+    display: none;
+  }
+
+  .topbar-right {
+    border-left: none;
+    padding-left: 8px;
+  }
+
+  .tbtn:not(.accent) {
+    display: none;
+  }
+}
+
+/* Topbar: icon-only tabs at ≤460px */
+@media (max-width: 460px) {
+  .ptab-label {
+    display: none;
+  }
+
+  .ptab {
+    padding: 0 10px;
+  }
+}
