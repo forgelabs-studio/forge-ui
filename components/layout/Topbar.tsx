@@ -49,7 +49,7 @@ export default function Topbar() {
               onClick={() => router.push(tab.href)}
             >
               {tab.icon}
-              {tab.label}
+              <span className="ptab-label">{tab.label}</span>
             </button>
           )
         })}
