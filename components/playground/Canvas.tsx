@@ -3,10 +3,15 @@ import { usePlaygroundStore, CanvasMode } from "@/store/playground";
 import { REGISTRY_BY_ID } from "@/lib/registry";
 import dynamic from "next/dynamic";
 import CLIWindow from "./CLIWindow";
+import SkeletonRenderer from "./renderers/SkeletonRenderer";
 
-// Dynamically import the renderer dispatcher to avoid SSR issues with canvas/chart
+// ssr:false keeps chart/canvas libs out of the server render.
+// loading prop eliminates the blank flash on mobile where Canvas mounts fresh on tab switch.
 const RendererDispatch = dynamic(() => import("./RendererDispatch"), {
   ssr: false,
+  loading: () => (
+    <SkeletonRenderer props={{ animated: true, variant: "card", label: "" }} />
+  ),
 });
 
 const MODES: { key: CanvasMode; label: string }[] = [
