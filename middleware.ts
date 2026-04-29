@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
   const scriptSrc = [
     "'self'",
     `'nonce-${nonce}'`,
+    "https://va.vercel-scripts.com",
     isDev ? "'unsafe-eval'" : null,
   ]
     .filter(Boolean)
@@ -21,7 +22,7 @@ export function middleware(request: NextRequest) {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: blob: https:",
-    "connect-src 'self' https://va.vercel-insights.com https://*.ingest.de.sentry.io",
+    "connect-src 'self' https://va.vercel-insights.com https://va.vercel-scripts.com https://*.ingest.de.sentry.io",
     "frame-ancestors 'none'",
     "report-uri https://o4511293935583232.ingest.de.sentry.io/api/4511293937418320/security/?sentry_key=1312b238ac289fde33a532ad9c036bab",
   ].join("; ");
