@@ -98,8 +98,8 @@ Secondary tools grid (`tools` array in `siteData.ts`, order: tokens, motion, blo
 
 | Index | Tool | State | Treatment |
 |-------|------|-------|-----------|
-| 0 | FORGE.tokens | Muted | Blurred body (opacity 0.35, blur 1.5px), "🔒 Under construction" badge, "Coming later" label |
-| 1 | FORGE.motion | Normal | Fully visible — **next to ship** |
+| 0 | FORGE.tokens | Muted | No npm scope, no action button. Blurred body (opacity 0.35, blur 3px, pointer-events none), "Coming later" badge + label |
+| 1 | FORGE.motion | Normal | Fully visible — npm scope shown, "Follow progress ↗" button — **next to ship** |
 | 2 | FORGE.blocks | Muted | Same as FORGE.tokens |
 
 To change states: edit `i !== 1` condition in `Tools.tsx`.
@@ -142,6 +142,15 @@ Hardcoded in components (update in-place if needed):
 
 ---
 
+## Production readiness score
+
+| Date | Score | Notes |
+|------|-------|-------|
+| 2026-04-29 | 8/10 | Site built and live. TypeScript clean. SEO + OG metadata complete. Analytics + CSP configured. No tests (marketing site — acceptable). Minor hardcoded content counts in Topbar/Tools. |
+| 2026-04-29+ | 8.5/10 | Nav Playground link + Hero CTA wired. Footer bug fixed (wrong playground href). Tools cards fully polished (blur 3px, no stale UI on muted cards). |
+
+---
+
 ## Session history
 
 | Date | What happened |
@@ -151,3 +160,9 @@ Hardcoded in components (update in-place if needed):
 | 2026-04-29 | Tools cards: FORGE.tokens (i=0) and FORGE.blocks (i=2) muted; FORGE.motion (i=1) normal |
 | 2026-04-29 | Route group restructure: playground → app/(playground)/, site → app/(site)/. Root layout now thin html/body only. Fixes hydration mismatch. |
 | 2026-04-29 | Topbar logo (gem + FORGE.ui text) now links to "/" via next/link |
+| 2026-04-29 | Nav: added Playground link between About and GitHub |
+| 2026-04-29 | Hero: "Explore the toolkit" button now router.push('/playground') instead of scrollIntoView |
+| 2026-04-29 | Tools muted cards (i=0,2): removed npm scope subtitle, removed "Follow progress ↗" button, blur 1.5px → 3px |
+| 2026-04-29 | Footer bug fixed: "Playground" link was pointing to / instead of /playground |
+| 2026-04-29 | Nav: /playground link changed from <a> (full reload) to <Link> (soft nav); hash + external links stay as <a> |
+| 2026-04-29 | OssCallout: "Read the docs" changed from window.open(GitHub) to router.push('/docs'); ↗ glyph removed |

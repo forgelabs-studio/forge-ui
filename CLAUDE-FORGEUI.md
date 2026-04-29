@@ -108,3 +108,4 @@ type errors in chart renderers and the deferred monorepo migration (tracked in `
 | 2026-04-27 | PropsPanel split, generate.ts split, 0.3.0 published, docs, browserslist, Sentry + CSP. |
 | 2026-04-27+ | Font fix, chartRef types, SENTRY_AUTH_TOKEN CI. FORGE.ui complete. |
 | 2026-04-29 | Marketing site built (see CLAUDE-FORGESITE.md). Monorepo migration complete. |
+| 2026-04-29+ | Marketing site polish: Nav Playground link, Hero CTA → router.push, tools card muting tightened, footer bug fixed. |

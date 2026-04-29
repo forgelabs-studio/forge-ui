@@ -5,7 +5,7 @@ import { ForgeButton } from "@/components/forge/ForgeButton";
 
 const LINKS = [
   { label: "GitHub ↗", href: "https://github.com/forgelabs-studio" },
-  { label: "X / Twitter ↗", href: "https://x.com/forgelabs_studio" },
+  { label: "X / Twitter ↗", href: "https://x.com/taliawip" },
   { label: "npm ↗", href: "https://www.npmjs.com/org/forgelabs-studio" },
 ];
 

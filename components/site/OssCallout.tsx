@@ -1,6 +1,7 @@
 "use client";
 
 import { useReveal } from "@/lib/useReveal";
+import { useRouter } from "next/navigation";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 
 const STEPS = [
@@ -23,6 +24,7 @@ const STEPS = [
 
 export default function OssCallout() {
   const ref = useReveal();
+  const router = useRouter();
 
   return (
     <section
@@ -109,15 +111,9 @@ export default function OssCallout() {
               <ForgeButton
                 variant="ghost"
                 color="#7F77DD"
-                onClick={() =>
-                  window.open(
-                    "https://github.com/forgelabs-studio/forge-ui",
-                    "_blank",
-                    "noopener,noreferrer",
-                  )
-                }
+                onClick={() => router.push("/docs")}
               >
-                Read the docs ↗
+                Read the docs
               </ForgeButton>
             </div>
           </div>

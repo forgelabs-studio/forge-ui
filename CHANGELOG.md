@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 The format is based on _Keep a Changelog_ and this project follows semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- Marketing site at `app/(site)/` — 8 sections (Nav, Hero, Tools, Philosophy, OssCallout, BuiltBy, CTA, Footer)
+- `components/site/` — all site section components
+- `lib/siteData.ts` — ticker items, tools array, tenets
+- `lib/useReveal.ts` — IntersectionObserver scroll-reveal hook
+- `packages/shared/` — shared registry and types across CLI packages (monorepo migration)
+
+### Changed
+
+- Monorepo migration: playground routes moved to `app/(playground)/`, marketing site at `app/(site)/`. Root layout stripped to html/body only — fixes hydration mismatch between route groups.
+- Nav: added Playground link; internal route links use `next/link` for soft navigation
+- Hero: "Explore the toolkit" CTA navigates to `/playground` via `router.push`
+- OssCallout: "Read the docs" routes to `/docs` internally
+- Tools cards (FORGE.tokens, FORGE.blocks): npm scope and action button removed; blur increased to 3px
+- Footer: corrected Playground link href
+
+### Infrastructure
+
+- CSP: added `va.vercel-scripts.com` to `script-src` and `connect-src` for Vercel Analytics
+- Topbar logo links back to marketing site (`/`) via `next/link`
+
+---
+
 ## [0.3.0] — 2026-04-27
 
 ### Changed

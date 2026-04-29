@@ -208,9 +208,11 @@ export default function Tools() {
                       {prefix}
                       <span>.{suffix}</span>
                     </div>
-                    <div className="text-[10px] text-[var(--hint)] [font-family:var(--mono)]">
-                      {tool.sub}
-                    </div>
+                    {!isMuted && (
+                      <div className="text-[10px] text-[var(--hint)] [font-family:var(--mono)]">
+                        {tool.sub}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -234,7 +236,7 @@ export default function Tools() {
                       isMuted
                         ? {
                             opacity: 0.35,
-                            filter: "blur(1.5px)",
+                            filter: "blur(3px)",
                             userSelect: "none",
                             pointerEvents: "none",
                           }
@@ -250,8 +252,8 @@ export default function Tools() {
                       ))}
                     </div>
                   </div>
-                  <div className="tool-actions">
-                    <div style={isMuted ? { opacity: 0.4 } : undefined}>
+                  {!isMuted && (
+                    <div className="tool-actions">
                       <ForgeButton
                         variant="ghost"
                         color="#7F77DD"
@@ -266,7 +268,7 @@ export default function Tools() {
                         Follow progress ↗
                       </ForgeButton>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             );

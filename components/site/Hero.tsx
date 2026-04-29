@@ -1,12 +1,14 @@
 "use client";
 
 import { useReveal } from "@/lib/useReveal";
+import { useRouter } from "next/navigation";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 import { ForgeTicker } from "@/components/forge/ForgeTicker";
 import { tickerItems } from "@/lib/siteData";
 
 export default function Hero() {
   const ref = useReveal();
+  const router = useRouter();
 
   return (
     <section
@@ -78,11 +80,7 @@ export default function Hero() {
         <ForgeButton
           variant="solid"
           color="#7F77DD"
-          onClick={() =>
-            document
-              .getElementById("tools")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
+          onClick={() => router.push("/playground")}
         >
           Explore the toolkit
         </ForgeButton>

@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const FOOTER_LINKS = [
   { label: "GitHub", href: "https://github.com/forgelabs-studio" },
-  { label: "Playground", href: "https://forgelabs.studio" },
+  { label: "Playground", href: "https://forgelabs.studio/playground" },
   { label: "npm", href: "https://www.npmjs.com/org/forgelabs-studio" },
-  { label: "X", href: "https://x.com/forgelabs_studio" },
+  { label: "X", href: "https://x.com/taliawip" },
 ];
 
 export default function Footer() {

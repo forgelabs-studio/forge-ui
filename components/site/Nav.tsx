@@ -7,6 +7,7 @@ import { ForgeButton } from "@/components/forge/ForgeButton";
 const NAV_LINKS = [
   { label: "Tools", href: "#tools" },
   { label: "About", href: "#about" },
+  { label: "Playground", href: "/playground" },
   { label: "GitHub", href: "https://github.com/forgelabs-studio" },
 ];
 
@@ -40,17 +41,25 @@ export default function Nav() {
       <ul className="hide-mobile flex gap-7 list-none">
         {NAV_LINKS.map(({ label, href }) => {
           const isExternal = href.startsWith("http");
+          const isAnchor = href.startsWith("#");
+          const linkClass = "text-[13px] text-[var(--muted)] tracking-[-0.01em] no-underline transition-colors duration-[150ms] hover:text-[var(--text)]";
           return (
             <li key={label}>
-              <a
-                href={href}
-                className="text-[13px] text-[var(--muted)] tracking-[-0.01em] no-underline transition-colors duration-[150ms] hover:text-[var(--text)]"
-                {...(isExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-              >
-                {label}
-              </a>
+              {!isExternal && !isAnchor ? (
+                <Link href={href} className={linkClass}>
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  href={href}
+                  className={linkClass}
+                  {...(isExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {label}
+                </a>
+              )}
             </li>
           );
         })}
