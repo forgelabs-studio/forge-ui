@@ -1,38 +1,69 @@
-# FORGE.ui
+# FORGE.labs
 
-Spectrum-aware, motion-first React component library.  
-Configure visually — install with one CLI command — own the generated files.
+Design engineering tooling. Open source, MIT licensed, zero runtime dependency.
 
-**[→ Playground](https://forgelabs.studio)** · **[→ npm](https://www.npmjs.com/package/@forgelabs-studio/ui)**
+**[→ forgelabs.studio](https://forgelabs.studio)** · **[→ Playground](https://forgelabs.studio/playground)** · **[→ npm](https://www.npmjs.com/org/forgelabs-studio)**
+
+---
 
 ## What this is
 
-FORGE.ui is a component library with no runtime dependency. The CLI generates `.tsx` and `.css` files directly into your project. You own them. No black box, no forced upgrades.
+A monorepo for the FORGE.labs ecosystem. The defining idea: users configure visually, install with one CLI command, and own the generated files with no runtime dependency on any FORGE package.
+
+| Package | npm | Status |
+|---------|-----|--------|
+| FORGE.ui | `@forgelabs-studio/ui` | v0.3.0 — shipped |
+| FORGE.motion | `@forgelabs-studio/motion` | In development |
+| FORGE.tokens | `@forgelabs-studio/tokens` | Planned |
+
+---
 
 ## Repo structure
+
 ```
 forge-ui/
-├── app/              # Next.js playground (forgelabs.studio)
-├── components/       # Playground UI components
-├── store/            # Zustand state
-├── lib/              # Registry, CLI builder, types
-└── cli/              # @forgelabs-studio/ui npm package
-    └── src/
-        ├── index.ts          # CLI entrypoint
-        ├── commands/         # init, add, list, update, remove
-        ├── generate.ts       # Component file generators
-        ├── registry.ts       # 40 component definitions
-        └── flags.ts          # Flag parser
+├── app/
+│   ├── layout.tsx              # Root layout — html/body only
+│   ├── (site)/                 # Marketing site (forgelabs.studio)
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   └── (playground)/           # Component playground
+│       ├── layout.tsx
+│       ├── playground/
+│       ├── docs/
+│       └── how-it-works/
+├── components/
+│   ├── site/                   # Marketing site sections
+│   ├── forge/                  # ForgeUI components (CLI-generated, self-owned)
+│   ├── playground/             # Playground UI (renderers, props panels)
+│   └── layout/                 # Shared layout (Topbar)
+├── packages/
+│   └── shared/                 # Shared registry + types across CLI packages
+├── cli/                        # @forgelabs-studio/ui CLI
+│   └── src/
+│       ├── index.ts            # CLI entrypoint
+│       ├── commands/           # add, init, list, update, remove
+│       ├── generators/         # 40 per-component file generators
+│       ├── generate.ts         # Generator dispatcher
+│       └── flags.ts            # Flag parser
+├── lib/                        # Playground utilities
+│   ├── registry.ts             # Component registry — source of truth
+│   ├── types.ts                # Component prop interfaces
+│   ├── cli-builder.ts          # Builds CLI command string from playground state
+│   └── utils.ts                # Shared utils
+└── store/                      # Zustand playground state
 ```
 
-## Components
+---
+
+## FORGE.ui — 40 components
 
 **Primitives:** Button, Card, Input, Badge, Toggle, Select, Checkbox, Radio, Slider, Textarea, Avatar, StatCard, TagInput, DatePicker
 
 **Motion:** Spinner, FadeUp, Ticker, MorphBlob, CountUp
 
-**Charts:** BarChart, LineChart, Donut, Progress, Sparkline  
-*Note: Chart.js is required as a peer dependency. Add it to your layout via CDN:*
+**Charts:** BarChart, LineChart, Donut, Progress, Sparkline
+*Chart.js is required as a peer dependency:*
 ```html
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 ```
@@ -45,15 +76,19 @@ forge-ui/
 
 **Data:** Table
 
+---
+
 ## Running locally
+
 ```bash
 npm install
 npm run dev
 ```
 
-Playground runs at `http://localhost:3000`.
+Playground at `http://localhost:3000/playground`. Marketing site at `http://localhost:3000`.
 
 ## CLI development
+
 ```bash
 cd cli
 npm install
@@ -61,11 +96,13 @@ npm run build
 npm link
 ```
 
-Then `npx @forgelabs-studio/ui` works globally from your local build.
+Then `npx @forgelabs-studio/ui` resolves to your local build.
+
+---
 
 ## Contributing
 
-Open an issue before opening a PR. This is an early-stage project — direction may change.
+Open an issue before opening a PR. See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ## Licence
 

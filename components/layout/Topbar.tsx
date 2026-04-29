@@ -1,6 +1,7 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Link from 'next/link'
 import { usePlaygroundStore } from '@/store/playground'
 import { buildCLIString } from '@/lib/cli-builder'
 
@@ -34,10 +35,10 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
-      <div className="logo">
+      <Link href="/" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}>
         <div className="gem" />
         <span className="logo-name">FORGE</span><span className="logo-tag">.ui</span>
-      </div>
+      </Link>
 
       <nav className="page-tabs">
         {tabs.map(tab => {

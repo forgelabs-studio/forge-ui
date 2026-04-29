@@ -1,6 +1,6 @@
-# Contributing to Forge UI
+# Contributing to FORGE.labs
 
-Thanks for your interest in contributing to **Forge UI**
+Thanks for your interest in contributing to **FORGE.ui** and the broader FORGE.labs ecosystem.
 
 We aim to keep the codebase clean, consistent, and easy to extend. Please follow the guidelines below to make sure your contribution can be reviewed and merged quickly.
 
@@ -25,13 +25,15 @@ npm install
 npm run dev
 ```
 
+Playground runs at `http://localhost:3000/playground`. Marketing site at `http://localhost:3000`.
+
 ## Branch Workflow
 
 - **Never push directly to `main`**
 - Always create a new branch:
 
 ```bash
-  git checkout -b feat/your-feature-name
+git checkout -b feat/your-feature-name
 ```
 
 - Open a Pull Request (PR) for all changes
@@ -39,17 +41,15 @@ npm run dev
 
 ## Code Style Guidelines
 
-To maintain consistency across the project:
-
 - **TypeScript**
   - `strict` mode is required
   - Avoid `any` unless absolutely necessary
   - No `@ts-ignore` without a clear comment explaining why
 
 - **Styling**
-  - Use **Tailwind CSS only**
+  - Use **Tailwind CSS** for playground and layout components
+  - Marketing site components (`components/site/`) use inline styles — keep consistent with existing patterns there
   - No CSS Modules
-  - No inline styles unless unavoidable
 
 - **General**
   - Keep components simple and composable
@@ -57,25 +57,27 @@ To maintain consistency across the project:
 
 ## Adding a New Component
 
-When adding a new component, you must update **all of the following locations**:
+When adding a new FORGE.ui component, update **all of the following**:
 
-1. `lib/registry.ts`
-   → Register the component
-
-2. `components/playground/renderers/`
-   → Add the renderer for the playground
-
-3. `components/playground/props/`
-   → Define editable props
-
-4. `cli/src/generators/`
-   → Add the CLI generator
+1. `lib/registry.ts` — register the component
+2. `components/playground/renderers/` — add the playground renderer
+3. `components/playground/props/` — define editable props
+4. `cli/src/generators/` — add the CLI generator
 
 Missing one of these will result in incomplete functionality.
 
+## Monorepo structure
+
+The repo uses npm workspaces:
+
+- `cli/` — `@forgelabs-studio/ui` CLI, published to npm
+- `packages/shared/` — shared registry and types consumed by CLI packages
+
+When working in `packages/`, run `npm install` from the repo root to wire workspace symlinks.
+
 ## Running Checks
 
-Before opening a PR, make sure everything passes:
+Before opening a PR:
 
 ```bash
 npm run typecheck
@@ -83,8 +85,7 @@ npm test
 npm run lint
 ```
 
-- Fix all errors and warnings
-- Ensure your code builds and runs correctly
+Fix all errors and warnings before submitting.
 
 ## Final Notes
 
@@ -92,4 +93,4 @@ npm run lint
 - If your change is non-trivial, explain **why**, not just what
 - If you're unsure about something, open a discussion or draft PR
 
-Thanks for contributing — this project gets better with every PR
+Thanks for contributing — this project gets better with every PR.

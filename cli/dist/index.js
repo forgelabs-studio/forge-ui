@@ -81,306 +81,7 @@ async function runInit() {
 
 // src/commands/add.ts
 import pc3 from "picocolors";
-
-// src/registry.ts
-var REGISTRY = [
-  {
-    id: "button",
-    displayName: "ForgeButton",
-    group: "Primitives",
-    description: "Spectrum-aware button \u2014 6 variants, ripple, glow states",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "card",
-    displayName: "ForgeCard",
-    group: "Primitives",
-    description: "Card with bottom-up colour glow on hover",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "input",
-    displayName: "ForgeInput",
-    group: "Primitives",
-    description: "Input with focus glow and 4 validation states",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "badge",
-    displayName: "ForgeBadge",
-    group: "Primitives",
-    description: "Status badge with optional pulse dot",
-    defaultColor: "#1D9E75"
-  },
-  {
-    id: "toggle",
-    displayName: "ForgeToggle",
-    group: "Primitives",
-    description: "Animated toggle switch with glow on active state",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "select",
-    displayName: "ForgeSelect",
-    group: "Primitives",
-    description: "Select dropdown with colour-token focus",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "checkbox",
-    displayName: "ForgeCheckbox",
-    group: "Primitives",
-    description: "Checkbox with animated check and glow",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "radio",
-    displayName: "ForgeRadio",
-    group: "Primitives",
-    description: "Radio group with colour token",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "slider",
-    displayName: "ForgeSlider",
-    group: "Primitives",
-    description: "Range slider with coloured fill track",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "textarea",
-    displayName: "ForgeTextarea",
-    group: "Primitives",
-    description: "Textarea with focus glow and character count",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "avatar",
-    displayName: "ForgeAvatar",
-    group: "Primitives",
-    description: "Avatar with initials, status dot, optional ring",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "statcard",
-    displayName: "ForgeStatCard",
-    group: "Primitives",
-    description: "Metric card with value, delta, and colour bar",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "taginput",
-    displayName: "ForgeTagInput",
-    group: "Primitives",
-    description: "Tag input \u2014 add and remove tags with keyboard",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "datepicker",
-    displayName: "ForgeDatePicker",
-    group: "Primitives",
-    description: "Calendar date picker with month navigation",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "spinner",
-    displayName: "ForgeSpinner",
-    group: "Motion",
-    description: "Loading indicator \u2014 5 variants, pure CSS",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "fadeup",
-    displayName: "ForgeFadeUp",
-    group: "Motion",
-    description: "Scroll-triggered fade up with per-line stagger",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "ticker",
-    displayName: "ForgeTicker",
-    group: "Motion",
-    description: "Infinite horizontal text ticker",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "morphblob",
-    displayName: "ForgeMorphBlob",
-    group: "Motion",
-    description: "Organic CSS morphing blob",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "countup",
-    displayName: "ForgeCountUp",
-    group: "Motion",
-    description: "Animated number counter",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "barchart",
-    displayName: "ForgeBarChart",
-    group: "Charts",
-    description: "Bar chart \u2014 spectrum colours, animated",
-    defaultColor: "#7F77DD",
-    deps: ["chart.js"]
-  },
-  {
-    id: "linechart",
-    displayName: "ForgeLineChart",
-    group: "Charts",
-    description: "Line chart with fill and tension",
-    defaultColor: "#1D9E75",
-    deps: ["chart.js"]
-  },
-  {
-    id: "donut",
-    displayName: "ForgeDonut",
-    group: "Charts",
-    description: "Donut chart with centre display",
-    defaultColor: "#7F77DD",
-    deps: ["chart.js"]
-  },
-  {
-    id: "progress",
-    displayName: "ForgeProgress",
-    group: "Charts",
-    description: "Progress bar with glow and striped option",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "sparkline",
-    displayName: "ForgeSparkline",
-    group: "Charts",
-    description: "Compact inline sparkline",
-    defaultColor: "#7F77DD",
-    deps: ["chart.js"]
-  },
-  {
-    id: "cmdpalette",
-    displayName: "ForgeCommand",
-    group: "Navigation",
-    description: "Command palette (\u2318K)",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "navbar",
-    displayName: "ForgeNavbar",
-    group: "Navigation",
-    description: "Navigation bar \u2014 dark/light, CTA button",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "breadcrumb",
-    displayName: "ForgeBreadcrumb",
-    group: "Navigation",
-    description: "Breadcrumb with custom separator",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "pagination",
-    displayName: "ForgePagination",
-    group: "Navigation",
-    description: "Pagination with ellipsis and count",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "sidenav",
-    displayName: "ForgeSideNav",
-    group: "Navigation",
-    description: "Collapsible side navigation",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "tabs",
-    displayName: "ForgeTabs",
-    group: "Navigation",
-    description: "Tab bar \u2014 underline, pill, line variants",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "modal",
-    displayName: "ForgeModal",
-    group: "Overlay",
-    description: "Modal dialog \u2014 overlay, ESC to close, actions",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "toast",
-    displayName: "ForgeToast",
-    group: "Overlay",
-    description: "Toast notification \u2014 4 semantic variants",
-    defaultColor: "#1D9E75"
-  },
-  {
-    id: "tooltip",
-    displayName: "ForgeTooltip",
-    group: "Overlay",
-    description: "Tooltip \u2014 dark and light, 4 positions",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "dropdown",
-    displayName: "ForgeDropdown",
-    group: "Overlay",
-    description: "Dropdown menu with icons and danger item",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "drawer",
-    displayName: "ForgeDrawer",
-    group: "Overlay",
-    description: "Side drawer \u2014 left or right, with overlay",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "skeleton",
-    displayName: "ForgeSkeleton",
-    group: "Feedback",
-    description: "Shimmer skeleton \u2014 card, text, profile, table",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "alert",
-    displayName: "ForgeAlert",
-    group: "Feedback",
-    description: "Alert banner \u2014 4 semantic variants with action",
-    defaultColor: "#1D9E75"
-  },
-  {
-    id: "stepper",
-    displayName: "ForgeStepper",
-    group: "Feedback",
-    description: "Multi-step progress \u2014 horizontal and vertical",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "accordion",
-    displayName: "ForgeAccordion",
-    group: "Feedback",
-    description: "Expandable accordion with smooth animation",
-    defaultColor: "#7F77DD"
-  },
-  {
-    id: "table",
-    displayName: "ForgeTable",
-    group: "Data",
-    description: "Data table \u2014 striped, hover, colour token",
-    defaultColor: "#7F77DD"
-  }
-];
-var REGISTRY_BY_ID = Object.fromEntries(
-  REGISTRY.map((c) => [c.id, c])
-);
-var GROUPS = [
-  "Primitives",
-  "Motion",
-  "Charts",
-  "Navigation",
-  "Overlay",
-  "Feedback",
-  "Data"
-];
+import { REGISTRY_BY_ID } from "@forgelabs-studio/shared";
 
 // src/flags.ts
 var FLAG_TO_PROP = {
@@ -6666,6 +6367,7 @@ async function runAdd(componentId, rawFlags) {
 
 // src/commands/list.ts
 import pc4 from "picocolors";
+import { REGISTRY, GROUPS } from "@forgelabs-studio/shared";
 async function runList() {
   console.log(pc4.bold("\n  FORGE.ui components\n"));
   const config = await readConfig();
@@ -6683,6 +6385,7 @@ async function runList() {
 
 // src/commands/update.ts
 import pc5 from "picocolors";
+import { REGISTRY_BY_ID as REGISTRY_BY_ID2 } from "@forgelabs-studio/shared";
 async function runUpdate(componentId) {
   console.log(pc5.bold(`
   forge-ui update ${componentId}
@@ -6703,7 +6406,7 @@ async function runUpdate(componentId) {
       );
       process.exit(1);
     }
-    const meta = REGISTRY_BY_ID[componentId];
+    const meta = REGISTRY_BY_ID2[componentId];
     if (!meta) {
       console.log(pc5.red(`  Unknown component: "${componentId}"
 `));
@@ -6727,6 +6430,7 @@ async function runUpdate(componentId) {
 import fs4 from "fs-extra";
 import path4 from "path";
 import pc6 from "picocolors";
+import { REGISTRY_BY_ID as REGISTRY_BY_ID3 } from "@forgelabs-studio/shared";
 async function runRemove(componentId) {
   console.log(pc6.bold(`
   forge-ui remove ${componentId}
@@ -6737,7 +6441,7 @@ async function runRemove(componentId) {
       console.log(pc6.red("  No forge.config.json found.\n"));
       process.exit(1);
     }
-    const meta = REGISTRY_BY_ID[componentId];
+    const meta = REGISTRY_BY_ID3[componentId];
     if (!meta) {
       console.log(pc6.red(`  Unknown component: "${componentId}"
 `));
