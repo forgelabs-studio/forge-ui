@@ -217,20 +217,6 @@ export default function Tools() {
                 </div>
 
                 <div className="tool-card-body">
-                  {isMuted && (
-                    <div
-                      style={{
-                        fontSize: 10,
-                        fontFamily: "var(--mono)",
-                        color: "var(--hint)",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        marginBottom: 12,
-                      }}
-                    >
-                      Coming later
-                    </div>
-                  )}
                   <div
                     style={
                       isMuted

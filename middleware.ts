@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
   const scriptSrc = [
     "'self'",
     `'nonce-${nonce}'`,
+    "'unsafe-inline'",
     "https://va.vercel-scripts.com",
     isDev ? "'unsafe-eval'" : null,
   ]
