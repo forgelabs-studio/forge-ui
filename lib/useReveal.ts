@@ -1,28 +1,32 @@
-'use client'
+"use client";
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
 
-export function useReveal<T extends HTMLElement = HTMLElement>() {
-  const ref = useRef<T>(null)
+export function useReveal<T extends HTMLElement = HTMLElement>(
+  options?: IntersectionObserverInit,
+) {
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add('visible')
-            observer.unobserve(e.target)
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
           }
         }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
-    )
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px", ...options },
+    );
 
     if (ref.current) {
-      ref.current.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+      ref.current
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
-  return ref
+  return ref;
 }
