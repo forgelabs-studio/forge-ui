@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0",
+  "output": "components/forge",
+  "components": {
+    "spinner": {
+      "color": "#7F77DD"
+    },
+    "navbar": {
+      "color": "#7F77DD"
+    },
+    "toast": {
+      "color": "#1D9E75"
+    },
+    "morphblob": {
+      "color": "#7F77DD"
+    },
+    "slider": {
+      "color": "#7F77DD"
+    },
+    "countup": {
+      "color": "#7F77DD"
+    },
+    "stepper": {
+      "color": "#7F77DD"
+    },
+    "accordion": {
+      "color": "#7F77DD"
+    },
+    "alert": {
+      "color": "#1D9E75"
+    },
+    "table": {
+      "color": "#7F77DD"
+    },
+    "pagination": {
+      "color": "#7F77DD"
+    },
+    "donut": {
+      "color": "#7F77DD"
+    },
+    "linechart": {
+      "color": "#1D9E75"
+    },
+    "toggle": {
+      "color": "#7F77DD"
+    },
+    "skeleton": {
+      "color": "#7F77DD"
+    },
+    "tooltip": {
+      "color": "#7F77DD"
+    },
+    "breadcrumb": {
+      "color": "#7F77DD"
+    }
+  }
+}
