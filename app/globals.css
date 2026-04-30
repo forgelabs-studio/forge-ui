@@ -1301,6 +1301,40 @@ code {
   margin-bottom: 14px;
 }
 
+/* Playground polish */
+.stage {
+  max-width: 680px;
+  min-height: 260px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  background: rgba(15, 15, 18, 0.35);
+}
+
+.ver {
+  color: rgba(240, 237, 232, 0.14);
+}
+
+.grp-lbl {
+  color: rgba(240, 237, 232, 0.32);
+}
+
+.pg {
+  padding: 16px 12px;
+}
+
+.pgt {
+  margin-bottom: 12px;
+}
+
+.cli-cmd {
+  font-size: 13px;
+}
+
+.cli-title {
+  color: rgba(240, 237, 232, 0.28);
+}
+
 /* ─── Mobile ─────────────────────────────────────────────── */
 
 /* max-width: 767px so this block only applies when Tailwind's md: (min-width:768px)
@@ -1511,17 +1545,28 @@ code {
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s !important; }
-.reveal-delay-2 { transition-delay: 0.2s !important; }
-.reveal-delay-3 { transition-delay: 0.3s !important; }
+.reveal-delay-1 {
+  transition-delay: 0.1s !important;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s !important;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s !important;
+}
 
 .pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .tool-card {
@@ -1529,7 +1574,9 @@ code {
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.25s, transform 0.25s;
+  transition:
+    border-color 0.25s,
+    transform 0.25s;
 }
 
 .tool-card:hover {
@@ -1732,11 +1779,21 @@ code {
   line-height: 2;
 }
 
-.code-comment { color: rgba(240, 237, 232, 0.2); }
-.code-key     { color: #afa9ec; }
-.code-val     { color: #5dcaa5; }
-.code-str     { color: var(--amber); }
-.code-muted   { color: var(--hint); }
+.code-comment {
+  color: rgba(240, 237, 232, 0.2);
+}
+.code-key {
+  color: #afa9ec;
+}
+.code-val {
+  color: #5dcaa5;
+}
+.code-str {
+  color: var(--amber);
+}
+.code-muted {
+  color: var(--hint);
+}
 
 .manifesto-grid {
   display: grid;
@@ -1825,7 +1882,9 @@ code {
   );
   animation: gem-spin 8s linear infinite;
   opacity: 0.9;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
 }
 
