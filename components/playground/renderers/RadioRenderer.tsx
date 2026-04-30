@@ -85,7 +85,7 @@ export default function RadioRenderer({ props: p }: { props: RadioProps }) {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 9,
+              gap: 10,
               cursor: "pointer",
               userSelect: "none",
             }}
@@ -98,50 +98,46 @@ export default function RadioRenderer({ props: p }: { props: RadioProps }) {
               checked={isSelected}
               onChange={() => setSel(i)}
               style={{
-                width: sz,
-                height: sz,
-                borderRadius: "50%",
-                border: `1px solid ${isSelected ? col : "rgba(255,255,255,.18)"}`,
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "all .2s",
-                flexShrink: 0,
-                boxShadow: isSelected ? `0 0 8px rgba(${rgb},.3)` : "none",
-                // visually neutralize native appearance while keeping semantics
-                appearance: "none",
-                WebkitAppearance: "none",
-                MozAppearance: "none",
-                outline: "none",
+                position: "absolute",
+                opacity: 0,
+                pointerEvents: "none",
               }}
-              onFocus={(e) => {
-                (e.currentTarget as HTMLInputElement).style.boxShadow =
-                  `0 0 0 3px rgba(${rgb},.12)`;
-              }}
-              onBlur={(e) => {
-                (e.currentTarget as HTMLInputElement).style.boxShadow =
-                  isSelected ? `0 0 8px rgba(${rgb},.3)` : "none";
-              }}
-              aria-checked={isSelected}
             />
-            {/* inner dot for selected state */}
+
             <span
               aria-hidden="true"
               style={{
-                width: isSelected ? sz * 0.44 : 0,
-                height: isSelected ? sz * 0.44 : 0,
+                width: sz,
+                height: sz,
                 borderRadius: "50%",
-                background: isSelected ? col : "transparent",
-                transition: "all .15s",
-                marginLeft: -sz, // visually place inside the radio area
-                pointerEvents: "none",
+                border: `1px solid ${
+                  isSelected ? `rgba(${rgb},.85)` : "rgba(255,255,255,.16)"
+                }`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 flexShrink: 0,
+                transition: "all .18s",
+                boxShadow: isSelected ? `0 0 0 2px rgba(${rgb},.12)` : "none",
+                background: isSelected ? `rgba(${rgb},.06)` : "transparent",
               }}
-            />
+            >
+              <span
+                style={{
+                  width: sz * 0.32,
+                  height: sz * 0.32,
+                  borderRadius: "50%",
+                  background: isSelected ? col : "transparent",
+                  transform: isSelected ? "scale(1)" : "scale(0)",
+                  transition: "transform .15s ease, background .15s ease",
+                }}
+              />
+            </span>
+
             <span
               style={{
                 fontSize: labelSz,
-                color: `rgba(240,237,232,${isSelected ? 0.7 : 0.4})`,
+                color: `rgba(240,237,232,${isSelected ? 0.86 : 0.36})`,
                 fontFamily,
               }}
             >
