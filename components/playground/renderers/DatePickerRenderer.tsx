@@ -309,7 +309,7 @@ export default function DatePickerRenderer({
             onKeyDown={onGridKeyDown}
             style={{
               display: "grid",
-              gridTemplateRows: `repeat(${rows.length}, auto)`,
+              gridTemplateColumns: "repeat(7, 1fr)",
               gap: 2,
               outline: "none",
             }}
