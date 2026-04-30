@@ -3,7 +3,7 @@ import Topbar from "@/components/layout/Topbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://forgelabs.studio"),
-  title: "FORGE.ui — Component Playground",
+  title: "FORGE.ui - Component Playground",
   description:
     "Spectrum-aware, motion-first React component library. Configure visually, install with one CLI command, own the generated files.",
   openGraph: {
@@ -16,16 +16,17 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: "https://forgelabs.studio/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "FORGE.ui — Spectrum-aware, motion-first React components",
+        alt: "FORGE.ui - Spectrum-aware, motion-first React components",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/opengraph-image"],
+    images: ["https://forgelabs.studio/opengraph-image"],
   },
 };
 
