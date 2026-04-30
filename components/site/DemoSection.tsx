@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 import { ForgeToast } from "@/components/forge/ForgeToast";
 import { ForgeAlert } from "@/components/forge/ForgeAlert";

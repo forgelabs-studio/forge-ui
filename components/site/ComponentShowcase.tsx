@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { ForgeTable } from "@/components/forge/ForgeTable";
 import { ForgePagination } from "@/components/forge/ForgePagination";
 import { ForgeDonut } from "@/components/forge/ForgeDonut";
