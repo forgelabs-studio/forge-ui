@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "FORGE.labs",
   description:
     "Open source React components, design token pipelines, and animation primitives.",
+  icons: {
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

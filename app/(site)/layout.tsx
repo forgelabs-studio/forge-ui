@@ -3,7 +3,7 @@ import "@/components/forge/forge-tokens.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://forgelabs.studio"),
-  title: "FORGE.labs — Tools for design engineers",
+  title: "FORGE.labs - Tools for design engineers",
   description:
     "Open source React components, design token pipelines, and animation primitives. Configure visually, install with one command, own the code forever.",
   openGraph: {
@@ -16,16 +16,17 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: "https://forgelabs.studio/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "FORGE.labs — Tools for design engineers",
+        alt: "FORGE.labs - Tools for design engineers",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/opengraph-image"],
+    images: ["https://forgelabs.studio/opengraph-image"],
   },
 };
 
