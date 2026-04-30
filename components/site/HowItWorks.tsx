@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { useReveal } from "@/lib/useReveal";
 import { ForgeStepper } from "@/components/forge/ForgeStepper";
 
 const STEPS = [
@@ -23,26 +24,10 @@ const SNIPPETS = [
 
 export default function HowItWorks() {
   const [active, setActive] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    ref.current
-      ?.querySelectorAll(".reveal")
-      .forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const ref = useReveal<HTMLDivElement>({
+    threshold: 0.05,
+    rootMargin: "0px 0px -20px 0px",
+  });
 
   return (
     <section

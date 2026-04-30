@@ -1,32 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useReveal } from "@/lib/useReveal";
 import Link from "next/link";
 import { ForgeBadge } from "@/components/forge/ForgeBadge";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 import { ForgeCard } from "@/components/forge/ForgeCard";
 
 export default function SiteHero() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
-    );
-    if (ref.current) {
-      ref.current
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-    }
-    return () => observer.disconnect();
-  }, []);
+  const ref = useReveal<HTMLDivElement>({
+    threshold: 0.05,
+    rootMargin: "0px 0px -20px 0px",
+  });
 
   return (
     <section
