@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://forgelabs.studio"),

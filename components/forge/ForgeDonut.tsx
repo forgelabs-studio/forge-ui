@@ -4,61 +4,81 @@
 // Requires Chart.js — add to your layout:
 // <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
 
-import { useEffect, useRef } from 'react'
-import './ForgeDonut.css'
+import { useEffect, useRef } from "react";
+import "./ForgeDonut.css";
 
 interface ForgeDonutProps {
-  title?: string
-  data?: { label: string; value: number }[]
-  color?: string
-  showLabels?: boolean
-  showCenter?: boolean
-  centerText?: string
-  thickness?: number
-  animated?: boolean
-  size?: number
+  title?: string;
+  data?: { label: string; value: number }[];
+  color?: string;
+  showLabels?: boolean;
+  showCenter?: boolean;
+  centerText?: string;
+  thickness?: number;
+  animated?: boolean;
+  size?: number;
 }
 
-const PALETTE = ['#7F77DD','#378ADD','#1D9E75','#EF9F27','#D4537E','#e24b4a']
+const PALETTE = [
+  "#7F77DD",
+  "#378ADD",
+  "#1D9E75",
+  "#EF9F27",
+  "#D4537E",
+  "#e24b4a",
+];
 
 const DEFAULT_DATA = [
-  { label: 'Direct', value: 40 },
-  { label: 'Search', value: 30 },
-  { label: 'Social', value: 20 },
-  { label: 'Other', value: 10 },
-]
+  { label: "Direct", value: 40 },
+  { label: "Search", value: 30 },
+  { label: "Social", value: 20 },
+  { label: "Other", value: 10 },
+];
+
+type ChartConstructor = new (
+  ctx: HTMLCanvasElement,
+  config: Record<string, unknown>,
+) => { destroy: () => void };
+
+declare global {
+  interface Window {
+    Chart?: ChartConstructor;
+  }
+}
 
 export function ForgeDonut({
-  title = '',
+  title = "",
   data = DEFAULT_DATA,
-  color = '#7F77DD',
+  color = "#7F77DD",
   showLabels = true,
   showCenter = true,
-  centerText = '—',
+  centerText = "—",
   thickness = 28,
   animated = true,
   size = 240,
 }: ForgeDonutProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const chartRef = useRef<unknown>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartRef = useRef<{ destroy: () => void } | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Chart = (window as any).Chart
-    if (!Chart || !canvasRef.current) return
-    if (chartRef.current) (chartRef.current as any).destroy()
+    const Chart = window.Chart;
+    if (!Chart || !canvasRef.current) return;
+    chartRef.current?.destroy();
 
     chartRef.current = new Chart(canvasRef.current, {
-      type: 'doughnut',
+      type: "doughnut",
       data: {
-        labels: data.map(d => d.label),
-        datasets: [{
-          data: data.map(d => d.value),
-          backgroundColor: data.map((_, i) => PALETTE[i % PALETTE.length]),
-          borderWidth: 0,
-          borderRadius: 4,
-          spacing: 2,
-        }],
+        labels: data.map((d) => d.label),
+        datasets: [
+          {
+            data: data.map((d) => d.value),
+            backgroundColor: data.map((_, i) => PALETTE[i % PALETTE.length]),
+            borderWidth: 0,
+            borderRadius: 4,
+            spacing: 2,
+          },
+        ],
       },
       options: {
         responsive: false,
@@ -67,23 +87,43 @@ export function ForgeDonut({
         plugins: {
           legend: {
             display: showLabels,
-            position: 'bottom',
-            labels: { color: 'rgba(240,237,232,0.4)', font: { family: 'Inter', size: 11 }, boxWidth: 8, padding: 16 }
+            position: "bottom",
+            labels: {
+              color: "rgba(240,237,232,0.4)",
+              font: { family: "Inter", size: 11 },
+              boxWidth: 8,
+              padding: 16,
+            },
           },
-          title: { display: !!title, text: title, color: 'rgba(240,237,232,0.6)', font: { family: 'Inter', size: 13, weight: '400' } },
+          title: {
+            display: !!title,
+            text: title,
+            color: "rgba(240,237,232,0.6)",
+            font: { family: "Inter", size: 13, weight: "400" },
+          },
         },
       },
-    })
+    });
 
-    return () => { if (chartRef.current) (chartRef.current as any).destroy() }
-  }, [data, thickness, showLabels, animated, title, size])
+    return () => {
+      chartRef.current?.destroy();
+    };
+  }, [data, thickness, showLabels, animated, title, size]);
 
   return (
     <div
       className="forge-donut-wrap"
-      style={{ '--forge-donut-color': color, '--forge-donut-rgb': '127, 119, 221' } as React.CSSProperties}
+      style={
+        {
+          "--forge-donut-color": color,
+          "--forge-donut-rgb": "127, 119, 221",
+        } as React.CSSProperties
+      }
     >
-      <div className="forge-donut-canvas-wrap" style={{ width: size, height: size }}>
+      <div
+        className="forge-donut-canvas-wrap"
+        style={{ width: size, height: size }}
+      >
         <canvas ref={canvasRef} width={size} height={size} />
         {showCenter && (
           <div className="forge-donut-center">
@@ -92,5 +132,5 @@ export function ForgeDonut({
         )}
       </div>
     </div>
-  )
+  );
 }

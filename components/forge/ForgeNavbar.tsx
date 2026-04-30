@@ -3,52 +3,58 @@
 // Re-generate with: npx @forgelabs-studio/ui update navbar
 // Note: links use <a> tags — swap for Next.js <Link> if needed.
 
-import { useState } from 'react'
-import './ForgeNavbar.css'
+import { useState } from "react";
+import Link from "next/link";
+import "./ForgeNavbar.css";
 
 interface ForgeNavbarProps {
-  brand?: string
-  links?: { label: string; href: string }[] | string[]
-  color?: string
-  variant?: 'dark' | 'light'
-  showLogo?: boolean
-  showCta?: boolean
-  ctaText?: string
-  onCtaClick?: () => void
+  brand?: string;
+  links?: { label: string; href: string }[] | string[];
+  color?: string;
+  variant?: "dark" | "light";
+  showLogo?: boolean;
+  showCta?: boolean;
+  ctaText?: string;
+  onCtaClick?: () => void;
 }
 
 export function ForgeNavbar({
-  brand = 'FORGE',
-  links = ["Work","About","Contact"],
-  color = '#7F77DD',
-  variant = 'dark',
+  brand = "FORGE",
+  links = ["Work", "About", "Contact"],
+  color = "#7F77DD",
+  variant = "dark",
   showLogo = true,
   showCta = true,
-  ctaText = 'Get started',
+  ctaText = "Get started",
   onCtaClick,
 }: ForgeNavbarProps) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   // Normalise links — accept both strings and { label, href } objects
-  const normalisedLinks = links.map(l =>
-    typeof l === 'string' ? { label: l, href: `#${l.toLowerCase()}` } : l
-  )
+  const normalisedLinks = links.map((l) =>
+    typeof l === "string" ? { label: l, href: `#${l.toLowerCase()}` } : l,
+  );
 
   return (
     <header
       className={`forge-navbar forge-navbar--${variant}`}
-      style={{ '--forge-navbar-color': color, '--forge-navbar-rgb': '127, 119, 221' } as React.CSSProperties}
+      style={
+        {
+          "--forge-navbar-color": color,
+          "--forge-navbar-rgb": "127, 119, 221",
+        } as React.CSSProperties
+      }
     >
       <div className="forge-navbar__inner">
         {/* Logo / brand */}
-        <a href="/" className="forge-navbar__brand">
+        <Link href="/" className="forge-navbar__brand">
           {showLogo && <span className="forge-navbar__gem" />}
           <span className="forge-navbar__brand-name">{brand}</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="forge-navbar__links" aria-label="Main navigation">
-          {normalisedLinks.map(link => (
+          {normalisedLinks.map((link) => (
             <a key={link.label} href={link.href} className="forge-navbar__link">
               {link.label}
             </a>
@@ -64,11 +70,11 @@ export function ForgeNavbar({
           )}
           <button
             className="forge-navbar__toggle"
-            onClick={() => setOpen(o => !o)}
+            onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
           >
-            {open ? '✕' : '☰'}
+            {open ? "✕" : "☰"}
           </button>
         </div>
       </div>
@@ -76,7 +82,7 @@ export function ForgeNavbar({
       {/* Mobile menu */}
       {open && (
         <nav className="forge-navbar__mobile" aria-label="Mobile navigation">
-          {normalisedLinks.map(link => (
+          {normalisedLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
@@ -87,12 +93,15 @@ export function ForgeNavbar({
             </a>
           ))}
           {showCta && (
-            <button className="forge-navbar__cta forge-navbar__cta--mobile" onClick={onCtaClick}>
+            <button
+              className="forge-navbar__cta forge-navbar__cta--mobile"
+              onClick={onCtaClick}
+            >
               {ctaText}
             </button>
           )}
         </nav>
       )}
     </header>
-  )
+  );
 }
