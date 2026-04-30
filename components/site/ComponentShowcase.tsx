@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReveal } from "@/lib/useReveal";
 import { ForgeTable } from "@/components/forge/ForgeTable";
 import { ForgePagination } from "@/components/forge/ForgePagination";
 import { ForgeDonut } from "@/components/forge/ForgeDonut";
@@ -124,27 +125,11 @@ function Cell({
 
 export default function ComponentShowcase() {
   const [page, setPage] = useState(1);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useReveal<HTMLElement>({
+    threshold: 0.04,
+    rootMargin: "0px 0px -20px 0px",
+  });
   const accordionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            obs.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.04, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    sectionRef.current
-      ?.querySelectorAll(".reveal")
-      .forEach((el) => obs.observe(el));
-
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     accordionRef.current

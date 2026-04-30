@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useReveal } from "@/lib/useReveal";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 import { ForgeToast } from "@/components/forge/ForgeToast";
 import { ForgeAlert } from "@/components/forge/ForgeAlert";
@@ -258,26 +259,10 @@ function DemoCell({
 
 /* ─── Main export ────────────────────────────────────────── */
 export default function DemoSection() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            observer.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-    );
-    if (ref.current) {
-      ref.current
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-    }
-    return () => observer.disconnect();
-  }, []);
+  const ref = useReveal<HTMLDivElement>({
+    threshold: 0.05,
+    rootMargin: "0px 0px -20px 0px",
+  });
 
   return (
     <section

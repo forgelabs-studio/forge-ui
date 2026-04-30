@@ -108,7 +108,7 @@ export default function Topbar() {
       </nav>
 
       <div className="topbar-right">
-        <span className="ver">v0.1.0 · 40 components</span>
+        <span className="ver">v0.3.0 · 40 components</span>
         <button className={`tbtn${initOk ? " ok" : ""}`} onClick={copyInit}>
           {initOk ? "✓ Copied!" : "⬡ npx init"}
         </button>
