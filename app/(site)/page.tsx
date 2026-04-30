@@ -1,11 +1,10 @@
-import Nav from '@/components/site/Nav'
-import Hero from '@/components/site/Hero'
-import Tools from '@/components/site/Tools'
-import Philosophy from '@/components/site/Philosophy'
-import OssCallout from '@/components/site/OssCallout'
-import BuiltBy from '@/components/site/BuiltBy'
-import Cta from '@/components/site/Cta'
-import Footer from '@/components/site/Footer'
+import SiteNav from '@/components/site/SiteNav'
+import SiteHero from '@/components/site/SiteHero'
+import SiteTicker from '@/components/site/SiteTicker'
+import DemoSection from '@/components/site/DemoSection'
+import HowItWorks from '@/components/site/HowItWorks'
+import ComponentShowcase from '@/components/site/ComponentShowcase'
+import SiteFooter from '@/components/site/SiteFooter'
 
 export default function ForgePage() {
   return (
@@ -13,19 +12,18 @@ export default function ForgePage() {
       <div className="forge-grid" />
       <div className="forge-vignette" />
 
-      <Nav />
+      <SiteNav />
 
-      <main style={{ position: 'relative', zIndex: 1, paddingTop: '60px' }}>
-        <Hero />
+      <main style={{ position: 'relative', zIndex: 1, paddingTop: '56px' }}>
+        <SiteHero />
         <div className="spectrum-bar" />
-        <Tools />
-        <Philosophy />
-        <OssCallout />
-        <BuiltBy />
-        <Cta />
+        <SiteTicker />
+        <DemoSection />
+        <HowItWorks />
+        <ComponentShowcase />
       </main>
 
-      <Footer />
+      <SiteFooter />
     </>
   )
 }
