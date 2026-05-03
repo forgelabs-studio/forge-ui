@@ -8,37 +8,59 @@ export interface ParallaxPreviewProps {
 }
 
 export default function Parallax({ speed = 0.3 }: ParallaxPreviewProps) {
-  const ref = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const targetRef = useRef<HTMLDivElement>(null)
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: targetRef,
+    container: containerRef,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], [`${speed * -100}px`, `${speed * 100}px`])
+
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [`${speed * -80}px`, `${speed * 80}px`]
+  )
 
   return (
     <div
-      ref={ref}
+      ref={containerRef}
       style={{
-        height: 200,
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: 320,
+        width: '100%',
+        overflowY: 'auto',
         position: 'relative',
       }}
     >
-      <motion.div
-        style={{
-          y,
-          fontSize: 24,
-          fontWeight: 300,
-          letterSpacing: '-0.03em',
-          color: 'var(--text)',
-          textAlign: 'center',
-        }}
-      >
-        Scroll to see parallax
-      </motion.div>
+      {/* Spacer to allow scroll */}
+      <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--hint)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          ↓ scroll
+        </span>
+      </div>
+
+      <div ref={targetRef} style={{ padding: '40px 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <motion.div
+          style={{
+            y,
+            fontSize: 24,
+            fontWeight: 300,
+            letterSpacing: '-0.03em',
+            color: 'var(--text)',
+            textAlign: 'center',
+          }}
+        >
+          Interfaces built<br />to a standard<br />you can feel.
+        </motion.div>
+      </div>
+
+      {/* Spacer to allow scroll */}
+      <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--hint)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          ↑ scroll
+        </span>
+      </div>
     </div>
   )
 }
