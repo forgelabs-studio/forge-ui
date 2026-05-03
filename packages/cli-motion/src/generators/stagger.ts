@@ -12,7 +12,7 @@ export function generateStagger(props: Record<string, unknown>): string {
 
 'use client'
 
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeStaggerProps {
