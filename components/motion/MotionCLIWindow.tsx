@@ -1,33 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import type { MotionPresetId } from '@/components/motion/MotionPlaygroundLayout'
+import { buildMotionCLIFlags, buildMotionCLIString } from '@/lib/motion-cli-builder'
+import { MOTION_PRESET_BY_ID, type MotionPresetId, type MotionPresetProps } from '@/lib/motion'
 
 interface MotionCLIWindowProps {
   activePreset: MotionPresetId
+  props: MotionPresetProps
 }
 
-const DISPLAY_NAMES: Record<MotionPresetId, string> = {
-  'fade-up':        'ForgeFadeUp',
-  'fade-down':      'ForgeFadeDown',
-  'fade-in':        'ForgeFadeIn',
-  'slide-in-left':  'ForgeSlideInLeft',
-  'slide-in-right': 'ForgeSlideInRight',
-  'scale-in':       'ForgeScaleIn',
-  'bounce-in':      'ForgeBounceIn',
-  stagger:          'ForgeStagger',
-  parallax:         'ForgeParallax',
-  reveal:           'ForgeReveal',
-  float:            'ForgeFloat',
-  pulse:            'ForgePulse',
-  'count-up':       'ForgeCountUp',
-  typewriter:       'ForgeTypewriter',
-}
-
-export function MotionCLIWindow({ activePreset }: MotionCLIWindowProps) {
+export function MotionCLIWindow({ activePreset, props }: MotionCLIWindowProps) {
   const [cliOk, setCliOk] = useState(false)
-  const cliString = `npx @forgelabs-studio/motion add ${activePreset}`
-  const displayName = DISPLAY_NAMES[activePreset]
+  const cliString = buildMotionCLIString(activePreset, props)
+  const flags = buildMotionCLIFlags(activePreset, props)
+  const displayName = MOTION_PRESET_BY_ID[activePreset].displayName
 
   function copyCLI() {
     navigator.clipboard.writeText(cliString).then(() => {
@@ -63,6 +49,18 @@ export function MotionCLIWindow({ activePreset }: MotionCLIWindowProps) {
             <span className="t-sub">add</span>
             {' '}
             <span className="t-comp">{activePreset}</span>
+            {flags.map(({ key, value }) => (
+              <span key={key} className="flag-new">
+                {' '}
+                <span className="t-key">{key}</span>
+                {value !== null && (
+                  <>
+                    =
+                    <span className="t-val">{value}</span>
+                  </>
+                )}
+              </span>
+            ))}
             <span className="t-cursor" />
           </div>
         </div>

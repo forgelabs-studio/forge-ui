@@ -16,6 +16,7 @@ program
 program
   .command('add <preset>')
   .description('Add a motion preset')
+  .allowUnknownOption(true)
   .action((preset: string, _opts: unknown, cmd: Command) => {
     const rawFlags = cmd.args.slice(1)
     runAdd(preset, rawFlags)

@@ -3,10 +3,11 @@ import { readConfig, writeConfig, createDefaultConfig } from '../config.js'
 import { REGISTRY_BY_ID } from '../registry.js'
 import { generatePreset } from '../generate.js'
 import { setPresetVersion } from '../manifest.js'
+import { parseMotionFlags } from '../flags.js'
 
 export async function runAdd(
   presetId: string,
-  _rawFlags: string[],
+  rawFlags: string[],
 ): Promise<void> {
   console.log(pc.bold(`\n  forge-motion add ${presetId}\n`))
 
@@ -24,7 +25,7 @@ export async function runAdd(
       console.log(pc.dim('  No motion config found in forge.config.json — creating one.\n'))
     }
 
-    const props: Record<string, unknown> = {}
+    const props = parseMotionFlags(rawFlags)
 
     await generatePreset(presetId, meta.displayName, props, config)
 

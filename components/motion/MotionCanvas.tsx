@@ -1,14 +1,16 @@
 'use client'
 
 import { lazy, Suspense } from 'react'
-import type { MotionPresetId } from '@/components/motion/MotionPlaygroundLayout'
+import type { ComponentType } from 'react'
+import { MOTION_PRESET_BY_ID, type MotionPresetId, type MotionPresetProps } from '@/lib/motion'
 import { MotionCLIWindow } from '@/components/motion/MotionCLIWindow'
 
 interface MotionCanvasProps {
   activePreset: MotionPresetId
+  props: MotionPresetProps
 }
 
-const PRESETS = {
+const PRESETS: Record<MotionPresetId, React.LazyExoticComponent<ComponentType<MotionPresetProps>>> = {
   'fade-up':        lazy(() => import('@/components/motion/presets/FadeUp')),
   'fade-down':      lazy(() => import('@/components/motion/presets/FadeDown')),
   'fade-in':        lazy(() => import('@/components/motion/presets/FadeIn')),
@@ -25,31 +27,15 @@ const PRESETS = {
   typewriter:       lazy(() => import('@/components/motion/presets/Typewriter')),
 }
 
-const PRESET_LABELS: Record<MotionPresetId, string> = {
-  'fade-up':        'FadeUp',
-  'fade-down':      'FadeDown',
-  'fade-in':        'FadeIn',
-  'slide-in-left':  'SlideInLeft',
-  'slide-in-right': 'SlideInRight',
-  'scale-in':       'ScaleIn',
-  'bounce-in':      'BounceIn',
-  stagger:          'Stagger',
-  parallax:         'Parallax',
-  reveal:           'Reveal',
-  float:            'Float',
-  pulse:            'Pulse',
-  'count-up':       'CountUp',
-  typewriter:       'Typewriter',
-}
-
-export function MotionCanvas({ activePreset }: MotionCanvasProps) {
+export function MotionCanvas({ activePreset, props }: MotionCanvasProps) {
   const Preset = PRESETS[activePreset]
+  const meta = MOTION_PRESET_BY_ID[activePreset]
 
   return (
     <div className="centre">
       <div className="prev-bar">
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)' }}>
-          Forge{PRESET_LABELS[activePreset]}
+          {meta.displayName}
         </span>
         <span
           style={{
@@ -75,11 +61,11 @@ export function MotionCanvas({ activePreset }: MotionCanvasProps) {
         }}
       >
         <Suspense fallback={<span style={{ color: 'var(--muted)', fontSize: 13, fontFamily: 'var(--font)' }}>Loading…</span>}>
-          <Preset />
+          <Preset {...props} />
         </Suspense>
       </div>
 
-      <MotionCLIWindow activePreset={activePreset} />
+      <MotionCLIWindow activePreset={activePreset} props={props} />
     </div>
   )
 }
