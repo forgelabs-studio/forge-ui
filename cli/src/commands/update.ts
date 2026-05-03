@@ -11,7 +11,7 @@ export async function runUpdate(componentId: string): Promise<void> {
 
     if (!config) {
       console.log(
-        pc.red("  No forge.config.json found. Run npx forge-ui init first.\n"),
+        pc.red("  No forge.config.json found. Run npx @forgelabs-studio/ui init first.\n"),
       );
       process.exit(1);
     }
@@ -20,7 +20,7 @@ export async function runUpdate(componentId: string): Promise<void> {
     if (!savedProps) {
       console.log(pc.red(`  "${componentId}" is not in forge.config.json.`));
       console.log(
-        pc.dim("  Run npx forge-ui add " + componentId + " first.\n"),
+        pc.dim("  Run npx @forgelabs-studio/ui add " + componentId + " first.\n"),
       );
       process.exit(1);
     }

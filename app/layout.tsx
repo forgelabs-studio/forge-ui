@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     'Open source React components, design token pipelines, and animation primitives.',
   icons: {
+    icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
 }

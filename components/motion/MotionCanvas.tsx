@@ -2,6 +2,7 @@
 
 import { lazy, Suspense } from 'react'
 import type { MotionPresetId } from '@/components/motion/MotionPlaygroundLayout'
+import { MotionCLIWindow } from '@/components/motion/MotionCLIWindow'
 
 interface MotionCanvasProps {
   activePreset: MotionPresetId
@@ -77,6 +78,8 @@ export function MotionCanvas({ activePreset }: MotionCanvasProps) {
           <Preset />
         </Suspense>
       </div>
+
+      <MotionCLIWindow activePreset={activePreset} />
     </div>
   )
 }

@@ -1,58 +1,63 @@
 # @forgelabs-studio/ui
 
-Spectrum-aware, motion-first React component library.  
-Configure visually in the playground — install with one command — own the generated files.
+Spectrum-aware React component generator. Configure visually in the playground, install with one command, and own the generated files.
 
-**[→ Open the playground](https://forgelabs.studio)**
+**[→ Open the playground](https://forgelabs.studio/playground/ui)**
 
-## Quick start
+## Quick Start
+
 ```bash
 npx @forgelabs-studio/ui init
 ```
 
 This creates `forge.config.json` and `components/forge/forge-tokens.css` in your project.
 
-Import the tokens in your root layout:
+Import the tokens in your root layout or global CSS entry:
+
 ```tsx
 import '@/components/forge/forge-tokens.css'
 ```
 
-## Add a component
+## Add a Component
 
-Configure any component visually at [forgelabs.studio](https://forgelabs.studio) and copy the generated command, or add with defaults:
+Configure any component visually and copy the generated command, or add one with defaults:
+
 ```bash
-npx @forgelabs-studio/ui add button --color=#7F77DD --variant=glow
+npx @forgelabs-studio/ui add button --color='#7F77DD' --variant='glow'
 ```
 
-This writes two files into your project:
-```
+This writes local files into your project:
+
+```text
 components/forge/ForgeButton.tsx
 components/forge/ForgeButton.css
 ```
 
 You own these files. Edit them freely.
 
-## CLI reference
+## CLI Reference
 
 | Command | Description |
 |---------|-------------|
 | `npx @forgelabs-studio/ui init` | Create config and tokens file |
 | `npx @forgelabs-studio/ui add <component>` | Add a component |
-| `npx @forgelabs-studio/ui list` | List all available and installed components |
-| `npx @forgelabs-studio/ui update <component>` | Regenerate with original config |
+| `npx @forgelabs-studio/ui list` | List available and installed components |
+| `npx @forgelabs-studio/ui update <component>` | Regenerate with saved config |
 | `npx @forgelabs-studio/ui remove <component>` | Remove component files |
 
-## Flags
+## Common Flags
 
 | Flag | Description |
 |------|-------------|
-| `--color` | Primary hex colour — derives all states |
+| `--color` | Primary hex colour |
 | `--variant` | Component variant |
-| `--size` | Size preset (sm, md, lg, xl) |
+| `--size` | Size preset |
 | `--radius` | Border radius in px |
-| `--hover` | Hover effect (lift, scale, glow, none) |
-| `--animation` | Click animation (ripple, scale, bounce, none) |
-| `--shadow` | Shadow style (glow, soft, hard, none) |
+| `--hover` | Hover effect |
+| `--animation` | Interaction animation |
+| `--shadow` | Shadow style |
+
+The playground emits the exact flag set for the selected component.
 
 ## Components
 
@@ -60,10 +65,12 @@ You own these files. Edit them freely.
 
 **Motion:** Spinner, FadeUp, Ticker, MorphBlob, CountUp
 
-**Charts:** BarChart, LineChart, Donut, Progress, Sparkline  
-*Note: Chart.js is required as a peer dependency. Add it to your layout via CDN:*
+**Charts:** BarChart, LineChart, Donut, Progress, Sparkline
+
+Chart components expect Chart.js to be available in the consuming app:
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 ```
 
 **Navigation:** Command, Navbar, Breadcrumb, Pagination, SideNav, Tabs
@@ -74,20 +81,21 @@ You own these files. Edit them freely.
 
 **Data:** Table
 
-## Design tokens
+## Design Tokens
 
-Override any token in your globals to retheme everything:
+Override tokens in your globals to retheme generated components:
+
 ```css
 :root {
   --forge-purple: #5B5BF0;
-  --forge-bg:     #06060a;
-  --forge-font:   'Geist', sans-serif;
+  --forge-bg: #06060a;
+  --forge-font: 'Inter', sans-serif;
 }
 ```
 
 ## Philosophy
 
-Most component libraries ship as a black box. FORGE.ui uses the shadcn model — the files live in your project and belong to you — but adds a visual playground that pre-configures everything before copying, and a config file that tracks what's installed so updates work cleanly later.
+FORGE.ui follows an ownership-first model: the CLI writes editable component files into your app instead of adding a runtime component library dependency.
 
 ## Licence
 

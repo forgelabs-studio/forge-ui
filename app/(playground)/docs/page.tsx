@@ -86,7 +86,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
           <div className="d-card-num">Update</div>
           <div className="d-card-title">Preserved config</div>
           <div className="d-card-desc">
-            <code>npx forge-ui update</code> regenerates with your original
+            <code>npx @forgelabs-studio/ui update</code> regenerates with your original
             flags intact.
           </div>
         </div>
@@ -118,7 +118,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <p className="d-lead">Up and running in four commands.</p>
       <h2 className="d-h2">1. Init</h2>
       <CB lang="bash">
-        <span className="str">npx forge-ui@latest init</span>
+        <span className="str">npx @forgelabs-studio/ui@latest init</span>
       </CB>
       <p className="d-p">
         Creates <code>forge.config.json</code> and{' '}
@@ -138,7 +138,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       </p>
       <CB lang="bash">
         <span className="str">
-          npx forge-ui add button <span className="kw">--color</span>=#7F77DD{' '}
+          npx @forgelabs-studio/ui add button <span className="kw">--color</span>=#7F77DD{' '}
           <span className="kw">--variant</span>=glow
         </span>
       </CB>
@@ -325,7 +325,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <h2 className="d-h2">Install</h2>
       <CB lang="bash">
         <span className="str">
-          npx forge-ui add button <span className="kw">--color</span>=#7F77DD{' '}
+          npx @forgelabs-studio/ui add button <span className="kw">--color</span>=#7F77DD{' '}
           <span className="kw">--variant</span>=glow{' '}
           <span className="kw">--hover</span>=lift
         </span>
@@ -396,7 +396,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <h2 className="d-h2">Install</h2>
       <CB lang="bash">
         <span className="str">
-          npx forge-ui add card <span className="kw">--color</span>=#7F77DD
+          npx @forgelabs-studio/ui add card <span className="kw">--color</span>=#7F77DD
         </span>
       </CB>
       <h2 className="d-h2">Props</h2>
@@ -451,7 +451,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <h2 className="d-h2">Install</h2>
       <CB lang="bash">
         <span className="str">
-          npx forge-ui add input <span className="kw">--color</span>=#7F77DD{' '}
+          npx @forgelabs-studio/ui add input <span className="kw">--color</span>=#7F77DD{' '}
           <span className="kw">--state</span>=default
         </span>
       </CB>
@@ -516,7 +516,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <h2 className="d-h2">Install</h2>
       <CB lang="bash">
         <span className="str">
-          npx forge-ui add badge <span className="kw">--color</span>=#1D9E75{' '}
+          npx @forgelabs-studio/ui add badge <span className="kw">--color</span>=#1D9E75{' '}
           <span className="kw">--variant</span>=pill
         </span>
       </CB>
@@ -580,27 +580,27 @@ const DOCS: Record<DocId, React.ReactNode> = {
             [
               'ForgeFadeUp',
               'Text reveal with per-line stagger',
-              'npx forge-ui add fadeup',
+              'npx @forgelabs-studio/ui add fadeup',
             ],
             [
               'ForgeTicker',
               'Infinite horizontal scroll ticker',
-              'npx forge-ui add ticker',
+              'npx @forgelabs-studio/ui add ticker',
             ],
             [
               'ForgeMorphBlob',
               'CSS border-radius morphing blob',
-              'npx forge-ui add morphblob',
+              'npx @forgelabs-studio/ui add morphblob',
             ],
             [
               'ForgeCountUp',
               'requestAnimationFrame counter',
-              'npx forge-ui add countup',
+              'npx @forgelabs-studio/ui add countup',
             ],
             [
               'ForgeSpinner',
               '5 loading spinner variants',
-              'npx forge-ui add spinner',
+              'npx @forgelabs-studio/ui add spinner',
             ],
           ].map(([comp, desc, cmd]) => (
             <tr key={comp}>
@@ -668,22 +668,22 @@ const DOCS: Record<DocId, React.ReactNode> = {
         </thead>
         <tbody>
           {[
-            ['ForgeBarChart', 'Grouped bar chart', 'npx forge-ui add barchart'],
+            ['ForgeBarChart', 'Grouped bar chart', 'npx @forgelabs-studio/ui add barchart'],
             [
               'ForgeLineChart',
               'Line chart with optional fill',
-              'npx forge-ui add linechart',
+              'npx @forgelabs-studio/ui add linechart',
             ],
-            ['ForgeDonut', 'Donut/pie chart', 'npx forge-ui add donut'],
+            ['ForgeDonut', 'Donut/pie chart', 'npx @forgelabs-studio/ui add donut'],
             [
               'ForgeProgress',
               'Linear progress bar',
-              'npx forge-ui add progress',
+              'npx @forgelabs-studio/ui add progress',
             ],
             [
               'ForgeSparkline',
               'Inline sparkline',
-              'npx forge-ui add sparkline',
+              'npx @forgelabs-studio/ui add sparkline',
             ],
           ].map(([comp, desc, cmd]) => (
             <tr key={comp}>
@@ -763,20 +763,20 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <tbody>
           {[
             [
-              'npx forge-ui init',
+              'npx @forgelabs-studio/ui init',
               'Create forge.config.json and forge-tokens.css',
             ],
             [
-              'npx forge-ui add <component>',
+              'npx @forgelabs-studio/ui add <component>',
               'Add one or more components with optional flags',
             ],
             [
-              'npx forge-ui update <component>',
+              'npx @forgelabs-studio/ui update <component>',
               'Regenerate component with original flags',
             ],
-            ['npx forge-ui list', 'List all installed components'],
+            ['npx @forgelabs-studio/ui list', 'List all installed components'],
             [
-              'npx forge-ui remove <component>',
+              'npx @forgelabs-studio/ui remove <component>',
               'Remove a component and its CSS file',
             ],
           ].map(([cmd, desc]) => (
@@ -847,7 +847,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <div className="d-eyebrow">CLI reference</div>
       <h1 className="d-h1">forge.config.json</h1>
       <p className="d-lead">
-        Created by <code>npx forge-ui init</code>. Tracks installed components
+        Created by <code>npx @forgelabs-studio/ui init</code>. Tracks installed components
         so <code>update</code> knows which flags to use.
       </p>
       <CB lang="json — forge.config.json">
@@ -879,7 +879,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
         {'}'}
       </CB>
       <p className="d-p">
-        When you run <code>npx forge-ui update button</code>, the CLI reads the
+        When you run <code>npx @forgelabs-studio/ui update button</code>, the CLI reads the
         stored flags and regenerates the component file exactly as it was
         configured — preserving your colour and variant choices across library
         updates.
@@ -888,7 +888,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <div className="callout-icon">i</div>
         <div>
           Commit <code>forge.config.json</code> to version control. Other
-          developers on your team can run <code>npx forge-ui update --all</code>{' '}
+          developers on your team can run <code>npx @forgelabs-studio/ui update --all</code>{' '}
           to regenerate all components to the same specification.
         </div>
       </div>

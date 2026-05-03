@@ -137,7 +137,7 @@ export default function OGImage() {
                 letterSpacing: '0.04em',
               }}
             >
-              forge.ui · v0.3.0
+              forge.ui · v0.4.0
             </span>
           </div>
         </div>

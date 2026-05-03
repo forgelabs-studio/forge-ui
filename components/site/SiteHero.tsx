@@ -39,7 +39,7 @@ export default function SiteHero() {
                 showDot
                 dotPulse
               >
-                forge.ui · v0.3.0
+                forge.ui · v0.4.0
               </ForgeBadge>
             </div>
 

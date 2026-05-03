@@ -13,7 +13,7 @@ export async function runAdd(
   const meta = REGISTRY_BY_ID[presetId]
   if (!meta) {
     console.log(pc.red(`  Unknown preset: "${presetId}"`))
-    console.log(pc.dim('  Run npx forge-motion list to see available presets.\n'))
+    console.log(pc.dim('  Run npx @forgelabs-studio/motion list to see available presets.\n'))
     process.exit(1)
   }
 

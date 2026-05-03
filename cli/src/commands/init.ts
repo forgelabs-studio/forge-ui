@@ -10,7 +10,7 @@ export async function runInit(): Promise<void> {
   const existing = await readConfig()
   if (existing) {
     console.log(pc.yellow('  forge.config.json already exists — skipping.'))
-    console.log(pc.dim('  Run npx forge-ui add <component> to add components.\n'))
+    console.log(pc.dim('  Run npx @forgelabs-studio/ui add <component> to add components.\n'))
     return
   }
 
