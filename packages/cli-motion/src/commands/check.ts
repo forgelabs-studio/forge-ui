@@ -1,0 +1,55 @@
+import pc from 'picocolors'
+import semver from 'semver'
+import { readManifest } from '../manifest.js'
+
+const PACKAGE_NAME = '@forgelabs-studio/motion'
+
+async function fetchLatestVersion(): Promise<string> {
+  const res = await fetch(`https://registry.npmjs.org/${PACKAGE_NAME}/latest`)
+  if (!res.ok) throw new Error(`npm registry returned ${res.status}`)
+  const data = await res.json() as { version: string }
+  return data.version
+}
+
+export async function runCheck(): Promise<void> {
+  console.log(pc.bold('\n  forge-motion check\n'))
+
+  try {
+    const manifest = await readManifest()
+    const installed = Object.entries(manifest)
+
+    if (installed.length === 0) {
+      console.log(pc.dim('  No presets installed. Run npx forge-motion add <preset> to get started.\n'))
+      return
+    }
+
+    console.log(pc.dim('  Checking latest version on npm…\n'))
+    const latest = await fetchLatestVersion()
+
+    let allUpToDate = true
+
+    for (const [presetId, installedVersion] of installed) {
+      const isOutdated = semver.lt(installedVersion, latest)
+      if (isOutdated) {
+        allUpToDate = false
+        console.log(
+          `  ${pc.yellow('!')} ${pc.white(presetId.padEnd(20))} ${pc.dim(installedVersion)} → ${pc.cyan(latest)}`
+        )
+      } else {
+        console.log(
+          `  ${pc.green('✓')} ${pc.white(presetId.padEnd(20))} ${pc.dim(installedVersion)}`
+        )
+      }
+    }
+
+    if (!allUpToDate) {
+      console.log(pc.dim('\n  Update with: npx forge-motion add <preset> --force\n'))
+    } else {
+      console.log(pc.dim('\n  All presets are up to date.\n'))
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(pc.red(`\n  ✖ Check failed: ${message}\n`))
+    process.exit(1)
+  }
+}
