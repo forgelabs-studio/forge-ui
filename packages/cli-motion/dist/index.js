@@ -770,8 +770,69 @@ async function removePresetVersion(presetId) {
   await writeManifest(manifest);
 }
 
+// src/flags.ts
+var FLAG_TO_PROP = {
+  "--duration": "duration",
+  "--delay": "delay",
+  "--distance": "distance",
+  "--ease": "ease",
+  "--once": "once",
+  "--scale": "scale",
+  "--stiffness": "stiffness",
+  "--damping": "damping",
+  "--stagger-delay": "staggerDelay",
+  "--speed": "speed",
+  "--from": "from",
+  "--to": "to",
+  "--text": "text"
+};
+var NUMBER_PROPS = /* @__PURE__ */ new Set([
+  "duration",
+  "delay",
+  "distance",
+  "scale",
+  "stiffness",
+  "damping",
+  "staggerDelay",
+  "speed",
+  "from",
+  "to"
+]);
+function coerceValue(prop, value) {
+  if (typeof value === "boolean") return value;
+  if (prop === "once") return value !== "false";
+  if (!NUMBER_PROPS.has(prop)) return value;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    throw new Error(`Invalid numeric value for ${prop}: ${value}`);
+  }
+  return parsed;
+}
+function parseMotionFlags(rawFlags) {
+  const props = {};
+  for (let i = 0; i < rawFlags.length; i += 1) {
+    const current = rawFlags[i];
+    if (!current.startsWith("--")) continue;
+    const [flag, inlineValue] = current.split("=", 2);
+    const prop = FLAG_TO_PROP[flag];
+    if (!prop) continue;
+    const next = rawFlags[i + 1];
+    let value;
+    if (inlineValue !== void 0) {
+      value = inlineValue;
+    } else if (next && !next.startsWith("--")) {
+      value = next;
+      i += 1;
+    } else {
+      value = true;
+    }
+    props[prop] = coerceValue(prop, value);
+  }
+  return props;
+}
+
 // src/commands/add.ts
-async function runAdd(presetId, _rawFlags) {
+async function runAdd(presetId, rawFlags) {
   console.log(pc.bold(`
   forge-motion add ${presetId}
 `));
@@ -787,7 +848,7 @@ async function runAdd(presetId, _rawFlags) {
       config = createDefaultConfig();
       console.log(pc.dim("  No motion config found in forge.config.json \u2014 creating one.\n"));
     }
-    const props = {};
+    const props = parseMotionFlags(rawFlags);
     await generatePreset(presetId, meta.displayName, props, config);
     config.presets[presetId] = props;
     await writeConfig(config);
@@ -943,7 +1004,7 @@ async function runCheck() {
 // src/index.ts
 var program = new Command();
 program.name("forge-motion").description("FORGE.motion \u2014 scroll-triggered and viewport-aware animation presets for React").version("0.1.0");
-program.command("add <preset>").description("Add a motion preset").action((preset, _opts, cmd) => {
+program.command("add <preset>").description("Add a motion preset").allowUnknownOption(true).action((preset, _opts, cmd) => {
   const rawFlags = cmd.args.slice(1);
   runAdd(preset, rawFlags);
 });

@@ -44,6 +44,23 @@ You own this file. Edit it freely.
 
 **Continuous:** Float, Pulse
 
+## Common Flags
+
+| Flag | Description |
+|------|-------------|
+| `--duration` | Animation duration in seconds |
+| `--delay` | Delay before animation starts |
+| `--distance` | Translate distance in px |
+| `--ease` | Easing preset: linear, easeIn, easeOut, easeInOut |
+| `--once` | Whether viewport animations run only once |
+| `--scale` | Starting or loop scale |
+| `--stiffness` | Spring stiffness for BounceIn |
+| `--damping` | Spring damping for BounceIn |
+| `--stagger-delay` | Delay between children for Stagger |
+| `--speed` | Parallax speed or Typewriter character speed |
+| `--from` / `--to` | CountUp range |
+| `--text` | Typewriter text |
+
 ## Config Files
 
 FORGE.motion uses two small project files:
