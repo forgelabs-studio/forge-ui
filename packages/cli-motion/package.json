@@ -1,0 +1,30 @@
+{
+  "name": "@forgelabs-studio/motion",
+  "version": "0.1.0",
+  "description": "Scroll-triggered and viewport-aware animation presets for React. Configure visually, own the generated files.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "forge-motion": "dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --target node18 --outDir dist --clean",
+    "dev": "tsup src/index.ts --format esm --target node18 --outDir dist --watch"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "@clack/prompts": "^0.7.0",
+    "picocolors": "^1.0.0",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsup": "^8.0.0",
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
