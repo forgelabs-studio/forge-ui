@@ -27,9 +27,14 @@ const NUMBER_PROPS = new Set([
   'to',
 ])
 
+const EASE_VALUES = new Set(['linear', 'easeIn', 'easeOut', 'easeInOut'])
+
 function coerceValue(prop: string, value: string | boolean): string | number | boolean {
   if (typeof value === 'boolean') return value
   if (prop === 'once') return value !== 'false'
+  if (prop === 'ease' && !EASE_VALUES.has(value)) {
+    throw new Error(`Invalid easing value: ${value}`)
+  }
   if (!NUMBER_PROPS.has(prop)) return value
 
   const parsed = Number(value)
@@ -46,7 +51,9 @@ export function parseMotionFlags(rawFlags: string[]): Record<string, unknown> {
     const current = rawFlags[i]
     if (!current.startsWith('--')) continue
 
-    const [flag, inlineValue] = current.split('=', 2)
+    const equalsIndex = current.indexOf('=')
+    const flag = equalsIndex === -1 ? current : current.slice(0, equalsIndex)
+    const inlineValue = equalsIndex === -1 ? undefined : current.slice(equalsIndex + 1)
     const prop = FLAG_TO_PROP[flag]
     if (!prop) continue
 

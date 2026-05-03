@@ -1,4 +1,5 @@
 export function generateTypewriter(props: Record<string, unknown>): string {
+  const text = (props.text as string) ?? 'Interfaces built to a standard you can feel.'
   const speed = (props.speed as number) ?? 40
   const once = (props.once as boolean) ?? true
 
@@ -12,13 +13,13 @@ import { useRef, useState, useEffect } from 'react'
 import { useInView } from 'framer-motion'
 
 interface ForgeTypewriterProps {
-  text: string
+  text?: string
   speed?: number
   once?: boolean
 }
 
 export function ForgeTypewriter({
-  text,
+  text = ${JSON.stringify(text)},
   speed = ${speed},
   once = ${once},
 }: ForgeTypewriterProps) {
