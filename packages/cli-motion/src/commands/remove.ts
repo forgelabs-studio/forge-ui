@@ -3,6 +3,7 @@ import path from 'path'
 import pc from 'picocolors'
 import { readConfig, writeConfig } from '../config.js'
 import { REGISTRY_BY_ID } from '../registry.js'
+import { removePresetVersion } from '../manifest.js'
 
 export async function runRemove(presetId: string): Promise<void> {
   console.log(pc.bold(`\n  forge-motion remove ${presetId}\n`))
@@ -30,6 +31,7 @@ export async function runRemove(presetId: string): Promise<void> {
 
     delete config.presets[presetId]
     await writeConfig(config)
+    await removePresetVersion(presetId)
 
     console.log(pc.dim('\n  Removed from forge.config.json.\n'))
   } catch (error) {

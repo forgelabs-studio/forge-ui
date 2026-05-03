@@ -742,6 +742,34 @@ async function generatePreset(presetId, displayName, props, config) {
   await fs2.writeFile(path2.join(outputDir, `${displayName}.tsx`), tsx, "utf8");
 }
 
+// src/manifest.ts
+import fs3 from "fs-extra";
+import path3 from "path";
+var MANIFEST_FILE = ".forge.json";
+var MOTION_KEY2 = "motion";
+async function readManifest() {
+  const manifestPath = path3.join(process.cwd(), MANIFEST_FILE);
+  if (!await fs3.pathExists(manifestPath)) return {};
+  const full = await fs3.readJson(manifestPath);
+  return full[MOTION_KEY2] ?? {};
+}
+async function writeManifest(manifest) {
+  const manifestPath = path3.join(process.cwd(), MANIFEST_FILE);
+  const full = await fs3.pathExists(manifestPath) ? await fs3.readJson(manifestPath) : {};
+  full[MOTION_KEY2] = manifest;
+  await fs3.writeJson(manifestPath, full, { spaces: 2 });
+}
+async function setPresetVersion(presetId, version) {
+  const manifest = await readManifest();
+  manifest[presetId] = version;
+  await writeManifest(manifest);
+}
+async function removePresetVersion(presetId) {
+  const manifest = await readManifest();
+  delete manifest[presetId];
+  await writeManifest(manifest);
+}
+
 // src/commands/add.ts
 async function runAdd(presetId, _rawFlags) {
   console.log(pc.bold(`
@@ -763,6 +791,7 @@ async function runAdd(presetId, _rawFlags) {
     await generatePreset(presetId, meta.displayName, props, config);
     config.presets[presetId] = props;
     await writeConfig(config);
+    await setPresetVersion(presetId, "0.1.0");
     console.log(pc.green("  \u2713") + ` ${meta.displayName}.tsx`);
     console.log(pc.dim(`
   Import with:`));
@@ -824,8 +853,8 @@ async function runUpdate(presetId) {
 }
 
 // src/commands/remove.ts
-import fs3 from "fs-extra";
-import path3 from "path";
+import fs4 from "fs-extra";
+import path4 from "path";
 import pc4 from "picocolors";
 async function runRemove(presetId) {
   console.log(pc4.bold(`
@@ -843,19 +872,69 @@ async function runRemove(presetId) {
 `));
       process.exit(1);
     }
-    const outputDir = path3.join(process.cwd(), config.output);
-    const tsxPath = path3.join(outputDir, `${meta.displayName}.tsx`);
-    if (await fs3.pathExists(tsxPath)) {
-      await fs3.remove(tsxPath);
+    const outputDir = path4.join(process.cwd(), config.output);
+    const tsxPath = path4.join(outputDir, `${meta.displayName}.tsx`);
+    if (await fs4.pathExists(tsxPath)) {
+      await fs4.remove(tsxPath);
       console.log(pc4.red("  \u2715") + ` ${meta.displayName}.tsx`);
     }
     delete config.presets[presetId];
     await writeConfig(config);
+    await removePresetVersion(presetId);
     console.log(pc4.dim("\n  Removed from forge.config.json.\n"));
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(pc4.red(`
   \u2716 Failed to remove ${presetId}: ${message}
+`));
+    process.exit(1);
+  }
+}
+
+// src/commands/check.ts
+import pc5 from "picocolors";
+import semver from "semver";
+var PACKAGE_NAME = "@forgelabs-studio/motion";
+async function fetchLatestVersion() {
+  const res = await fetch(`https://registry.npmjs.org/${PACKAGE_NAME}/latest`);
+  if (!res.ok) throw new Error(`npm registry returned ${res.status}`);
+  const data = await res.json();
+  return data.version;
+}
+async function runCheck() {
+  console.log(pc5.bold("\n  forge-motion check\n"));
+  try {
+    const manifest = await readManifest();
+    const installed = Object.entries(manifest);
+    if (installed.length === 0) {
+      console.log(pc5.dim("  No presets installed. Run npx forge-motion add <preset> to get started.\n"));
+      return;
+    }
+    console.log(pc5.dim("  Checking latest version on npm\u2026\n"));
+    const latest = await fetchLatestVersion();
+    let allUpToDate = true;
+    for (const [presetId, installedVersion] of installed) {
+      const isOutdated = semver.lt(installedVersion, latest);
+      if (isOutdated) {
+        allUpToDate = false;
+        console.log(
+          `  ${pc5.yellow("!")} ${pc5.white(presetId.padEnd(20))} ${pc5.dim(installedVersion)} \u2192 ${pc5.cyan(latest)}`
+        );
+      } else {
+        console.log(
+          `  ${pc5.green("\u2713")} ${pc5.white(presetId.padEnd(20))} ${pc5.dim(installedVersion)}`
+        );
+      }
+    }
+    if (!allUpToDate) {
+      console.log(pc5.dim("\n  Update with: npx forge-motion add <preset> --force\n"));
+    } else {
+      console.log(pc5.dim("\n  All presets are up to date.\n"));
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(pc5.red(`
+  \u2716 Check failed: ${message}
 `));
     process.exit(1);
   }
@@ -871,4 +950,5 @@ program.command("add <preset>").description("Add a motion preset").action((prese
 program.command("list").description("List all available and installed presets").action(() => runList());
 program.command("update <preset>").description("Regenerate a preset using its saved configuration").action((preset) => runUpdate(preset));
 program.command("remove <preset>").description("Remove a preset and its files").action((preset) => runRemove(preset));
+program.command("check").description("Check installed presets against the latest published version").action(() => runCheck());
 program.parse();

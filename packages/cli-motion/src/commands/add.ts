@@ -2,6 +2,7 @@ import pc from 'picocolors'
 import { readConfig, writeConfig, createDefaultConfig } from '../config.js'
 import { REGISTRY_BY_ID } from '../registry.js'
 import { generatePreset } from '../generate.js'
+import { setPresetVersion } from '../manifest.js'
 
 export async function runAdd(
   presetId: string,
@@ -29,6 +30,7 @@ export async function runAdd(
 
     config.presets[presetId] = props
     await writeConfig(config)
+    await setPresetVersion(presetId, '0.1.0')
 
     console.log(pc.green('  ✓') + ` ${meta.displayName}.tsx`)
     console.log(pc.dim(`\n  Import with:`))

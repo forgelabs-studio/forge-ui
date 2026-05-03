@@ -4,6 +4,7 @@ import { runAdd } from './commands/add.js'
 import { runList } from './commands/list.js'
 import { runUpdate } from './commands/update.js'
 import { runRemove } from './commands/remove.js'
+import { runCheck } from './commands/check.js'
 
 const program = new Command()
 
@@ -34,5 +35,10 @@ program
   .command('remove <preset>')
   .description('Remove a preset and its files')
   .action((preset: string) => runRemove(preset))
+
+program
+  .command('check')
+  .description('Check installed presets against the latest published version')
+  .action(() => runCheck())
 
 program.parse()
