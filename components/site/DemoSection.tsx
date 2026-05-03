@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useReveal } from "@/lib/useReveal";
 import { ForgeButton } from "@/components/forge/ForgeButton";
 import { ForgeToast } from "@/components/forge/ForgeToast";
