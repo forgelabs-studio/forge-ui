@@ -10,7 +10,14 @@ type MobileTab = 'components' | 'preview' | 'props'
 
 function ComponentsIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    >
       <rect x="1" y="1" width="5" height="5" rx="1" />
       <rect x="8" y="1" width="5" height="5" rx="1" />
       <rect x="1" y="8" width="5" height="5" rx="1" />
@@ -21,7 +28,14 @@ function ComponentsIcon() {
 
 function PreviewIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    >
       <circle cx="7" cy="7" r="5.5" />
       <path d="M5.5 5l4 2-4 2V5z" fill="currentColor" stroke="none" />
     </svg>
@@ -30,18 +44,26 @@ function PreviewIcon() {
 
 function PropsIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 14 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    >
       <path d="M2 4h10M2 7h5.5M2 10h8" />
       <circle cx="10" cy="7" r="1.5" fill="currentColor" stroke="none" />
     </svg>
   )
 }
 
-const TABS: { id: MobileTab; label: string; Icon: () => React.JSX.Element }[] = [
-  { id: 'components', label: 'Components', Icon: ComponentsIcon },
-  { id: 'preview',    label: 'Preview',    Icon: PreviewIcon    },
-  { id: 'props',      label: 'Props',      Icon: PropsIcon      },
-]
+const TABS: { id: MobileTab; label: string; Icon: () => React.JSX.Element }[] =
+  [
+    { id: 'components', label: 'Components', Icon: ComponentsIcon },
+    { id: 'preview', label: 'Preview', Icon: PreviewIcon },
+    { id: 'props', label: 'Props', Icon: PropsIcon },
+  ]
 
 export function PlaygroundLayout() {
   const [tab, setTab] = useState<MobileTab>('preview')
@@ -51,8 +73,12 @@ export function PlaygroundLayout() {
       {/* Desktop — .playground sits directly in .app's 1fr grid row */}
       <div className="playground">
         <Sidebar />
-        <ErrorBoundary><Canvas /></ErrorBoundary>
-        <ErrorBoundary><PropsPanel /></ErrorBoundary>
+        <ErrorBoundary>
+          <Canvas />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <PropsPanel />
+        </ErrorBoundary>
       </div>
 
       {/* Mobile — tab-based, one panel mounted at a time */}
@@ -62,13 +88,24 @@ export function PlaygroundLayout() {
       >
         <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
           {tab === 'components' && <Sidebar />}
-          {tab === 'preview'    && <ErrorBoundary><Canvas /></ErrorBoundary>}
-          {tab === 'props'      && <ErrorBoundary><PropsPanel /></ErrorBoundary>}
+          {tab === 'preview' && (
+            <ErrorBoundary>
+              <Canvas />
+            </ErrorBoundary>
+          )}
+          {tab === 'props' && (
+            <ErrorBoundary>
+              <PropsPanel />
+            </ErrorBoundary>
+          )}
         </div>
 
         <nav
           className="flex shrink-0"
-          style={{ borderTop: '1px solid var(--line)', background: 'var(--bg2)' }}
+          style={{
+            borderTop: '1px solid var(--line)',
+            background: 'var(--bg2)',
+          }}
         >
           {TABS.map(({ id, label, Icon }) => {
             const active = tab === id

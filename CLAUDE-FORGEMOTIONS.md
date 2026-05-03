@@ -131,6 +131,18 @@ published npm version via semver, prints a summary. Update is always explicit (`
 
 ---
 
+## GSAP — v2 consideration
+
+GSAP was discussed and deferred from v1. Reasons:
+- ScrollTrigger and advanced plugins require a paid commercial license — conflicts with the ownership model (users generating files for commercial projects need their own license)
+- Two peer deps (Framer Motion + GSAP) adds install friction for no v1 benefit
+- v1 preset list is well within Framer Motion's capabilities
+- Mixed library DX is fragmented — some presets Framer Motion, some GSAP
+
+**v2 trigger:** timeline-based or complex SVG presets that genuinely need GSAP's strengths, or a separate `@forgelabs-studio/motion-gsap` variant for users who already have GSAP licensed.
+
+---
+
 ## Architecture decisions — do not reverse without discussion
 
 - **Ownership model** — generated files have zero runtime dependency on `@forgelabs-studio/motion`
@@ -156,13 +168,13 @@ published npm version via semver, prints a summary. Update is always explicit (`
 
 ## Build order
 
-1. Monorepo migration (Turborepo + `packages/shared`) — infrastructure first
-2. `/playground/ui` route rename + redirect from `/playground`
-3. `/playground/motion` route + `MotionCanvas` + `MotionPropsPanel` shell
-4. 14 preset preview components (playground side)
-5. `packages/cli-motion/` setup + 14 generator files
-6. `check` command + `.forge.json` manifest
-7. Publish `@forgelabs-studio/motion@0.1.0`
+1. ~~Monorepo migration (Turborepo + `packages/shared`) — infrastructure first~~ ✓ 2026-04-27
+2. ~~`/playground/ui` route rename + redirect from `/playground`~~ ✓ 2026-05-02
+3. ~~`/playground/motion` route + `MotionCanvas` + `MotionPropsPanel` shell~~ ✓ 2026-05-03
+4. ~~14 preset preview components (playground side)~~ ✓ 2026-05-03
+5. ~~`packages/cli-motion/` setup + 14 generator files~~ ✓ 2026-05-03
+6. ~~`check` command + `.forge.json` manifest~~ ✓ 2026-05-03
+7. ~~Publish `@forgelabs-studio/motion@0.1.0`~~ ✓ 2026-05-03
 
 ---
 
@@ -177,3 +189,49 @@ published npm version via semver, prints a summary. Update is always explicit (`
 - Monorepo Option A decided — convert forge-ui, playground stays at root
 - `packages/shared` export surface defined (registry, ComponentId, ComponentProps)
 - `.forge.json` namespace decided — unified file covering both ui and motion
+
+### Session — 2026-05-02 / 2026-05-03
+
+**Full build order completed — FORGE.motion v0.1.0 shipped.**
+
+**Step 2 — Playground routing:**
+- `app/(playground)/layout.tsx` — stripped FORGE.ui-specific metadata, layout is now generic
+- `app/(playground)/playground/page.tsx` — replaced with landing linking to `/playground/ui` and `/playground/motion`
+- `app/(playground)/playground/ui/page.tsx` — existing UI playground moved here with FORGE.ui metadata
+- `app/(playground)/playground/motion/page.tsx` — new route with FORGE.motion metadata
+
+**Step 3 — Motion playground shell:**
+- `components/motion/MotionPlaygroundLayout.tsx` — `'use client'`, preset list nav, passes `activePreset` to canvas and props panel
+- `components/motion/MotionCanvas.tsx` — lazy-loads active preset via static map, wrapped in Suspense
+- `components/motion/MotionPropsPanel.tsx` — shell, shows active preset name (controls wired in future)
+
+**Step 4 — 14 preset preview components (`components/motion/presets/`):**
+- All use Framer Motion (`motion.div`, `useInView`, `useScroll`, `useTransform`)
+- All have `prefersReduced` check and replay button (except Float/Pulse continuous loops)
+- `Easing` type imported from `framer-motion` — not `string`
+- Parallax uses `useScroll` + `useTransform`, no `useInView`
+
+**Step 5 — `packages/cli-motion/`:**
+- Binary: `forge-motion` — commands: `add`, `list`, `update`, `remove`, `check`
+- `src/registry.ts` — 14 preset definitions with `displayName` (e.g. `ForgeFadeUp`)
+- `src/config.ts` — reads/writes `motion` section of `forge.config.json` (props for `update`)
+- `src/generate.ts` — dispatcher to 14 generator functions
+- `src/generators/` — 14 generators, each producing a standalone TSX file wrapping Framer Motion
+
+**Step 6 — `check` command + `.forge.json` manifest:**
+- `src/manifest.ts` — reads/writes `.forge.json` under `motion` key (version tracking only)
+- `check` — fetches latest `@forgelabs-studio/motion` from npm registry, compares via semver, reports outdated presets
+- `add` writes `"0.1.0"` to `.forge.json` after generating; `remove` cleans it up
+- Two files, two jobs: `forge.config.json` = props, `.forge.json` = versions
+
+**Step 7 — Published:**
+- `@forgelabs-studio/motion@0.1.0` live on npm
+- Build: 26.1 KB ESM bundle
+
+**GSAP decision:** deferred to v2. Licensing conflicts with ownership model, two peer deps unnecessary for v1 preset list. Noted in CLAUDE-FORGEMOTIONS.md.
+
+**Next session should:**
+- Wire `MotionPropsPanel` with real controls (Zustand store for motion state)
+- Connect playground props to preset preview components (pass props down through `MotionCanvas`)
+- Add CLI string builder for motion (equivalent of `lib/cli-builder.ts` for FORGE.ui)
+- Consider adding `MotionSidebar` as its own component (currently inlined in layout)

@@ -1,24 +1,22 @@
-export const dynamic = "force-static";
-
-import type { Metadata } from "next";
-import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
+import type { Metadata } from 'next'
+import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://forgelabs.studio"),
-  title: "FORGE.labs",
+  metadataBase: new URL('https://forgelabs.studio'),
+  title: 'FORGE.labs',
   description:
-    "Open source React components, design token pipelines, and animation primitives.",
+    'Open source React components, design token pipelines, and animation primitives.',
   icons: {
-    apple: "/apple-touch-icon.png",
+    apple: '/apple-touch-icon.png',
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -31,5 +29,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  );
+  )
 }
