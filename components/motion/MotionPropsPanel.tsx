@@ -23,8 +23,6 @@ const PRESET_DESCRIPTIONS: Record<MotionPresetId, string> = {
   typewriter:       'Reveals text character by character on viewport entry.',
 }
 
-const PEER_DEP = 'framer-motion'
-
 export function MotionPropsPanel({ activePreset }: MotionPropsPanelProps) {
   return (
     <aside
@@ -84,7 +82,7 @@ export function MotionPropsPanel({ activePreset }: MotionPropsPanelProps) {
             <path d="M5 1L9 3v4L5 9 1 7V3L5 1z" />
           </svg>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'rgba(55,138,221,0.7)' }}>
-            {PEER_DEP}
+            framer-motion
           </span>
         </div>
 
@@ -102,44 +100,6 @@ export function MotionPropsPanel({ activePreset }: MotionPropsPanelProps) {
         >
           Props controls coming soon. For now, configure defaults in your generated file.
         </div>
-      </div>
-
-      {/* Footer — install command */}
-      <div
-        style={{
-          padding: '12px 16px',
-          borderTop: '1px solid var(--line)',
-          flexShrink: 0,
-          background: 'var(--bg2)',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: 'var(--font)',
-            fontSize: 10,
-            color: 'var(--muted)',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            marginBottom: 8,
-          }}
-        >
-          Install
-        </div>
-        <code
-          style={{
-            display: 'block',
-            fontFamily: 'var(--font-mono)',
-            fontSize: 11,
-            color: 'var(--text)',
-            background: 'var(--bg3)',
-            border: '1px solid var(--line)',
-            borderRadius: 6,
-            padding: '8px 10px',
-            wordBreak: 'break-all',
-          }}
-        >
-          npx @forgelabs-studio/motion add {activePreset}
-        </code>
       </div>
     </aside>
   )

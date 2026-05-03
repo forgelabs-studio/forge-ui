@@ -109,7 +109,7 @@ export default function Topbar() {
         {isMotion ? (
           <span className="ver">v0.1.0 · 14 presets</span>
         ) : (
-          <span className="ver">v0.3.0 · 40 components</span>
+          <span className="ver">v0.4.0 · 40 components</span>
         )}
         {!isMotion && (
           <button className={`tbtn${initOk ? " ok" : ""}`} onClick={copyInit}>

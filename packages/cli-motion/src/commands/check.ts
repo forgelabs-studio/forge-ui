@@ -19,7 +19,7 @@ export async function runCheck(): Promise<void> {
     const installed = Object.entries(manifest)
 
     if (installed.length === 0) {
-      console.log(pc.dim('  No presets installed. Run npx forge-motion add <preset> to get started.\n'))
+      console.log(pc.dim('  No presets installed. Run npx @forgelabs-studio/motion add <preset> to get started.\n'))
       return
     }
 
@@ -43,7 +43,7 @@ export async function runCheck(): Promise<void> {
     }
 
     if (!allUpToDate) {
-      console.log(pc.dim('\n  Update with: npx forge-motion add <preset> --force\n'))
+      console.log(pc.dim('\n  Update with: npx @forgelabs-studio/motion add <preset> --force\n'))
     } else {
       console.log(pc.dim('\n  All presets are up to date.\n'))
     }

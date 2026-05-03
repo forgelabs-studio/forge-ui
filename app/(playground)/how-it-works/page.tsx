@@ -161,7 +161,7 @@ export default function HowItWorksPage() {
         </p>
         <p className="ht-p">
           When a new version of FORGE ships, run{" "}
-          <code>npx FORGE-ui update button</code> and the CLI regenerates the
+          <code>npx @forgelabs-studio/ui update button</code> and the CLI regenerates the
           file with the same flags you originally used, pulling in any
           improvements we&apos;ve made. Your customisations are preserved.
         </p>
@@ -185,12 +185,12 @@ export default function HowItWorksPage() {
 
         <CodeBlock
           lang="bash"
-          copyText={`npx FORGE-ui add ${ALL_COMPONENTS}`}
+          copyText={`npx @forgelabs-studio/ui add ${ALL_COMPONENTS}`}
           code={
             <>
               <span className="cmt">{"# Install all 40 with defaults"}</span>
               <br />
-              <span className="str">{`npx FORGE-ui add ${ALL_COMPONENTS}`}</span>
+              <span className="str">{`npx @forgelabs-studio/ui add ${ALL_COMPONENTS}`}</span>
             </>
           }
         />
@@ -198,7 +198,7 @@ export default function HowItWorksPage() {
         <div className="callout callout-info">
           <div className="callout-icon">i</div>
           <div>
-            Don&apos;t forget to run <code>npx FORGE-ui init</code> first to
+            Don&apos;t forget to run <code>npx @forgelabs-studio/ui init</code> first to
             create the tokens file and config. Import{" "}
             <code>FORGE-tokens.css</code> once in your root layout and
             you&apos;re ready.

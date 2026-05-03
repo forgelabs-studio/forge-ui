@@ -1,72 +1,60 @@
 # FORGE.labs
 
-Design engineering tooling. Open source, MIT licensed, zero runtime dependency.
+Design engineering tooling. Open source, MIT licensed, ownership-first.
 
 **[→ forgelabs.studio](https://forgelabs.studio)** · **[→ Playground](https://forgelabs.studio/playground)** · **[→ npm](https://www.npmjs.com/org/forgelabs-studio)**
 
 ---
 
-## What this is
+## What This Is
 
-A monorepo for the FORGE.labs ecosystem. The defining idea: users configure visually, install with one CLI command, and own the generated files with no runtime dependency on any FORGE package.
+FORGE.labs is a monorepo for visual playgrounds and CLIs that generate code you own. Configure components or motion presets visually, copy one command, and commit the generated files into your own app with no runtime dependency on FORGE packages.
 
 | Package | npm | Status |
 |---------|-----|--------|
-| FORGE.ui | `@forgelabs-studio/ui` | v0.3.0 — shipped |
-| FORGE.motion | `@forgelabs-studio/motion` | In development |
+| FORGE.ui | `@forgelabs-studio/ui` | v0.4.0 — shipped |
+| FORGE.motion | `@forgelabs-studio/motion` | v0.1.0 — shipped |
 | FORGE.tokens | `@forgelabs-studio/tokens` | Planned |
 
 ---
 
-## Repo structure
+## Repo Structure
 
-```
+```text
 forge-ui/
 ├── app/
-│   ├── layout.tsx              # Root layout — html/body only
-│   ├── (site)/                 # Marketing site (forgelabs.studio)
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   └── (playground)/           # Component playground
-│       ├── layout.tsx
-│       ├── playground/
-│       ├── docs/
-│       └── how-it-works/
+│   ├── (site)/                 # Marketing site at forgelabs.studio
+│   └── (playground)/           # Docs, how-it-works, UI and motion playgrounds
 ├── components/
 │   ├── site/                   # Marketing site sections
-│   ├── forge/                  # ForgeUI components (CLI-generated, self-owned)
-│   ├── playground/             # Playground UI (renderers, props panels)
-│   └── layout/                 # Shared layout (Topbar)
-├── packages/
-│   └── shared/                 # Shared registry + types across CLI packages
+│   ├── forge/                  # Generated/self-owned Forge UI components used by the site
+│   ├── playground/             # FORGE.ui playground
+│   ├── motion/                 # FORGE.motion playground
+│   └── layout/                 # Shared shell UI
 ├── cli/                        # @forgelabs-studio/ui CLI
-│   └── src/
-│       ├── index.ts            # CLI entrypoint
-│       ├── commands/           # add, init, list, update, remove
-│       ├── generators/         # 40 per-component file generators
-│       ├── generate.ts         # Generator dispatcher
-│       └── flags.ts            # Flag parser
-├── lib/                        # Playground utilities
-│   ├── registry.ts             # Component registry — source of truth
-│   ├── types.ts                # Component prop interfaces
-│   ├── cli-builder.ts          # Builds CLI command string from playground state
-│   └── utils.ts                # Shared utils
+├── packages/
+│   ├── shared/                 # Shared registry and types
+│   └── cli-motion/             # @forgelabs-studio/motion CLI
+├── lib/                        # Registries, defaults, command builders, utilities
 └── store/                      # Zustand playground state
 ```
 
 ---
 
-## FORGE.ui — 40 components
+## FORGE.ui
+
+`@forgelabs-studio/ui` generates 40 React components as local TSX/CSS files.
+
+```bash
+npx @forgelabs-studio/ui init
+npx @forgelabs-studio/ui add button --color='#7F77DD' --variant='glow'
+```
 
 **Primitives:** Button, Card, Input, Badge, Toggle, Select, Checkbox, Radio, Slider, Textarea, Avatar, StatCard, TagInput, DatePicker
 
 **Motion:** Spinner, FadeUp, Ticker, MorphBlob, CountUp
 
 **Charts:** BarChart, LineChart, Donut, Progress, Sparkline
-*Chart.js is required as a peer dependency:*
-```html
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-```
 
 **Navigation:** Command, Navbar, Breadcrumb, Pagination, SideNav, Tabs
 
@@ -76,33 +64,76 @@ forge-ui/
 
 **Data:** Table
 
+Chart components expect Chart.js to be available in the consuming app.
+
 ---
 
-## Running locally
+## FORGE.motion
+
+`@forgelabs-studio/motion` generates Framer Motion presets as local TSX files.
+
+```bash
+npx @forgelabs-studio/motion add fade-up
+npx @forgelabs-studio/motion check
+```
+
+**Presets:** FadeUp, FadeDown, FadeIn, SlideInLeft, SlideInRight, ScaleIn, BounceIn, Stagger, Parallax, Reveal, Float, Pulse, CountUp, Typewriter
+
+Generated motion presets require `framer-motion` in the consuming app.
+
+---
+
+## Running Locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Playground at `http://localhost:3000/playground`. Marketing site at `http://localhost:3000`.
+Routes:
 
-## CLI development
+- Marketing site: `http://localhost:3000`
+- Playground chooser: `http://localhost:3000/playground`
+- FORGE.ui playground: `http://localhost:3000/playground/ui`
+- FORGE.motion playground: `http://localhost:3000/playground/motion`
+- Docs: `http://localhost:3000/docs`
+
+Useful checks:
+
+```bash
+npm run typecheck
+npm test
+npm run lint
+npm run build
+```
+
+---
+
+## CLI Development
 
 ```bash
 cd cli
-npm install
 npm run build
 npm link
 ```
 
 Then `npx @forgelabs-studio/ui` resolves to your local build.
 
+For motion:
+
+```bash
+cd packages/cli-motion
+npm run build
+npm link
+```
+
+Then `npx @forgelabs-studio/motion` resolves to your local build.
+
 ---
 
 ## Contributing
 
-Open an issue before opening a PR. See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
+Open an issue before opening a PR. See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow and extension points.
 
 ## Licence
 

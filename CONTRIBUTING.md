@@ -1,79 +1,94 @@
 # Contributing to FORGE.labs
 
-Thanks for your interest in contributing to **FORGE.ui** and the broader FORGE.labs ecosystem.
+Thanks for your interest in contributing to **FORGE.ui**, **FORGE.motion**, and the broader FORGE.labs ecosystem.
 
-We aim to keep the codebase clean, consistent, and easy to extend. Please follow the guidelines below to make sure your contribution can be reviewed and merged quickly.
+The project is built around one principle: generated files belong to the user. Keep changes aligned with that ownership model.
 
 ## Getting Started
-
-1. Clone the repository:
 
 ```bash
 git clone https://github.com/forgelabs-studio/forge-ui
 cd forge-ui
-```
-
-2. Install dependencies:
-
-```bash
 npm install
-```
-
-3. Start development:
-
-```bash
 npm run dev
 ```
 
-Playground runs at `http://localhost:3000/playground`. Marketing site at `http://localhost:3000`.
+Local routes:
+
+- Marketing site: `http://localhost:3000`
+- Playground chooser: `http://localhost:3000/playground`
+- FORGE.ui playground: `http://localhost:3000/playground/ui`
+- FORGE.motion playground: `http://localhost:3000/playground/motion`
+- Docs: `http://localhost:3000/docs`
 
 ## Branch Workflow
 
-- **Never push directly to `main`**
-- Always create a new branch:
+- Never push directly to `main`.
+- Create a branch for every change:
 
 ```bash
 git checkout -b feat/your-feature-name
 ```
 
-- Open a Pull Request (PR) for all changes
-- Keep PRs focused and small where possible
+- Open a PR for review.
+- Keep PRs focused and small where possible.
 
-## Code Style Guidelines
+## Code Style
 
-- **TypeScript**
-  - `strict` mode is required
-  - Avoid `any` unless absolutely necessary
-  - No `@ts-ignore` without a clear comment explaining why
+**TypeScript**
 
-- **Styling**
-  - Use **Tailwind CSS** for playground and layout components
-  - Marketing site components (`components/site/`) use inline styles — keep consistent with existing patterns there
-  - No CSS Modules
+- `strict` mode is required.
+- Avoid `any` unless the boundary genuinely needs it.
+- Do not add `@ts-ignore` without a clear comment explaining why.
 
-- **General**
-  - Keep components simple and composable
-  - Prefer readability over cleverness
+**Styling**
 
-## Adding a New Component
+- Playground shell styles live in `app/globals.css`.
+- Generated FORGE.ui components use colocated CSS files.
+- Marketing site components under `components/site/` use the established site patterns.
+- Do not introduce CSS Modules.
 
-When adding a new FORGE.ui component, update **all of the following**:
+**General**
 
-1. `lib/registry.ts` — register the component
-2. `components/playground/renderers/` — add the playground renderer
-3. `components/playground/props/` — define editable props
-4. `cli/src/generators/` — add the CLI generator
+- Prefer the existing local patterns before adding abstractions.
+- Keep generated output dependency-light and easy for users to edit.
+- Do not add runtime dependencies to generated files unless the product model explicitly requires them, such as `framer-motion` for FORGE.motion presets.
 
-Missing one of these will result in incomplete functionality.
-
-## Monorepo structure
+## Monorepo Structure
 
 The repo uses npm workspaces:
 
-- `cli/` — `@forgelabs-studio/ui` CLI, published to npm
-- `packages/shared/` — shared registry and types consumed by CLI packages
+- `cli/` — `@forgelabs-studio/ui` CLI.
+- `packages/cli-motion/` — `@forgelabs-studio/motion` CLI.
+- `packages/shared/` — shared registry and type surfaces.
 
-When working in `packages/`, run `npm install` from the repo root to wire workspace symlinks.
+Run `npm install` from the repo root to wire workspace symlinks.
+
+## Adding a FORGE.ui Component
+
+Update all relevant surfaces:
+
+- `lib/registry.ts`
+- `lib/types.ts`
+- `lib/prop-defaults.ts`
+- `components/playground/renderers/`
+- `components/playground/props/`
+- `cli/src/generators/`
+- `cli/src/generate.ts`
+- docs or tests if the public surface changes
+
+## Adding a FORGE.motion Preset
+
+Update all relevant surfaces:
+
+- `components/motion/MotionPlaygroundLayout.tsx`
+- `components/motion/MotionCanvas.tsx`
+- `components/motion/MotionCLIWindow.tsx`
+- `components/motion/presets/`
+- `packages/cli-motion/src/registry.ts`
+- `packages/cli-motion/src/generate.ts`
+- `packages/cli-motion/src/generators/`
+- docs or tests if the public surface changes
 
 ## Running Checks
 
@@ -83,14 +98,13 @@ Before opening a PR:
 npm run typecheck
 npm test
 npm run lint
+npm run build
 ```
 
 Fix all errors and warnings before submitting.
 
 ## Final Notes
 
-- Keep PR descriptions clear and concise
-- If your change is non-trivial, explain **why**, not just what
-- If you're unsure about something, open a discussion or draft PR
-
-Thanks for contributing — this project gets better with every PR.
+- Explain why a non-trivial change exists, not only what changed.
+- Keep generated files readable; users will edit them.
+- Open a discussion or draft PR if the architecture is uncertain.

@@ -15,7 +15,7 @@ export async function runAdd(
   if (!meta) {
     console.log(pc.red(`  Unknown component: "${componentId}"`));
     console.log(
-      pc.dim("  Run npx forge-ui list to see available components.\n"),
+      pc.dim("  Run npx @forgelabs-studio/ui list to see available components.\n"),
     );
     process.exit(1);
   }
