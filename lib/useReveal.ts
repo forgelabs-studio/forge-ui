@@ -26,7 +26,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>(
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [options]);
 
   return ref;
 }
