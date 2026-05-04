@@ -55,24 +55,25 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <em>a standard you can feel.</em>
       </h1>
       <p className="d-lead">
-        FORGE.ui is a spectrum-aware, motion-first component library for React.
-        Configure visually, install with one CLI command, own the generated
-        files.
+        FORGE.ui is a spectrum-aware component generator for React. FORGE.motion
+        is its Framer Motion companion. Configure visually, install with one CLI
+        command, own the generated files.
       </p>
       <div className="d-cards">
         <div className="d-card">
           <div className="d-card-num">Configure</div>
           <div className="d-card-title">Visual playground</div>
           <div className="d-card-desc">
-            Pick any of 40 components. Adjust every property. The preview
-            updates live.
+            Pick any of 40 UI components or 14 motion presets. Adjust every
+            property. The preview updates live.
           </div>
         </div>
         <div className="d-card">
           <div className="d-card-num">Install</div>
           <div className="d-card-title">One CLI command</div>
           <div className="d-card-desc">
-            Your exact configuration baked in as flags. Copy it, run it, done.
+            Your exact UI or motion configuration baked in as flags. Copy it,
+            run it, done.
           </div>
         </div>
         <div className="d-card">
@@ -176,6 +177,21 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <br />
         {'  '})<br />
         {'}'}
+      </CB>
+      <h2 className="d-h2">Motion quick start</h2>
+      <p className="d-p">
+        FORGE.motion generates Framer Motion presets as standalone TSX files.
+        Add Framer Motion to your app, then copy a preset command from the
+        Motion playground.
+      </p>
+      <CB lang="bash">
+        <span className="str">npm install framer-motion</span>
+        <br />
+        <span className="str">
+          npx @forgelabs-studio/motion add fade-up{' '}
+          <span className="kw">--duration</span>=0.8{' '}
+          <span className="kw">--distance</span>=64
+        </span>
       </CB>
     </>
   ),
@@ -563,10 +579,11 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <div className="d-eyebrow">Component group</div>
       <h1 className="d-h1">Motion</h1>
       <p className="d-lead">
-        5 animation components. CSS keyframe-driven, no JavaScript animation
-        library required at runtime.
+        Two motion surfaces, same ownership model. FORGE.ui includes five
+        lightweight motion helpers. FORGE.motion generates 14 Framer Motion
+        presets for scroll, viewport, loop, and text effects.
       </p>
-      <h2 className="d-h2">Components</h2>
+      <h2 className="d-h2">FORGE.ui motion helpers</h2>
       <table className="d-table">
         <thead>
           <tr>
@@ -618,10 +635,57 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <div className="callout callout-tip">
         <div className="callout-icon">✦</div>
         <div>
-          All motion components respect <code>prefers-reduced-motion</code> —
+          All generated motion output respects <code>prefers-reduced-motion</code> —
           animations are automatically disabled for users who have opted out.
         </div>
       </div>
+      <h2 className="d-h2">FORGE.motion presets</h2>
+      <p className="d-p">
+        Use <code>@forgelabs-studio/motion</code> when you want Framer
+        Motion-powered entrance, scroll, loop, number, and text presets.
+        Generated files live in <code>components/motion</code> by default and
+        are tracked under the <code>motion</code> key in <code>.forge.json</code>.
+      </p>
+      <CB lang="bash">
+        <span className="str">
+          npx @forgelabs-studio/motion add fade-up{' '}
+          <span className="kw">--duration</span>=0.8{' '}
+          <span className="kw">--distance</span>=64
+        </span>
+        <br />
+        <span className="str">
+          npx @forgelabs-studio/motion add stagger{' '}
+          <span className="kw">--stagger-delay</span>=0.12
+        </span>
+        <br />
+        <span className="str">npx @forgelabs-studio/motion check</span>
+      </CB>
+      <table className="d-table">
+        <thead>
+          <tr>
+            <th>Preset</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['fade-up / fade-down / fade-in', 'Viewport entrance opacity and translate'],
+            ['slide-in-left / slide-in-right', 'Directional entrance animations'],
+            ['scale-in / bounce-in', 'Scale and spring-based entrances'],
+            ['stagger', 'Children enter sequentially'],
+            ['parallax / reveal', 'Scroll offset and clip-path wipe effects'],
+            ['float / pulse', 'Continuous idle loops'],
+            ['count-up / typewriter', 'Viewport-triggered number and text reveals'],
+          ].map(([preset, desc]) => (
+            <tr key={preset}>
+              <td>
+                <code>{preset}</code>
+              </td>
+              <td style={{ fontSize: 12, color: 'var(--muted)' }}>{desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   ),
 
@@ -767,7 +831,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
               'Create forge.config.json and forge-tokens.css',
             ],
             [
-              'npx @forgelabs-studio/ui add <component>',
+              'npx @forgelabs-studio/ui add <component...>',
               'Add one or more components with optional flags',
             ],
             [
@@ -778,6 +842,14 @@ const DOCS: Record<DocId, React.ReactNode> = {
             [
               'npx @forgelabs-studio/ui remove <component>',
               'Remove a component and its CSS file',
+            ],
+            [
+              'npx @forgelabs-studio/motion add <preset>',
+              'Add a Framer Motion preset',
+            ],
+            [
+              'npx @forgelabs-studio/motion check',
+              'Check installed motion preset versions',
             ],
           ].map(([cmd, desc]) => (
             <tr key={cmd}>
@@ -812,12 +884,10 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <tbody>
           {[
             ['--color', 'hex string', 'Primary colour. Derives all states.'],
-            [
-              '--output',
-              'path',
-              'Output directory (default: components/forge)',
-            ],
-            ['--overwrite', 'boolean', 'Overwrite existing files'],
+            ['--variant', 'string', 'Component variant where supported.'],
+            ['--size', 'string', 'Size preset where supported.'],
+            ['--radius', 'number', 'Border radius in px where supported.'],
+            ['--duration', 'number', 'Animation duration where supported.'],
           ].map(([flag, type, desc]) => (
             <tr key={flag}>
               <td>
@@ -888,8 +958,9 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <div className="callout-icon">i</div>
         <div>
           Commit <code>forge.config.json</code> to version control. Other
-          developers on your team can run <code>npx @forgelabs-studio/ui update --all</code>{' '}
-          to regenerate all components to the same specification.
+          developers on your team can run{' '}
+          <code>npx @forgelabs-studio/ui update button</code> to regenerate a
+          component to the same specification.
         </div>
       </div>
     </>

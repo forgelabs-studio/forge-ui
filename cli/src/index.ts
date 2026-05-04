@@ -11,7 +11,7 @@ const program = new Command()
 program
   .name('forge-ui')
   .description('FORGE.ui — spectrum-aware React component library')
-  .version('0.4.0')
+  .version('0.4.1')
 
 program
   .command('init')
