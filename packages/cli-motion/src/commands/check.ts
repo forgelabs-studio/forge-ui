@@ -43,7 +43,7 @@ export async function runCheck(): Promise<void> {
     }
 
     if (!allUpToDate) {
-      console.log(pc.dim('\n  Update with: npx @forgelabs-studio/motion add <preset> --force\n'))
+      console.log(pc.dim('\n  Update with: npx @forgelabs-studio/motion update <preset>\n'))
     } else {
       console.log(pc.dim('\n  All presets are up to date.\n'))
     }

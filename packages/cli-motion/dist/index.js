@@ -914,6 +914,9 @@ function parseMotionFlags(rawFlags) {
   return props;
 }
 
+// src/version.ts
+var PACKAGE_VERSION = "0.1.0";
+
 // src/commands/add.ts
 async function runAdd(presetId, rawFlags) {
   console.log(pc.bold(`
@@ -935,7 +938,7 @@ async function runAdd(presetId, rawFlags) {
     await generatePreset(presetId, meta.displayName, props, config);
     config.presets[presetId] = props;
     await writeConfig(config);
-    await setPresetVersion(presetId, "0.1.0");
+    await setPresetVersion(presetId, PACKAGE_VERSION);
     console.log(pc.green("  \u2713") + ` ${meta.displayName}.tsx`);
     console.log(pc.dim(`
   Import with:`));
@@ -1071,7 +1074,7 @@ async function runCheck() {
       }
     }
     if (!allUpToDate) {
-      console.log(pc5.dim("\n  Update with: npx @forgelabs-studio/motion add <preset> --force\n"));
+      console.log(pc5.dim("\n  Update with: npx @forgelabs-studio/motion update <preset>\n"));
     } else {
       console.log(pc5.dim("\n  All presets are up to date.\n"));
     }
@@ -1086,7 +1089,7 @@ async function runCheck() {
 
 // src/index.ts
 var program = new Command();
-program.name("forge-motion").description("FORGE.motion \u2014 scroll-triggered and viewport-aware animation presets for React").version("0.1.0");
+program.name("forge-motion").description("FORGE.motion \u2014 scroll-triggered and viewport-aware animation presets for React").version(PACKAGE_VERSION);
 program.command("add <preset>").description("Add a motion preset").allowUnknownOption(true).action((preset, _opts, cmd) => {
   const rawFlags = cmd.args.slice(1);
   runAdd(preset, rawFlags);

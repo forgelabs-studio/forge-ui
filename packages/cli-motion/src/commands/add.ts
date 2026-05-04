@@ -4,6 +4,7 @@ import { REGISTRY_BY_ID } from '../registry.js'
 import { generatePreset } from '../generate.js'
 import { setPresetVersion } from '../manifest.js'
 import { parseMotionFlags } from '../flags.js'
+import { PACKAGE_VERSION } from '../version.js'
 
 export async function runAdd(
   presetId: string,
@@ -31,7 +32,7 @@ export async function runAdd(
 
     config.presets[presetId] = props
     await writeConfig(config)
-    await setPresetVersion(presetId, '0.1.0')
+    await setPresetVersion(presetId, PACKAGE_VERSION)
 
     console.log(pc.green('  ✓') + ` ${meta.displayName}.tsx`)
     console.log(pc.dim(`\n  Import with:`))
