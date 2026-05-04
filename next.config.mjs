@@ -1,6 +1,9 @@
 import { withSentryConfig } from "@sentry/nextjs";
 
 const hasSentryAuthToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
+const hasSentryDsn = Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN);
+const disabledSentryModule = new URL("./lib/sentry-disabled.ts", import.meta.url)
+  .pathname;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,6 +13,13 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
+  },
+  webpack(config) {
+    if (!hasSentryDsn) {
+      config.resolve.alias["@sentry/nextjs"] = disabledSentryModule;
+    }
+
+    return config;
   },
   async headers() {
     return [
@@ -34,7 +44,7 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
+const sentryConfig = {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
@@ -80,4 +90,6 @@ export default withSentryConfig(nextConfig, {
       removeDebugLogging: true,
     },
   },
-});
+};
+
+export default hasSentryDsn ? withSentryConfig(nextConfig, sentryConfig) : nextConfig;

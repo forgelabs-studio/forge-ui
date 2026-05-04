@@ -3,7 +3,7 @@ import type { ComponentId } from "@forgelabs-studio/shared";
 export interface ForgeConfig {
   version: string;
   output: string;
-  components: Record<ComponentId, Record<string, unknown>>;
+  components: Partial<Record<ComponentId, Record<string, unknown>>>;
 }
 
 export interface CLIFlag {

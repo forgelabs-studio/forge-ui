@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import pc from "picocolors";
 import { readConfig, writeConfig, createDefaultConfig } from "../config.js";
-import { REGISTRY, REGISTRY_BY_ID } from "@forgelabs-studio/shared";
+import { REGISTRY, REGISTRY_BY_ID, isComponentId } from "@forgelabs-studio/shared";
 import { parseFlags } from "../flags.js";
 import { generateComponent } from "../generate.js";
 import type { ForgeConfig } from "../types.js";
@@ -92,8 +92,7 @@ async function addOneComponent(
   }
   seen.add(componentId);
 
-  const meta = REGISTRY_BY_ID[componentId];
-  if (!meta) {
+  if (!isComponentId(componentId)) {
     console.log(pc.red(`  Unknown component: "${componentId}"`));
     const suggestion = suggestComponentId(componentId);
     if (suggestion) {
@@ -104,6 +103,7 @@ async function addOneComponent(
     );
     return { status: "failed", componentId };
   }
+  const meta = REGISTRY_BY_ID[componentId];
 
   if (config.components[componentId]) {
     console.log(pc.yellow(`  Skipping ${meta.displayName}: already in forge.config.json`));

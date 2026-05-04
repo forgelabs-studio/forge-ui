@@ -1,10 +1,11 @@
 "use client";
 import { usePlaygroundStore } from "@/store/playground";
 import { PROP_DEFAULTS } from "@/lib/prop-defaults";
+import type { ComponentId } from "@/lib/registry";
 import { Grp, Pills, Row, Swatches } from "./props/controls";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from "react";
 
-const PROP_PANELS = {
+const PROP_PANELS: Record<ComponentId, LazyExoticComponent<ComponentType>> = {
   accordion: lazy(() => import("./props/AccordionProps")),
   alert: lazy(() => import("./props/AlertProps")),
   avatar: lazy(() => import("./props/AvatarProps")),
@@ -14,7 +15,7 @@ const PROP_PANELS = {
   button: lazy(() => import("./props/ButtonProps")),
   card: lazy(() => import("./props/CardProps")),
   checkbox: lazy(() => import("./props/CheckboxProps")),
-  cmdpalete: lazy(() => import("./props/CmdPaletteProps")),
+  cmdpalette: lazy(() => import("./props/CmdPaletteProps")),
   countup: lazy(() => import("./props/CountUpProps")),
   datepicker: lazy(() => import("./props/DatePickerProps")),
   donut: lazy(() => import("./props/DonutProps")),
@@ -63,7 +64,7 @@ export default function PropsPanel() {
   const displayName =
     activeComponent.charAt(0).toUpperCase() + activeComponent.slice(1);
 
-  const Panel = PROP_PANELS[activeComponent as keyof typeof PROP_PANELS];
+  const Panel = PROP_PANELS[activeComponent];
   return (
     <div className="props-col">
       <div className="ph">

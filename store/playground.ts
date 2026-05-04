@@ -2,21 +2,22 @@
 import { create } from "zustand";
 import { PROP_DEFAULTS } from "@/lib/prop-defaults";
 import type { ComponentProps } from "@/lib/types";
+import type { ComponentId } from "@/lib/registry";
 import { persist } from "zustand/middleware";
 
 export type CanvasMode = "c-grid" | "c-dots" | "c-dark";
 export type RadiusScale = "sharp" | "default" | "rounded";
 
 interface PlaygroundStore {
-  activeComponent: string;
-  props: Record<string, ComponentProps>;
+  activeComponent: ComponentId;
+  props: Record<ComponentId, ComponentProps>;
   canvasMode: CanvasMode;
   globalFont: string;
   globalTextColor: string;
   globalRadius: RadiusScale;
-  setActiveComponent: (id: string) => void;
+  setActiveComponent: (id: ComponentId) => void;
   setProp: (
-    componentId: string,
+    componentId: ComponentId,
     key: string,
     value: ComponentProps[string],
   ) => void;
@@ -24,7 +25,7 @@ interface PlaygroundStore {
   setGlobalFont: (font: string) => void;
   setGlobalTextColor: (color: string) => void;
   setGlobalRadius: (r: RadiusScale) => void;
-  resetComponent: (componentId: string) => void;
+  resetComponent: (componentId: ComponentId) => void;
 }
 
 export const usePlaygroundStore = create<PlaygroundStore>()(

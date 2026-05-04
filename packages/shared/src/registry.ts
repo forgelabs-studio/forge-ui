@@ -1,5 +1,3 @@
-export type ComponentId = (typeof REGISTRY)[number]["id"];
-
 export type ComponentGroup =
   | "Primitives"
   | "Motion"
@@ -19,7 +17,7 @@ export interface ComponentMeta {
   deps?: string[];
 }
 
-export const REGISTRY: ComponentMeta[] = [
+export const REGISTRY = [
   {
     id: "button",
     displayName: "ForgeButton",
@@ -344,11 +342,17 @@ export const REGISTRY: ComponentMeta[] = [
     defaultColor: "#7F77DD",
     icon: "⊞",
   },
-];
+] as const satisfies readonly ComponentMeta[];
+
+export type ComponentId = (typeof REGISTRY)[number]["id"];
 
 export const REGISTRY_BY_ID = Object.fromEntries(
   REGISTRY.map((c) => [c.id, c]),
-);
+) as Record<ComponentId, ComponentMeta>;
+
+export function isComponentId(id: string): id is ComponentId {
+  return id in REGISTRY_BY_ID;
+}
 
 export const GROUPS: ComponentGroup[] = [
   "Primitives",
