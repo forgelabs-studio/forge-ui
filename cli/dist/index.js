@@ -6908,7 +6908,7 @@ async function runRemove(componentId) {
 
 // src/index.ts
 var program = new Command();
-program.name("forge-ui").description("FORGE.ui \u2014 spectrum-aware React component library").version("0.4.0");
+program.name("forge-ui").description("FORGE.ui \u2014 spectrum-aware React component library").version("0.4.1");
 program.command("init").description("Create forge.config.json and forge-tokens.css").action(() => runInit());
 program.command("add <items...>").description("Add one or more components with optional flags").allowUnknownOption(true).action((_items, _opts, cmd) => {
   const { componentIds, rawFlags } = splitAddArgs(cmd.args);

@@ -44,7 +44,8 @@ export default function HowItWorksPage() {
           <em>to production.</em>
         </h1>
         <p className="ht-lead">
-          Four steps. No package to install at runtime. No API surface to break.
+          Four steps for UI components, the same ownership model for motion
+          presets. No package to install at runtime. No API surface to break.
           Just your code, configured exactly how you want it, living in your
           project.
         </p>
@@ -54,10 +55,11 @@ export default function HowItWorksPage() {
             <div className="step-num">01</div>
             <div className="step-title">Pick a component and configure it</div>
             <div className="step-desc">
-              Open the Playground. Select any of the 40 components from the
-              sidebar. Every property you change — colour, variant, size, hover
-              effect, animation — updates the live preview instantly.
-              You&apos;re not just browsing, you&apos;re configuring.
+              Open the Playground. Select any of the 40 UI components or switch
+              to the Motion playground for viewport and scroll presets. Every
+              property you change — colour, variant, duration, easing, distance
+              — updates the live preview instantly. You&apos;re not just
+              browsing, you&apos;re configuring.
             </div>
             <div className="step-icon">⊞</div>
           </div>
@@ -69,8 +71,8 @@ export default function HowItWorksPage() {
             <div className="step-desc">
               Watch the terminal window at the bottom of the screen. Every
               property change adds or updates a flag in the CLI command. Change
-              colour to red — <code>--color=#e24b4a</code> appears. Switch to
-              solid variant — <code>--variant=solid</code> is added. The command
+              colour to red — <code>--color=#e24b4a</code> appears. Increase a
+              motion distance — <code>--distance=64</code> is added. The command
               is always in sync.
             </div>
             <div className="step-icon">⌘</div>
@@ -84,9 +86,9 @@ export default function HowItWorksPage() {
                 ⌘ Copy command
               </strong>
               . Paste it into your terminal at the root of your Next.js or React
-              project. Two files are written: <code>ForgeButton.tsx</code> and{" "}
-              <code>ForgeButton.css</code>. They&apos;re pre-configured to your
-              exact specification.
+              project. UI components write TSX and CSS files. Motion presets
+              write standalone TSX files powered by Framer Motion. They&apos;re
+              pre-configured to your exact specification.
             </div>
             <div className="step-icon">▶</div>
           </div>
@@ -100,6 +102,46 @@ export default function HowItWorksPage() {
               automatically.
             </div>
             <div className="step-icon">◉</div>
+          </div>
+        </div>
+
+        <hr className="ht-divider" />
+
+        <h2 className="ht-h2">FORGE.motion works the same way</h2>
+        <p className="ht-p">
+          FORGE.motion is the companion package for Framer Motion presets. It
+          uses the same visual configure-and-copy workflow, but outputs
+          viewport-aware TSX components like <code>ForgeFadeUp</code>,{" "}
+          <code>ForgeStagger</code>, <code>ForgeParallax</code>, and{" "}
+          <code>ForgeTypewriter</code>.
+        </p>
+
+        <CodeBlock
+          lang="bash — add motion presets"
+          copyText={`npx @forgelabs-studio/motion add fade-up --duration=0.8 --distance=64\nnpx @forgelabs-studio/motion add stagger --stagger-delay=0.12`}
+          code={
+            <>
+              <span className="str">
+                npx @forgelabs-studio/motion add fade-up{" "}
+                <span className="kw">--duration</span>=0.8{" "}
+                <span className="kw">--distance</span>=64
+              </span>
+              <br />
+              <span className="str">
+                npx @forgelabs-studio/motion add stagger{" "}
+                <span className="kw">--stagger-delay</span>=0.12
+              </span>
+            </>
+          }
+        />
+
+        <div className="callout callout-info">
+          <div className="callout-icon">i</div>
+          <div>
+            Motion presets track installed versions in <code>.forge.json</code>{" "}
+            and saved props in <code>forge.config.json</code>. Run{" "}
+            <code>npx @forgelabs-studio/motion check</code> to see when presets
+            can be regenerated.
           </div>
         </div>
 
@@ -180,7 +222,9 @@ export default function HowItWorksPage() {
         <h2 className="ht-h2">Install everything at defaults</h2>
         <p className="ht-p">
           Don&apos;t want to configure each component individually? Install all
-          40 with one command and customise via props in your JSX later.
+          40 with one command and customise via props in your JSX later. The UI
+          CLI skips anything already installed or already present on disk, then
+          continues with the rest.
         </p>
 
         <CodeBlock
@@ -198,8 +242,8 @@ export default function HowItWorksPage() {
         <div className="callout callout-info">
           <div className="callout-icon">i</div>
           <div>
-            Don&apos;t forget to run <code>npx @forgelabs-studio/ui init</code> first to
-            create the tokens file and config. Import{" "}
+            Don&apos;t forget to run <code>npx @forgelabs-studio/ui init</code>{" "}
+            first to create the tokens file and config. Import{" "}
             <code>FORGE-tokens.css</code> once in your root layout and
             you&apos;re ready.
           </div>

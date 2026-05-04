@@ -6,12 +6,26 @@ The format is based on _Keep a Changelog_ and this project follows semantic vers
 
 ## [Unreleased]
 
+## [0.4.1] — 2026-05-04
+
+### Added
+
+- `@forgelabs-studio/ui add` now accepts multiple component ids in one command, for example `npx @forgelabs-studio/ui add button morphblob badge`.
+- UI CLI add now skips duplicate requests, existing config entries, and existing output files while continuing with the rest of the queue.
+- UI CLI add now suggests the nearest component id for likely spelling errors.
+
+### Changed
+
+- Built UI CLI bundles the private shared registry into `dist/index.js` so published/local CLI runs do not import TypeScript workspace sources at runtime.
+- Docs and How It Works now distinguish FORGE.ui motion helpers from `@forgelabs-studio/motion` Framer Motion presets.
+- Sentry release/source-map upload is gated by `SENTRY_AUTH_TOKEN`; no-token builds stay quiet and runtime reporting still uses the public DSN.
+
+## [0.4.0] — 2026-05-04
+
 ### Changed
 
 - Motion playground install command now matches the FORGE.ui command panel pattern, including copy feedback and generated-file output.
 - Documentation refreshed for the current FORGE.ui + FORGE.motion monorepo structure.
-
-## [0.4.0] — 2026-05-04
 
 ### Added
 

@@ -84,7 +84,7 @@ export default function Image() {
                   letterSpacing: "0.01em",
                 }}
               >
-                forge.ui · v0.4.0
+                forge.ui · v0.4.1
               </span>
             </div>
 
