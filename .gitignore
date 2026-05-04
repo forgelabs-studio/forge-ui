@@ -12,6 +12,8 @@ packages/*/package-lock.json
 
 # testing
 /coverage
+/playwright-report
+/test-results
 
 # next.js
 /.next/
