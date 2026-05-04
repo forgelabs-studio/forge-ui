@@ -13,7 +13,7 @@
     "audit": "npm audit --audit-level=high",
     "test": "vitest run",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@forgelabs-studio/shared": "*",
