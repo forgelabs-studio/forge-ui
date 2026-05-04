@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
 import { runInit } from './commands/init.js'
-import { runAdd } from './commands/add.js'
+import { runAdd, splitAddArgs } from './commands/add.js'
 import { runList } from './commands/list.js'
 import { runUpdate } from './commands/update.js'
 import { runRemove } from './commands/remove.js'
@@ -19,12 +19,12 @@ program
   .action(() => runInit())
 
 program
-  .command('add <component>')
-  .description('Add a component with optional flags')
+  .command('add <items...>')
+  .description('Add one or more components with optional flags')
   .allowUnknownOption(true)
-  .action((component: string, _opts: unknown, cmd: Command) => {
-    const rawFlags = cmd.args.slice(1)
-    runAdd(component, rawFlags)
+  .action((_items: string[], _opts: unknown, cmd: Command) => {
+    const { componentIds, rawFlags } = splitAddArgs(cmd.args)
+    runAdd(componentIds, rawFlags)
   })
 
 program

@@ -24,6 +24,7 @@ Configure any component visually and copy the generated command, or add one with
 
 ```bash
 npx @forgelabs-studio/ui add button --color='#7F77DD' --variant='glow'
+npx @forgelabs-studio/ui add button morphblob badge
 ```
 
 This writes local files into your project:
@@ -34,13 +35,15 @@ components/forge/ForgeButton.css
 ```
 
 You own these files. Edit them freely.
+`add` accepts multiple component ids in one command. Existing files or components already saved
+in `forge.config.json` are skipped with a warning while the rest of the queue continues.
 
 ## CLI Reference
 
 | Command | Description |
 |---------|-------------|
 | `npx @forgelabs-studio/ui init` | Create config and tokens file |
-| `npx @forgelabs-studio/ui add <component>` | Add a component |
+| `npx @forgelabs-studio/ui add <component...>` | Add one or more components |
 | `npx @forgelabs-studio/ui list` | List available and installed components |
 | `npx @forgelabs-studio/ui update <component>` | Regenerate with saved config |
 | `npx @forgelabs-studio/ui remove <component>` | Remove component files |

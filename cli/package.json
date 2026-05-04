@@ -13,8 +13,8 @@
     "templates"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --target node18 --outDir dist --clean",
-    "dev": "tsup src/index.ts --format esm --target node18 --outDir dist --watch"
+    "build": "tsup --config tsup.config.ts",
+    "dev": "tsup --config tsup.config.ts --watch"
   },
   "dependencies": {
     "@forgelabs-studio/shared": "*",
