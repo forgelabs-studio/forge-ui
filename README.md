@@ -48,6 +48,7 @@ forge-ui/
 ```bash
 npx @forgelabs-studio/ui init
 npx @forgelabs-studio/ui add button --color='#7F77DD' --variant='glow'
+npx @forgelabs-studio/ui add button morphblob badge
 ```
 
 **Primitives:** Button, Card, Input, Badge, Toggle, Select, Checkbox, Radio, Slider, Textarea, Avatar, StatCard, TagInput, DatePicker

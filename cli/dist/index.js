@@ -80,8 +80,349 @@ async function runInit() {
 }
 
 // src/commands/add.ts
+import fs4 from "fs-extra";
+import path4 from "path";
 import pc3 from "picocolors";
-import { REGISTRY_BY_ID } from "@forgelabs-studio/shared";
+
+// ../packages/shared/src/registry.ts
+var REGISTRY = [
+  {
+    id: "button",
+    displayName: "ForgeButton",
+    group: "Primitives",
+    description: "Spectrum-aware button \u2014 6 variants, ripple, glow states",
+    defaultColor: "#7F77DD",
+    icon: "\u2B1B"
+  },
+  {
+    id: "card",
+    displayName: "ForgeCard",
+    group: "Primitives",
+    description: "Card with bottom-up colour glow on hover",
+    defaultColor: "#7F77DD",
+    icon: "\u25AD"
+  },
+  {
+    id: "input",
+    displayName: "ForgeInput",
+    group: "Primitives",
+    description: "Input with focus glow and 4 validation states",
+    defaultColor: "#7F77DD",
+    icon: "\u25B1"
+  },
+  {
+    id: "badge",
+    displayName: "ForgeBadge",
+    group: "Primitives",
+    description: "Status badge with optional pulse dot",
+    defaultColor: "#1D9E75",
+    icon: "\u25C9"
+  },
+  {
+    id: "toggle",
+    displayName: "ForgeToggle",
+    group: "Primitives",
+    description: "Animated toggle switch with glow on active state",
+    defaultColor: "#7F77DD",
+    icon: "\u2B2D"
+  },
+  {
+    id: "select",
+    displayName: "ForgeSelect",
+    group: "Primitives",
+    description: "Select dropdown with colour-token focus",
+    defaultColor: "#7F77DD",
+    icon: "\u25BE"
+  },
+  {
+    id: "checkbox",
+    displayName: "ForgeCheckbox",
+    group: "Primitives",
+    description: "Checkbox with animated check and glow",
+    defaultColor: "#7F77DD",
+    icon: "\u2611"
+  },
+  {
+    id: "radio",
+    displayName: "ForgeRadio",
+    group: "Primitives",
+    description: "Radio group with colour token",
+    defaultColor: "#7F77DD",
+    icon: "\u25CE"
+  },
+  {
+    id: "slider",
+    displayName: "ForgeSlider",
+    group: "Primitives",
+    description: "Range slider with coloured fill track",
+    defaultColor: "#7F77DD",
+    icon: "\u22A3"
+  },
+  {
+    id: "textarea",
+    displayName: "ForgeTextarea",
+    group: "Primitives",
+    description: "Textarea with focus glow and character count",
+    defaultColor: "#7F77DD",
+    icon: "\u25A4"
+  },
+  {
+    id: "avatar",
+    displayName: "ForgeAvatar",
+    group: "Primitives",
+    description: "Avatar with initials, status dot, optional ring",
+    defaultColor: "#7F77DD",
+    icon: "\u25CE"
+  },
+  {
+    id: "statcard",
+    displayName: "ForgeStatCard",
+    group: "Primitives",
+    description: "Metric card with value, delta, and colour bar",
+    defaultColor: "#7F77DD",
+    icon: "\u25A3"
+  },
+  {
+    id: "taginput",
+    displayName: "ForgeTagInput",
+    group: "Primitives",
+    description: "Tag input \u2014 add and remove tags with keyboard",
+    defaultColor: "#7F77DD",
+    icon: "\u2295"
+  },
+  {
+    id: "datepicker",
+    displayName: "ForgeDatePicker",
+    group: "Primitives",
+    description: "Calendar date picker with month navigation",
+    defaultColor: "#7F77DD",
+    icon: "\u25EB"
+  },
+  {
+    id: "spinner",
+    displayName: "ForgeSpinner",
+    group: "Motion",
+    description: "Loading indicator \u2014 5 variants, pure CSS",
+    defaultColor: "#7F77DD",
+    icon: "\u27F3"
+  },
+  {
+    id: "fadeup",
+    displayName: "ForgeFadeUp",
+    group: "Motion",
+    description: "Scroll-triggered fade up with per-line stagger",
+    defaultColor: "#7F77DD",
+    icon: "\u2191"
+  },
+  {
+    id: "ticker",
+    displayName: "ForgeTicker",
+    group: "Motion",
+    description: "Infinite horizontal text ticker",
+    defaultColor: "#7F77DD",
+    icon: "\u21C4"
+  },
+  {
+    id: "morphblob",
+    displayName: "ForgeMorphBlob",
+    group: "Motion",
+    description: "Organic CSS morphing blob",
+    defaultColor: "#7F77DD",
+    icon: "\u25D0"
+  },
+  {
+    id: "countup",
+    displayName: "ForgeCountUp",
+    group: "Motion",
+    description: "Animated number counter",
+    defaultColor: "#7F77DD",
+    icon: "\u24EA"
+  },
+  {
+    id: "barchart",
+    displayName: "ForgeBarChart",
+    group: "Charts",
+    description: "Bar chart \u2014 spectrum colours, animated",
+    defaultColor: "#7F77DD",
+    icon: "\u25A6",
+    deps: ["chart.js"]
+  },
+  {
+    id: "linechart",
+    displayName: "ForgeLineChart",
+    group: "Charts",
+    description: "Line chart with fill and tension",
+    defaultColor: "#1D9E75",
+    icon: "\u2571",
+    deps: ["chart.js"]
+  },
+  {
+    id: "donut",
+    displayName: "ForgeDonut",
+    group: "Charts",
+    description: "Donut chart with centre display",
+    defaultColor: "#7F77DD",
+    icon: "\u25EF",
+    deps: ["chart.js"]
+  },
+  {
+    id: "progress",
+    displayName: "ForgeProgress",
+    group: "Charts",
+    description: "Progress bar with glow and striped option",
+    defaultColor: "#7F77DD",
+    icon: "\u25AC"
+  },
+  {
+    id: "sparkline",
+    displayName: "ForgeSparkline",
+    group: "Charts",
+    description: "Compact inline sparkline",
+    defaultColor: "#7F77DD",
+    icon: "\u2571",
+    deps: ["chart.js"]
+  },
+  {
+    id: "cmdpalette",
+    displayName: "ForgeCommand",
+    group: "Navigation",
+    description: "Command palette (\u2318K)",
+    defaultColor: "#7F77DD",
+    icon: "\u2318"
+  },
+  {
+    id: "navbar",
+    displayName: "ForgeNavbar",
+    group: "Navigation",
+    description: "Navigation bar \u2014 dark/light, CTA button",
+    defaultColor: "#7F77DD",
+    icon: "\u25AC"
+  },
+  {
+    id: "breadcrumb",
+    displayName: "ForgeBreadcrumb",
+    group: "Navigation",
+    description: "Breadcrumb with custom separator",
+    defaultColor: "#7F77DD",
+    icon: "\u203A"
+  },
+  {
+    id: "pagination",
+    displayName: "ForgePagination",
+    group: "Navigation",
+    description: "Pagination with ellipsis and count",
+    defaultColor: "#7F77DD",
+    icon: "\u22A1"
+  },
+  {
+    id: "sidenav",
+    displayName: "ForgeSideNav",
+    group: "Navigation",
+    description: "Collapsible side navigation",
+    defaultColor: "#7F77DD",
+    icon: "\u25E7"
+  },
+  {
+    id: "tabs",
+    displayName: "ForgeTabs",
+    group: "Navigation",
+    description: "Tab bar \u2014 underline, pill, line variants",
+    defaultColor: "#7F77DD",
+    icon: "\u229F"
+  },
+  {
+    id: "modal",
+    displayName: "ForgeModal",
+    group: "Overlay",
+    description: "Modal dialog \u2014 overlay, ESC to close, actions",
+    defaultColor: "#7F77DD",
+    icon: "\u25E8"
+  },
+  {
+    id: "toast",
+    displayName: "ForgeToast",
+    group: "Overlay",
+    description: "Toast notification \u2014 4 semantic variants",
+    defaultColor: "#1D9E75",
+    icon: "\u25EB"
+  },
+  {
+    id: "tooltip",
+    displayName: "ForgeTooltip",
+    group: "Overlay",
+    description: "Tooltip \u2014 dark and light, 4 positions",
+    defaultColor: "#7F77DD",
+    icon: "\u25F3"
+  },
+  {
+    id: "dropdown",
+    displayName: "ForgeDropdown",
+    group: "Overlay",
+    description: "Dropdown menu with icons and danger item",
+    defaultColor: "#7F77DD",
+    icon: "\u25BE"
+  },
+  {
+    id: "drawer",
+    displayName: "ForgeDrawer",
+    group: "Overlay",
+    description: "Side drawer \u2014 left or right, with overlay",
+    defaultColor: "#7F77DD",
+    icon: "\u25C1"
+  },
+  {
+    id: "skeleton",
+    displayName: "ForgeSkeleton",
+    group: "Feedback",
+    description: "Shimmer skeleton \u2014 card, text, profile, table",
+    defaultColor: "#7F77DD",
+    icon: "\u2592"
+  },
+  {
+    id: "alert",
+    displayName: "ForgeAlert",
+    group: "Feedback",
+    description: "Alert banner \u2014 4 semantic variants with action",
+    defaultColor: "#1D9E75",
+    icon: "\u26A0"
+  },
+  {
+    id: "stepper",
+    displayName: "ForgeStepper",
+    group: "Feedback",
+    description: "Multi-step progress \u2014 horizontal and vertical",
+    defaultColor: "#7F77DD",
+    icon: "\u2295"
+  },
+  {
+    id: "accordion",
+    displayName: "ForgeAccordion",
+    group: "Feedback",
+    description: "Expandable accordion with smooth animation",
+    defaultColor: "#7F77DD",
+    icon: "\u2630"
+  },
+  {
+    id: "table",
+    displayName: "ForgeTable",
+    group: "Data",
+    description: "Data table \u2014 striped, hover, colour token",
+    defaultColor: "#7F77DD",
+    icon: "\u229E"
+  }
+];
+var REGISTRY_BY_ID = Object.fromEntries(
+  REGISTRY.map((c) => [c.id, c])
+);
+var GROUPS = [
+  "Primitives",
+  "Motion",
+  "Charts",
+  "Navigation",
+  "Overlay",
+  "Feedback",
+  "Data"
+];
 
 // src/flags.ts
 var FLAG_TO_PROP = {
@@ -6321,16 +6662,117 @@ async function generateComponent(componentId, displayName, props, config) {
 }
 
 // src/commands/add.ts
-async function runAdd(componentId, rawFlags) {
-  console.log(pc3.bold(`
-  forge-ui add ${componentId}
-`));
+function distanceBetween(a, b) {
+  const rows = a.length + 1;
+  const cols = b.length + 1;
+  const matrix = Array.from({ length: rows }, () => Array(cols).fill(0));
+  for (let i = 0; i < rows; i += 1) matrix[i][0] = i;
+  for (let j = 0; j < cols; j += 1) matrix[0][j] = j;
+  for (let i = 1; i < rows; i += 1) {
+    for (let j = 1; j < cols; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+  return matrix[a.length][b.length];
+}
+function suggestComponentId(input) {
+  const normalized = input.toLowerCase();
+  const ranked = REGISTRY.map((component) => ({
+    id: component.id,
+    distance: distanceBetween(normalized, component.id)
+  })).sort((a, b) => a.distance - b.distance);
+  const best = ranked[0];
+  if (!best) return null;
+  const threshold = Math.max(2, Math.floor(normalized.length * 0.4));
+  return best.distance <= threshold ? best.id : null;
+}
+function splitAddArgs(rawArgs) {
+  return {
+    componentIds: rawArgs.filter((arg) => !arg.startsWith("--")),
+    rawFlags: rawArgs.filter((arg) => arg.startsWith("--"))
+  };
+}
+async function componentFilesExist(displayName, config) {
+  const outputDir = path4.join(process.cwd(), config.output);
+  const candidates = [
+    path4.join(outputDir, `${displayName}.tsx`),
+    path4.join(outputDir, `${displayName}.css`)
+  ];
+  const existing = [];
+  for (const filePath of candidates) {
+    if (await fs4.pathExists(filePath)) {
+      existing.push(path4.basename(filePath));
+    }
+  }
+  return existing;
+}
+async function addOneComponent(componentId, rawFlags, config, seen) {
+  if (seen.has(componentId)) {
+    console.log(pc3.yellow(`  Skipping duplicate request: "${componentId}"`));
+    return { status: "skipped", componentId };
+  }
+  seen.add(componentId);
   const meta = REGISTRY_BY_ID[componentId];
   if (!meta) {
     console.log(pc3.red(`  Unknown component: "${componentId}"`));
+    const suggestion = suggestComponentId(componentId);
+    if (suggestion) {
+      console.log(pc3.dim(`  Did you mean "${suggestion}"?`));
+    }
     console.log(
       pc3.dim("  Run npx @forgelabs-studio/ui list to see available components.\n")
     );
+    return { status: "failed", componentId };
+  }
+  if (config.components[componentId]) {
+    console.log(pc3.yellow(`  Skipping ${meta.displayName}: already in forge.config.json`));
+    return { status: "skipped", componentId };
+  }
+  const existingFiles = await componentFilesExist(meta.displayName, config);
+  if (existingFiles.length > 0) {
+    console.log(
+      pc3.yellow(`  Skipping ${meta.displayName}: ${existingFiles.join(", ")} already exists`)
+    );
+    return { status: "skipped", componentId };
+  }
+  const flagProps = parseFlags(rawFlags);
+  const props = { color: meta.defaultColor, ...flagProps };
+  try {
+    await generateComponent(componentId, meta.displayName, props, config);
+    config.components[componentId] = props;
+    if (meta.deps?.length) {
+      console.log(pc3.yellow(`
+  Peer deps required for ${meta.displayName}: ${meta.deps.join(", ")}`));
+    }
+    console.log(pc3.dim(`
+  Import ${meta.displayName} with:`));
+    console.log(
+      pc3.cyan(
+        `  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
+`
+      )
+    );
+    return { status: "added", componentId };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(pc3.red(`
+  \u2716 Failed to add ${componentId}: ${message}
+`));
+    return { status: "failed", componentId };
+  }
+}
+async function runAdd(componentIds, rawFlags) {
+  console.log(pc3.bold(`
+  forge-ui add ${componentIds.join(" ")}
+`));
+  if (componentIds.length === 0) {
+    console.log(pc3.red("  No components requested."));
+    console.log(pc3.dim("  Usage: npx @forgelabs-studio/ui add button morphblob\n"));
     process.exit(1);
   }
   try {
@@ -6339,27 +6781,22 @@ async function runAdd(componentId, rawFlags) {
       config = createDefaultConfig();
       console.log(pc3.dim("  No forge.config.json found \u2014 creating one.\n"));
     }
-    const flagProps = parseFlags(rawFlags);
-    const props = { color: meta.defaultColor, ...flagProps };
-    await generateComponent(componentId, meta.displayName, props, config);
-    config.components[componentId] = props;
-    await writeConfig(config);
-    if (meta.deps?.length) {
-      console.log(pc3.yellow(`
-  Peer deps required: ${meta.deps.join(", ")}`));
+    const seen = /* @__PURE__ */ new Set();
+    const results = [];
+    for (const componentId of componentIds) {
+      results.push(await addOneComponent(componentId, rawFlags, config, seen));
     }
-    console.log(pc3.dim(`
-  Import with:`));
-    console.log(
-      pc3.cyan(
-        `  import { ${meta.displayName} } from '@/components/forge/${meta.displayName}'
-`
-      )
-    );
+    await writeConfig(config);
+    const added = results.filter((result) => result.status === "added").length;
+    const skipped = results.filter((result) => result.status === "skipped").length;
+    const failed = results.filter((result) => result.status === "failed").length;
+    console.log(pc3.dim(`  Summary: ${added} added, ${skipped} skipped, ${failed} failed.
+`));
+    if (failed > 0) process.exit(1);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(pc3.red(`
-  \u2716 Failed to add ${componentId}: ${message}
+  \u2716 Failed to add components: ${message}
 `));
     process.exit(1);
   }
@@ -6367,7 +6804,6 @@ async function runAdd(componentId, rawFlags) {
 
 // src/commands/list.ts
 import pc4 from "picocolors";
-import { REGISTRY, GROUPS } from "@forgelabs-studio/shared";
 async function runList() {
   console.log(pc4.bold("\n  FORGE.ui components\n"));
   const config = await readConfig();
@@ -6385,7 +6821,6 @@ async function runList() {
 
 // src/commands/update.ts
 import pc5 from "picocolors";
-import { REGISTRY_BY_ID as REGISTRY_BY_ID2 } from "@forgelabs-studio/shared";
 async function runUpdate(componentId) {
   console.log(pc5.bold(`
   forge-ui update ${componentId}
@@ -6406,7 +6841,7 @@ async function runUpdate(componentId) {
       );
       process.exit(1);
     }
-    const meta = REGISTRY_BY_ID2[componentId];
+    const meta = REGISTRY_BY_ID[componentId];
     if (!meta) {
       console.log(pc5.red(`  Unknown component: "${componentId}"
 `));
@@ -6427,10 +6862,9 @@ async function runUpdate(componentId) {
 }
 
 // src/commands/remove.ts
-import fs4 from "fs-extra";
-import path4 from "path";
+import fs5 from "fs-extra";
+import path5 from "path";
 import pc6 from "picocolors";
-import { REGISTRY_BY_ID as REGISTRY_BY_ID3 } from "@forgelabs-studio/shared";
 async function runRemove(componentId) {
   console.log(pc6.bold(`
   forge-ui remove ${componentId}
@@ -6441,21 +6875,21 @@ async function runRemove(componentId) {
       console.log(pc6.red("  No forge.config.json found.\n"));
       process.exit(1);
     }
-    const meta = REGISTRY_BY_ID3[componentId];
+    const meta = REGISTRY_BY_ID[componentId];
     if (!meta) {
       console.log(pc6.red(`  Unknown component: "${componentId}"
 `));
       process.exit(1);
     }
-    const outputDir = path4.join(process.cwd(), config.output);
-    const tsxPath = path4.join(outputDir, `${meta.displayName}.tsx`);
-    const cssPath = path4.join(outputDir, `${meta.displayName}.css`);
-    if (await fs4.pathExists(tsxPath)) {
-      await fs4.remove(tsxPath);
+    const outputDir = path5.join(process.cwd(), config.output);
+    const tsxPath = path5.join(outputDir, `${meta.displayName}.tsx`);
+    const cssPath = path5.join(outputDir, `${meta.displayName}.css`);
+    if (await fs5.pathExists(tsxPath)) {
+      await fs5.remove(tsxPath);
       console.log(pc6.red("  \u2715") + ` ${meta.displayName}.tsx`);
     }
-    if (await fs4.pathExists(cssPath)) {
-      await fs4.remove(cssPath);
+    if (await fs5.pathExists(cssPath)) {
+      await fs5.remove(cssPath);
       console.log(pc6.red("  \u2715") + ` ${meta.displayName}.css`);
     }
     delete config.components[componentId];
@@ -6476,9 +6910,9 @@ async function runRemove(componentId) {
 var program = new Command();
 program.name("forge-ui").description("FORGE.ui \u2014 spectrum-aware React component library").version("0.4.0");
 program.command("init").description("Create forge.config.json and forge-tokens.css").action(() => runInit());
-program.command("add <component>").description("Add a component with optional flags").allowUnknownOption(true).action((component, _opts, cmd) => {
-  const rawFlags = cmd.args.slice(1);
-  runAdd(component, rawFlags);
+program.command("add <items...>").description("Add one or more components with optional flags").allowUnknownOption(true).action((_items, _opts, cmd) => {
+  const { componentIds, rawFlags } = splitAddArgs(cmd.args);
+  runAdd(componentIds, rawFlags);
 });
 program.command("list").description("List all available and installed components").action(() => runList());
 program.command("update <component>").description("Regenerate a component using its saved configuration").action((component) => runUpdate(component));
