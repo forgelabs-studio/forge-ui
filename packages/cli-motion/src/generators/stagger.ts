@@ -12,11 +12,11 @@ export function generateStagger(props: Record<string, unknown>): string {
 
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useRef, type ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeStaggerProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   staggerDelay?: number
@@ -36,15 +36,19 @@ export function ForgeStagger({
 }: ForgeStaggerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div ref={ref}>
       {React.Children.toArray(children).map((child, i) => (
         <motion.div
           key={i}
-          initial={{ opacity: 0, y: distance }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
-          transition={{ duration, ease, delay: delay + i * staggerDelay }}
+          initial={prefersReduced ? false : { opacity: 0, y: distance }}
+          animate={prefersReduced ? { opacity: 1, y: 0 } : inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
+          transition={prefersReduced ? { duration: 0 } : { duration, ease, delay: delay + i * staggerDelay }}
         >
           {child}
         </motion.div>

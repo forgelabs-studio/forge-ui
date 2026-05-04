@@ -7,11 +7,12 @@ export function generateParallax(props: Record<string, unknown>): string {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface ForgeParallaxProps {
-  children: React.ReactNode
+  children: ReactNode
   speed?: number
 }
 
@@ -29,10 +30,14 @@ export function ForgeParallax({
     [0, 1],
     [\`\${speed * -100}px\`, \`\${speed * 100}px\`]
   )
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div ref={ref} style={{ overflow: 'hidden' }}>
-      <motion.div style={{ y }}>
+      <motion.div style={{ y: prefersReduced ? 0 : y }}>
         {children}
       </motion.div>
     </div>

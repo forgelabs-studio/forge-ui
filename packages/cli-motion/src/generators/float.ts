@@ -9,9 +9,10 @@ export function generateFloat(props: Record<string, unknown>): string {
 'use client'
 
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 interface ForgeFloatProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   distance?: number
 }
@@ -21,10 +22,15 @@ export function ForgeFloat({
   duration = ${duration},
   distance = ${distance},
 }: ForgeFloatProps) {
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+
   return (
     <motion.div
-      animate={{ y: [0, -distance, 0] }}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
+      animate={prefersReduced ? { y: 0 } : { y: [0, -distance, 0] }}
+      transition={prefersReduced ? { duration: 0 } : { duration, repeat: Infinity, ease: 'easeInOut' }}
     >
       {children}
     </motion.div>

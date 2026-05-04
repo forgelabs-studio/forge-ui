@@ -10,11 +10,12 @@ export function generateReveal(props: Record<string, unknown>): string {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeRevealProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   ease?: string
@@ -30,15 +31,19 @@ export function ForgeReveal({
 }: ForgeRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     // overflow:hidden is required for the clip-path to mask correctly
     <div style={{ overflow: 'hidden' }}>
       <motion.div
         ref={ref}
-        initial={{ clipPath: 'inset(0 100% 0 0)' }}
-        animate={inView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-        transition={{ duration, delay, ease }}
+        initial={prefersReduced ? false : { clipPath: 'inset(0 100% 0 0)' }}
+        animate={prefersReduced ? { clipPath: 'inset(0 0% 0 0)' } : inView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
+        transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
       >
         {children}
       </motion.div>

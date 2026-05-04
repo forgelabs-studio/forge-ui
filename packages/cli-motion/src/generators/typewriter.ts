@@ -26,9 +26,17 @@ export function ForgeTypewriter({
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
   const [displayed, setDisplayed] = useState('')
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   useEffect(() => {
     if (!inView) return
+    if (prefersReduced) {
+      setDisplayed(text)
+      return
+    }
     setDisplayed('')
     let i = 0
     const interval = setInterval(() => {
@@ -37,7 +45,7 @@ export function ForgeTypewriter({
       if (i >= text.length) clearInterval(interval)
     }, speed)
     return () => clearInterval(interval)
-  }, [inView, text, speed])
+  }, [inView, text, speed, prefersReduced])
 
   return <span ref={ref}>{displayed}</span>
 }

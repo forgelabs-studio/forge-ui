@@ -9,9 +9,10 @@ export function generatePulse(props: Record<string, unknown>): string {
 'use client'
 
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 interface ForgePulseProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   scale?: number
 }
@@ -21,10 +22,15 @@ export function ForgePulse({
   duration = ${duration},
   scale = ${scale},
 }: ForgePulseProps) {
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+
   return (
     <motion.div
-      animate={{ scale: [1, scale, 1] }}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
+      animate={prefersReduced ? { scale: 1 } : { scale: [1, scale, 1] }}
+      transition={prefersReduced ? { duration: 0 } : { duration, repeat: Infinity, ease: 'easeInOut' }}
     >
       {children}
     </motion.div>

@@ -11,11 +11,12 @@ export function generateBounceIn(props: Record<string, unknown>): string {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeBounceInProps {
-  children: React.ReactNode
+  children: ReactNode
   delay?: number
   scale?: number
   stiffness?: number
@@ -33,13 +34,17 @@ export function ForgeBounceIn({
 }: ForgeBounceInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale }}
-      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
-      transition={{ type: 'spring', stiffness, damping, delay }}
+      initial={prefersReduced ? false : { opacity: 0, scale }}
+      animate={prefersReduced ? { opacity: 1, scale: 1 } : inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
+      transition={prefersReduced ? { duration: 0 } : { type: 'spring', stiffness, damping, delay }}
     >
       {children}
     </motion.div>
