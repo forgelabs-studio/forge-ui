@@ -8,12 +8,16 @@
     "forge-motion": "dist/index.js"
   },
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --target node18 --outDir dist --clean",
-    "dev": "tsup src/index.ts --format esm --target node18 --outDir dist --watch"
+    "dev": "tsup src/index.ts --format esm --target node18 --outDir dist --watch",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

@@ -5,13 +5,14 @@ import { runList } from './commands/list.js'
 import { runUpdate } from './commands/update.js'
 import { runRemove } from './commands/remove.js'
 import { runCheck } from './commands/check.js'
+import { PACKAGE_VERSION } from './version.js'
 
 const program = new Command()
 
 program
   .name('forge-motion')
   .description('FORGE.motion — scroll-triggered and viewport-aware animation presets for React')
-  .version('0.1.0')
+  .version(PACKAGE_VERSION)
 
 program
   .command('add <preset>')
