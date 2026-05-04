@@ -50,15 +50,8 @@ export function MotionCanvas({ activePreset, props }: MotionCanvasProps) {
       </div>
 
       <div
-        className="c-grid"
-        style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 40,
-          overflow: activePreset === 'parallax' ? 'auto' : 'hidden',
-        }}
+        className="motion-preview c-grid"
+        style={{ overflow: activePreset === 'parallax' ? 'auto' : 'hidden' }}
       >
         <Suspense fallback={<span style={{ color: 'var(--muted)', fontSize: 13, fontFamily: 'var(--font)' }}>Loading…</span>}>
           <Preset {...props} />
