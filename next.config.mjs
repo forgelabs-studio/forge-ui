@@ -1,4 +1,7 @@
 import { withSentryConfig } from "@sentry/nextjs";
+
+const hasSentryAuthToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@forgelabs-studio/shared"],
@@ -39,14 +42,24 @@ export default withSentryConfig(nextConfig, {
 
   project: "javascript-nextjs",
 
-  // Only print logs for uploading source maps in CI
-  silent: !process.env.CI,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+
+  // Avoid build noise when Vercel/CI is missing the optional upload token.
+  silent: !hasSentryAuthToken,
+
+  // Sentry telemetry is unrelated to app error reporting.
+  telemetry: false,
 
   // For all available options, see:
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-  // Upload a larger set of source maps for prettier stack traces (increases build time)
-  widenClientFileUpload: true,
+  // Only create releases and upload source maps when an auth token is configured.
+  sourcemaps: {
+    disable: !hasSentryAuthToken,
+  },
+
+  // Upload a larger set of source maps for prettier stack traces (increases build time).
+  widenClientFileUpload: hasSentryAuthToken,
 
   // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
   // This can increase your server load as well as your hosting bill.
