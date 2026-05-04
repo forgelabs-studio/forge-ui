@@ -13,7 +13,7 @@ FORGE.labs is a monorepo for visual playgrounds and CLIs that generate code you 
 | Package | npm | Status |
 |---------|-----|--------|
 | FORGE.ui | `@forgelabs-studio/ui` | v0.4.1 — shipped |
-| FORGE.motion | `@forgelabs-studio/motion` | v0.1.0 — shipped |
+| FORGE.motion | `@forgelabs-studio/motion` | v0.1.1 — shipped |
 | FORGE.tokens | `@forgelabs-studio/tokens` | Planned |
 
 ---

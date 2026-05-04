@@ -113,7 +113,7 @@ export default function Topbar() {
 
       <div className="topbar-right">
         {isMotion ? (
-          <span className="ver">v0.1.0 · 14 presets</span>
+          <span className="ver">v0.1.1 · 14 presets</span>
         ) : (
           <span className="ver">v0.4.1 · 40 components</span>
         )}

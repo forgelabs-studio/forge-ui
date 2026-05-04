@@ -6,6 +6,14 @@ The format is based on _Keep a Changelog_ and this project follows semantic vers
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-05-04
+
+### Changed
+
+- Hardened the `@forgelabs-studio/motion` release workflow with public publish metadata and automatic prepack builds.
+- Centralized the motion CLI package version used by `forge-motion --version` and installed preset manifests.
+- Corrected `forge-motion check` update guidance to use `update <preset>`.
+
 ## [0.4.1] — 2026-05-04
 
 ### Added

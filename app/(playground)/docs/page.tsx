@@ -925,7 +925,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
         <br />
         {'  '}
         <span className="attr">&quot;version&quot;</span>:{' '}
-        <span className="str">&quot;0.1.0&quot;</span>,<br />
+        <span className="str">&quot;0.1.1&quot;</span>,<br />
         {'  '}
         <span className="attr">&quot;output&quot;</span>:{' '}
         <span className="str">&quot;components/forge&quot;</span>,<br />

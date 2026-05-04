@@ -1,6 +1,6 @@
 {
   "name": "@forgelabs-studio/motion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scroll-triggered and viewport-aware animation presets for React. Configure visually, own the generated files.",
   "license": "MIT",
   "type": "module",
