@@ -30,13 +30,20 @@ export function ForgeCountUp({
   const inView = useInView(ref, { once, amount: 0.5 })
   const count = useMotionValue(from)
   const rounded = useTransform(count, (v) => Math.round(v))
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   useEffect(() => {
     if (!inView) return
     count.set(from)
-    const controls = animate(count, to, { duration, ease: 'easeOut' })
-    return controls.stop
-  }, [inView, from, to, duration, count])
+    const controls = animate(count, to, {
+      duration: prefersReduced ? 0 : duration,
+      ease: 'easeOut',
+    })
+    return () => controls.stop()
+  }, [inView, from, to, duration, prefersReduced, count])
 
   return <motion.span ref={ref}>{rounded}</motion.span>
 }

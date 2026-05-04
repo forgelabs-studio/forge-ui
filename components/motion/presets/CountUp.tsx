@@ -34,7 +34,7 @@ export default function CountUp({
       duration: prefersReduced ? 0 : duration,
       ease: 'easeOut',
     })
-    return controls.stop
+    return () => controls.stop()
   }, [inView, key, from, to, duration, prefersReduced, count])
 
   return (

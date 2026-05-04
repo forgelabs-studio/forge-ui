@@ -10,11 +10,12 @@ export function generateFadeIn(props: Record<string, unknown>): string {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeFadeInProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   ease?: string
@@ -30,13 +31,17 @@ export function ForgeFadeIn({
 }: ForgeFadeInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration, delay, ease }}
+      initial={prefersReduced ? false : { opacity: 0 }}
+      animate={prefersReduced ? { opacity: 1 } : inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
     >
       {children}
     </motion.div>

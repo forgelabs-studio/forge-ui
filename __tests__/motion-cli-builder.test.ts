@@ -4,10 +4,43 @@ import {
   buildMotionCLIString,
 } from "../lib/motion-cli-builder";
 import { parseMotionFlags } from "../packages/cli-motion/src/flags";
+import { generateBounceIn } from "../packages/cli-motion/src/generators/bounce-in";
+import { generateCountUp } from "../packages/cli-motion/src/generators/count-up";
+import { generateFadeDown } from "../packages/cli-motion/src/generators/fade-down";
+import { generateFadeIn } from "../packages/cli-motion/src/generators/fade-in";
+import { generateFadeUp } from "../packages/cli-motion/src/generators/fade-up";
+import { generateFloat } from "../packages/cli-motion/src/generators/float";
+import { generateParallax } from "../packages/cli-motion/src/generators/parallax";
+import { generatePulse } from "../packages/cli-motion/src/generators/pulse";
+import { generateReveal } from "../packages/cli-motion/src/generators/reveal";
+import { generateScaleIn } from "../packages/cli-motion/src/generators/scale-in";
+import { generateSlideInLeft } from "../packages/cli-motion/src/generators/slide-in-left";
+import { generateSlideInRight } from "../packages/cli-motion/src/generators/slide-in-right";
 import { generateStagger } from "../packages/cli-motion/src/generators/stagger";
 import { generateTypewriter } from "../packages/cli-motion/src/generators/typewriter";
 import { MOTION_PRESETS } from "../lib/motion";
 import { REGISTRY as MOTION_CLI_REGISTRY } from "../packages/cli-motion/src/registry";
+
+const GENERATED_WITH_CHILDREN = [
+  generateFadeUp,
+  generateFadeDown,
+  generateFadeIn,
+  generateSlideInLeft,
+  generateSlideInRight,
+  generateScaleIn,
+  generateBounceIn,
+  generateStagger,
+  generateParallax,
+  generateReveal,
+  generateFloat,
+  generatePulse,
+];
+
+const GENERATED_MOTIONS = [
+  ...GENERATED_WITH_CHILDREN,
+  generateCountUp,
+  generateTypewriter,
+];
 
 describe("motion CLI builder", () => {
   it("omits default values", () => {
@@ -79,6 +112,28 @@ describe("motion CLI flag parser", () => {
 });
 
 describe("motion generators", () => {
+  it("types generated children without relying on a global React namespace", () => {
+    for (const generate of GENERATED_WITH_CHILDREN) {
+      const output = generate({});
+
+      expect(output).toContain("ReactNode");
+      expect(output).not.toContain("children: React.ReactNode");
+    }
+  });
+
+  it("respects reduced-motion preferences in generated output", () => {
+    for (const generate of GENERATED_MOTIONS) {
+      expect(generate({})).toContain("prefers-reduced-motion: reduce");
+    }
+  });
+
+  it("cleans up generated CountUp animations with a callable cleanup", () => {
+    const output = generateCountUp({});
+
+    expect(output).toContain("return () => controls.stop()");
+    expect(output).not.toContain("return controls.stop");
+  });
+
   it("uses text flags as the generated Typewriter default", () => {
     const output = generateTypewriter({
       text: "Talia's Forge = craft",
@@ -94,7 +149,9 @@ describe("motion generators", () => {
   it("imports React when generated Stagger uses React.Children", () => {
     const output = generateStagger({});
 
-    expect(output).toContain("import React, { useRef } from 'react'");
+    expect(output).toContain(
+      "import React, { useRef, type ReactNode } from 'react'",
+    );
     expect(output).toContain("React.Children.toArray(children)");
   });
 });

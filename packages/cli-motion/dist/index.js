@@ -68,11 +68,12 @@ function generateFadeUp(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeFadeUpProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   distance?: number
@@ -90,13 +91,17 @@ export function ForgeFadeUp({
 }: ForgeFadeUpProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: distance }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
-      transition={{ duration, delay, ease }}
+      initial={prefersReduced ? false : { opacity: 0, y: distance }}
+      animate={prefersReduced ? { opacity: 1, y: 0 } : inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
+      transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
     >
       {children}
     </motion.div>
@@ -118,11 +123,12 @@ function generateFadeDown(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeFadeDownProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   distance?: number
@@ -140,13 +146,17 @@ export function ForgeFadeDown({
 }: ForgeFadeDownProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: -distance }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -distance }}
-      transition={{ duration, delay, ease }}
+      initial={prefersReduced ? false : { opacity: 0, y: -distance }}
+      animate={prefersReduced ? { opacity: 1, y: 0 } : inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -distance }}
+      transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
     >
       {children}
     </motion.div>
@@ -167,11 +177,12 @@ function generateFadeIn(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeFadeInProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   ease?: string
@@ -187,13 +198,17 @@ export function ForgeFadeIn({
 }: ForgeFadeInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration, delay, ease }}
+      initial={prefersReduced ? false : { opacity: 0 }}
+      animate={prefersReduced ? { opacity: 1 } : inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
     >
       {children}
     </motion.div>
@@ -215,11 +230,12 @@ function generateSlideInLeft(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeSlideInLeftProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   distance?: number
@@ -237,14 +253,18 @@ export function ForgeSlideInLeft({
 }: ForgeSlideInLeftProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div style={{ overflow: 'hidden' }}>
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, x: -distance }}
-        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -distance }}
-        transition={{ duration, delay, ease }}
+        initial={prefersReduced ? false : { opacity: 0, x: -distance }}
+        animate={prefersReduced ? { opacity: 1, x: 0 } : inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -distance }}
+        transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
       >
         {children}
       </motion.div>
@@ -267,11 +287,12 @@ function generateSlideInRight(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeSlideInRightProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   distance?: number
@@ -289,14 +310,18 @@ export function ForgeSlideInRight({
 }: ForgeSlideInRightProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div style={{ overflow: 'hidden' }}>
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, x: distance }}
-        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: distance }}
-        transition={{ duration, delay, ease }}
+        initial={prefersReduced ? false : { opacity: 0, x: distance }}
+        animate={prefersReduced ? { opacity: 1, x: 0 } : inView ? { opacity: 1, x: 0 } : { opacity: 0, x: distance }}
+        transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
       >
         {children}
       </motion.div>
@@ -319,11 +344,12 @@ function generateScaleIn(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeScaleInProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   scale?: number
@@ -341,13 +367,17 @@ export function ForgeScaleIn({
 }: ForgeScaleInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale }}
-      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
-      transition={{ duration, delay, ease }}
+      initial={prefersReduced ? false : { opacity: 0, scale }}
+      animate={prefersReduced ? { opacity: 1, scale: 1 } : inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
+      transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
     >
       {children}
     </motion.div>
@@ -369,11 +399,12 @@ function generateBounceIn(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeBounceInProps {
-  children: React.ReactNode
+  children: ReactNode
   delay?: number
   scale?: number
   stiffness?: number
@@ -391,13 +422,17 @@ export function ForgeBounceIn({
 }: ForgeBounceInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale }}
-      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
-      transition={{ type: 'spring', stiffness, damping, delay }}
+      initial={prefersReduced ? false : { opacity: 0, scale }}
+      animate={prefersReduced ? { opacity: 1, scale: 1 } : inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
+      transition={prefersReduced ? { duration: 0 } : { type: 'spring', stiffness, damping, delay }}
     >
       {children}
     </motion.div>
@@ -420,11 +455,11 @@ function generateStagger(props) {
 
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useRef, type ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeStaggerProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   staggerDelay?: number
@@ -444,15 +479,19 @@ export function ForgeStagger({
 }: ForgeStaggerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div ref={ref}>
       {React.Children.toArray(children).map((child, i) => (
         <motion.div
           key={i}
-          initial={{ opacity: 0, y: distance }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
-          transition={{ duration, ease, delay: delay + i * staggerDelay }}
+          initial={prefersReduced ? false : { opacity: 0, y: distance }}
+          animate={prefersReduced ? { opacity: 1, y: 0 } : inView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
+          transition={prefersReduced ? { duration: 0 } : { duration, ease, delay: delay + i * staggerDelay }}
         >
           {child}
         </motion.div>
@@ -472,11 +511,12 @@ function generateParallax(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface ForgeParallaxProps {
-  children: React.ReactNode
+  children: ReactNode
   speed?: number
 }
 
@@ -494,10 +534,14 @@ export function ForgeParallax({
     [0, 1],
     [\`\${speed * -100}px\`, \`\${speed * 100}px\`]
   )
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     <div ref={ref} style={{ overflow: 'hidden' }}>
-      <motion.div style={{ y }}>
+      <motion.div style={{ y: prefersReduced ? 0 : y }}>
         {children}
       </motion.div>
     </div>
@@ -518,11 +562,12 @@ function generateReveal(props) {
 
 'use client'
 
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface ForgeRevealProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   delay?: number
   ease?: string
@@ -538,15 +583,19 @@ export function ForgeReveal({
 }: ForgeRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   return (
     // overflow:hidden is required for the clip-path to mask correctly
     <div style={{ overflow: 'hidden' }}>
       <motion.div
         ref={ref}
-        initial={{ clipPath: 'inset(0 100% 0 0)' }}
-        animate={inView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-        transition={{ duration, delay, ease }}
+        initial={prefersReduced ? false : { clipPath: 'inset(0 100% 0 0)' }}
+        animate={prefersReduced ? { clipPath: 'inset(0 0% 0 0)' } : inView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
+        transition={prefersReduced ? { duration: 0 } : { duration, delay, ease }}
       >
         {children}
       </motion.div>
@@ -567,9 +616,10 @@ function generateFloat(props) {
 'use client'
 
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 interface ForgeFloatProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   distance?: number
 }
@@ -579,10 +629,15 @@ export function ForgeFloat({
   duration = ${duration},
   distance = ${distance},
 }: ForgeFloatProps) {
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+
   return (
     <motion.div
-      animate={{ y: [0, -distance, 0] }}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
+      animate={prefersReduced ? { y: 0 } : { y: [0, -distance, 0] }}
+      transition={prefersReduced ? { duration: 0 } : { duration, repeat: Infinity, ease: 'easeInOut' }}
     >
       {children}
     </motion.div>
@@ -602,9 +657,10 @@ function generatePulse(props) {
 'use client'
 
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 interface ForgePulseProps {
-  children: React.ReactNode
+  children: ReactNode
   duration?: number
   scale?: number
 }
@@ -614,10 +670,15 @@ export function ForgePulse({
   duration = ${duration},
   scale = ${scale},
 }: ForgePulseProps) {
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+
   return (
     <motion.div
-      animate={{ scale: [1, scale, 1] }}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
+      animate={prefersReduced ? { scale: 1 } : { scale: [1, scale, 1] }}
+      transition={prefersReduced ? { duration: 0 } : { duration, repeat: Infinity, ease: 'easeInOut' }}
     >
       {children}
     </motion.div>
@@ -658,13 +719,20 @@ export function ForgeCountUp({
   const inView = useInView(ref, { once, amount: 0.5 })
   const count = useMotionValue(from)
   const rounded = useTransform(count, (v) => Math.round(v))
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   useEffect(() => {
     if (!inView) return
     count.set(from)
-    const controls = animate(count, to, { duration, ease: 'easeOut' })
-    return controls.stop
-  }, [inView, from, to, duration, count])
+    const controls = animate(count, to, {
+      duration: prefersReduced ? 0 : duration,
+      ease: 'easeOut',
+    })
+    return () => controls.stop()
+  }, [inView, from, to, duration, prefersReduced, count])
 
   return <motion.span ref={ref}>{rounded}</motion.span>
 }
@@ -699,9 +767,17 @@ export function ForgeTypewriter({
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once, amount: 0.3 })
   const [displayed, setDisplayed] = useState('')
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   useEffect(() => {
     if (!inView) return
+    if (prefersReduced) {
+      setDisplayed(text)
+      return
+    }
     setDisplayed('')
     let i = 0
     const interval = setInterval(() => {
@@ -710,7 +786,7 @@ export function ForgeTypewriter({
       if (i >= text.length) clearInterval(interval)
     }, speed)
     return () => clearInterval(interval)
-  }, [inView, text, speed])
+  }, [inView, text, speed, prefersReduced])
 
   return <span ref={ref}>{displayed}</span>
 }
