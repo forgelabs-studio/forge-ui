@@ -6,6 +6,15 @@ The format is based on _Keep a Changelog_ and this project follows semantic vers
 
 ## [Unreleased]
 
+## [0.4.2] — 2026-05-04
+
+### Changed
+
+- Removed the private `@forgelabs-studio/shared` workspace package from the published `@forgelabs-studio/ui` package dependencies while keeping shared registry code bundled into the CLI output.
+- Tightened shared registry typing so UI component ids are enforced as a literal union across the playground and CLI.
+- UI CLI generator coverage is now compile-time complete; missing generator registrations fail typecheck instead of producing placeholder files.
+- No-DSN Sentry builds now alias the SDK to a local no-op module, removing Sentry build warnings and keeping local/public builds lean.
+
 ## [0.1.1] — 2026-05-04
 
 ### Changed
