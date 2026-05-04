@@ -78,6 +78,7 @@ function Cell({
 
   return (
     <div
+      className={`component-showcase-cell${span2 ? " component-showcase-cell--wide" : ""}`}
       style={{
         background: on && !noHover ? "var(--bg3)" : "var(--bg2)",
         padding: 24,
@@ -85,7 +86,6 @@ function Cell({
         position: "relative",
         overflow: "hidden",
         cursor: noHover ? "default" : "pointer",
-        gridColumn: span2 ? "span 2" : undefined,
         transition: "background 0.15s",
         boxShadow:
           on && !noHover
@@ -164,10 +164,9 @@ export default function ComponentShowcase() {
         </div>
 
         <div
-          className="reveal reveal-delay-1"
+          className="component-showcase-grid reveal reveal-delay-1"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1px",
             background: "var(--line)",
             border: "1px solid var(--line)",

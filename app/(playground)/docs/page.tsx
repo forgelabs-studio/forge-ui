@@ -181,8 +181,9 @@ const DOCS: Record<DocId, React.ReactNode> = {
       <h2 className="d-h2">Motion quick start</h2>
       <p className="d-p">
         FORGE.motion generates Framer Motion presets as standalone TSX files.
-        Add Framer Motion to your app, then copy a preset command from the
-        Motion playground.
+        Install Framer Motion in your app first. Generated files import from
+        <code>framer-motion</code> directly, so the consuming app must own that
+        dependency.
       </p>
       <CB lang="bash">
         <span className="str">npm install framer-motion</span>
@@ -646,7 +647,17 @@ const DOCS: Record<DocId, React.ReactNode> = {
         Generated files live in <code>components/motion</code> by default and
         are tracked under the <code>motion</code> key in <code>.forge.json</code>.
       </p>
+      <div className="callout callout-warn">
+        <div className="callout-icon">!</div>
+        <div>
+          FORGE.motion is a generator, not a runtime animation library.
+          Generated presets require <code>framer-motion</code> in the app that
+          imports them.
+        </div>
+      </div>
       <CB lang="bash">
+        <span className="str">npm install framer-motion</span>
+        <br />
         <span className="str">
           npx @forgelabs-studio/motion add fade-up{' '}
           <span className="kw">--duration</span>=0.8{' '}
@@ -845,7 +856,7 @@ const DOCS: Record<DocId, React.ReactNode> = {
             ],
             [
               'npx @forgelabs-studio/motion add <preset>',
-              'Add a Framer Motion preset',
+              'Add a Framer Motion preset after installing framer-motion',
             ],
             [
               'npx @forgelabs-studio/motion check',
