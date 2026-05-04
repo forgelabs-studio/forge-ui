@@ -234,7 +234,7 @@ function DemoCell({
 }) {
   return (
     <div
-      className={`border border-[var(--line)] relative overflow-hidden${span2 ? " col-span-2" : ""}`}
+      className={`site-demo-cell border border-[var(--line)] relative overflow-hidden${span2 ? " site-demo-cell--wide" : ""}`}
       style={{ background: "var(--bg2)" }}
     >
       <div
@@ -304,12 +304,10 @@ export default function DemoSection() {
 
         {/* Grid */}
         <div
-          className="reveal reveal-delay-2"
+          className="site-demo-grid reveal reveal-delay-2"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "2px",
-            gridTemplateRows: "auto auto",
           }}
         >
           {/* Row 1 */}

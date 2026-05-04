@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import {
   buildMotionCLIFlags,
   buildMotionCLIString,
@@ -40,6 +42,23 @@ const GENERATED_MOTIONS = [
   ...GENERATED_WITH_CHILDREN,
   generateCountUp,
   generateTypewriter,
+]
+
+const PLAYGROUND_PRESET_FILES = [
+  'BounceIn.tsx',
+  'CountUp.tsx',
+  'FadeDown.tsx',
+  'FadeIn.tsx',
+  'FadeUp.tsx',
+  'Float.tsx',
+  'Parallax.tsx',
+  'Pulse.tsx',
+  'Reveal.tsx',
+  'ScaleIn.tsx',
+  'SlideInLeft.tsx',
+  'SlideInRight.tsx',
+  'Stagger.tsx',
+  'Typewriter.tsx',
 ]
 
 describe('motion CLI builder', () => {
@@ -168,5 +187,29 @@ describe('motion registry consistency', () => {
     }))
 
     expect(cli).toEqual(playground)
+  })
+})
+
+describe('motion playground preset readiness', () => {
+  it('keeps all playground previews reduced-motion aware', () => {
+    for (const file of PLAYGROUND_PRESET_FILES) {
+      const source = readFileSync(
+        join(process.cwd(), 'components/motion/presets', file),
+        'utf8',
+      )
+
+      expect(source, file).toContain('prefers-reduced-motion: reduce')
+    }
+  })
+
+  it('does not ship unfinished playground preset markers', () => {
+    for (const file of PLAYGROUND_PRESET_FILES) {
+      const source = readFileSync(
+        join(process.cwd(), 'components/motion/presets', file),
+        'utf8',
+      )
+
+      expect(source, file).not.toMatch(/TODO|FIXME|placeholder|coming soon/i)
+    }
   })
 })

@@ -118,9 +118,11 @@ export default function HowItWorksPage() {
 
         <CodeBlock
           lang="bash — add motion presets"
-          copyText={`npx @forgelabs-studio/motion add fade-up --duration=0.8 --distance=64\nnpx @forgelabs-studio/motion add stagger --stagger-delay=0.12`}
+          copyText={`npm install framer-motion\nnpx @forgelabs-studio/motion add fade-up --duration=0.8 --distance=64\nnpx @forgelabs-studio/motion add stagger --stagger-delay=0.12`}
           code={
             <>
+              <span className="str">npm install framer-motion</span>
+              <br />
               <span className="str">
                 npx @forgelabs-studio/motion add fade-up{" "}
                 <span className="kw">--duration</span>=0.8{" "}
@@ -138,8 +140,10 @@ export default function HowItWorksPage() {
         <div className="callout callout-info">
           <div className="callout-icon">i</div>
           <div>
-            Motion presets track installed versions in <code>.forge.json</code>{" "}
-            and saved props in <code>forge.config.json</code>. Run{" "}
+            Motion presets import <code>framer-motion</code> from your app.
+            Install it before using generated presets. Presets track installed
+            versions in <code>.forge.json</code> and saved props in{" "}
+            <code>forge.config.json</code>. Run{" "}
             <code>npx @forgelabs-studio/motion check</code> to see when presets
             can be regenerated.
           </div>

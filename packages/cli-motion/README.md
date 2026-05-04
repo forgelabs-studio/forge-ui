@@ -6,7 +6,7 @@ Scroll-triggered and viewport-aware animation preset generator for React. Config
 
 ## Quick Start
 
-Install `framer-motion` in the consuming project:
+Install `framer-motion` in the consuming project first. Generated presets import from it directly, so this dependency is required at runtime in your app:
 
 ```bash
 npm install framer-motion
@@ -25,6 +25,8 @@ components/motion/ForgeFadeUp.tsx
 ```
 
 You own this file. Edit it freely.
+
+If you see `Cannot find module 'framer-motion'`, install it with `npm install framer-motion` in the app that owns the generated file.
 
 ## CLI Reference
 

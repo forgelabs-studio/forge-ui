@@ -4,7 +4,7 @@
 // Requires Chart.js — add to your layout:
 // <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" />
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ForgeDonut.css";
 
 interface ForgeDonutProps {
@@ -59,11 +59,20 @@ export function ForgeDonut({
 }: ForgeDonutProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<{ destroy: () => void } | null>(null);
+  const [chartLoadAttempt, setChartLoadAttempt] = useState(0);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Chart = window.Chart;
-    if (!Chart || !canvasRef.current) return;
+    if (!Chart || !canvasRef.current) {
+      if (chartLoadAttempt >= 20) return;
+
+      const retry = window.setTimeout(() => {
+        setChartLoadAttempt((attempt) => attempt + 1);
+      }, 150);
+
+      return () => window.clearTimeout(retry);
+    }
+
     chartRef.current?.destroy();
 
     chartRef.current = new Chart(canvasRef.current, {
@@ -108,7 +117,7 @@ export function ForgeDonut({
     return () => {
       chartRef.current?.destroy();
     };
-  }, [data, thickness, showLabels, animated, title, size]);
+  }, [data, thickness, showLabels, animated, title, size, chartLoadAttempt]);
 
   return (
     <div

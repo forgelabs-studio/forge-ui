@@ -10,6 +10,10 @@ export interface ParallaxPreviewProps {
 export default function Parallax({ speed = 0.3 }: ParallaxPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const targetRef = useRef<HTMLDivElement>(null)
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -43,7 +47,7 @@ export default function Parallax({ speed = 0.3 }: ParallaxPreviewProps) {
       <div ref={targetRef} style={{ padding: '40px 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <motion.div
           style={{
-            y,
+            y: prefersReduced ? 0 : y,
             fontSize: 24,
             fontWeight: 300,
             letterSpacing: '-0.03em',

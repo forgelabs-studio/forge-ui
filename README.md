@@ -74,13 +74,14 @@ Chart components expect Chart.js to be available in the consuming app.
 `@forgelabs-studio/motion` generates Framer Motion presets as local TSX files.
 
 ```bash
+npm install framer-motion
 npx @forgelabs-studio/motion add fade-up
 npx @forgelabs-studio/motion check
 ```
 
 **Presets:** FadeUp, FadeDown, FadeIn, SlideInLeft, SlideInRight, ScaleIn, BounceIn, Stagger, Parallax, Reveal, Float, Pulse, CountUp, Typewriter
 
-Generated motion presets require `framer-motion` in the consuming app.
+Generated motion presets import from `framer-motion`. Install it in the consuming app before using a generated preset, or your app will fail to resolve that import.
 
 ---
 
