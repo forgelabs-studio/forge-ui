@@ -23,7 +23,16 @@ const TAG_TEXT: Record<string, string> = {
 
 export function MotionSidebar({ activePreset, onPresetChange }: MotionSidebarProps) {
   return (
-    <div style={{ borderRight: '1px solid var(--line)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+    <div
+      className="motion-sidebar"
+      style={{
+        borderRight: '1px solid var(--line)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        height: '100%',
+      }}
+    >
       <div
         style={{
           padding: '10px 16px',

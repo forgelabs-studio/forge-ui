@@ -337,6 +337,14 @@ body {
   overflow: hidden;
   min-height: 0;
 }
+.motion-preview {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 40px;
+}
 .c-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -1357,10 +1365,28 @@ code {
      height:100% would resolve to auto here (flex-algorithm height isn't a CSS value),
      so flex:1 is used instead — it resolves against the container's definite main size. */
   .sidebar,
+  .motion-sidebar,
   .centre,
   .props-col {
     flex: 1;
     min-height: 0;
+  }
+
+  .motion-sidebar {
+    border-right: none !important;
+  }
+
+  .motion-preview {
+    padding: 18px;
+  }
+
+  .motion-preview > * {
+    max-width: min(100%, 360px);
+  }
+
+  .prev-bar {
+    min-height: 42px;
+    gap: 12px;
   }
 
   /* Hide the desktop grid — Tailwind's `hidden` can't override .playground{display:grid}

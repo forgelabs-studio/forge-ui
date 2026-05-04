@@ -3,12 +3,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { usePlaygroundStore } from "@/store/playground";
+import { useMotionPlaygroundStore } from "@/store/motion";
 import { buildCLIString } from "@/lib/cli-builder";
+import { buildMotionCLIString } from "@/lib/motion-cli-builder";
 
 export default function Topbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { activeComponent, props } = usePlaygroundStore();
+  const { activePreset, props: motionProps } = useMotionPlaygroundStore();
   const [initOk, setInitOk] = useState(false);
   const [cliOk, setCliOk] = useState(false);
 
@@ -25,7 +28,10 @@ export default function Topbar() {
   }
 
   function copyCLI() {
-    const cmd = buildCLIString(activeComponent, props[activeComponent] ?? {});
+    const cmd = isMotion
+      ? buildMotionCLIString(activePreset, motionProps[activePreset] ?? {})
+      : buildCLIString(activeComponent, props[activeComponent] ?? {});
+
     navigator.clipboard.writeText(cmd).then(() => {
       setCliOk(true);
       setTimeout(() => setCliOk(false), 2000);
@@ -116,7 +122,7 @@ export default function Topbar() {
             {initOk ? "✓ Copied!" : "⬡ npx init"}
           </button>
         )}
-        {isUI && (
+        {(isUI || isMotion) && (
           <button
             className={`tbtn accent${cliOk ? " ok" : ""}`}
             onClick={copyCLI}
