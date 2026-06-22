@@ -65,7 +65,7 @@ export function AsciiExportBar({ asciiText, config }: AsciiExportBarProps) {
           <div className="cli-cmd" style={{ whiteSpace: 'pre-wrap' }}>
             {asciiText ? (
               <>
-                <span className="t-sub">&lt;pre class="forge-ascii"&gt;</span>
+                <span className="t-sub">&lt;pre class=&quot;forge-ascii&quot;&gt;</span>
                 <span className="t-base">…</span>
                 <span className="t-sub">&lt;/pre&gt;</span>
                 {'  '}
