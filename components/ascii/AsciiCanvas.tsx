@@ -26,6 +26,14 @@ function UploadIcon() {
   )
 }
 
+function RemoveIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M3 3l8 8M11 3l-8 8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 interface DecodedImage {
   width: number
   height: number
@@ -176,6 +184,13 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
     setImage(URL.createObjectURL(file), file.name)
   }
 
+  function handleRemoveImage() {
+    if (imageUrl) URL.revokeObjectURL(imageUrl)
+    setImage(null)
+    setStatus('idle')
+    if (inputRef.current) inputRef.current.value = ''
+  }
+
   const anim =
     config.animation && !isAdvancedAnimation(config.animation)
       ? buildAnimationCss(config.animation, config.duration, config.colour)
@@ -184,8 +199,33 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
   return (
     <div className="centre">
       <div className="prev-bar">
-        <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--muted)' }}>
-          {fileName || 'No image uploaded'}
+        <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--muted)' }}>
+            {fileName || 'No image uploaded'}
+          </span>
+          {imageUrl && (
+            <button
+              type="button"
+              onClick={handleRemoveImage}
+              title="Remove image"
+              aria-label="Remove image"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 18,
+                height: 18,
+                padding: 0,
+                border: 'none',
+                borderRadius: 4,
+                background: 'transparent',
+                color: 'var(--muted)',
+                cursor: 'pointer',
+              }}
+            >
+              <RemoveIcon />
+            </button>
+          )}
         </span>
         <span
           style={{
