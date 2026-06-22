@@ -19,6 +19,15 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  // Next 16 hard-errors on a custom webpack config with no turbopack config
+  // present (Turbopack is now the default build engine, and @sentry/nextjs's
+  // own webpack plugin counts as "custom webpack config" too). An empty
+  // object satisfies the check - resolveAlias to an absolute filesystem path
+  // doesn't work here: Turbopack treats any leading "/" or "\" as a "server
+  // relative import" (unimplemented) rather than a filesystem path, on both
+  // Windows and Linux (Vercel), so the no-Sentry-when-no-DSN swap below only
+  // applies under webpack, not Turbopack.
+  turbopack: {},
   webpack(config) {
     if (!hasSentryDsn) {
       config.resolve.alias["@sentry/nextjs"] = disabledSentryModule;
