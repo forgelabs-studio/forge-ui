@@ -6,6 +6,12 @@ The format is based on _Keep a Changelog_ and this project follows semantic vers
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-06-22
+
+### Added
+
+- `ascii` component: converts an uploaded PNG/JPG to ASCII art rendered as plain text, with 4 character sets and 5 CSS animations. Conversion runs synchronously on the main thread — no Web Worker, no canvas — to keep the generated output a single self-contained file pair like every other component.
+
 ## [0.4.2] — 2026-05-04
 
 ### Changed

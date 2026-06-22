@@ -7,6 +7,7 @@ import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from "re
 
 const PROP_PANELS: Record<ComponentId, LazyExoticComponent<ComponentType>> = {
   accordion: lazy(() => import("./props/AccordionProps")),
+  ascii: lazy(() => import("./props/AsciiProps")),
   alert: lazy(() => import("./props/AlertProps")),
   avatar: lazy(() => import("./props/AvatarProps")),
   badge: lazy(() => import("./props/BadgeProps")),

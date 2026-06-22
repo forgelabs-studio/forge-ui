@@ -57,6 +57,7 @@ const DEFAULTS: Record<string, Record<string, unknown>> = {
   stepper: { color: "#7F77DD", variant: "horizontal" },
   accordion: { color: "#7F77DD", radius: 8 },
   table: { color: "#7F77DD" },
+  ascii: { color: "#EF9F27", density: 80, characterSet: "standard", animation: "fadein", duration: 1200 },
 };
 
 // Which prop key maps to which CLI flag
@@ -76,6 +77,12 @@ const PROP_TO_FLAG: Record<string, string> = {
   shape: "--shape",
   side: "--side",
   padding: "--padding",
+  density: "--density",
+  characterSet: "--charset",
+  // ascii's `animation` prop gets its own flag — `--animation` is already
+  // claimed by button's `clickAnim` in the reverse map (cli/src/flags.ts),
+  // and that map is global across all components, not per-component.
+  animation: "--fx",
 };
 
 export function buildCLIFlags(

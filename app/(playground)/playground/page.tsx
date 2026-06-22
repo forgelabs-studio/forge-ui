@@ -73,7 +73,7 @@ export default function PlaygroundPage() {
               </div>
               <div>
                 <div style={{ fontFamily: 'var(--font)', fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1 }}>FORGE.ui</div>
-                <div style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>40 components</div>
+                <div style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>41 components</div>
               </div>
             </div>
             <p style={{ fontFamily: 'var(--font)', fontSize: 12, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
@@ -151,6 +151,71 @@ export default function PlaygroundPage() {
                 fontFamily: 'var(--font)',
                 fontSize: 12,
                 color: 'rgba(55,138,221,0.8)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              Open playground
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </Link>
+
+        <Link href="/playground/ascii" style={{ textDecoration: 'none' }}>
+          <div
+            style={{
+              width: 260,
+              padding: '28px 28px 24px',
+              background: 'var(--bg2)',
+              border: '1px solid var(--line)',
+              borderRadius: 12,
+              cursor: 'pointer',
+              transition: 'border-color 0.2s, box-shadow 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(239,159,39,0.5)'
+              ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 32px rgba(239,159,39,0.08)'
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--line)'
+              ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+              <div
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: 7,
+                  background: 'rgba(239,159,39,0.12)',
+                  border: '1px solid rgba(239,159,39,0.25)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(239,159,39,0.9)" strokeWidth="1.4">
+                  <path d="M2 3h10M2 7h6M2 11h8" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font)', fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1 }}>FORGE.ascii</div>
+                <div style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>image to art</div>
+              </div>
+            </div>
+            <p style={{ fontFamily: 'var(--font)', fontSize: 12, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
+              Turn an image into animated ASCII art on canvas. Export self-contained HTML and CSS — zero dependencies.
+            </p>
+            <div
+              style={{
+                marginTop: 20,
+                fontFamily: 'var(--font)',
+                fontSize: 12,
+                color: 'rgba(239,159,39,0.8)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 4,
