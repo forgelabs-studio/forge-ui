@@ -44,7 +44,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
   const [dragOver, setDragOver] = useState(false)
   const [decodeVersion, setDecodeVersion] = useState(0)
 
-  // Conversion runs off the main thread — never block the UI.
+  // Conversion runs off the main thread - never block the UI.
   useEffect(() => {
     const worker = new Worker(new URL('../../workers/ascii.worker.ts', import.meta.url))
     worker.onmessage = (event: MessageEvent<AsciiWorkerResponse>) => {
@@ -56,7 +56,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
     return () => worker.terminate()
   }, [setAsciiText])
 
-  // Decode the source image once per upload — re-decoding on every density/character-set
+  // Decode the source image once per upload - re-decoding on every density/character-set
   // tweak would redo a full image decode + getImageData for pixels that haven't changed.
   useEffect(() => {
     decodedRef.current = null
@@ -93,7 +93,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
     return () => { cancelled = true }
   }, [imageUrl])
 
-  // Re-run conversion whenever the decoded image, character set, or density changes —
+  // Re-run conversion whenever the decoded image, character set, or density changes -
   // reuses the cached pixel data instead of re-decoding the source image.
   useEffect(() => {
     const decoded = decodedRef.current
@@ -118,7 +118,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
     worker.postMessage(request, [pixels.buffer])
   }, [decodeVersion, config.characterSet, config.density])
 
-  // Draw the converted text onto the canvas — never as DOM text nodes.
+  // Draw the converted text onto the canvas - never as DOM text nodes.
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -164,7 +164,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
 
     const handle = startAdvancedAnimation(canvas, asciiText, config.animation, config)
     return () => handle.stop()
-    // Depends on individual fields, not `config` itself — listing the whole object
+    // Depends on individual fields, not `config` itself - listing the whole object
     // would also restart the render loop on unrelated config changes (e.g. density).
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asciiText, config.animation, config.colour, config.duration, config.characterSet])
@@ -237,7 +237,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
           >
             <UploadIcon />
             <span style={{ fontSize: 13 }}>
-              {status === 'error' ? 'Could not read that file — try another PNG or JPG' : 'Upload a PNG or JPG'}
+              {status === 'error' ? 'Could not read that file - try another PNG or JPG' : 'Upload a PNG or JPG'}
             </span>
             <span style={{ fontSize: 11, color: 'var(--hint)' }}>Click to browse, or drag and drop</span>
           </button>

@@ -40,25 +40,25 @@ export const CHARACTER_SETS: CharacterSetMeta[] = [
   {
     id: 'standard',
     name: 'Standard',
-    description: 'Classic shading ramp — punctuation to dense symbols.',
+    description: 'Classic shading ramp - punctuation to dense symbols.',
     ramp: ' .,:;+*?%S#@',
   },
   {
     id: 'block',
     name: 'Block',
-    description: 'Unicode block shades — clean, even coverage.',
+    description: 'Unicode block shades - clean, even coverage.',
     ramp: ' ░▒▓█',
   },
   {
     id: 'braille',
     name: 'Braille',
-    description: 'Braille dot patterns — fine detail at small sizes.',
+    description: 'Braille dot patterns - fine detail at small sizes.',
     ramp: ' ⠂⠆⠖⠶⠷⠿⡿⣿',
   },
   {
     id: 'minimal',
     name: 'Minimal',
-    description: 'Four characters — spare, geometric look.',
+    description: 'Four characters - spare, geometric look.',
     ramp: ' .:|=',
   },
 ]
@@ -70,7 +70,7 @@ export const CHARACTER_SET_BY_ID = Object.fromEntries(
 export const ANIMATIONS: AnimationMeta[] = [
   { id: 'fadein', name: 'Fade in', description: 'Opacity rises from 0 to 1 on load.' },
   { id: 'scanline', name: 'Scanline reveal', description: 'Top-to-bottom wipe reveals the art.' },
-  { id: 'flicker', name: 'Flicker', description: 'Rapid opacity fluctuation — CRT monitor style.' },
+  { id: 'flicker', name: 'Flicker', description: 'Rapid opacity fluctuation - CRT monitor style.' },
   { id: 'wave', name: 'Wave', description: 'Gentle vertical oscillation through the block.' },
   { id: 'glitch', name: 'Glitch', description: 'Horizontal distortion with colour-channel offset.' },
 ]

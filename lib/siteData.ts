@@ -1,5 +1,5 @@
 export const tickerItems = [
-  { label: 'FORGE.ui — 41 components',           color: 'var(--purple)' },
+  { label: 'FORGE.ui - 41 components',           color: 'var(--purple)' },
   { label: 'FORGE.tokens — design system sync',  color: 'var(--amber)'  },
   { label: 'FORGE.motion — animation presets',   color: 'var(--teal)'   },
   { label: 'FORGE.blocks — page sections',       color: 'var(--blue)'   },

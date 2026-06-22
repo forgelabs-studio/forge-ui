@@ -1,7 +1,7 @@
 import { buildAnimationCss } from "@/lib/ascii-animate"
 import { CHARACTER_SET_BY_ID, isAdvancedAnimation, type AdvancedAnimationId, type AsciiConfig } from "@/lib/ascii"
 
-/** Builds a self-contained HTML + CSS export — no imports, no scripts, no dependencies. */
+/** Builds a self-contained HTML + CSS export - no imports, no scripts, no dependencies. */
 export function buildAsciiExportHtml(asciiText: string, config: AsciiConfig): string {
   const anim =
     config.animation && !isAdvancedAnimation(config.animation)
@@ -34,7 +34,7 @@ function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
 }
 
-/** Builds a self-contained HTML + canvas + vanilla JS export for an advanced animation — no imports, no scripts, no dependencies. */
+/** Builds a self-contained HTML + canvas + vanilla JS export for an advanced animation - no imports, no scripts, no dependencies. */
 export function buildAdvancedExport(asciiText: string, animation: AdvancedAnimationId, config: AsciiConfig): string {
   const ramp = CHARACTER_SET_BY_ID[config.characterSet].ramp.trim() || ".:#"
 

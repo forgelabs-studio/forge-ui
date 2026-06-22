@@ -47,7 +47,7 @@ export function AsciiExportBar({ asciiText, config }: AsciiExportBarProps) {
             <div className="cli-dot" style={{ background: '#EF9F27', opacity: .6 }} />
             <div className="cli-dot" style={{ background: '#1D9E75', opacity: .6 }} />
           </div>
-          <span className="cli-title">Export — updates as you adjust the preview</span>
+          <span className="cli-title">Export - updates as you adjust the preview</span>
         </div>
         <div className="cli-actions">
           <button type="button" className={`cli-btn${rawOk ? ' ok' : ''}`} onClick={copyRaw} disabled={!asciiText}>

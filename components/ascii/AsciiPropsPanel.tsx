@@ -61,7 +61,7 @@ export function AsciiPropsPanel() {
       <div className="ps">
         <Grp title="Character set">
           <p style={{ fontFamily: 'var(--font)', fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
-            {activeSet.name} — {activeSet.description}
+            {activeSet.name} - {activeSet.description}
           </p>
           <p style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--hint)', marginTop: 8, letterSpacing: '0.08em' }}>
             {activeSet.ramp}
