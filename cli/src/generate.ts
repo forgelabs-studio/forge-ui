@@ -7,7 +7,6 @@ import { generateButton } from "./generators/button.js";
 import { generateBadge } from "./generators/badge.js";
 import { generateAccordion } from "./generators/accordion.js";
 import { generateAlert } from "./generators/alert.js";
-import { generateAscii } from "./generators/ascii.js";
 import { generateAvatar } from "./generators/avatar.js";
 import { generateBarChart } from "./generators/barchart.js";
 import { generateBreadcrumb } from "./generators/breadcrumb.js";
@@ -52,7 +51,6 @@ type ComponentGenerator = (
 const GENERATORS: Record<ComponentId, ComponentGenerator> = {
   accordion: generateAccordion,
   alert: generateAlert,
-  ascii: generateAscii,
   avatar: generateAvatar,
   badge: generateBadge,
   barchart: generateBarChart,
