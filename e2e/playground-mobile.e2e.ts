@@ -12,7 +12,7 @@ test('UI playground mobile tabs expose components, preview, props, and copy comm
 
   await page.getByRole('button', { name: 'Components' }).click()
   await expect(page.locator('.sidebar').last()).toBeVisible()
-  await expect(page.getByPlaceholder('Search 41 components…').last()).toBeVisible()
+  await expect(page.getByPlaceholder('Search 40 components…').last()).toBeVisible()
 
   await page.getByRole('button', { name: 'Props' }).click()
   await expect(page.locator('.props-col').last()).toBeVisible()

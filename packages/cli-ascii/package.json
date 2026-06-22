@@ -1,0 +1,35 @@
+{
+  "name": "@forgelabs-studio/ascii",
+  "version": "0.1.0",
+  "description": "Image-to-ASCII-art component generator for React. Configure visually, own the generated files.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "forge-ascii": "dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --target node18 --outDir dist --clean",
+    "dev": "tsup src/index.ts --format esm --target node18 --outDir dist --watch",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "fs-extra": "^11.2.0",
+    "picocolors": "^1.0.0",
+    "semver": "^7.7.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/node": "^20.0.0",
+    "@types/semver": "^7.7.1",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

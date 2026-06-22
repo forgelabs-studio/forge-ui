@@ -238,14 +238,6 @@ export interface MorphBlobProps {
   blur?: number;
 }
 
-export interface AsciiProps {
-  color: string;
-  density: number;
-  characterSet: "standard" | "block" | "braille" | "minimal";
-  animation: "none" | "fadein" | "scanline" | "flicker" | "wave" | "glitch";
-  duration: number;
-}
-
 export interface NavbarProps {
   label: string;
   color: string;

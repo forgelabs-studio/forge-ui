@@ -1,30 +1,26 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
-import { runInit } from './commands/init.js'
-import { runAdd, splitAddArgs } from './commands/add.js'
+import { runAdd } from './commands/add.js'
 import { runList } from './commands/list.js'
 import { runUpdate } from './commands/update.js'
 import { runRemove } from './commands/remove.js'
+import { runCheck } from './commands/check.js'
+import { PACKAGE_VERSION } from './version.js'
 
 const program = new Command()
 
 program
-  .name('forge-ui')
-  .description('FORGE.ui — spectrum-aware React component library')
-  .version('0.4.2')
+  .name('forge-ascii')
+  .description('FORGE.ascii - image-to-ASCII-art component generator for React')
+  .version(PACKAGE_VERSION)
 
 program
-  .command('init')
-  .description('Create forge.config.json and forge-tokens.css')
-  .action(() => runInit())
-
-program
-  .command('add <items...>')
-  .description('Add one or more components with optional flags')
+  .command('add <component>')
+  .description('Add the ascii component')
   .allowUnknownOption(true)
-  .action((_items: string[], _opts: unknown, cmd: Command) => {
-    const { componentIds, rawFlags } = splitAddArgs(cmd.args)
-    runAdd(componentIds, rawFlags)
+  .action((component: string, _opts: unknown, cmd: Command) => {
+    const rawFlags = cmd.args.slice(1)
+    runAdd(component, rawFlags)
   })
 
 program
@@ -41,5 +37,10 @@ program
   .command('remove <component>')
   .description('Remove a component and its files')
   .action((component: string) => runRemove(component))
+
+program
+  .command('check')
+  .description('Check installed components against the latest published version')
+  .action(() => runCheck())
 
 program.parse()

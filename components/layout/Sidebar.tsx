@@ -20,7 +20,7 @@ export default function Sidebar() {
       <div className="sb-search">
         <input
           type="text"
-          placeholder="Search 41 components…"
+          placeholder="Search 40 components…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

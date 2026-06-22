@@ -43,7 +43,6 @@ const AlertRenderer = React.lazy(() => import("./renderers/AlertRenderer"));
 const StepperRenderer = React.lazy(() => import("./renderers/StepperRenderer"));
 const AccordionRenderer = React.lazy(() => import("./renderers/AccordionRenderer"));
 const TableRenderer = React.lazy(() => import("./renderers/TableRenderer"));
-const AsciiRenderer = React.lazy(() => import("./renderers/AsciiRenderer"));
 
 // Each renderer is typed internally with its specific props interface.
 // The dispatch map uses ComponentProps as the boundary type — a single cast here
@@ -89,7 +88,6 @@ const RENDERERS = {
   stepper: StepperRenderer,
   accordion: AccordionRenderer,
   table: TableRenderer,
-  ascii: AsciiRenderer,
 } as unknown as Record<string, React.ComponentType<{ props: ComponentProps }>>;
 
 export default function RendererDispatch() {

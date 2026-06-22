@@ -15,9 +15,6 @@ const FLAG_TO_PROP: Record<string, string> = {
   '--shape': 'shape',
   '--side': 'side',
   '--padding': 'padding',
-  '--density': 'density',
-  '--charset': 'characterSet',
-  '--fx': 'animation',
 }
 
 // Parse an array of raw flag strings like ['--color=#7F77DD', '--variant=glow']
