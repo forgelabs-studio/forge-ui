@@ -128,7 +128,7 @@ export default function Topbar() {
         ) : isAscii ? (
           <span className="ver">canvas renderer · 5 animations</span>
         ) : (
-          <span className="ver">v0.4.2 · 40 components</span>
+          <span className="ver">v0.5.0 · 41 components</span>
         )}
         {!isMotion && !isAscii && (
           <button className={`tbtn${initOk ? " ok" : ""}`} onClick={copyInit}>

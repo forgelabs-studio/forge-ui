@@ -216,7 +216,7 @@ export default function HowItWorksPage() {
           <div className="callout-icon">✦</div>
           <div>
             Because each component is its own file, tree shaking works
-            naturally. Install 40 components, use 3, pay for 3. Only the files
+            naturally. Install 41 components, use 3, pay for 3. Only the files
             you actually import get bundled.
           </div>
         </div>

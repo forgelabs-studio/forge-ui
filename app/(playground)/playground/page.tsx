@@ -73,7 +73,7 @@ export default function PlaygroundPage() {
               </div>
               <div>
                 <div style={{ fontFamily: 'var(--font)', fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1 }}>FORGE.ui</div>
-                <div style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>40 components</div>
+                <div style={{ fontFamily: 'var(--font)', fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>41 components</div>
               </div>
             </div>
             <p style={{ fontFamily: 'var(--font)', fontSize: 12, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>

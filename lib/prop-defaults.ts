@@ -180,6 +180,13 @@ export const PROP_DEFAULTS: PropDefaultsMap = {
     gradient: true,
     color2: "#D4537E",
   },
+  ascii: {
+    color: "#EF9F27",
+    density: 80,
+    characterSet: "standard",
+    animation: "fadein",
+    duration: 1200,
+  },
   countup: {
     from: 0,
     to: 48200,
