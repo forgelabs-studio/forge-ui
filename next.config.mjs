@@ -19,6 +19,19 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  // Next 16 hard-errors on a custom webpack config with no turbopack config
+  // present (Turbopack is now the default build engine, and @sentry/nextjs's
+  // own webpack plugin counts as "custom webpack config" too). Mirrors the
+  // webpack alias below so the no-DSN lean build still works under Turbopack.
+  turbopack: {
+    // Turbopack's resolveAlias rejects backslash-style Windows paths outright
+    // ("windows imports are not implemented yet") - forward slashes work fine,
+    // unlike webpack's config.resolve.alias just below, which wants the native
+    // OS path.
+    resolveAlias: hasSentryDsn
+      ? {}
+      : { "@sentry/nextjs": disabledSentryModule.replace(/\\/g, "/") },
+  },
   webpack(config) {
     if (!hasSentryDsn) {
       config.resolve.alias["@sentry/nextjs"] = disabledSentryModule;
