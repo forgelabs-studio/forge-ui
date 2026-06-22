@@ -1,6 +1,6 @@
 import { CHARACTER_SET_BY_ID, type AdvancedAnimationId, type AsciiConfig } from './ascii'
 
-// Mirrors the layout constants in AsciiCanvas's static draw effect — the
+// Mirrors the layout constants in AsciiCanvas's static draw effect - the
 // render loop owns canvas sizing for the duration of the animation, so the
 // glyph metrics here must match exactly or the grid will misalign.
 const FONT_SIZE = 8
@@ -38,7 +38,7 @@ function rampFor(config: AsciiConfig): string {
 
 type Render = (elapsed: number) => boolean
 
-// --- Cascade — characters drop from above into their final position --------
+// --- Cascade - characters drop from above into their final position --------
 
 interface CascadeState {
   delays: number[]
@@ -86,7 +86,7 @@ function renderCascade(ctx: CanvasRenderingContext2D, grid: Grid, config: AsciiC
   return allDone
 }
 
-// --- Typewriter — reveals in reading order with a blinking cursor -----------
+// --- Typewriter - reveals in reading order with a blinking cursor -----------
 
 interface TypewriterCell {
   char: string
@@ -135,7 +135,7 @@ function renderTypewriter(ctx: CanvasRenderingContext2D, grid: Grid, config: Asc
   return progress >= 1
 }
 
-// --- Rain — Matrix-style falling columns with a fading trail ----------------
+// --- Rain - Matrix-style falling columns with a fading trail ----------------
 
 interface RainState {
   speeds: number[]
@@ -174,7 +174,7 @@ function renderRain(ctx: CanvasRenderingContext2D, grid: Grid, config: AsciiConf
   return false
 }
 
-// --- Decay — clean text corrupts into noise from random origins -------------
+// --- Decay - clean text corrupts into noise from random origins -------------
 
 interface DecayState {
   origins: { col: number; row: number }[]
@@ -223,7 +223,7 @@ function renderDecay(ctx: CanvasRenderingContext2D, grid: Grid, config: AsciiCon
   return fullyCorrupted
 }
 
-// --- Scramble — all characters randomise, then resolve at staggered rates ---
+// --- Scramble - all characters randomise, then resolve at staggered rates ---
 
 interface ScrambleCell {
   char: string

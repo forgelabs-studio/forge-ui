@@ -46,7 +46,7 @@ export function AsciiPlaygroundLayout() {
   const [tab, setTab] = useState<MobileTab>('preview')
   const { config, setConfigValue } = useAsciiPlaygroundStore()
 
-  // Each panel mounts exactly once — on mobile, CSS (.mobile-active) decides which
+  // Each panel mounts exactly once - on mobile, CSS (.mobile-active) decides which
   // pane is visible instead of a second JS-mounted tree, so AsciiCanvas never
   // double-mounts its own Web Worker and image-conversion pipeline.
   return (

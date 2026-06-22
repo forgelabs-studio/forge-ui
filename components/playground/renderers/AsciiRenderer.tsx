@@ -29,7 +29,7 @@ const ANIMATION_TIMING: Record<string, string> = {
 };
 
 // Synthesizes a small radial-gradient sample so every character set and
-// colour choice is visible without requiring an image upload in the gallery —
+// colour choice is visible without requiring an image upload in the gallery -
 // the real upload flow lives at /playground/ascii.
 function buildSample(ramp: string): string {
   const cols = 28;

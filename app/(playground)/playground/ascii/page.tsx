@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://forgelabs.studio'),
   title: 'FORGE.ascii - Component Playground',
   description:
-    'Turn images into animated ASCII art rendered on canvas. Configure visually, export self-contained HTML and CSS — zero dependencies.',
+    'Turn images into animated ASCII art rendered on canvas. Configure visually, export self-contained HTML and CSS - zero dependencies.',
   openGraph: {
     title: 'FORGE.ascii',
     description:
-      'Turn images into animated ASCII art rendered on canvas. Configure visually, export self-contained HTML and CSS — zero dependencies.',
+      'Turn images into animated ASCII art rendered on canvas. Configure visually, export self-contained HTML and CSS - zero dependencies.',
     url: 'https://forgelabs.studio',
     siteName: 'FORGE.ascii',
     locale: 'en_US',

@@ -174,7 +174,7 @@ export const REGISTRY = [
     id: "ascii",
     displayName: "ForgeAscii",
     group: "Motion",
-    description: "Image to animated ASCII art — 4 character sets, 5 animations",
+    description: "Image to animated ASCII art - 4 character sets, 5 animations",
     defaultColor: "#EF9F27",
     icon: "▤",
   },

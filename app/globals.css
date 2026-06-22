@@ -1412,7 +1412,7 @@ code {
   }
 
   /* FORGE.ascii mounts each pane once and toggles visibility via CSS instead of a
-     second JS-mounted tree — avoids a duplicate Web Worker + image conversion. */
+     second JS-mounted tree - avoids a duplicate Web Worker + image conversion. */
   .ascii-shell {
     display: flex;
     flex-direction: column;
