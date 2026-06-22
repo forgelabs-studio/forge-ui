@@ -207,6 +207,18 @@ body {
   overflow: hidden;
 }
 
+.ascii-shell {
+  height: 100%;
+}
+
+.ascii-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  min-width: 0;
+}
+
 .sidebar {
   background: var(--bg2);
   border-right: 1px solid var(--line);
@@ -1368,13 +1380,15 @@ code {
      so flex:1 is used instead — it resolves against the container's definite main size. */
   .sidebar,
   .motion-sidebar,
+  .ascii-sidebar,
   .centre,
   .props-col {
     flex: 1;
     min-height: 0;
   }
 
-  .motion-sidebar {
+  .motion-sidebar,
+  .ascii-sidebar {
     border-right: none !important;
   }
 
@@ -1395,6 +1409,31 @@ code {
      because globals.css comes after @tailwind utilities in the cascade. */
   .playground {
     display: none;
+  }
+
+  /* FORGE.ascii mounts each pane once and toggles visibility via CSS instead of a
+     second JS-mounted tree — avoids a duplicate Web Worker + image conversion. */
+  .ascii-shell {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 48px);
+  }
+
+  .playground.ascii-playground {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .ascii-pane {
+    display: none;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+
+  .ascii-pane.mobile-active {
+    display: flex;
   }
 
   /* CLIWindow takes 150-200px on mobile and overflows its buttons — hide it.

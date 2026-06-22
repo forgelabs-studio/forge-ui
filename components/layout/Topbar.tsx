@@ -17,6 +17,7 @@ export default function Topbar() {
 
   const isMotion = pathname?.startsWith("/playground/motion");
   const isUI = pathname?.startsWith("/playground/ui");
+  const isAscii = pathname?.startsWith("/playground/ascii");
 
   function copyInit() {
     navigator.clipboard
@@ -62,6 +63,16 @@ export default function Topbar() {
       ),
     },
     {
+      href: "/playground/ascii",
+      label: "FORGE.ascii",
+      icon: (
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4">
+          <rect x="1" y="2" width="8" height="6" rx="1" />
+          <path d="M3 11h6M5 8v3" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
       href: "/how-it-works",
       label: "How it works",
       icon: (
@@ -92,7 +103,7 @@ export default function Topbar() {
       >
         <div className="gem" />
         <span className="logo-name">FORGE</span>
-        <span className="logo-tag">{isMotion ? ".motion" : ".ui"}</span>
+        <span className="logo-tag">{isMotion ? ".motion" : isAscii ? ".ascii" : ".ui"}</span>
       </Link>
 
       <nav className="page-tabs">
@@ -114,10 +125,12 @@ export default function Topbar() {
       <div className="topbar-right">
         {isMotion ? (
           <span className="ver">v0.1.1 · 14 presets</span>
+        ) : isAscii ? (
+          <span className="ver">canvas renderer · 5 animations</span>
         ) : (
           <span className="ver">v0.4.2 · 40 components</span>
         )}
-        {!isMotion && (
+        {!isMotion && !isAscii && (
           <button className={`tbtn${initOk ? " ok" : ""}`} onClick={copyInit}>
             {initOk ? "✓ Copied!" : "⬡ npx init"}
           </button>
