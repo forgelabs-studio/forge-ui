@@ -208,7 +208,7 @@ export default function PlaygroundPage() {
               </div>
             </div>
             <p style={{ fontFamily: 'var(--font)', fontSize: 12, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
-              Turn an image into animated ASCII art on canvas. Export self-contained HTML and CSS — zero dependencies.
+              Turn an image into animated ASCII art on canvas. Export self-contained HTML and CSS - zero dependencies.
             </p>
             <div
               style={{

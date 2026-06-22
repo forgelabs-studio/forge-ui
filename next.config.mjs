@@ -1,14 +1,19 @@
 import { withSentryConfig } from "@sentry/nextjs";
+import { fileURLToPath } from "node:url";
 
 const hasSentryAuthToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
 const hasSentryDsn = Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN);
-const disabledSentryModule = new URL("./lib/sentry-disabled.ts", import.meta.url)
-  .pathname;
+// fileURLToPath (not raw .pathname) is required here - on Windows, a bare
+// .pathname keeps a leading slash before the drive letter (e.g. "/C:/..."),
+// which Turbopack's distDirRoot validation rejects as escaping the project.
+const disabledSentryModule = fileURLToPath(
+  new URL("./lib/sentry-disabled.ts", import.meta.url),
+);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@forgelabs-studio/shared"],
-  outputFileTracingRoot: new URL(".", import.meta.url).pathname,
+  outputFileTracingRoot: fileURLToPath(new URL(".", import.meta.url)),
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   compiler: {

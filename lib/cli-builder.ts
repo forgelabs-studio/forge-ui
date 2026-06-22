@@ -79,7 +79,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   padding: "--padding",
   density: "--density",
   characterSet: "--charset",
-  // ascii's `animation` prop gets its own flag — `--animation` is already
+  // ascii's `animation` prop gets its own flag - `--animation` is already
   // claimed by button's `clickAnim` in the reverse map (cli/src/flags.ts),
   // and that map is global across all components, not per-component.
   animation: "--fx",
