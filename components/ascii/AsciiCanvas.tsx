@@ -172,7 +172,7 @@ export function AsciiCanvas({ config }: AsciiCanvasProps) {
 
     const handle = startAdvancedAnimation(canvas, asciiText, config.animation, config)
     return () => handle.stop()
-    // Depends on individual fields, not `config` itself - listing the whole object
+    // Depends on individual fields, not `config` itself — listing the whole object
     // would also restart the render loop on unrelated config changes (e.g. density).
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asciiText, config.animation, config.colour, config.duration, config.characterSet])
